@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+// COMPONENTS
+import Section from './components/Section';
+import Navbar from './components/Navbar';
+import Module from './components/Module';
+// Modules
+import Intro from './components/Modules/Intro';
+import Spotify from './components/Modules/Spotify';
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
+		<div className="container mx-auto max-w-6xl	">
+			<Navbar />
+			<Section title={'Intro'}>
+				<Module>
+					<Intro />
+				</Module>
+				<Module
+					extraClassNames={
+						'bg-gradient-to-r from-[#191414] to-[#1DB954]'
+					}
 				>
-					Learn React
-				</a>
-			</header>
+					<Spotify />
+				</Module>
+				<Module>Contact Page</Module>
+			</Section>
+			<Section title={'Work'}></Section>
 		</div>
 	);
 }
