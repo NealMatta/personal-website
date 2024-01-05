@@ -47,12 +47,12 @@ export default function SocialMediaList() {
 							title={single.title}
 							href={single.link}
 							target="_blank"
-							className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-gray-30 transition-colors hover:border-green-400 active:top-[1px] dark:border-gray-500 dark:hover:border-gray-200"
+							className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-gray-30 transition-colors border-gray-500 hover:border-gray-200"
 						>
 							<FontAwesomeIcon
 								icon={single.icon}
 								size="lg"
-								className="w-5 flex-shrink-0 text-gray-40 transition-all group-hover:text-gray-800 dark:text-gray-50 dark:group-hover:text-green-400"
+								className="w-5 flex-shrink-0 text-gray-40 transition-all group-hover:text-sky-500"
 							/>
 						</a>
 					);
