@@ -1,10 +1,7 @@
-import classNames from 'classnames';
+// Gives me the rounded border box around
 
-export default function Module({ children, extraClassNames }) {
-	const divClasses = classNames(
-		'box-border p-6 border-2 border-sky-200 rounded-lg',
-		extraClassNames
-	);
+export default function Module({ children }) {
+	const moduleClasses = 'box-border border-2 border-sky-200 rounded-lg';
 
-	return <div className={divClasses}>{children}</div>;
+	return <div className={moduleClasses}>{children}</div>;
 }

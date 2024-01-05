@@ -1,8 +1,8 @@
-import SocialMediaList from '../IntroComponents/SocialMediaList';
+import SocialMediaList from '../SubComponents/SocialMediaList';
 
 export default function Intro() {
 	return (
-		<div className="text-slate-700 flex-1">
+		<div className="m-6 text-slate-700 flex-1">
 			<h1 className="text-2xl font-bold pb-1">Hi, I'm Neal Matta</h1>
 			<p>
 				I'm a constant student always looking to learn more. From 9 - 5,
