@@ -9,7 +9,7 @@ import Spotify from './components/Modules/Spotify';
 
 function App() {
 	return (
-		<div className="container mx-auto max-w-6xl	">
+		<div className="container mx-auto max-w-4xl bg-red-500">
 			<Navbar />
 			<Section title={'Intro'}>
 				<Module>
@@ -17,12 +17,12 @@ function App() {
 				</Module>
 				<Module
 					extraClassNames={
-						'bg-gradient-to-r from-[#191414] to-[#1DB954]'
+						'bg-gradient-to-r from-[#191414] to-[#1DB954] '
 					}
 				>
 					<Spotify />
 				</Module>
-				<Module>Contact Page</Module>
+				{/* <Module>Second Links</Module> */}
 			</Section>
 			<Section title={'Work'}></Section>
 		</div>

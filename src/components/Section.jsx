@@ -1,10 +1,8 @@
 export default function Section({ children, title }) {
 	return (
-		<section>
-			<h1 className="text-4xl">{title}</h1>
-			<div className="flex flex-wrap gap-4 justify-stretch mb-10">
-				{children}
-			</div>
+		<section className="container">
+			<h1 className="text-4xl text-slate-900">{title}</h1>
+			<div className="flex gap-4 mb-10">{children}</div>
 		</section>
 	);
 }

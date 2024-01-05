@@ -1,10 +1,10 @@
-export default function Module({ children, extraClassNames = '' }) {
-	return (
-		<div
-			className={`box-border p-4 border-2 rounded-lg border-slate-500 ${extraClassNames}`}
-			// {...props}
-		>
-			{children}
-		</div>
+import classNames from 'classnames';
+
+export default function Module({ children, extraClassNames }) {
+	const divClasses = classNames(
+		'box-border p-4 border-2 rounded-lg',
+		extraClassNames
 	);
+
+	return <div className={divClasses}>{children}</div>;
 }
