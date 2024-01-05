@@ -3,7 +3,7 @@ import SocialMediaList from '../IntroComponents/SocialMediaList';
 export default function Intro() {
 	return (
 		<div className="text-slate-700 flex-1">
-			<h1 className="text-2xl font-bold">Hi, I'm Neal Matta</h1>
+			<h1 className="text-2xl font-bold pb-1">Hi, I'm Neal Matta</h1>
 			<p>
 				I'm a constant student always looking to learn more. From 9 - 5,
 				I work as an Enterprise Architect to help sell{' '}
@@ -14,19 +14,24 @@ export default function Intro() {
 				>
 					Workday
 				</a>
-				. Outside of those hours, I love to{' '}
+				. Outside of those hours, I spend my time{' '}
 				<a
 					className="text-sky-700 hover:underline"
 					href="https://www.goodreads.com/user/show/98169338-neal-matta"
 				>
-					read
+					reading
 				</a>
-				, play volleyball, and pick up new hobbies. I'm currently
-				learning React to help me build my dreams
+				, playing volleyball, and picking up new hobbies.
 			</p>
-			<br />
+			<p className="py-3">
+				I'm currently (re)learning React and building this website to
+				help me practice. I'm focusing on proper react development
+				practice and trying to learn more about how I can work with APIs
+				as well
+			</p>
 			<p>
-				If you have book recommendations or just want to chat, reach out
+				If you have any feedback on the site, book recommendations, or
+				just want to chat, please reach out!
 			</p>
 			<SocialMediaList />
 		</div>

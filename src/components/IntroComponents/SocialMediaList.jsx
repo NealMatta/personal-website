@@ -37,9 +37,9 @@ const socialMedia = [
 
 export default function SocialMediaList() {
 	return (
-		<div class="text-right pt-3">
-			<div class="mb-2 text-sm font-bold uppercase">Find me at</div>
-			<div class="flex justify-end space-x-2">
+		<div className="text-right pt-3">
+			<div className="mb-2 text-sm font-bold uppercase">Find me at</div>
+			<div className="flex justify-end space-x-2">
 				{socialMedia.map((single) => {
 					return (
 						<a
@@ -47,12 +47,12 @@ export default function SocialMediaList() {
 							title={single.title}
 							href={single.link}
 							target="_blank"
-							className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-gray-30 transition-colors border-gray-500 hover:border-gray-200"
+							className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-gray-30 transition-colors border-slate-700 hover:border-slate-300"
 						>
 							<FontAwesomeIcon
 								icon={single.icon}
 								size="lg"
-								className="w-5 flex-shrink-0 text-gray-40 transition-all group-hover:text-sky-500"
+								className="w-5 flex-shrink-0 transition-all group-hover:text-sky-500"
 							/>
 						</a>
 					);
