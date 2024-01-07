@@ -12,7 +12,7 @@ import Project from './components/SubComponents/Project';
 
 function App() {
 	return (
-		<div className="container mx-auto max-w-4xl">
+		<div className="mx-auto px-6 max-w-5xl">
 			<Navbar />
 
 			<Section title={'Intro'}>
