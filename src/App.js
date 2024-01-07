@@ -1,4 +1,6 @@
 // import './App.css';
+// Data
+import projectsData from './utils/projectsData.json';
 // COMPONENTS
 import Section from './components/Section';
 import Navbar from './components/Navbar';
@@ -6,7 +8,7 @@ import Module from './components/Module';
 // Modules
 import Intro from './components/Modules/Intro';
 import Spotify from './components/Modules/Spotify';
-import Projects from './components/SubComponents/Projects';
+import Project from './components/SubComponents/Project';
 
 function App() {
 	return (
@@ -26,17 +28,18 @@ function App() {
 					</section>
 				</section>
 			</Section>
-			<Section title={'Projects'}>
-				<section className="grid gap-4 md:grid-cols-2 grid-cols-1 ">
-					<Module>
-						<Projects />
-					</Module>
-					<Module>
-						<Projects />
-					</Module>
-					<Module>
-						<Projects />
-					</Module>
+			<Section
+				title={'Projects'}
+				description={`A collection of ideas that I've worked on in the past, currently working on, or plan to work on in the future`}
+			>
+				<section className="grid gap-4 md:grid-cols-2 grid-cols-1">
+					{projectsData.map((project) => {
+						return (
+							<Module>
+								<Project project={project} />
+							</Module>
+						);
+					})}
 				</section>
 			</Section>
 			<Section title={'Work'}></Section>
