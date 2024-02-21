@@ -15,22 +15,20 @@ function App() {
 	return (
 		<div className="mx-auto px-6 max-w-5xl">
 			<Navbar />
+			<h1 className="text-9xl uppercase tracking-widest text-center font-bold">Neal Matta</h1>
 
-			<Section title={'Intro'}>
-				<section className="grid grid-cols-1 gap-4">
-					<Module>
-						<Intro />
-					</Module>
-					<section className="grid grid-cols-2 gap-4">
-						<Module>
-							<Spotify />
-						</Module>
-						<Module>
-							<NextSteps />
-						</Module>
-					</section>
-				</section>
-			</Section>
+			<section className="grid grid-cols-3 grid-rows-3 gap-4 h-[396px]">
+				<Module className={'col-span-2 row-span-3'}>
+					<Intro />
+				</Module>
+				<Module className={'row-span-1'}>
+					<Spotify />
+				</Module>
+				<Module className={'row-span-2 overflow-scroll'}>
+					<NextSteps />
+				</Module>
+			</section>
+
 			<Section
 				title={'Projects'}
 				description={`Ideas that I've worked on in the past, am currently working on, or plan to work on in the future`}

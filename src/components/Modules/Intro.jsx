@@ -3,10 +3,10 @@ import SocialMediaList from '../SubComponents/SocialMediaList';
 export default function Intro() {
 	return (
 		<div className="m-6 text-slate-700 flex-1">
-			<h1 className="text-2xl font-bold pb-1">Hi, I'm Neal Matta</h1>
+			<h1 className="text-3xl font-bold pb-1 text-slate-900">About Me</h1>
 			<p>
-				I'm a constant student always looking to learn more. From 9 AM - 5 P.M, I work as an Enterprise
-				Architect to help sell{' '}
+				I'm a constant student always looking to learn more. From 9 AM - 5 PM, I work as an Enterprise Architect
+				to help sell{' '}
 				<a className="text-sky-700 hover:underline" href="https://www.workday.com/" target="blank">
 					Workday
 				</a>
