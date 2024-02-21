@@ -8,22 +8,15 @@ export default function Project({ project }) {
 
 			<div>
 				<div className="flex flex-row gap-4">
-					<span>{project.status}</span>
-					<span>{project.type}</span>
+					<span class="bg-blue-100 text-blue-800 text-sm px-2.5 py-0.5 rounded-full">{project.status}</span>
+					<span class="bg-blue-100 text-blue-800 text-sm px-2.5 py-0.5 rounded-full">{project.type}</span>
 				</div>
 				<div className="flex justify-end">
-					<a
-						href={project.link}
-						className="text-sky-700 hover:underline"
-					>
+					<a href={project.link} className="text-sky-700 hover:underline">
 						See More
 					</a>
 				</div>
 			</div>
 		</div>
 	);
-}
-
-{
-	/*  */
 }

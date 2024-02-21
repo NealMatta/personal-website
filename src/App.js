@@ -9,6 +9,7 @@ import Module from './components/Module';
 import Intro from './components/Modules/Intro';
 import Spotify from './components/Modules/Spotify';
 import Project from './components/SubComponents/Project';
+import NextSteps from './components/Modules/NextSteps';
 
 function App() {
 	return (
@@ -24,13 +25,15 @@ function App() {
 						<Module>
 							<Spotify />
 						</Module>
-						<Module>Second Links</Module>
+						<Module>
+							<NextSteps />
+						</Module>
 					</section>
 				</section>
 			</Section>
 			<Section
 				title={'Projects'}
-				description={`A collection of ideas that I've worked on in the past, currently working on, or plan to work on in the future`}
+				description={`Ideas that I've worked on in the past, am currently working on, or plan to work on in the future`}
 			>
 				<section className="grid gap-4 md:grid-cols-2 grid-cols-1">
 					{projectsData.map((project) => {
