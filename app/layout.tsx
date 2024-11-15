@@ -15,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="container mx-auto">
+      <body>
         <NavBar />
-        {children}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
+          {children}
+        </div>
       </body>
     </html>
   );

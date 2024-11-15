@@ -3,24 +3,24 @@ import React from 'react';
 
 export default function NavBar() {
   return (
-    <nav className="bg-red-500 p-4">
-      <ul className="flex space-x-4">
-        <li>
-          <Link href="/" className="text-white">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/about" className="text-white">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link href="/contact" className="text-white">
-            Contact
-          </Link>
-        </li>
-      </ul>
+    <nav className="bg-slate-900">
+      <div className="max-w-4xl mx-auto p-2 sm:px-6 lg:px-8 xl:px-16">
+        <div className="flex justify-between">
+          <div>
+            <Link
+              href="/"
+              className="text-white uppercase tracking-widest font-bold "
+            >
+              Neal Matta
+            </Link>
+          </div>
+          <div>
+            <Link href="/projects" className="text-white">
+              Projects
+            </Link>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
