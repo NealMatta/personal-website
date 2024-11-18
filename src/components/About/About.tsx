@@ -12,7 +12,7 @@ export default function About() {
           <div className="flex h-full items-center justify-center ">
             <div className="flex space-x-2">
               <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-4 border-slate-500 bg-red-400 ">
-                <FontAwesomeIcon icon={faUser} className="w-12" />
+                <FontAwesomeIcon icon={faUser} />
               </div>
               {/* <Image
             className=""
