@@ -1,5 +1,6 @@
 import About from '@/src/components/About/About';
 import BasicCard from '@/src/components/card/BasicCard';
+import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
 
       <div className="flex flex-col md:flex-row md:gap-4">
         <div className="w-full md:w-2/3">
-          <BasicCard>Projects</BasicCard>
+          <FeaturedProjects />
           <BasicCard>Submit Feedback</BasicCard>
         </div>
         <div className="w-full md:w-1/3">
