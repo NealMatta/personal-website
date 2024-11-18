@@ -1,4 +1,4 @@
-import BasicCard from '../card/BasicCard';
+import BarebonesCard from '../cards/BarebonesCard';
 import SocialLinks from './SocialLinks';
 // import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +6,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function About() {
   return (
-    <BasicCard>
+    <BarebonesCard>
       <div className="flex flex-col md:flex-row gap-4 md:gap-2">
         <div className="w-full md:w-1/4 ">
           <div className="flex h-full items-center justify-center ">
@@ -41,6 +41,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </BasicCard>
+    </BarebonesCard>
   );
 }

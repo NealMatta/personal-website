@@ -1,10 +1,10 @@
 import ProjectCardCompact from './Cards/ProjectCardCompact';
-import BasicCard from '../card/BasicCard';
+import BarebonesCard from '../cards/BarebonesCard';
 import Link from 'next/link';
 
 export default function FeaturedProjects() {
   return (
-    <BasicCard>
+    <BarebonesCard>
       <div className="flex flex-col">
         <h1 className="font-bold">
           <span className="lg:hidden">Featured Project</span>
@@ -24,6 +24,6 @@ export default function FeaturedProjects() {
           </Link>
         </div>
       </div>
-    </BasicCard>
+    </BarebonesCard>
   );
 }

@@ -1,5 +1,5 @@
 import About from '@/src/components/About/About';
-import BasicCard from '@/src/components/card/BasicCard';
+import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
 
 export default function Home() {
@@ -20,12 +20,12 @@ export default function Home() {
       <div className="flex flex-col md:flex-row md:gap-4">
         <div className="w-full md:w-2/3">
           <FeaturedProjects />
-          <BasicCard>Submit Feedback</BasicCard>
+          <BarebonesCard>Submit Feedback</BarebonesCard>
         </div>
         <div className="w-full md:w-1/3">
-          <BasicCard>Weather in Chicago</BasicCard>
-          <BasicCard>Resume Creator</BasicCard>
-          <BasicCard>Last Listened To</BasicCard>
+          <BarebonesCard>Weather in Chicago</BarebonesCard>
+          <BarebonesCard>Resume Creator</BarebonesCard>
+          <BarebonesCard>Last Listened To</BarebonesCard>
         </div>
       </div>
     </div>
