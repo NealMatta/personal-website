@@ -71,14 +71,14 @@ export default function FeaturedProjects() {
       {/* Modal for Project Details */}
       <ProjectModal isOpen={isModalOpen} onClose={closeModal}>
         {selectedProject && (
-          <div>
+          <div className="overflow-scroll max-h-[calc(100vh-100px)]">
             <h2 className="font-bold text-xl">{selectedProject.title}</h2>
             <div className="flex flex-col md:flex-row gap-2">
-              <div className="md:w-1/3 w-full flex flex-col gap-2">
-                <div className="relative flex w-full h-full items-center justify-center rounded-lg bg-red-400 ">
+              <div className="w-full md:w-1/3 flex flex-col gap-2">
+                <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
                   <FontAwesomeIcon icon={faUser} />
                 </div>
-                <div className="relative flex w-full h-full items-center justify-center rounded-lg bg-red-400 ">
+                <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
                   <FontAwesomeIcon icon={faUser} />
                 </div>
               </div>
@@ -91,7 +91,29 @@ export default function FeaturedProjects() {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Quis, unde nulla voluptatibus alias iste incidunt nihil
                     ipsam molestiae sint nisi eveniet, dolorum in officia magnam
-                    doloremque corrupti autem repudiandae provident.
+                    doloremque corrupti autem repudiandae provident. Lorem ipsum
+                    dolor sit amet consectetur adipisicing elit. Quis, unde
+                    nulla voluptatibus alias iste incidunt nihil ipsam molestiae
+                    sint nisi eveniet, dolorum in officia magnam doloremque
+                    corrupti autem repudiandae provident. ipsam molestiae sint
+                    nisi eveniet, dolorum in officia magnam doloremque corrupti
+                    autem repudiandae provident. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Quis, unde nulla voluptatibus
+                    alias iste incidunt nihil ipsam molestiae sint nisi eveniet,
+                    dolorum in officia magnam doloremque corrupti autem
+                    repudiandae provident.ipsam molestiae sint nisi eveniet,
+                    dolorum in officia magnam doloremque corrupti autem
+                    repudiandae provident. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Quis, unde nulla voluptatibus
+                    alias iste incidunt nihil ipsam molestiae sint nisi eveniet,
+                    dolorum in officia magnam doloremque corrupti autem
+                    repudiandae provident.ipsam molestiae sint nisi eveniet,
+                    dolorum in officia magnam doloremque corrupti autem
+                    repudiandae provident. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Quis, unde nulla voluptatibus
+                    alias iste incidunt nihil ipsam molestiae sint nisi eveniet,
+                    dolorum in officia magnam doloremque corrupti autem
+                    repudiandae provident.
                   </p>
                 </div>
                 <div className="mb-2">
