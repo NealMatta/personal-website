@@ -1,16 +1,15 @@
 import ProjectCardCompact from './Cards/ProjectCardCompact';
 import BarebonesCard from '../cards/BarebonesCard';
-import CardTitle from '../cards/CardTitle';
 import Link from 'next/link';
 
 export default function FeaturedProjects() {
   return (
     <BarebonesCard>
       <div className="flex flex-col">
-        <CardTitle>
+        <h1 className="font-bold">
           <span className="lg:hidden">Featured Project</span>
           <span className="hidden lg:inline">Featured Projects</span>
-        </CardTitle>
+        </h1>
         <div className="gap-2 my-2 flex flex-wrap lg:flex-nowrap">
           {/* Both cards are displayed for larger screens */}
           <ProjectCardCompact className="w-full lg:w-auto" />
