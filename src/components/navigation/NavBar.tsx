@@ -14,9 +14,15 @@ export default function NavBar() {
               Neal Matta
             </Link>
           </div>
-          <div>
+          <div className="flex space-x-4">
             <Link href="/projects" className="text-white">
               Projects
+            </Link>
+            <Link href="#" className="text-white">
+              Playground
+            </Link>
+            <Link href="#" className="text-white">
+              Recipes
             </Link>
           </div>
         </div>
