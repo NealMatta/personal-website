@@ -2,11 +2,19 @@
   {
     "id": 1,
     "title": "Project 1",
-    "description": "Details about Project 1"
+    "description": "Details about Project 1",
+    "featured": true
   },
   {
     "id": 2,
     "title": "Project 2",
-    "description": "Details about Project 2"
+    "description": "Details about Project 2",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "Project 3",
+    "description": "Details about Project 3",
+    "featured": false
   }
 ]
