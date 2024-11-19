@@ -3,3 +3,11 @@ export interface Project {
   title: string;
   description: string;
 }
+
+export interface ProjectCardProps {
+  project: Project;
+}
+
+export interface ClientSideProjectsProps {
+  projects: Project[];
+}

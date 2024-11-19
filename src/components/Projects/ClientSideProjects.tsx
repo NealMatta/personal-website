@@ -12,13 +12,11 @@ import ProjectCard from './Cards/ProjectCard';
 import ProjectModal from './ProjectModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Project } from '@/src/types';
+import { ClientSideProjectsProps, Project } from '@/src/types';
 
 export default function ClientSideProjects({
   projects,
-}: {
-  projects: Project[];
-}) {
+}: ClientSideProjectsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -81,7 +79,7 @@ export default function ClientSideProjects({
           onClick={() => openModal(project)}
           className="cursor-pointer grow"
         >
-          <ProjectCard className="" project={project} />
+          <ProjectCard project={project} />
         </div>
       ))}
 
