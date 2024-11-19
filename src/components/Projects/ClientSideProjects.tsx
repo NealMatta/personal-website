@@ -12,18 +12,15 @@ import ProjectCard from './Cards/ProjectCard';
 import ProjectModal from './ProjectModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Project } from '@/src/types';
 
 export default function ClientSideProjects({
   projects,
 }: {
-  projects: { id: number; title: string; description: string }[];
+  projects: Project[];
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<{
-    id: number;
-    title: string;
-    description: string;
-  } | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -85,11 +82,12 @@ export default function ClientSideProjects({
         <div
           key={project.id}
           onClick={() => openModal(project)}
-          className="cursor-pointer"
+          className="cursor-pointer grow"
         >
-          <ProjectCard className="w-full lg:w-auto" />
+          <ProjectCard className="" project={project} />
         </div>
       ))}
+
       {/* Modal for Project Details */}
       <ProjectModal isOpen={isModalOpen} onClose={closeModal}>
         {selectedProject && (
@@ -117,8 +115,9 @@ export default function ClientSideProjects({
               </div>
 
               <div className="w-full md:w-1/2 ">
-                {/* <p>{selectedProject.description}</p> */}
                 <div className="mb-2">
+                  <p>{selectedProject.description}</p>
+
                   <h3 className="font-bold text-lg">What is It?</h3>
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
