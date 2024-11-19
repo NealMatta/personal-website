@@ -6,7 +6,11 @@ import { ProjectCardProps } from '@/src/types';
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className={'flex flex-col p-2 border-2 rounded shadow-sm bg-white'}>
+    <div
+      className={
+        'flex flex-col p-2 border-2 rounded shadow-sm bg-white hover:opacity-50 transition'
+      }
+    >
       {/* Image would go here */}
       <div className="flex h-24 w-full items-center justify-center rounded bg-red-400 ">
         <FontAwesomeIcon icon={faUser} />
