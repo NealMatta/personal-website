@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
-import PROJECTS from '@/public/dummyData/projects.json';
+import PROJECTS from '@/src/mockData/projects.json';
 import ClientSideProjects from '@/src/components/Projects/ClientSideProjects';
 
 const Projects = () => {

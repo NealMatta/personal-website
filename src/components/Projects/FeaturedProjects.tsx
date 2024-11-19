@@ -1,7 +1,7 @@
 import BarebonesCard from '../cards/BarebonesCard';
 import Link from 'next/link';
 import ClientSideProjects from './ClientSideProjects';
-import PROJECTS from '@/public/dummyData/projects.json';
+import PROJECTS from '@/src/mockData/projects.json';
 
 export default function FeaturedProjects() {
   // Dummy Data but same logic
