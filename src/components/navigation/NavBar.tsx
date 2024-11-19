@@ -22,7 +22,7 @@ export default function NavBar() {
               Playground
             </Link>
             <Link href="#" className="text-white">
-              Recipes
+              Cookbook
             </Link>
           </div>
         </div>

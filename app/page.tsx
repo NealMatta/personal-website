@@ -26,21 +26,17 @@ export default function Home() {
         }}
       />
 
-      <div className="flex">
-        <div className="w-full">
-          <About />
-        </div>
-      </div>
-
       <div className="flex flex-col md:flex-row md:gap-4">
         <div className="w-full md:w-2/3">
+          <About />
+          <BarebonesCard>Quotes</BarebonesCard>
           <FeaturedProjects />
-          <BarebonesCard>Submit Feedback</BarebonesCard>
         </div>
         <div className="w-full md:w-1/3">
-          <BarebonesCard>Weather in Chicago</BarebonesCard>
-          <BarebonesCard>Resume Creator</BarebonesCard>
           <BarebonesCard>Last Listened To</BarebonesCard>
+          <BarebonesCard>Favorite Recipe</BarebonesCard>
+          <BarebonesCard>Resume Creator</BarebonesCard>
+          <BarebonesCard>Submit Feedback</BarebonesCard>
         </div>
       </div>
     </>
