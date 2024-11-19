@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
-import mockProjectDetails from '@/public/dummyData/PROJECTS.json';
+import PROJECTS from '@/public/dummyData/projects.json';
 import ClientSideProjects from '@/src/components/Projects/ClientSideProjects';
 
 const Projects = () => {
@@ -14,7 +14,7 @@ const Projects = () => {
 
       <div className="grid gap-4 my-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {/* Pass mock project details to the client-side component */}
-        <ClientSideProjects projects={mockProjectDetails} />
+        <ClientSideProjects projects={PROJECTS} />
       </div>
     </>
   );

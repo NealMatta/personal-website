@@ -75,9 +75,6 @@ export default function ClientSideProjects({
 
   return (
     <>
-      {/* Right now this works because there are only two projects that I'm passing in. 
-    When I get to the database management stuff, I'll need to add a boolean that states whether or not the 
-    project is a featured project and then the API I run needs to only look at projects that have that filter */}
       {projects.map((project) => (
         <div
           key={project.id}

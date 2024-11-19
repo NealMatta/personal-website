@@ -16,5 +16,11 @@
     "title": "Project 3",
     "description": "Details about Project 3",
     "featured": false
+  }, 
+  {
+    "id": 4,
+    "title": "Project 4",
+    "description": "Details about Project 4",
+    "featured": false
   }
 ]
