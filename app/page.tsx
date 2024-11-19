@@ -1,15 +1,30 @@
 import About from '@/src/components/About/About';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
+import PageHeader from '@/src/components/PageHeader/PageHeader';
 
 export default function Home() {
   return (
-    <div className="container mt-5 md:mt-20">
-      <div className="mb-4">
-        <h1 className="text-3xl font-bold">Good Afternoon</h1>
-        {/* Morning, Afternoon, and Evening changes depending on time */}
-        <h3 className="text-xl ">It&apos;s November 16 2024</h3>
-      </div>
+    <>
+      <PageHeader
+        header="Welcome!"
+        subHeader={() => {
+          const hours = new Date().getHours();
+          const date = new Intl.DateTimeFormat('en-US', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          }).format(new Date());
+
+          let greeting = '';
+          if (hours < 12) greeting = 'Good Morning';
+          else if (hours < 18) greeting = 'Good Afternoon';
+          else greeting = 'Good Evening';
+
+          return `${greeting}! It's ${date}`;
+        }}
+      />
 
       <div className="flex">
         <div className="w-full">
@@ -28,6 +43,6 @@ export default function Home() {
           <BarebonesCard>Last Listened To</BarebonesCard>
         </div>
       </div>
-    </div>
+    </>
   );
 }

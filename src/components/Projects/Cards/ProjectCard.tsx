@@ -3,13 +3,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-interface ProjectCardCompactProps {
+interface ProjectCardProps {
   className?: string; // Optional prop to accept custom class names
 }
 
-export default function ProjectCardCompact({
-  className,
-}: ProjectCardCompactProps) {
+export default function ProjectCard({ className }: ProjectCardProps) {
   return (
     <div className={`flex flex-col p-2 border-2 rounded-md ${className}`}>
       {/* Image would go here */}

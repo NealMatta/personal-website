@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
-import ProjectCardCompact from './Cards/ProjectCardCompact';
+import ProjectCard from './Cards/ProjectCard';
 import ProjectModal from './ProjectModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -87,7 +87,7 @@ export default function ClientSideProjects({
           onClick={() => openModal(project)}
           className="cursor-pointer"
         >
-          <ProjectCardCompact className="w-full lg:w-auto" />
+          <ProjectCard className="w-full lg:w-auto" />
         </div>
       ))}
       {/* Modal for Project Details */}
