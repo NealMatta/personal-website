@@ -2,6 +2,7 @@ import About from '@/src/components/About/About';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
+import Quotes from '@/src/components/Quotes/Quotes';
 
 export default function Home() {
   return (
@@ -29,7 +30,7 @@ export default function Home() {
       <div className="flex flex-col md:flex-row md:gap-4">
         <div className="w-full md:w-2/3">
           <About />
-          <BarebonesCard>Quotes</BarebonesCard>
+          <Quotes />
           <FeaturedProjects />
         </div>
         <div className="w-full md:w-1/3">
