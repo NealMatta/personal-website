@@ -8,32 +8,32 @@ export default function Home() {
   return (
     <>
       <PageHeader
-        header="Welcome!"
-        subHeader={() => {
+        header={() => {
           const hours = new Date().getHours();
-          const date = new Intl.DateTimeFormat('en-US', {
+          if (hours < 12) return 'Good Morning!';
+          else if (hours < 18) return 'Good Afternoon!';
+          return 'Good Evening!';
+        }}
+        subHeader={() => {
+          const date = new Date();
+          const formattedDate = new Intl.DateTimeFormat('en-US', {
             weekday: 'long',
             month: 'long',
             day: 'numeric',
             year: 'numeric',
-          }).format(new Date());
+          }).format(date);
 
-          let greeting = '';
-          if (hours < 12) greeting = 'Good Morning';
-          else if (hours < 18) greeting = 'Good Afternoon';
-          else greeting = 'Good Evening';
-
-          return `${greeting}! It's ${date}`;
+          return `It's ${formattedDate}`;
         }}
       />
 
-      <div className="flex flex-col md:flex-row md:gap-4">
-        <div className="w-full md:w-2/3">
+      <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+        <div className="flex flex-col w-full md:w-2/3 gap-4">
           <About />
           <Quotes />
           <FeaturedProjects />
         </div>
-        <div className="w-full md:w-1/3">
+        <div className="flex flex-col gap-4 w-full md:w-1/3">
           <BarebonesCard>Last Listened To</BarebonesCard>
           <BarebonesCard>Favorite Recipe</BarebonesCard>
           <BarebonesCard>Resume Creator</BarebonesCard>
