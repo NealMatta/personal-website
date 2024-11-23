@@ -2,42 +2,46 @@ import About from '@/src/components/About/About';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
+import Quotes from '@/src/components/Quotes/Quotes';
 
 export default function Home() {
   return (
     <>
       <PageHeader
-        header="Welcome!"
-        subHeader={() => {
+        header={() => {
           const hours = new Date().getHours();
-          const date = new Intl.DateTimeFormat('en-US', {
+          if (hours < 12) return 'Good Morning!';
+          else if (hours < 18) return 'Good Afternoon!';
+          return 'Good Evening!';
+        }}
+        subHeader={() => {
+          const date = new Date();
+          const formattedDate = new Intl.DateTimeFormat('en-US', {
             weekday: 'long',
             month: 'long',
             day: 'numeric',
             year: 'numeric',
-          }).format(new Date());
+          }).format(date);
 
-          let greeting = '';
-          if (hours < 12) greeting = 'Good Morning';
-          else if (hours < 18) greeting = 'Good Afternoon';
-          else greeting = 'Good Evening';
-
-          return `${greeting}! It's ${date}`;
+          return `It's ${formattedDate}`;
         }}
       />
 
-      <div className="flex flex-col md:flex-row md:gap-4">
-        <div className="w-full md:w-2/3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Main Content */}
+        <main className="col-span-2 space-y-4">
           <About />
-          <BarebonesCard>Quotes</BarebonesCard>
+          <Quotes />
           <FeaturedProjects />
-        </div>
-        <div className="w-full md:w-1/3">
+        </main>
+
+        {/* Sidebar */}
+        <aside className="space-y-4">
           <BarebonesCard>Last Listened To</BarebonesCard>
           <BarebonesCard>Favorite Recipe</BarebonesCard>
           <BarebonesCard>Resume Creator</BarebonesCard>
           <BarebonesCard>Submit Feedback</BarebonesCard>
-        </div>
+        </aside>
       </div>
     </>
   );
