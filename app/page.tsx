@@ -27,18 +27,21 @@ export default function Home() {
         }}
       />
 
-      <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-        <div className="flex flex-col w-full md:w-2/3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Main Content */}
+        <main className="col-span-2 space-y-4">
           <About />
           <Quotes />
           <FeaturedProjects />
-        </div>
-        <div className="flex flex-col gap-4 w-full md:w-1/3">
+        </main>
+
+        {/* Sidebar */}
+        <aside className="space-y-4">
           <BarebonesCard>Last Listened To</BarebonesCard>
           <BarebonesCard>Favorite Recipe</BarebonesCard>
           <BarebonesCard>Resume Creator</BarebonesCard>
           <BarebonesCard>Submit Feedback</BarebonesCard>
-        </div>
+        </aside>
       </div>
     </>
   );
