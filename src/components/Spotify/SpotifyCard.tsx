@@ -4,11 +4,14 @@ import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 export default function SpotifyCard() {
   return (
-    <BarebonesCard>
-      <div className="flex items-center h-full mb-2">
-        <FontAwesomeIcon icon={faSpotify} />
-        <h2 className="font-bold ml-2">Last Listened To</h2>
-      </div>
+    <BarebonesCard
+      title={
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={faSpotify} className="mr-2" />
+          <h2 className="font-bold text-xl">Last Listened To</h2>
+        </div>
+      }
+    >
       <div className="flex gap-2 items-center">
         {/* Left Side: Square Icon */}
         <div className="w-full flex justify-center">

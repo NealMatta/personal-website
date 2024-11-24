@@ -3,7 +3,7 @@
 import React from 'react';
 
 interface BasicCardProps {
-  title?: string;
+  title?: string | React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -13,7 +13,17 @@ export default function BarebonesCard({ title, children }: BasicCardProps) {
 
   return (
     <div className={classValue}>
-      {title && <h2 className="font-bold mb-2">{title}</h2>}
+      {/* Render title only if it exists */}
+      {title && (
+        <div className="mb-2">
+          {typeof title === 'string' ? (
+            <h2 className="font-bold text-xl">{title}</h2>
+          ) : (
+            title
+          )}
+        </div>
+      )}
+      {/* Render the children */}
       {children}
     </div>
   );
