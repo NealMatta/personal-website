@@ -8,7 +8,7 @@ export default function SpotifyCard() {
       title={
         <div className="flex items-center">
           <FontAwesomeIcon icon={faSpotify} className="mr-2" />
-          <h2 className="font-bold text-xl">Last Listened To</h2>
+          <h2>Last Listened To</h2>
         </div>
       }
     >
