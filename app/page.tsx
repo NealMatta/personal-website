@@ -39,7 +39,6 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="space-y-4">
           <WebsiteStatus />
-          <BarebonesCard>Website Status</BarebonesCard>
           <BarebonesCard>Last Listened To</BarebonesCard>
           <BarebonesCard>Submit Feedback</BarebonesCard>
         </aside>

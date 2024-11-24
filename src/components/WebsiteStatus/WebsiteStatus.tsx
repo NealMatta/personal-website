@@ -7,12 +7,8 @@ export default function WebsiteStatus() {
   const commitCount = 45; // Replace with API fetch logic later
 
   return (
-    <BarebonesCard>
+    <BarebonesCard title={'Website Status'}>
       <div className="flex flex-col gap-4">
-        <h1 className="font-bold">
-          <span>Website Status</span>
-        </h1>
-
         <div className="text-center">
           <h3 className="font-bold text-5xl text-gray-700">{commitCount}</h3>
           <p className="text-gray-500">Commits in the past month</p>
