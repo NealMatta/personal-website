@@ -20,7 +20,7 @@ export default function BarebonesCard({ title, children }: BasicCardProps) {
           {typeof title === 'string' ? (
             <h2 className={textClasses}>{title}</h2>
           ) : (
-            <div className={textClasses}> {title} </div>
+            <div className={textClasses}>{title} </div>
           )}
         </div>
       )}

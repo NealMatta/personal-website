@@ -12,7 +12,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       }
     >
       {/* Image would go here */}
-      <div className="flex h-24 w-full items-center justify-center rounded bg-red-400 ">
+      <div className="flex h-48 w-full items-center justify-center rounded bg-red-400 ">
         <FontAwesomeIcon icon={faUser} />
       </div>
       <div className="pt-3">
