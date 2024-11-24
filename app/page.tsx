@@ -1,10 +1,11 @@
 import About from '@/src/components/About/About';
-import BarebonesCard from '@/src/components/cards/BarebonesCard';
+// import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
 import Quotes from '@/src/components/Quotes/Quotes';
 import WebsiteStatusCard from '@/src/components/WebsiteStatus/WebsiteStatusCard';
 import SubmitFeedbackCard from '@/src/components/SubmitFeedback/SubmitFeedbackCard';
+import SpotifyCard from '@/src/components/Spotify/SpotifyCard';
 
 export default function Home() {
   return (
@@ -40,7 +41,7 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="space-y-4">
           <WebsiteStatusCard />
-          <BarebonesCard>Last Listened To</BarebonesCard>
+          <SpotifyCard />
           <SubmitFeedbackCard />
         </aside>
       </div>

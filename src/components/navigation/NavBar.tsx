@@ -18,12 +18,12 @@ export default function NavBar() {
             <Link href="/projects" className="text-white">
               Projects
             </Link>
-            <Link href="#" className="text-white">
+            {/* <Link href="#" className="text-white">
               Playground
-            </Link>
-            <Link href="#" className="text-white">
+            </Link> */}
+            {/* <Link href="#" className="text-white">
               Cookbook
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
