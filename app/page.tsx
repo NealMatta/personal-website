@@ -3,7 +3,8 @@ import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
 import Quotes from '@/src/components/Quotes/Quotes';
-import WebsiteStatus from '@/src/components/WebsiteStatus/WebsiteStatus';
+import WebsiteStatusCard from '@/src/components/WebsiteStatus/WebsiteStatusCard';
+import SubmitFeedbackCard from '@/src/components/SubmitFeedback/SubmitFeedbackCard';
 
 export default function Home() {
   return (
@@ -38,9 +39,9 @@ export default function Home() {
 
         {/* Sidebar */}
         <aside className="space-y-4">
-          <WebsiteStatus />
+          <WebsiteStatusCard />
           <BarebonesCard>Last Listened To</BarebonesCard>
-          <BarebonesCard>Submit Feedback</BarebonesCard>
+          <SubmitFeedbackCard />
         </aside>
       </div>
     </>
