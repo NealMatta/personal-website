@@ -17,7 +17,7 @@ export default function FeaturedProjects() {
         <div className="ml-auto text-right">
           <Link
             href="/projects"
-            className="text-xs italic underline text-blue-500 hover:text-blue-950"
+            className="text-md italic underline text-blue-500 hover:text-blue-950"
           >
             Check out all my Projects
           </Link>

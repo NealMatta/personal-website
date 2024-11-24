@@ -25,8 +25,8 @@ export default function SpotifyCard() {
 
         {/* Right Side: Song and Artist */}
         <div className="w-full flex flex-col justify-center items-center text-center">
-          <div className="text-xl font-bold">Song</div>
-          <div className="text-sm text-gray-500">Artist</div>
+          <div className="text-2xl font-bold">Song</div>
+          <div className="text-md text-gray-500">Artist</div>
         </div>
       </div>
     </BarebonesCard>

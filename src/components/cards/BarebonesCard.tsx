@@ -10,6 +10,7 @@ interface BasicCardProps {
 export default function BarebonesCard({ title, children }: BasicCardProps) {
   // Max width needs to change. Need to figure that out
   const classValue = `block p-6 bg-white border rounded-lg shadow`;
+  const textSize = `text-2xl`;
 
   return (
     <div className={classValue}>
@@ -17,9 +18,9 @@ export default function BarebonesCard({ title, children }: BasicCardProps) {
       {title && (
         <div className="mb-2">
           {typeof title === 'string' ? (
-            <h2 className="font-bold text-xl">{title}</h2>
+            <h2 className={`font-bold ${textSize}`}>{title}</h2>
           ) : (
-            title
+            <div className={textSize}> {title} </div>
           )}
         </div>
       )}

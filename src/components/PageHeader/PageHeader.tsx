@@ -12,8 +12,8 @@ export default function PageHeader({ header, subHeader }: PageHeaderProps) {
 
   return (
     <div className="mb-4">
-      <h1 className="text-3xl font-bold">{resolve(header)}</h1>
-      <h3 className="text-xl">{resolve(subHeader)}</h3>
+      <h1 className="text-4xl font-bold">{resolve(header)}</h1>
+      <h3 className="text-2xl">{resolve(subHeader)}</h3>
     </div>
   );
 }
