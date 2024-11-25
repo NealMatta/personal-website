@@ -20,3 +20,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Global CSS file (e.g., styles/globals.css) */
+.fa-icon {
+  width: 1em;
+  height: 1em;
+
+  font-size: inherit; /* Ensures size is consistent */
+}

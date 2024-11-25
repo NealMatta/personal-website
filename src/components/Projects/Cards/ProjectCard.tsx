@@ -13,7 +13,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     >
       {/* Image would go here */}
       <div className="flex h-48 w-full items-center justify-center rounded bg-red-400 ">
-        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon={faUser} className="fa-icon" />
       </div>
       <div className="pt-3">
         <h1 className="font-bold text-xl">{project.title}</h1>

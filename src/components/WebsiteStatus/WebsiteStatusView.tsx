@@ -46,7 +46,7 @@ export default function WebsiteStatusView({
             aria-label="View on GitHub"
             className="inline-flex items-center space-x-2"
           >
-            <FontAwesomeIcon icon={faGithub} size="lg" />
+            <FontAwesomeIcon icon={faGithub} size="lg" className="fa-icon" />
             <span>GitHub</span>
           </PrimaryButton>
         </div>

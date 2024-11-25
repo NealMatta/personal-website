@@ -93,19 +93,19 @@ export default function ClientSideProjects({
             <div className="flex flex-col md:flex-row gap-2">
               <div className="w-full md:w-1/2 flex flex-col gap-2">
                 <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} className="fa-icon" />
                 </div>
                 <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} className="fa-icon" />
                 </div>
                 <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} className="fa-icon" />
                 </div>
                 <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} className="fa-icon" />
                 </div>
                 <div className="relative flex items-center justify-center w-full h-full rounded-lg bg-red-400">
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} className="fa-icon" />
                 </div>
               </div>
 
