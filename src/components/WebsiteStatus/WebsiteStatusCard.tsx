@@ -1,36 +1,45 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import BarebonesCard from '../cards/BarebonesCard';
 import PrimaryButton from '../UI/PrimaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { fetchCommits } from '@/src/services/githubAPI';
 
-export default function WebsiteStatus() {
-  const [commitCount, setCommitCount] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const loadCommits = async () => {
-      try {
-        const commits = await fetchCommits();
-        setCommitCount(commits.length);
-      } catch (error) {
-        console.error('Error loading commits:', error);
-      } finally {
-        setLoading(false);
-      }
+type Commit = {
+  sha: string;
+  commit: {
+    author: {
+      name: string;
+      date: string;
     };
+    message: string;
+  };
+};
 
-    loadCommits();
-  }, []);
+export default function WebsiteStatus() {
+  const {
+    data: commits,
+    isLoading,
+    isError,
+  }: UseQueryResult<Commit[], Error> = useQuery({
+    queryKey: ['commits'], // Define your query key
+    queryFn: fetchCommits, // Define the function to fetch data
+  });
+
+  const commitCount = commits?.length ?? 0;
 
   return (
     <BarebonesCard title="Website Status">
       <div className="flex flex-col gap-4">
-        {loading ? (
+        {isLoading ? (
           <div className="text-center">
             <p className="text-gray-500">Loading commit data...</p>
+          </div>
+        ) : isError ? (
+          <div className="text-center">
+            <p className="text-red-500">Failed to load commit data.</p>
           </div>
         ) : (
           <>

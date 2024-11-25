@@ -11,7 +11,7 @@ type Commit = {
 };
 
 export const fetchCommits = async (): Promise<Commit[]> => {
-  const url = 'https://api.github.com/repos/NealMatta/personal-website/commits';
+  const url = `https://api.github.com/repos/NealMatta/personal-website/commits`;
 
   const response = await fetch(url);
   if (!response.ok) {
