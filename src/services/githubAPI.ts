@@ -12,7 +12,7 @@ type Commit = {
 
 export const fetchCommits = async (): Promise<Commit[]> => {
   const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 30);
 
   const isoDate = oneWeekAgo.toISOString();
   const perPage = 100; // Maximum allowed by GitHub

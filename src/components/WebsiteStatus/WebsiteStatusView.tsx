@@ -35,7 +35,7 @@ export default function WebsiteStatusView({
               <h3 className="font-bold text-5xl text-gray-800">
                 {commitCount}
               </h3>
-              <p className="text-gray-500">Commits in the last 7 days</p>
+              <p className="text-gray-500">Commits in the last 30 days</p>
             </>
           )}
         </div>
