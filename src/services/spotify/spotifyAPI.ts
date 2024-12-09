@@ -37,23 +37,13 @@ export async function getMostRecentTrack(): Promise<{
       const currentlyPlayingData = await currentlyPlayingResponse.json();
 
       if (currentlyPlayingData.item) {
-        // Format the currently playing data
-        const currentTrack = {
-          albumCover: currentlyPlayingData.item.album.images[0]?.url || '',
-          songName: currentlyPlayingData.item.name,
-          artist: currentlyPlayingData.item.artists
-            .map((artist: any) => artist.name)
-            .join(', '),
-          lastPlayed: 'Currently Playing', // No specific timestamp needed for the currently playing track
-        };
-        console.log(currentTrack);
-        return currentTrack;
+        return formatTrackData(currentlyPlayingData.item, true);
       }
     }
 
     // If nothing is playing, fall back to recently played
     const recentlyPlayedResponse = await fetch(
-      `${SPOTIFY_API_URL}/me/player/recently-played`,
+      `${SPOTIFY_API_URL}/me/player/recently-played?limit=1`,
       {
         method: 'GET',
         headers: {
@@ -74,15 +64,7 @@ export async function getMostRecentTrack(): Promise<{
       return null;
     }
 
-    // Format the recently played data
-    const recentTrack = {
-      albumCover: firstItem.track.album.images[0]?.url || '',
-      songName: firstItem.track.name,
-      artist: firstItem.track.artists.map((artist) => artist.name).join(', '),
-      lastPlayed: new Date(firstItem.played_at).toLocaleString(),
-    };
-
-    return recentTrack;
+    return formatTrackData(firstItem.track);
   } catch (error) {
     console.error(
       'Error fetching the most recent track:',
@@ -90,6 +72,25 @@ export async function getMostRecentTrack(): Promise<{
     );
     return null; // Return null to indicate failure
   }
+}
+
+function formatTrackData(
+  track: any,
+  isCurrentlyPlaying: boolean = false
+): {
+  albumCover: string;
+  songName: string;
+  artist: string;
+  lastPlayed: string;
+} {
+  return {
+    albumCover: track.album.images[0]?.url || '',
+    songName: track.name,
+    artist: track.artists.map((artist: any) => artist.name).join(', '),
+    lastPlayed: isCurrentlyPlaying
+      ? 'Currently Playing'
+      : new Date(track.played_at).toLocaleString(),
+  };
 }
 
 async function getAccessToken(): Promise<string> {
