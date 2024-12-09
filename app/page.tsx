@@ -6,6 +6,7 @@ import Quotes from '@/src/components/Quotes/Quotes';
 import WebsiteStatusCard from '@/src/components/WebsiteStatus/WebsiteStatusCard';
 import SubmitFeedbackCard from '@/src/components/SubmitFeedback/SubmitFeedbackCard';
 import SpotifyCard from '@/src/components/Spotify/SpotifyCard';
+import SpotifyStatusCard from '@/src/components/Spotify/SpotifyStatusCard';
 
 export default function Home() {
   return (
@@ -41,7 +42,8 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="space-y-4">
           <WebsiteStatusCard />
-          <SpotifyCard />
+          {/* <SpotifyCard /> */}
+          <SpotifyStatusCard />
           <SubmitFeedbackCard />
         </aside>
       </div>

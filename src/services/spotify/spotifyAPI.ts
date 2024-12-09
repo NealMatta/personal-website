@@ -8,11 +8,16 @@ const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
 const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
 import { SpotifyCurrentlyPlaying } from '@/src/types/spotify';
 // Access token would be stored in redis alongside the expiration time.
-const ACCESS_TOKEN = { accessToken: 'abc', expiryDate: '01/01/1997' };
+const ACCESS_TOKEN = {
+  accessToken: process.env.TEMP_SPOTIFY_ACCESS_TOKEN,
+  expiryDate: '01/01/1997',
+};
 
 export async function getCurrentlyPlaying(): Promise<SpotifyCurrentlyPlaying | null> {
   try {
-    const accessToken = await getAccessToken();
+    // const accessToken = await getAccessToken();
+    const accessToken = ACCESS_TOKEN.accessToken;
+    console.log(process.env.NEXT_PUBLIC_TEST_VARIABLE);
 
     const response = await fetch(
       `${SPOTIFY_API_URL}/me/player/currently-playing`,
@@ -29,6 +34,9 @@ export async function getCurrentlyPlaying(): Promise<SpotifyCurrentlyPlaying | n
     }
 
     const data = await response.json();
+
+    // Need to manipulate the recentSongData so that it's formatted in a specific manner
+
     console.log(data);
     return data;
   } catch (error) {
