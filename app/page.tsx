@@ -5,7 +5,7 @@ import PageHeader from '@/src/components/PageHeader/PageHeader';
 import Quotes from '@/src/components/Quotes/Quotes';
 import WebsiteStatusCard from '@/src/components/WebsiteStatus/WebsiteStatusCard';
 import SubmitFeedbackCard from '@/src/components/SubmitFeedback/SubmitFeedbackCard';
-import SpotifyCard from '@/src/components/Spotify/SpotifyCard';
+// import SpotifyCard from '@/src/components/Spotify/SpotifyCard';
 import SpotifyStatusCard from '@/src/components/Spotify/SpotifyStatusCard';
 
 export default function Home() {

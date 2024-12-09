@@ -3,23 +3,27 @@ const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
 // Environment variables (replace these with your process.env values)
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
-const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
-import { SpotifyCurrentlyPlaying } from '@/src/types/spotify';
+const CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!;
+const CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET!;
+const REFRESH_TOKEN = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
+import { SpotifyRecentlyPlayed } from '@/src/types/spotify';
 // Access token would be stored in redis alongside the expiration time.
 const ACCESS_TOKEN = {
-  accessToken: process.env.TEMP_SPOTIFY_ACCESS_TOKEN,
+  accessToken: process.env.NEXT_PUBLIC_TEMP_SPOTIFY_ACCESS_TOKEN,
   expiryDate: '01/01/1997',
 };
 
-export async function getCurrentlyPlaying(): Promise<SpotifyCurrentlyPlaying | null> {
+export async function getMostRecentTrack(): Promise<{
+  albumCover: string;
+  songName: string;
+  artist: string;
+  lastPlayed: string;
+} | null> {
   try {
-    // const accessToken = await getAccessToken();
-    const accessToken = ACCESS_TOKEN.accessToken;
-    console.log(process.env.NEXT_PUBLIC_TEST_VARIABLE);
+    const accessToken = await getAccessToken();
 
-    const response = await fetch(
+    // First, try to get the currently playing track
+    const currentlyPlayingResponse = await fetch(
       `${SPOTIFY_API_URL}/me/player/currently-playing`,
       {
         method: 'GET',
@@ -29,19 +33,59 @@ export async function getCurrentlyPlaying(): Promise<SpotifyCurrentlyPlaying | n
       }
     );
 
-    if (!response.ok) {
-      throw new Error(`Spotify API error: ${response.status}`);
+    if (currentlyPlayingResponse.ok) {
+      const currentlyPlayingData = await currentlyPlayingResponse.json();
+
+      if (currentlyPlayingData.item) {
+        // Format the currently playing data
+        const currentTrack = {
+          albumCover: currentlyPlayingData.item.album.images[0]?.url || '',
+          songName: currentlyPlayingData.item.name,
+          artist: currentlyPlayingData.item.artists
+            .map((artist: any) => artist.name)
+            .join(', '),
+          lastPlayed: 'Currently Playing', // No specific timestamp needed for the currently playing track
+        };
+        console.log(currentTrack);
+        return currentTrack;
+      }
     }
 
-    const data = await response.json();
+    // If nothing is playing, fall back to recently played
+    const recentlyPlayedResponse = await fetch(
+      `${SPOTIFY_API_URL}/me/player/recently-played`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
-    // Need to manipulate the recentSongData so that it's formatted in a specific manner
+    if (!recentlyPlayedResponse.ok) {
+      throw new Error(`Spotify API error: ${recentlyPlayedResponse.status}`);
+    }
 
-    console.log(data);
-    return data;
+    const recentlyPlayedData: SpotifyRecentlyPlayed =
+      await recentlyPlayedResponse.json();
+    const firstItem = recentlyPlayedData.items[0];
+    if (!firstItem) {
+      console.warn('No recently played track found.');
+      return null;
+    }
+
+    // Format the recently played data
+    const recentTrack = {
+      albumCover: firstItem.track.album.images[0]?.url || '',
+      songName: firstItem.track.name,
+      artist: firstItem.track.artists.map((artist) => artist.name).join(', '),
+      lastPlayed: new Date(firstItem.played_at).toLocaleString(),
+    };
+
+    return recentTrack;
   } catch (error) {
     console.error(
-      'Error fetching currently playing:',
+      'Error fetching the most recent track:',
       error instanceof Error ? error.message : error
     );
     return null; // Return null to indicate failure
@@ -59,10 +103,11 @@ async function getAccessToken(): Promise<string> {
   }
   return await refreshAccessToken(); */
 
-  if (!accessTokenValid(ACCESS_TOKEN.expiryDate)) {
+  if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
     return refreshAccessToken();
   }
-  return ACCESS_TOKEN.accessToken;
+
+  return ACCESS_TOKEN.accessToken!;
 }
 
 function accessTokenValid(expiryDate: string): boolean {

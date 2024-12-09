@@ -20,28 +20,23 @@ interface SpotifyTrack {
   duration_ms: number;
 }
 
-interface SpotifyDevice {
-  id: string;
-  is_active: boolean;
-  is_private_session: boolean;
-  is_restricted: boolean;
-  name: string;
-  type: string;
-  volume_percent: number;
-}
-
-export interface SpotifyCurrentlyPlaying {
-  timestamp: number;
-  context: null | {
-    type: string;
-    href: string;
-    external_urls: {
-      spotify: string;
+export interface SpotifyRecentlyPlayed {
+  items: {
+    track: SpotifyTrack;
+    played_at: string; // ISO 8601 date string
+    context: null | {
+      type: string;
+      href: string;
+      external_urls: {
+        spotify: string;
+      };
     };
+  }[];
+  next: string | null;
+  cursors: {
+    after: string;
+    before: string;
   };
-  progress_ms: number;
-  item: SpotifyTrack;
-  currently_playing_type: string;
-  is_playing: boolean;
-  device: SpotifyDevice;
+  limit: number;
+  href: string;
 }
