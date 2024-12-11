@@ -3,13 +3,13 @@ const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
 // Environment variables (replace these with your process.env values)
-const CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!;
-const CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET!;
-const REFRESH_TOKEN = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
+const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
 import { SpotifyRecentlyPlayed } from '@/src/types/spotify';
 // Access token would be stored in redis alongside the expiration time.
 const ACCESS_TOKEN = {
-  accessToken: process.env.NEXT_PUBLIC_TEMP_SPOTIFY_ACCESS_TOKEN,
+  accessToken: process.env.TEMP_SPOTIFY_ACCESS_TOKEN,
   expiryDate: '01/01/1997',
 };
 
@@ -21,6 +21,7 @@ export async function getMostRecentTrack(): Promise<{
 } | null> {
   try {
     const accessToken = await getAccessToken();
+    // console.log(accessToken);
 
     // First, try to get the currently playing track
     const currentlyPlayingResponse = await fetch(
@@ -104,6 +105,7 @@ async function getAccessToken(): Promise<string> {
   }
   return await refreshAccessToken(); */
 
+  // Change to NOT to get the refresh piece to work
   if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
     return refreshAccessToken();
   }
