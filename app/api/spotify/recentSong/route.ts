@@ -1,4 +1,4 @@
-import { getMostRecentTrack } from '@/src/services/spotify/spotifyAPI';
+import { getMostRecentTrack } from '@/src/services/spotify/spotify';
 
 export async function GET() {
   try {

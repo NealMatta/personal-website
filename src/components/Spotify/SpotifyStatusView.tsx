@@ -26,21 +26,30 @@ export default function SpotifyStatusView({
       <div className="flex flex-col gap-4">
         <div className="text-center">
           {isLoading && (
-            <div className="animate-pulse flex flex-col items-center">
-              <div className="h-8 w-32 bg-gray-200 rounded mb-4"></div>
-              <div className="h-4 w-64 bg-gray-200 rounded"></div>
+            <div className="flex gap-2 items-center animate-pulse">
+              {/* Left Side: Placeholder Icon */}
+              <div className="w-full flex justify-center">
+                <div className="relative flex items-center justify-center w-24 h-24 rounded-lg bg-gray-200"></div>
+              </div>
+
+              {/* Right Side: Placeholder Song and Artist */}
+              <div className="w-full flex flex-col justify-center items-center text-center">
+                <div className="h-6 w-32 bg-gray-200 rounded mb-2"></div>{' '}
+                {/* Placeholder for Song */}
+                <div className="h-4 w-24 bg-gray-200 rounded"></div>{' '}
+                {/* Placeholder for Artist */}
+              </div>
             </div>
           )}
 
           {isError && (
-            <p className="text-red-500">Failed to load commit data.</p>
+            <p className="text-red-500">Failed to load recent song.</p>
           )}
 
           {!isLoading && !isError && (
             <>
-              {/* <p>{commitCount}</p> */}
               <div className="flex gap-2 items-center">
-                {/* Left Side: Square Icon */}
+                {/* Left Side: Album Icon */}
                 <div className="w-full flex justify-center">
                   <div className="relative flex items-center justify-center w-24 h-24 rounded-lg bg-gray-300">
                     <FontAwesomeIcon
@@ -52,8 +61,12 @@ export default function SpotifyStatusView({
 
                 {/* Right Side: Song and Artist */}
                 <div className="w-full flex flex-col justify-center items-center text-center">
-                  <div className="text-2xl font-bold">Song</div>
-                  <div className="text-md text-gray-500">Artist</div>
+                  <div className="text-2xl font-bold">
+                    {recentSong?.name || 'Unknown Song'}
+                  </div>
+                  <div className="text-md text-gray-500">
+                    {recentSong?.artist || 'Unknown Artist'}
+                  </div>
                 </div>
               </div>
             </>

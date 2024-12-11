@@ -2,14 +2,21 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMostRecentTrack } from '@/src/services/spotify/spotifyAPI';
 import SpotifyStatusView from './SpotifyStatusView';
 
-export default function WebsiteStatusClient() {
-  // Client-side logic: Fetch commits
+async function fetchRecentSong() {
+  const response = await fetch('/api/spotify/recentSong');
+  if (!response.ok) {
+    throw new Error('Failed to fetch recent song');
+  }
+  return response.json();
+}
+
+export default function SpotifyStatusClient() {
+  // Client-side logic: Fetch data from the API
   const { data, isLoading, isError } = useQuery({
     queryKey: ['currentlyPlaying'],
-    queryFn: getMostRecentTrack,
+    queryFn: fetchRecentSong,
   });
 
   // Pass all data and states to the presentational component
