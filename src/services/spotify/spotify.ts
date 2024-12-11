@@ -23,7 +23,7 @@ export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
       }
     );
 
-    if (currentlyPlayingResponse.ok) {
+    if (currentlyPlayingResponse.ok && currentlyPlayingResponse.body !== null) {
       const currentlyPlayingData: SpotifyApi.CurrentPlaybackResponse =
         await currentlyPlayingResponse.json();
       if (
@@ -36,8 +36,29 @@ export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
         );
       }
     }
-    console.warn('No recently played track found.');
-    return null;
+
+    const recentlyPlayedResponse = await fetch(
+      `${SPOTIFY_API_URL}/me/player/recently-played?limit=1`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    if (!recentlyPlayedResponse.ok) {
+      throw new Error(`Spotify API error: ${recentlyPlayedResponse.status}`);
+    }
+
+    const recentlyPlayedData: SpotifyApi.UsersRecentlyPlayedTracksResponse =
+      await recentlyPlayedResponse.json();
+    const firstItem: SpotifyApi.PlayHistoryObject = recentlyPlayedData.items[0];
+    if (!firstItem) {
+      console.warn('No recently played track found.');
+      return null;
+    }
+    return formatTrackData(firstItem.track);
   } catch (error) {
     console.error(
       'Error fetching the most recent track:',
