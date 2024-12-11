@@ -2,11 +2,13 @@ import React from 'react';
 import BarebonesCard from '../cards/BarebonesCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { SpotifyOutput } from '@/src/types/spotify';
+import Image from 'next/image';
 
 type SpotifyStatusViewProps = {
   isLoading: boolean;
   isError: boolean;
-  recentSong: any;
+  recentSong: SpotifyOutput;
 };
 
 export default function SpotifyStatusView({
@@ -19,7 +21,7 @@ export default function SpotifyStatusView({
       title={
         <div className="flex items-center">
           <FontAwesomeIcon icon={faSpotify} className="mr-2 fa-icon" />
-          <h2>Last Listened To</h2>
+          <h2>{recentSong.lastPlayed}</h2>
         </div>
       }
     >
@@ -51,10 +53,12 @@ export default function SpotifyStatusView({
               <div className="flex gap-2 items-center">
                 {/* Left Side: Album Icon */}
                 <div className="w-full flex justify-center">
-                  <div className="relative flex items-center justify-center w-24 h-24 rounded-lg bg-gray-300">
-                    <FontAwesomeIcon
-                      icon={faSpotify}
-                      className="text-4xl text-gray-700 fa-icon"
+                  <div className="relative flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                    <Image
+                      src={recentSong.albumCover}
+                      layout="fill"
+                      objectFit="cover"
+                      alt="Album Cover"
                     />
                   </div>
                 </div>
@@ -62,7 +66,7 @@ export default function SpotifyStatusView({
                 {/* Right Side: Song and Artist */}
                 <div className="w-full flex flex-col justify-center items-center text-center">
                   <div className="text-2xl font-bold">
-                    {recentSong?.name || 'Unknown Song'}
+                    {recentSong?.songName || 'Unknown Song'}
                   </div>
                   <div className="text-md text-gray-500">
                     {recentSong?.artist || 'Unknown Artist'}

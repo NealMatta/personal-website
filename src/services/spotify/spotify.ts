@@ -12,14 +12,11 @@ const ACCESS_TOKEN = {
   expiryDate: '01/01/1997',
 };
 
+import { SpotifyOutput } from '@/src/types/spotify';
+
 const basicAccessToken = false;
 
-export async function getMostRecentTrack(): Promise<{
-  albumCover: string;
-  songName: string;
-  artist: string;
-  lastPlayed: string;
-} | null> {
+export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
   try {
     const accessToken = await getAccessToken();
 
@@ -45,34 +42,14 @@ export async function getMostRecentTrack(): Promise<{
         currentlyPlayingData.item &&
         isTrackObject(currentlyPlayingData.item)
       ) {
-        return formatTrackData(currentlyPlayingData.item, true);
+        return formatTrackData(
+          currentlyPlayingData.item,
+          currentlyPlayingData.is_playing
+        );
       }
     }
-
-    // If nothing is playing, fall back to recently played
-    const recentlyPlayedResponse = await fetch(
-      `${SPOTIFY_API_URL}/me/player/recently-played?limit=1`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    if (!recentlyPlayedResponse.ok) {
-      throw new Error(`Spotify API error: ${recentlyPlayedResponse.status}`);
-    }
-
-    const recentlyPlayedData: SpotifyApi.UsersRecentlyPlayedTracksResponse =
-      await recentlyPlayedResponse.json();
-    const firstItem = recentlyPlayedData.items[0];
-    if (!firstItem) {
-      console.warn('No recently played track found.');
-      return null;
-    }
-
-    return formatTrackData(firstItem.track);
+    console.warn('No recently played track found.');
+    return null;
   } catch (error) {
     console.error(
       'Error fetching the most recent track:',
@@ -95,7 +72,7 @@ function formatTrackData(
     albumCover: track.album.images[0]?.url || '',
     songName: track.name,
     artist: track.artists.map((artist) => artist.name).join(', '),
-    lastPlayed: isCurrentlyPlaying ? 'Currently Playing' : 'Played Recently',
+    lastPlayed: isCurrentlyPlaying ? 'Currently Playing' : 'Last Listened To',
   };
 }
 
