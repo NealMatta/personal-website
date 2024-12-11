@@ -21,7 +21,7 @@ export default function SpotifyStatusView({
       title={
         <div className="flex items-center">
           <FontAwesomeIcon icon={faSpotify} className="mr-2 fa-icon" />
-          <h2>{recentSong.lastPlayed}</h2>
+          <h2>{recentSong?.lastPlayed || 'Last Listened To'}</h2>
         </div>
       }
     >

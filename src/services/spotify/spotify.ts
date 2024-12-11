@@ -1,30 +1,18 @@
 // Base URL for Spotify API
 const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
-const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
-// Environment variables (replace these with your process.env values)
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
-const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
 // Access token would be stored in redis alongside the expiration time.
-const ACCESS_TOKEN = {
-  accessToken: process.env.TEMP_SPOTIFY_ACCESS_TOKEN,
-  expiryDate: '01/01/1997',
-};
 
+import { isTrackObject, formatTrackData } from './helpers';
 import { SpotifyOutput } from '@/src/types/spotify';
-
-const basicAccessToken = false;
+import { getAccessToken } from './tokenManager';
 
 export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
   try {
     const accessToken = await getAccessToken();
 
-    if (basicAccessToken) {
-      console.log(accessToken);
-    }
+    // console.log(accessToken);
 
-    // First, try to get the currently playing track
     const currentlyPlayingResponse = await fetch(
       `${SPOTIFY_API_URL}/me/player/currently-playing`,
       {
@@ -57,93 +45,4 @@ export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
     );
     return null; // Return null to indicate failure
   }
-}
-
-function formatTrackData(
-  track: SpotifyApi.TrackObjectFull,
-  isCurrentlyPlaying: boolean = false
-): {
-  albumCover: string;
-  songName: string;
-  artist: string;
-  lastPlayed: string;
-} {
-  return {
-    albumCover: track.album.images[0]?.url || '',
-    songName: track.name,
-    artist: track.artists.map((artist) => artist.name).join(', '),
-    lastPlayed: isCurrentlyPlaying ? 'Currently Playing' : 'Last Listened To',
-  };
-}
-
-async function getAccessToken(): Promise<string> {
-  // TODO: Pull from redis store the access token and the expiry time
-  /* const tokenData = await redis.get('spotify_access_token');
-  if (tokenData) {
-    const { accessToken, expiryDate } = JSON.parse(tokenData);
-    if (accessTokenValid(expiryDate)) {
-      return accessToken;
-    }
-  }
-  return await refreshAccessToken(); */
-
-  // Change to NOT to get the refresh piece to work
-  if (basicAccessToken) {
-    if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
-      return await refreshAccessToken();
-    }
-  } else {
-    if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
-      return await refreshAccessToken();
-    }
-  }
-
-  return ACCESS_TOKEN.accessToken!;
-}
-
-function accessTokenValid(expiryDate: string): boolean {
-  const now = new Date();
-  const expiry = new Date(expiryDate);
-  return now < expiry;
-}
-
-// TODO: Implement retries or fallback mechanisms in case the token refresh fails
-async function refreshAccessToken(): Promise<string> {
-  try {
-    const response = await fetch(SPOTIFY_TOKEN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-      },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: REFRESH_TOKEN,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to refresh access token');
-    }
-
-    // TODO: Reset the access token in Redis and store expiry time as well
-    const data = await response.json();
-    const newAccessToken = data.access_token;
-
-    console.log('Access token refreshed successfully!');
-    return newAccessToken;
-  } catch (error) {
-    console.error(
-      'Error refreshing access token:',
-      error instanceof Error ? error.message : error
-    );
-    throw error; // Propagate the error to stop further retries
-  }
-}
-
-// Add the type guard function here
-function isTrackObject(
-  item: SpotifyApi.TrackObjectFull | SpotifyApi.EpisodeObject
-): item is SpotifyApi.TrackObjectFull {
-  return 'album' in item && 'artists' in item;
 }
