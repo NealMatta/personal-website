@@ -6,12 +6,13 @@ const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
 const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
-import { SpotifyRecentlyPlayed } from '@/src/types/spotify';
 // Access token would be stored in redis alongside the expiration time.
 const ACCESS_TOKEN = {
   accessToken: process.env.TEMP_SPOTIFY_ACCESS_TOKEN,
   expiryDate: '01/01/1997',
 };
+
+const basicAccessToken = false;
 
 export async function getMostRecentTrack(): Promise<{
   albumCover: string;
@@ -21,7 +22,10 @@ export async function getMostRecentTrack(): Promise<{
 } | null> {
   try {
     const accessToken = await getAccessToken();
-    // console.log(accessToken);
+
+    if (basicAccessToken) {
+      console.log(accessToken);
+    }
 
     // First, try to get the currently playing track
     const currentlyPlayingResponse = await fetch(
@@ -35,9 +39,12 @@ export async function getMostRecentTrack(): Promise<{
     );
 
     if (currentlyPlayingResponse.ok) {
-      const currentlyPlayingData = await currentlyPlayingResponse.json();
-
-      if (currentlyPlayingData.item) {
+      const currentlyPlayingData: SpotifyApi.CurrentPlaybackResponse =
+        await currentlyPlayingResponse.json();
+      if (
+        currentlyPlayingData.item &&
+        isTrackObject(currentlyPlayingData.item)
+      ) {
         return formatTrackData(currentlyPlayingData.item, true);
       }
     }
@@ -57,7 +64,7 @@ export async function getMostRecentTrack(): Promise<{
       throw new Error(`Spotify API error: ${recentlyPlayedResponse.status}`);
     }
 
-    const recentlyPlayedData: SpotifyRecentlyPlayed =
+    const recentlyPlayedData: SpotifyApi.UsersRecentlyPlayedTracksResponse =
       await recentlyPlayedResponse.json();
     const firstItem = recentlyPlayedData.items[0];
     if (!firstItem) {
@@ -76,7 +83,7 @@ export async function getMostRecentTrack(): Promise<{
 }
 
 function formatTrackData(
-  track: any,
+  track: SpotifyApi.TrackObjectFull,
   isCurrentlyPlaying: boolean = false
 ): {
   albumCover: string;
@@ -87,10 +94,8 @@ function formatTrackData(
   return {
     albumCover: track.album.images[0]?.url || '',
     songName: track.name,
-    artist: track.artists.map((artist: any) => artist.name).join(', '),
-    lastPlayed: isCurrentlyPlaying
-      ? 'Currently Playing'
-      : new Date(track.played_at).toLocaleString(),
+    artist: track.artists.map((artist) => artist.name).join(', '),
+    lastPlayed: isCurrentlyPlaying ? 'Currently Playing' : 'Played Recently',
   };
 }
 
@@ -106,8 +111,14 @@ async function getAccessToken(): Promise<string> {
   return await refreshAccessToken(); */
 
   // Change to NOT to get the refresh piece to work
-  if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
-    return refreshAccessToken();
+  if (basicAccessToken) {
+    if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
+      return await refreshAccessToken();
+    }
+  } else {
+    if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
+      return await refreshAccessToken();
+    }
   }
 
   return ACCESS_TOKEN.accessToken!;
@@ -151,4 +162,11 @@ async function refreshAccessToken(): Promise<string> {
     );
     throw error; // Propagate the error to stop further retries
   }
+}
+
+// Add the type guard function here
+function isTrackObject(
+  item: SpotifyApi.TrackObjectFull | SpotifyApi.EpisodeObject
+): item is SpotifyApi.TrackObjectFull {
+  return 'album' in item && 'artists' in item;
 }

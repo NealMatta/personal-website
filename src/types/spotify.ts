@@ -13,7 +13,7 @@ interface SpotifyArtist {
   name: string;
 }
 
-interface SpotifyTrack {
+interface SpotifyTrackTwo {
   name: string;
   album: SpotifyAlbum;
   artists: SpotifyArtist[];
@@ -22,7 +22,7 @@ interface SpotifyTrack {
 
 export interface SpotifyRecentlyPlayed {
   items: {
-    track: SpotifyTrack;
+    track: SpotifyTrackTwo;
     played_at: string; // ISO 8601 date string
     context: null | {
       type: string;
