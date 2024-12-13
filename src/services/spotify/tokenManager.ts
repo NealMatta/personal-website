@@ -64,7 +64,7 @@ export async function getAccessToken(): Promise<string> {
     return await refreshAccessToken(); */
 
   // Change to NOT to get the refresh piece to work
-  if (accessTokenValid(ACCESS_TOKEN.expiryDate)) {
+  if (!accessTokenValid(ACCESS_TOKEN.expiryDate)) {
     return await refreshAccessToken();
   }
 
