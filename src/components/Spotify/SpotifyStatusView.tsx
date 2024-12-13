@@ -21,7 +21,16 @@ export default function SpotifyStatusView({
       title={
         <div className="flex items-center">
           <FontAwesomeIcon icon={faSpotify} className="mr-2 fa-icon" />
-          <h2>{recentSong?.lastPlayed || 'Last Listened To'}</h2>
+          {isLoading && (
+            <>
+              <div className="w-full flex items-center text-center">
+                <div className="h-8 w-48 bg-gray-200 rounded mb-2"></div>{' '}
+              </div>
+            </>
+          )}
+          {!isLoading && (
+            <h2>{recentSong?.lastPlayed || 'Last Listened To'}</h2>
+          )}
         </div>
       }
     >
@@ -55,7 +64,7 @@ export default function SpotifyStatusView({
                 <div className="w-full flex justify-center">
                   <div className="relative flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
                     <Image
-                      src={recentSong.albumCover}
+                      src={recentSong?.albumCover}
                       layout="fill"
                       objectFit="cover"
                       alt="Album Cover"
