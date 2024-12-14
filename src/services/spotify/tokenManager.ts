@@ -1,14 +1,48 @@
+import { createClient } from '@supabase/supabase-js';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
-// Environment variables (replace these with your process.env values)
+// Environment variables
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
 const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
+const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_KEY = process.env.SUPABASE_KEY!;
 
-const ACCESS_TOKEN = {
-  accessToken: process.env.TEMP_SPOTIFY_ACCESS_TOKEN,
-  expiryDate: '01/01/1997',
-};
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// SUPABASE
+async function saveAccessTokenToSupabase(
+  accessToken: string,
+  expiryDate: string
+) {
+  const { error } = await supabase.from('spotify_tokens').upsert({
+    id: 1,
+    access_token: accessToken,
+    expiry_date: expiryDate,
+  });
+
+  if (error) {
+    console.error('Error saving access token to Supabase:', error);
+    throw error;
+  }
+
+  console.log('Access token saved to Supabase successfully!');
+}
+
+async function getAccessTokenFromSupabase() {
+  const { data, error } = await supabase
+    .from('spotify_tokens')
+    .select('access_token, expiry_date')
+    .eq('id', 1)
+    .single();
+
+  if (error) {
+    console.error('Error fetching access token from Supabase:', error);
+    throw error;
+  }
+
+  return data;
+}
 
 // Checks validity of access token
 export function accessTokenValid(expiryDate: string): boolean {
@@ -37,9 +71,9 @@ export async function refreshAccessToken(): Promise<string> {
       throw new Error('Failed to refresh access token');
     }
 
-    // TODO: Reset the access token in Redis and store expiry time as well
     const data = await response.json();
     const newAccessToken = data.access_token;
+    console.log(data);
 
     console.log('Access token refreshed successfully!');
     return newAccessToken;
@@ -53,20 +87,16 @@ export async function refreshAccessToken(): Promise<string> {
 }
 
 export async function getAccessToken(): Promise<string> {
-  // TODO: Pull from redis store the access token and the expiry time
-  /* const tokenData = await redis.get('spotify_access_token');
-    if (tokenData) {
-      const { accessToken, expiryDate } = JSON.parse(tokenData);
-      if (accessTokenValid(expiryDate)) {
-        return accessToken;
-      }
-    }
-    return await refreshAccessToken(); */
+  const tokenData = await getAccessTokenFromSupabase();
 
-  // Change to NOT to get the refresh piece to work
-  if (!accessTokenValid(ACCESS_TOKEN.expiryDate)) {
-    return await refreshAccessToken();
+  if (tokenData && accessTokenValid(tokenData.expiry_date)) {
+    return tokenData.access_token;
   }
 
-  return ACCESS_TOKEN.accessToken!;
+  const newAccessToken = await refreshAccessToken();
+  await saveAccessTokenToSupabase(
+    newAccessToken,
+    new Date(Date.now() + 3600 * 1000).toISOString()
+  );
+  return newAccessToken;
 }
