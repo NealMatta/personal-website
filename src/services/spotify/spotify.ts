@@ -1,11 +1,11 @@
-// Base URL for Spotify API
-const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
-
-// Access token would be stored in redis alongside the expiration time.
-
 import { isTrackObject, formatTrackData } from './helpers';
 import { SpotifyOutput } from '@/src/types/spotify';
 import { getAccessToken } from './tokenManager';
+
+// Access token would be stored in redis alongside the expiration time.
+
+// Base URL for Spotify API
+const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
   try {
@@ -23,6 +23,8 @@ export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
       }
     );
 
+    // Succesfully runs if I'm playing a song or recently played a song
+    // Otherwise, a response with the 200 value is returned but not body
     if (currentlyPlayingResponse.ok && currentlyPlayingResponse.body !== null) {
       const currentlyPlayingData: SpotifyApi.CurrentPlaybackResponse =
         await currentlyPlayingResponse.json();
@@ -48,7 +50,9 @@ export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
     );
 
     if (!recentlyPlayedResponse.ok) {
-      throw new Error(`Spotify API error: ${recentlyPlayedResponse.status}`);
+      throw new Error(
+        `Spotify Recently Played API error: ${recentlyPlayedResponse.status}`
+      );
     }
 
     const recentlyPlayedData: SpotifyApi.UsersRecentlyPlayedTracksResponse =

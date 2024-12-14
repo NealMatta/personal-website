@@ -1,9 +1,14 @@
+/* Notes
+- Calling the getMostRecentTrack function here ensures that I'm executing the API on the server side
+  - This helps ensure the API Tokens and the logic is safer */
+
 import { getMostRecentTrack } from '@/src/services/spotify/spotify';
 
 export async function GET() {
   try {
     const track = await getMostRecentTrack();
 
+    // A null value would be returned if no songs were able to be found or the Spotify API is erroring out
     if (!track) {
       return new Response(JSON.stringify({ error: 'No recent track found' }), {
         status: 404,
