@@ -29,7 +29,7 @@ export default function Home() {
         }}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4 mb-20">
         {/* Main Content */}
         <main className="col-span-2 space-y-4">
           <About />

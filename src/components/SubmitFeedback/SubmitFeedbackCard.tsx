@@ -3,7 +3,7 @@ import PrimaryButton from '../UI/PrimaryButton';
 
 export default function WebsiteStatus() {
   return (
-    <BarebonesCard title={'Submit Feedback'}>
+    <BarebonesCard title={'Submit Feedback'} wip={true}>
       <div className="flex flex-col gap-4">
         <div className="text-center">
           <p className="text-gray-500">I&apos;d love to hear what you think!</p>
