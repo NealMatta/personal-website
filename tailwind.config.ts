@@ -9,7 +9,7 @@ export default {
         foreground: 'var(--foreground)',
       },
       animation: {
-        marquee: 'marquee 2s linear infinite',
+        marquee: 'marquee 2s linear 1 forwards',
       },
       keyframes: {
         marquee: {
