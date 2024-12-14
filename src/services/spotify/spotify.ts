@@ -2,16 +2,12 @@ import { isTrackObject, formatTrackData } from './helpers';
 import { SpotifyOutput } from '@/src/types/spotify';
 import { getAccessToken } from './tokenManager';
 
-// Access token would be stored in redis alongside the expiration time.
-
 // Base URL for Spotify API
 const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
   try {
     const accessToken = await getAccessToken();
-
-    // console.log(accessToken);
 
     const currentlyPlayingResponse = await fetch(
       `${SPOTIFY_API_URL}/me/player/currently-playing`,

@@ -4,13 +4,12 @@ const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 // Environment variables
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
-const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!; // Could also move this to supabase as well
+const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!;
 const SUPABASE_URL = process.env.SUPABASE_URL!;
 const SUPABASE_KEY = process.env.SUPABASE_KEY!;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// SUPABASE
 async function saveAccessTokenToSupabase(
   accessToken: string,
   expiryDate: string
@@ -26,7 +25,7 @@ async function saveAccessTokenToSupabase(
     throw error;
   }
 
-  console.log('Access token saved to Supabase successfully!');
+  console.log('SUCCESS - Access token saved to Supabase');
 }
 
 async function getAccessTokenFromSupabase() {
@@ -73,9 +72,8 @@ export async function refreshAccessToken(): Promise<string> {
 
     const data = await response.json();
     const newAccessToken = data.access_token;
-    console.log(data);
 
-    console.log('Access token refreshed successfully!');
+    console.log('SUCCESS - Access Token Refreshed!');
     return newAccessToken;
   } catch (error) {
     console.error(
@@ -98,5 +96,6 @@ export async function getAccessToken(): Promise<string> {
     newAccessToken,
     new Date(Date.now() + 3600 * 1000).toISOString()
   );
+  console.log('SUCCESS - Grabbed Token');
   return newAccessToken;
 }
