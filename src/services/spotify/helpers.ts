@@ -1,3 +1,5 @@
+import { SpotifyOutput } from '@/src/types/spotify';
+
 // Type Guard function for the currently Playing Response since it returns either a Track or an Episode
 export function isTrackObject(
   item: SpotifyApi.TrackObjectFull | SpotifyApi.EpisodeObject
@@ -8,12 +10,7 @@ export function isTrackObject(
 export function formatTrackData(
   track: SpotifyApi.TrackObjectFull,
   isCurrentlyPlaying: boolean = false
-): {
-  albumCover: string;
-  songName: string;
-  artist: string;
-  lastPlayed: string;
-} {
+): SpotifyOutput {
   return {
     albumCover: track.album.images[0]?.url || '',
     songName: track.name,
