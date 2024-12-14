@@ -65,19 +65,32 @@ export default function SpotifyStatusView({
                   <div className="relative flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
                     <Image
                       src={recentSong?.albumCover}
-                      layout="fill"
-                      objectFit="cover"
+                      fill={true}
                       alt="Album Cover"
                     />
                   </div>
                 </div>
 
                 {/* Right Side: Song and Artist */}
-                <div className="w-full flex flex-col justify-center items-center text-center">
-                  <div className="text-2xl font-bold">
+                <div className="w-full flex flex-col justify-center text-left overflow-x-hidden whitespace-nowrap">
+                  <div
+                    className={`text-2xl font-bold ${
+                      recentSong?.songName.length > 10
+                        ? 'hover:animate-marquee'
+                        : ''
+                    }`}
+                  >
+                    {/* <div className="text-2xl font-bold hover:animate-marquee"> */}
+
                     {recentSong?.songName || 'Unknown Song'}
                   </div>
-                  <div className="text-md text-gray-500">
+                  <div
+                    className={`text-md text-gray-500 ${
+                      recentSong?.artist.length > 20
+                        ? 'hover:animate-marquee'
+                        : ''
+                    }`}
+                  >
                     {recentSong?.artist || 'Unknown Artist'}
                   </div>
                 </div>
