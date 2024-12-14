@@ -27,7 +27,7 @@ export default function About() {
             <SocialLinks />
           </div>
           <div className="text-md">
-            Hey, I&apos;’m Neal! I&apos;m a tech enthusiast and serial hobbyist
+            Hey, I&apos;m Neal! I&apos;m a tech enthusiast and serial hobbyist
             working as an Enterprise Architect at Workday. I thrive on solving
             problems, organizing chaos, and pushing my aging body to the limits
             by playing too much volleyball. Outside of work, I&apos;m an avid
