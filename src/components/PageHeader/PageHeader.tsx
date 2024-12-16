@@ -8,6 +8,7 @@ const PageHeader = () => {
       hour12: false,
     });
     const numericHours = parseInt(hours, 10);
+    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
     if (numericHours < 12) return 'Good Morning!';
     else if (numericHours < 18) return 'Good Afternoon!';
     return 'Good Evening!';
