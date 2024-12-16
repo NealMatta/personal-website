@@ -9,25 +9,7 @@ import SpotifyStatusCard from '@/src/components/Spotify/SpotifyStatusCard';
 export default function Home() {
   return (
     <>
-      <PageHeader
-        header={() => {
-          const hours = new Date().getHours();
-          if (hours < 12) return 'Good Morning!';
-          else if (hours < 18) return 'Good Afternoon!';
-          return 'Good Evening!';
-        }}
-        subHeader={() => {
-          const date = new Date();
-          const formattedDate = new Intl.DateTimeFormat('en-US', {
-            weekday: 'long',
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-          }).format(date);
-
-          return `It's ${formattedDate}`;
-        }}
-      />
+      <PageHeader />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4 mb-20">
         {/* Main Content */}
