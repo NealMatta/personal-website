@@ -1,15 +1,16 @@
+'use client';
 import React from 'react';
-import { getClientTimeZone } from '@/src/services/about/timezone';
 
 const PageHeader = () => {
+  const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log(clientTimeZone);
   const getHeader = () => {
     const hours = new Date().toLocaleString('en-US', {
-      timeZone: getClientTimeZone(),
+      timeZone: clientTimeZone,
       hour: '2-digit',
       hour12: false,
     });
     const numericHours = parseInt(hours, 10);
-    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
     if (numericHours < 12) return 'Good Morning!';
     else if (numericHours < 18) return 'Good Afternoon!';
     return 'Good Evening!';
@@ -22,7 +23,7 @@ const PageHeader = () => {
       month: 'long',
       day: 'numeric',
       year: 'numeric',
-      timeZone: getClientTimeZone(),
+      timeZone: clientTimeZone,
     }).format(date);
 
     return `It's ${formattedDate}`;
