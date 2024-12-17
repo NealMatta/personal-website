@@ -3,7 +3,6 @@ import React from 'react';
 
 const PageHeader = () => {
   const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  console.log(clientTimeZone);
   const getHeader = () => {
     const hours = new Date().toLocaleString('en-US', {
       timeZone: clientTimeZone,
