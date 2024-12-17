@@ -1,9 +1,10 @@
 import React from 'react';
+import { getClientTimeZone } from '@/src/services/about/timezone';
 
 const PageHeader = () => {
   const getHeader = () => {
     const hours = new Date().toLocaleString('en-US', {
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Replace or keep dynamic time zone
+      timeZone: getClientTimeZone(),
       hour: '2-digit',
       hour12: false,
     });
@@ -21,7 +22,7 @@ const PageHeader = () => {
       month: 'long',
       day: 'numeric',
       year: 'numeric',
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Replace or keep dynamic time zone
+      timeZone: getClientTimeZone(),
     }).format(date);
 
     return `It's ${formattedDate}`;
