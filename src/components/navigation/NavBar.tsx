@@ -4,7 +4,7 @@ export default function NavBar() {
   return (
     <nav className="sticky top-0 z-50 px-4 py-8 transition-all duration-300 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-16">
-        <div className="container flex justify-between items-center ">
+        <div className="container flex flex-wrap justify-between items-center">
           {/* Logo Section */}
           <div>
             <Link
@@ -16,11 +16,12 @@ export default function NavBar() {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex space-x-8">
+          <div className="flex flex-wrap gap-x-8 gap-y-4 mt-4 sm:mt-0">
             <NavLink href="#" label="Projects" disabled={true} />
             <NavLink href="#" label="Playground" disabled={true} />
             <NavLink href="#" label="Cookbook" disabled={true} />
             <NavLink href="#" label="Articles" disabled={true} />
+            <NavLink href="#" label="Test" disabled={true} />
           </div>
         </div>
       </div>
@@ -40,7 +41,9 @@ const NavLink = ({
 }) => (
   <Link
     href={href}
-    className={`text-gray-500 hover:text-gray-700 transition-colors duration-300 ${disabled ? 'pointer-events-none' : ''}`}
+    className={`text-gray-500 hover:text-gray-700 transition-colors duration-300 ${
+      disabled ? 'pointer-events-none' : ''
+    }`}
   >
     {label}
   </Link>

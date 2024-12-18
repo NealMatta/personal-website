@@ -19,7 +19,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <NavBar />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-            <div className="mt-5 md:mt-20">{children}</div>
+            <div className="mt-5 ">{children}</div>
           </div>
         </ReactQueryProvider>
       </body>
