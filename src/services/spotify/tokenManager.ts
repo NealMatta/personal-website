@@ -51,37 +51,42 @@ export function accessTokenValid(expiryDate: string): boolean {
 }
 
 // Refreshes access token
-// TODO: Implement retries or fallback mechanisms in case the token refresh fails
-export async function refreshAccessToken(): Promise<string> {
-  try {
-    const response = await fetch(SPOTIFY_TOKEN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-      },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: REFRESH_TOKEN,
-      }),
-    });
+export async function refreshAccessToken(retries = 3): Promise<string> {
+  let attempt = 0;
 
-    if (!response.ok) {
-      throw new Error('Failed to refresh access token');
+  while (attempt < retries) {
+    try {
+      const response = await fetch(SPOTIFY_TOKEN_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+        },
+        body: new URLSearchParams({
+          grant_type: 'refresh_token',
+          refresh_token: REFRESH_TOKEN,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to refresh access token, status: ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+      console.log('SUCCESS - Access Token Refreshed!');
+      return data.access_token;
+    } catch (error) {
+      attempt++;
+      console.error(
+        `Attempt ${attempt} - Error refreshing access token: ${error}`
+      );
+      if (attempt >= retries) throw error; // Exhausted retries
     }
-
-    const data = await response.json();
-    const newAccessToken = data.access_token;
-
-    console.log('SUCCESS - Access Token Refreshed!');
-    return newAccessToken;
-  } catch (error) {
-    console.error(
-      'Error refreshing access token:',
-      error instanceof Error ? error.message : error
-    );
-    throw error; // Propagate the error to stop further retries
   }
+
+  throw new Error('Failed to refresh access token after multiple attempts');
 }
 
 export async function getAccessToken(): Promise<string> {
