@@ -23,18 +23,30 @@ export default function About() {
         {/* Content */}
         <div className="col-span-1 md:col-span-3 flex flex-col gap-2">
           <div className="flex flex-col lg:flex-row gap-4 items-center">
-            <h1 className="font-bold text-4xl">About Me</h1>
+            <h1 className="font-bold text-4xl">I&lsquo;m Neal ...</h1>
             <SocialLinks />
           </div>
-          <div className="text-md">
-            Hey, I&apos;m Neal! I&apos;m a tech enthusiast and serial hobbyist
-            working as an Enterprise Architect at Workday. I thrive on solving
-            problems, organizing chaos, and pushing my aging body to the limits
-            by playing too much volleyball. Outside of work, I&apos;m an avid
-            volleyball player, a (more recently) adventurous foodie, and someone
-            who finds joy in learning and creating. The purpose of this site is
-            to help me brush up on my coding skills and bring even more
-            organization to my life. Enjoy!
+          <div className="text-md space-y-4">
+            <div>
+              ... a tech enthusiast, lifelong learner, and self-proclaimed
+              serial hobbyist working as an Enterprise Architect at Workday. I
+              thrive on turning chaos into clarity, solving complex problems,
+              and occasionally pushing my body past its limits with (far too
+              much) volleyball.
+            </div>
+            <div>
+              When I&lsquo;m not diving into technology, you&lsquo;ll find me on
+              the volleyball court, exploring new cuisines as an adventurous
+              foodie, or bringing my latest creative ideas to life. This site is
+              my space to sharpen my coding skills, share what I&lsquo;m
+              learning, and build tools that bring even more structure to my
+              world.
+            </div>
+            <div>
+              If you&lsquo;re interested in connecting further, you can find my
+              LinkedIn and resume via the social links above. Thanks for
+              stopping by—enjoy exploring!
+            </div>
           </div>
         </div>
       </div>
