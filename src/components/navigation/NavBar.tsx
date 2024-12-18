@@ -21,7 +21,6 @@ export default function NavBar() {
             <NavLink href="#" label="Playground" disabled={true} />
             <NavLink href="#" label="Cookbook" disabled={true} />
             <NavLink href="#" label="Articles" disabled={true} />
-            <NavLink href="#" label="Test" disabled={true} />
           </div>
         </div>
       </div>
