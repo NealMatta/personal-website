@@ -12,7 +12,7 @@ const Projects = () => {
           pursuits to personal growth and volleyball goals."
       />
 
-      <div className="grid gap-4 my-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 my-4 grid-cols-1 sm:grid-cols-2 ">
         {/* Pass mock project details to the client-side component */}
         <ClientSideProjects projects={PROJECTS} />
       </div>

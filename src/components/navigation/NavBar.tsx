@@ -17,7 +17,7 @@ export default function NavBar() {
 
           {/* Navigation Links */}
           <div className="flex flex-wrap gap-x-8 gap-y-4 mt-4 sm:mt-0">
-            <NavLink href="#" label="Projects" disabled={true} />
+            <NavLink href="/projects" label="Projects" />
             <NavLink href="#" label="Playground" disabled={true} />
             <NavLink href="#" label="Cookbook" disabled={true} />
             <NavLink href="#" label="Articles" disabled={true} />
@@ -40,8 +40,10 @@ const NavLink = ({
 }) => (
   <Link
     href={href}
-    className={`text-gray-500 hover:text-gray-700 transition-colors duration-300 ${
-      disabled ? 'pointer-events-none' : ''
+    className={`${
+      disabled
+        ? 'text-red-500 line-through pointer-events-none'
+        : 'text-gray-500 hover:text-gray-700 transition-colors duration-300'
     }`}
   >
     {label}
