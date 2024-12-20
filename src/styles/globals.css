@@ -5,6 +5,8 @@
 :root {
   --background: #eff1f2;
   --foreground: #171717;
+  --font-rubik: 'Rubik', sans-serif;
+  --font-lora: 'Lora', serif;
 }
 
 /* I'll get to dark mode later */
@@ -18,13 +20,21 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-rubik); /* Rubik as the default font */
 }
 
-/* Global CSS file (e.g., styles/globals.css) */
-.fa-icon {
-  width: 1em;
-  height: 1em;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-rubik); /* Use Lora for headings */
+}
 
-  font-size: inherit; /* Ensures size is consistent */
+blockquote,
+em,
+p,
+.secondary-font {
+  font-family: var(--font-lora); /* Lora for emphasis or secondary text */
 }

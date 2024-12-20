@@ -31,7 +31,7 @@ const PageHeader = () => {
   return (
     <div className="page-header">
       <h1 className="text-4xl font-bold">{getHeader()}</h1>
-      <h3 className="text-2xl">{getSubHeader()}</h3>
+      <h3 className="text-2xl secondary-font">{getSubHeader()}</h3>
     </div>
   );
 };
