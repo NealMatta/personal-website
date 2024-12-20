@@ -14,7 +14,7 @@ export default function BarebonesCard({
   wip = false,
 }: BasicCardProps) {
   // Max width needs to change. Need to figure that out
-  const classValue = `relative block p-6 bg-white border rounded-lg shadow`;
+  const classValue = `relative block p-6 bg-white border rounded-lg shadow-md`;
   const workInProgressClasses = 'opacity-50 pointer-events-none';
   const textClasses = `text-2xl font-bold ${wip ? 'text-gray-500' : 'text-black'}`;
 

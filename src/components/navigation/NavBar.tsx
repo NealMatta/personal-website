@@ -7,10 +7,7 @@ export default function NavBar() {
         <div className="container flex flex-wrap justify-between items-center">
           {/* Logo Section */}
           <div>
-            <Link
-              href="/"
-              className="text-slate-900 uppercase tracking-widest font-bold"
-            >
+            <Link href="/" className="uppercase tracking-widest font-bold">
               Neal Matta
             </Link>
           </div>
@@ -42,8 +39,8 @@ const NavLink = ({
     href={href}
     className={`${
       disabled
-        ? 'text-red-500 line-through pointer-events-none'
-        : 'text-gray-500 hover:text-gray-700 transition-colors duration-300'
+        ? 'line-through pointer-events-none'
+        : 'hover:text-primary transition-colors duration-300'
     }`}
   >
     {label}
