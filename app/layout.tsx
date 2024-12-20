@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${rubik.variable} ${lora.variable}`}>
-      <body className={rubik.className}>
+      <body>
         <ReactQueryProvider>
           <NavBar />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
