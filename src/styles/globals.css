@@ -2,20 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+1. Foreground: Neutral for readability.
+2. Primary Color: Stands out for emphasis (e.g., buttons or links).
+3. Secondary Color: Complements the primary color and adds depth to the design 
+*/
+
 :root {
   --background: #eff1f2;
-  --foreground: #171717;
+  --foreground: #171717; /* Neutral dark gray for text */
   --font-rubik: 'Rubik', sans-serif;
   --font-lora: 'Lora', serif;
+  --primary-color: #3db8ea; /* Bright blue for CTAs and highlights */
+  --primary-color-light: #6dcaf0;
+  --primary-color-dark: #2a94ba;
+  --secondary-color: #4caf50; /* A fresh green for accents */
+  --secondary-color-light: #81c784;
+  --secondary-color-dark: #388e3c;
 }
 
-/* I'll get to dark mode later */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+/* Dark mode */
+[data-theme='dark'] {
+  --background: #18181b;
+  --foreground: #f9fafb; /* Light gray for text */
+  --primary-color: #3db8ea; /* Retain blue for CTAs */
+  --primary-color-light: #6dcaf0;
+  --primary-color-dark: #2a94ba;
+  --secondary-color: #4caf50; /* Same green for accents */
+  --secondary-color-light: #81c784;
+  --secondary-color-dark: #388e3c;
+}
 
 body {
   color: var(--foreground);
