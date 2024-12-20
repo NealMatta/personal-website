@@ -9,17 +9,17 @@ export const metadata: Metadata = {
   description: 'Everything about Neal Matta',
 };
 
-const rubik = Rubik({
+const primaryText = Rubik({
   subsets: ['latin'],
   weight: ['400', '700'], // Specify weights for Rubik
-  variable: '--font-rubik', // CSS variable for easy usage
+  variable: '--font-primary-font', // CSS variable for easy usage
 });
 
-const lora = Lora({
+const secondaryText = Lora({
   subsets: ['latin'],
   weight: ['400', '700'], // Specify weights for Lora
   style: ['normal', 'italic'], // Add italic if needed
-  variable: '--font-lora', // CSS variable for Lora
+  variable: '--font-secondary-font', // CSS variable for Lora
 });
 
 export default function RootLayout({
@@ -28,7 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${rubik.variable} ${lora.variable}`}>
+    <html
+      lang="en"
+      className={`${primaryText.variable} ${secondaryText.variable}`}
+    >
       <body>
         <ReactQueryProvider>
           <NavBar />

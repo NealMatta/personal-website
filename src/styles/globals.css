@@ -11,8 +11,8 @@
 :root {
   --background: #eff1f2;
   --foreground: #171717; /* Neutral dark gray for text */
-  --font-rubik: 'Rubik', sans-serif;
-  --font-lora: 'Lora', serif;
+  --font-primary-font: 'Rubik', sans-serif;
+  --font-secondary-font: 'Lora', serif;
   --primary-color: #3db8ea; /* Bright blue for CTAs and highlights */
   --primary-color-light: #6dcaf0;
   --primary-color-dark: #2a94ba;
@@ -36,7 +36,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-rubik); /* Rubik as the default font */
+  font-family: var(--font-primary-font); /* Rubik as the default font */
 }
 
 h1,
@@ -45,12 +45,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-rubik); /* Use Lora for headings */
+  font-family: var(--font-primary-font); /* Use Lora for headings */
 }
 
 blockquote,
 em,
 p,
 .secondary-font {
-  font-family: var(--font-lora); /* Lora for emphasis or secondary text */
+  font-family: var(
+    --font-secondary-font
+  ); /* Lora for emphasis or secondary text */
 }
