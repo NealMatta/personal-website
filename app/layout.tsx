@@ -2,11 +2,17 @@ import type { Metadata } from 'next';
 import '@/src/styles/globals.css';
 import NavBar from '@/src/components/navigation/NavBar';
 import ReactQueryProvider from '@/src/components/providers/ReactQueryProvider';
+import { Rubik } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Neal Matta',
   description: 'Everything about Neal Matta',
 };
+
+const rubik = Rubik({
+  subsets: ['latin'], // Choose the subset you need
+  weight: ['400', '700'], // Specify font weights
+});
 
 export default function RootLayout({
   children,
@@ -15,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={rubik.className}>
         <ReactQueryProvider>
           <NavBar />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
