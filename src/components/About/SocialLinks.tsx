@@ -44,12 +44,12 @@ export default function SocialLinks() {
             title={title}
             href={link}
             target="_blank"
-            className="group relative flex h-8 w-8 items-center justify-center rounded-lg border border-slate-500 hover:border-slate-300"
+            className="group relative flex h-8 w-8 items-center justify-center rounded-lg border border-foreground hover:border-primary"
           >
             <FontAwesomeIcon
               icon={icon}
               size="lg"
-              className="w-4 flex-shrink-0 group-hover:text-slate-300"
+              className="w-4 flex-shrink-0 group-hover:text-primary"
             />
           </Link>
         );
