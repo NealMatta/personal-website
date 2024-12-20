@@ -1,9 +1,10 @@
 [
   {
-    "id": 1,
+    "id": 123,
     "title": "Project 1",
     "description": "Details about Project 1",
-    "featured": true
+    "featured": true,
+    "tags": ["woodworking", "testing"]
   },
   {
     "id": 2,
@@ -16,7 +17,7 @@
     "title": "Project 3",
     "description": "Details about Project 3",
     "featured": false
-  }, 
+  },
   {
     "id": 4,
     "title": "Project 4",
