@@ -1,6 +1,7 @@
 import React from 'react';
 // import Image from 'next/image';
 import { ProjectCardProps } from '@/src/types';
+import ProjectTags from './ProjectTags';
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
@@ -15,15 +16,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <div className="pt-3">
         <h1 className="font-bold text-3xl mb-1.5">{project.title}</h1>
-        <div className="flex space-x-3">
-          {project.tags?.map((tag, index) => (
-            <p
-              key={index}
-              className="border border-foreground px-2 py-1 rounded-md uppercase text-xs tracking-wider italic mb-3"
-            >
-              {tag}
-            </p>
-          ))}
+        <div className="flex flex-wrap gap-x-3">
+          <ProjectTags tags={project.tags} />
         </div>
       </div>
     </div>

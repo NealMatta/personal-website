@@ -8,16 +8,15 @@ export default function FeaturedProjects() {
   const featuredProjects = PROJECTS.filter((project) => project.featured);
 
   return (
-    <BarebonesCard title="Featured Projects" wip={true}>
+    <BarebonesCard title="Featured Projects">
       <div className="flex flex-col">
-        <div className="flex flex-col lg:flex-row gap-2 my-2">
-          {/* Pass mock project details to the client-side component */}
+        <div className="grid gap-4 my-4 grid-cols-1 lg:grid-cols-2 ">
           <AllProjects projects={featuredProjects} />
         </div>
         <div className="ml-auto text-right">
           <Link
             href="/projects"
-            className="text-md italic underline text-blue-500 hover:text-blue-950"
+            className="text-md italic underline text-primary hover:text-primary-dark"
           >
             Check out all my Projects
           </Link>

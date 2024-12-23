@@ -1,7 +1,8 @@
 import React from 'react';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
-import { Project } from '@/src/types/projects';
+import { Project } from '@/src/types/';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
+import ProjectTags from '@/src/components/Projects/ProjectTags';
 
 export default async function ProjectPage(
   {
@@ -51,18 +52,13 @@ export default async function ProjectPage(
   return (
     <div>
       <PageHeader
-        header={`${projectExample.title}`}
+        header={projectExample.title}
         subHeader={projectExample.description}
       />
-      <div className="flex space-x-3">
-        {projectExample.tags?.map((tag, index) => (
-          <p
-            key={index}
-            className="border border-foreground px-2 py-1 rounded-md uppercase text-xs tracking-wider italic mb-3"
-          >
-            {tag}
-          </p>
-        ))}
+      <div className="mt-2">
+        <div className="flex flex-wrap gap-x-3">
+          <ProjectTags tags={projectExample.tags} />
+        </div>
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
