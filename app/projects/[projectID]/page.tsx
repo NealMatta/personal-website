@@ -14,9 +14,17 @@ export default async function ProjectPage({
   // Fetch project data from Supabase
   const { data: projectData, error } = await supabase
     .from('projects')
-    .select('*')
+    .select(
+      `
+    *,
+    projectimages(*),
+    projectdetails(*)
+  `
+    )
     .eq('id', projectID)
     .single();
+
+  console.log(projectData);
 
   if (error) {
     console.error('Error fetching project data:', error.message);
@@ -37,8 +45,8 @@ export default async function ProjectPage({
     tags: projectData.tags,
     featured: projectData.featured,
     description: projectData.description,
-    details: projectData.details,
-    images: projectData.images,
+    details: projectData.projectdetails,
+    images: projectData.projectimages,
   };
 
   return (
@@ -52,8 +60,8 @@ export default async function ProjectPage({
           <ProjectTags tags={projectExample.tags} />
         </div>
       </div>
-
-      {/* <div className="flex flex-col md:flex-row gap-8">
+      {/* Content */}
+      <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-4">
           {projectExample.details
             .sort((a, b) => a.order - b.order) // Sort by the 'order' property
@@ -65,6 +73,7 @@ export default async function ProjectPage({
             ))}
         </div>
 
+        {/* Images */}
         <div className="flex-1 space-y-4">
           {projectExample.images.map((image, index) => (
             <div
@@ -79,7 +88,7 @@ export default async function ProjectPage({
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
