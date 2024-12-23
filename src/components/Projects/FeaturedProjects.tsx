@@ -1,6 +1,6 @@
 import BarebonesCard from '../cards/BarebonesCard';
 import Link from 'next/link';
-import ClientSideProjects from './ClientSideProjects';
+import AllProjects from './AllProjects';
 import PROJECTS from '@/src/mockData/projects.json';
 
 export default function FeaturedProjects() {
@@ -12,7 +12,7 @@ export default function FeaturedProjects() {
       <div className="flex flex-col">
         <div className="flex flex-col lg:flex-row gap-2 my-2">
           {/* Pass mock project details to the client-side component */}
-          <ClientSideProjects projects={featuredProjects} />
+          <AllProjects projects={featuredProjects} />
         </div>
         <div className="ml-auto text-right">
           <Link

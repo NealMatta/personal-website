@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import ProjectCard from './Cards/ProjectCard';
-import { ClientSideProjectsProps } from '@/src/types';
+import { AllProjectsProps } from '@/src/types';
 
-export default function ClientSideProjects({
-  projects,
-}: ClientSideProjectsProps) {
+export default function AllProjects({ projects }: AllProjectsProps) {
   return (
     <>
       {projects.map((project) => (

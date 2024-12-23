@@ -19,6 +19,6 @@ export interface ProjectCardProps {
   project: Project;
 }
 
-export interface ClientSideProjectsProps {
+export interface AllProjectsProps {
   projects: Project[];
 }
