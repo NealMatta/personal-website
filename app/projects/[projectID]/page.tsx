@@ -1,52 +1,44 @@
-import React from 'react';
+import supabase from '@/src/lib/supabaseClient';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
 import { Project } from '@/src/types/';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import ProjectTags from '@/src/components/Projects/ProjectTags';
 
-export default async function ProjectPage(
-  {
-    // params,
-  }: {
-    params: Promise<{ project: string }>;
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ projectID: string }>;
+}) {
+  const { projectID } = await params;
+
+  // Fetch project data from Supabase
+  const { data: projectData, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('id', projectID)
+    .single();
+
+  if (error) {
+    console.error('Error fetching project data:', error.message);
+    return (
+      <div>
+        <PageHeader
+          header="Error"
+          subHeader="Could not fetch project information."
+        />
+      </div>
+    );
   }
-) {
-  // const { project } = await params;
-  // Code above will come into play when I need to pull from teh database
 
-  // Run some code to grab the project information from the database
-
+  // Map data to match the Project type
   const projectExample: Project = {
-    id: 101,
-    title: 'Build a Birdhouse',
-    tags: ['woodworking', 'DIY', 'outdoors'],
-    featured: true,
-    description: 'A project to construct a wooden birdhouse for your backyard.',
-    details: [
-      {
-        order: 1,
-        id: 1,
-        title: 'Gather Materials',
-        detail: 'Collect all necessary tools and wood for the birdhouse.',
-      },
-      {
-        order: 2,
-        id: 2,
-        title: 'Cut and Assemble',
-        detail:
-          'Cut the wood into pieces and assemble the birdhouse structure.',
-      },
-      {
-        order: 3,
-        id: 3,
-        title: 'Paint and Decorate',
-        detail: 'Paint the birdhouse and add decorative elements.',
-      },
-    ],
-    images: [
-      'https://example.com/images/birdhouse1.jpg',
-      'https://example.com/images/birdhouse2.jpg',
-    ],
+    id: projectData.id,
+    title: projectData.title,
+    tags: projectData.tags,
+    featured: projectData.featured,
+    description: projectData.description,
+    details: projectData.details,
+    images: projectData.images,
   };
 
   return (
@@ -61,8 +53,7 @@ export default async function ProjectPage(
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Left Column */}
+      {/* <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-4">
           {projectExample.details
             .sort((a, b) => a.order - b.order) // Sort by the 'order' property
@@ -74,7 +65,6 @@ export default async function ProjectPage(
             ))}
         </div>
 
-        {/* Right Column */}
         <div className="flex-1 space-y-4">
           {projectExample.images.map((image, index) => (
             <div
@@ -89,7 +79,7 @@ export default async function ProjectPage(
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
