@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@/src/styles/globals.css';
 import NavBar from '@/src/components/navigation/NavBar';
+import Footer from '@/src/components/navigation/Footer';
 import ReactQueryProvider from '@/src/components/providers/ReactQueryProvider';
 import { Rubik, Lora } from 'next/font/google';
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
             <div className="mt-5">{children}</div>
           </div>
+          <Footer />
         </ReactQueryProvider>
       </body>
     </html>
