@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['i.scdn.co'], // Add the domain for Spotify's image host
+    domains: ['i.scdn.co', 'hpwskllhfbfuhsnysziq.supabase.co'], // Add the domain for Spotify's image host
   },
   /* other config options here */
 };

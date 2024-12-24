@@ -5,6 +5,12 @@ interface ProjectInfo {
   detail: string;
 }
 
+interface ProjectImage {
+  id: number;
+  url: string;
+  project_id: number;
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -12,7 +18,7 @@ export interface Project {
   featured: boolean;
   description: string;
   details: ProjectInfo[];
-  images: string[];
+  images: ProjectImage[];
 }
 
 export interface ProjectCardProps {
