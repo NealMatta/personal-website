@@ -1,42 +1,16 @@
-import supabase from '@/src/lib/supabaseClient';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
 import { Project } from '@/src/types/';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import ProjectTags from '@/src/components/Projects/ProjectTags';
+import { getProject } from '@/src/services/projects/project';
 
 export default async function ProjectPage({
   params,
 }: {
   params: Promise<{ projectID: string }>;
 }) {
-  const { projectID } = await params;
-
-  // Fetch project data from Supabase
-  const { data: projectData, error } = await supabase
-    .from('projects')
-    .select(
-      `
-    *,
-    projectimages(*),
-    projectdetails(*)
-  `
-    )
-    .eq('id', projectID)
-    .single();
-
-  console.log(projectData);
-
-  if (error) {
-    console.error('Error fetching project data:', error.message);
-    return (
-      <div>
-        <PageHeader
-          header="Error"
-          subHeader="Could not fetch project information."
-        />
-      </div>
-    );
-  }
+  const projectID = (await params).projectID;
+  const projectData = await getProject(projectID);
 
   // Map data to match the Project type
   const projectExample: Project = {
