@@ -1,11 +1,13 @@
 import BarebonesCard from '../cards/BarebonesCard';
 import Link from 'next/link';
 import AllProjects from './AllProjects';
-import PROJECTS from '@/src/mockData/projects.json';
+import { getAllProjects } from '@/src/services/projects/project';
 
-export default function FeaturedProjects() {
+export default async function FeaturedProjects() {
+  const allProjects = await getAllProjects();
   // Dummy Data but same logic
-  const featuredProjects = PROJECTS.filter((project) => project.featured);
+  const featuredProjects =
+    allProjects && allProjects.filter((project) => project.featured);
 
   return (
     <BarebonesCard title="Featured Projects">

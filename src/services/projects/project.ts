@@ -43,10 +43,6 @@ export async function getAllProjects() {
   }: { data: Project[] | null; error: PostgrestError | null } = await supabase
     .from('projects')
     .select('*');
-
-  if (!data) {
-    return 'Nothing to see here ... yet';
-  }
   if (error) {
     console.error(
       'Error fetching project data:',
