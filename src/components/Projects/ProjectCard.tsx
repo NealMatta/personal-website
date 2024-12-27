@@ -2,6 +2,7 @@ import React from 'react';
 // import Image from 'next/image';
 import ProjectTags from './ProjectTags';
 import { Project } from '@/src/types';
+import Image from 'next/image';
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
@@ -11,7 +12,18 @@ export default function ProjectCard({ project }: { project: Project }) {
       }
     >
       {/* Image would go here */}
-      <div className="flex h-60 w-full items-center justify-center rounded bg-red-400 ">
+      <div className=" ">
+        {project.header_image && (
+          <Image
+            src={project.header_image}
+            alt={project.header_image}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-46 rounded"
+          />
+        )}
+
         {/* <FontAwesomeIcon icon={faUser} className="fa-icon" /> */}
       </div>
       <div className="pt-3">

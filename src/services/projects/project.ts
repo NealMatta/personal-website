@@ -43,6 +43,7 @@ export async function getAllProjects() {
   }: { data: Project[] | null; error: PostgrestError | null } = await supabase
     .from('projects')
     .select('*');
+
   if (error) {
     console.error(
       'Error fetching project data:',
@@ -51,6 +52,5 @@ export async function getAllProjects() {
     throw error;
   }
 
-  // Now data will be strongly typed as Project[]
   return data;
 }
