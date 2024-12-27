@@ -1,5 +1,5 @@
-import { TrainETA } from '@/src/types/cta';
-export async function getChicagoRedLineStatus() {
+import { TrainETA, TrainAlertProps } from '@/src/types/cta';
+export async function getChicagoRedLineStatus(): Promise<TrainAlertProps[]> {
   const ctaAccessToken = process.env.CTA_TRACKER;
 
   try {
