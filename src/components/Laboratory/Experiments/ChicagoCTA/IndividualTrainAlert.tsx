@@ -4,8 +4,8 @@ export default function TrainAlert({ data }: TrainAlertProps) {
   const fullArrivalTime = new Date(`${data.arrivalTime}Z`); // Appending 'Z' ensures UTC interpretation
   const today = new Date();
 
-  // console.log(new Date(`${data.arrivalTime}`));
-  // console.log(new Date());
+  console.log('full arrival time', new Date(`${data.arrivalTime}`));
+  console.log('today', new Date());
 
   // Calculate the time difference in minutes
   const timeInMs = Math.abs(fullArrivalTime.getTime() - today.getTime());
