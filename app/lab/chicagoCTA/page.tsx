@@ -13,7 +13,6 @@ interface TrainAlertProps {
 
 export default async function ChicagoCTA() {
   const trainData = await getChicagoRedLineStatus();
-  console.log(trainData);
 
   return (
     <div>

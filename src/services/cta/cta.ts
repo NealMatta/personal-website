@@ -22,7 +22,7 @@ export async function getChicagoRedLineStatus() {
     const etaData = data.ctatt.eta;
 
     // Process or return the extracted data
-    console.log('Upcoming Train Arrivals:', etaData);
+    // console.log('Upcoming Train Arrivals:', etaData);
 
     // Return the processed data
     return etaData.map((train: any) => ({
