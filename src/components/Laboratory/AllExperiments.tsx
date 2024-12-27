@@ -1,4 +1,4 @@
-import ChicagoCta from './Cards/ChicagoCta';
+import ChicagoCta from './Experiments/ChicagoCta';
 
 export default function AllPlaygroundCards() {
   return (

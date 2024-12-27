@@ -1,4 +1,4 @@
-import PlaygroundCard from '../PlaygroundCard';
+import PlaygroundCard from '../ExperimentSkeleton';
 export default function ChicagoCta() {
   return (
     <PlaygroundCard
