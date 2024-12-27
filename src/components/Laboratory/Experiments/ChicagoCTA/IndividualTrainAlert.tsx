@@ -2,12 +2,14 @@ import { TrainAlertProps } from '@/src/types/cta';
 
 export default function TrainAlert({ data }: TrainAlertProps) {
   const formatToCST = (date: Date) => {
-    return new Date(
-      new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/Chicago',
-        hour12: false,
-      }).format(date)
-    );
+    // Convert the given date to UTC time
+    const utcTime = date.getTime() + date.getTimezoneOffset() * 60000;
+
+    // Adjust for CST time zone (UTC-6)
+    const cstOffset = -6 * 60 * 60 * 1000;
+
+    // Return the new date in CST
+    return new Date(utcTime + cstOffset);
   };
 
   // Convert arrival time and current time to CST
