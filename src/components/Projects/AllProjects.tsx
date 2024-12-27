@@ -1,8 +1,20 @@
 import Link from 'next/link';
 import ProjectCard from './ProjectCard';
-import { AllProjectProps } from '@/src/types';
+import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
 
-export default function AllProjects({ projects }: AllProjectProps) {
+type Project = Database['public']['Tables']['projects']['Row'];
+
+export default function AllProjects({
+  projects,
+}: {
+  projects: Project[] | string;
+}) {
+  if (typeof projects === 'string') {
+    // If `projects` is a string, return the string value
+    return <p>{projects}</p>;
+  }
+
+  // If `projects` is an array, render the list
   return (
     <>
       {projects.map((project) => (

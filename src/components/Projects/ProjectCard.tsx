@@ -1,9 +1,11 @@
 import React from 'react';
 // import Image from 'next/image';
-import { ProjectCardProps } from '@/src/types';
 import ProjectTags from './ProjectTags';
+import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+type Project = Database['public']['Tables']['projects']['Row'];
+
+export default function ProjectCard({ project }: { project: Project }) {
   return (
     <div
       className={
