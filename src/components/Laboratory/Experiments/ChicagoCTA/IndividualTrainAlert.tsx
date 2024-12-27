@@ -1,10 +1,21 @@
 import { TrainAlertProps } from '@/src/types/cta';
 
 export default function TrainAlert({ data }: TrainAlertProps) {
-  const fullArrivalTime = new Date(data.arrivalTime);
-  const today = new Date();
-  const timeInMs = Math.abs(fullArrivalTime.getTime() - today.getTime());
+  const formatToCST = (date: Date) => {
+    return new Date(
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Chicago',
+        hour12: false,
+      }).format(date)
+    );
+  };
 
+  // Convert arrival time and current time to CST
+  const fullArrivalTime = formatToCST(new Date(data.arrivalTime));
+  const today = formatToCST(new Date());
+
+  // Calculate the time difference in minutes
+  const timeInMs = Math.abs(fullArrivalTime.getTime() - today.getTime());
   let timeInMins: string | number = Math.round(timeInMs / 1000 / 60);
 
   if (timeInMins === 0 || timeInMins === 1) {
