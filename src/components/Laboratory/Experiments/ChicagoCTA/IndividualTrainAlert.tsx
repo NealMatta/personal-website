@@ -8,9 +8,6 @@ export default function TrainAlert({ data }: TrainAlertProps) {
   const fullArrivalTime = moment.tz(data.arrivalTime, timeZone).utc();
   const today = moment().utc();
 
-  console.log('full arrival time (UTC):', fullArrivalTime.format());
-  console.log('today (UTC):', today.format());
-
   // Calculate the time difference in minutes
   const timeInMs = Math.abs(fullArrivalTime.valueOf() - today.valueOf());
   let timeInMins: string | number = Math.round(timeInMs / 1000 / 60);
