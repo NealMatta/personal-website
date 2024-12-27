@@ -3,7 +3,6 @@ import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import ProjectTags from '@/src/components/Projects/ProjectTags';
 import { getProject } from '@/src/services/projects/project';
 import Image from 'next/image';
-import { ProjectWithDetails } from '@/src/types';
 
 export default async function ProjectPage({
   params,
@@ -11,18 +10,7 @@ export default async function ProjectPage({
   params: Promise<{ projectID: string }>;
 }) {
   const projectID = (await params).projectID;
-  const projectData = await getProject(projectID);
-
-  // Map data to match the Project type
-  const project: ProjectWithDetails = {
-    id: projectData.id,
-    title: projectData.title,
-    tags: projectData.tags,
-    featured: projectData.featured,
-    description: projectData.description,
-    projectdetails: projectData.projectdetails,
-    projectimages: projectData.projectimages,
-  };
+  const project = await getProject(projectID);
 
   return (
     <div>
