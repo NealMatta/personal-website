@@ -1,14 +1,18 @@
 import { TrainAlertProps } from '@/src/types/cta';
+import moment from 'moment-timezone';
 
 export default function TrainAlert({ data }: TrainAlertProps) {
-  const fullArrivalTime = new Date(`${data.arrivalTime}Z`); // Appending 'Z' ensures UTC interpretation
-  const today = new Date();
+  const timeZone = 'America/Chicago'; // CST time zone
 
-  console.log('full arrival time', new Date(`${data.arrivalTime}`));
-  console.log('today', new Date());
+  // Convert arrivalTime from CST to UTC
+  const fullArrivalTime = moment.tz(data.arrivalTime, timeZone).utc();
+  const today = moment().utc();
+
+  console.log('full arrival time (UTC):', fullArrivalTime.format());
+  console.log('today (UTC):', today.format());
 
   // Calculate the time difference in minutes
-  const timeInMs = Math.abs(fullArrivalTime.getTime() - today.getTime());
+  const timeInMs = Math.abs(fullArrivalTime.valueOf() - today.valueOf());
   let timeInMins: string | number = Math.round(timeInMs / 1000 / 60);
 
   if (timeInMins === 0 || timeInMins === 1) {
