@@ -1,3 +1,4 @@
+import { TrainETA } from '@/src/types/cta';
 export async function getChicagoRedLineStatus() {
   const ctaAccessToken = process.env.CTA_TRACKER;
 
@@ -25,7 +26,7 @@ export async function getChicagoRedLineStatus() {
     // console.log('Upcoming Train Arrivals:', etaData);
 
     // Return the processed data
-    return etaData.map((train: any) => ({
+    return etaData.map((train: TrainETA) => ({
       stationName: train.staNm,
       destination: train.destNm,
       arrivalTime: train.arrT,
