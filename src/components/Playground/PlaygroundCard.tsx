@@ -1,11 +1,24 @@
 import BarebonesCard from '../cards/BarebonesCard';
+import Link from 'next/link';
 
-export default function PlaygroundCard() {
+interface PlaygroundCardProps {
+  title: string;
+  details: string;
+  url: string;
+}
+
+export default function PlaygroundCard({
+  title,
+  details,
+  url,
+}: PlaygroundCardProps) {
   return (
-    <BarebonesCard title="Chicago CTA">
-      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-        CTA Red Line from the Chicago Stop
-      </p>
-    </BarebonesCard>
+    <Link href={`/playground/${url}`}>
+      <BarebonesCard title={title}>
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          {details}
+        </p>
+      </BarebonesCard>
+    </Link>
   );
 }
