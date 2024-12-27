@@ -1,29 +1,65 @@
 // Fetch project data from Supabase
 import supabase from '@/src/lib/supabaseClient';
 import { notFound } from 'next/navigation';
-// import { Project as ProjectType } from '@/src/types';
+import { PostgrestError } from '@supabase/supabase-js';
+import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
 
+type Project = Database['public']['Tables']['projects']['Row'];
+type ProjectWithDetails = Project & {
+  projectimages: Database['public']['Tables']['projectimages']['Row'][];
+  projectdetails: Database['public']['Tables']['projectdetails']['Row'][];
+};
 export async function getProject(projectID: string) {
-  const { data, error } = await supabase
-    .from('projects')
-    .select(
+  const {
+    data,
+    error,
+  }: { data: ProjectWithDetails | null; error: PostgrestError | null } =
+    await supabase
+      .from('projects')
+      .select(
+        `
+      *,
+      projectimages(*),
+      projectdetails(*)
       `
-  *,
-  projectimages(*),
-  projectdetails(*)
-`
-    )
-    .eq('id', projectID)
-    .single();
+      )
+      .eq('id', projectID)
+      .single();
 
   // If data is null, send them to the 404 not found
   if (!data) {
     notFound();
   }
   if (error) {
-    console.error('Error fetching project data:', error.message);
+    console.error(
+      'Error fetching project data:',
+      error.message || error.details || 'Unknown error'
+    );
     throw error;
   }
 
+  return data;
+}
+
+export async function getAllProjects() {
+  const {
+    data,
+    error,
+  }: { data: Project[] | null; error: PostgrestError | null } = await supabase
+    .from('projects')
+    .select('*');
+
+  if (!data) {
+    return 'Nothing to see here ... yet';
+  }
+  if (error) {
+    console.error(
+      'Error fetching project data:',
+      error.message || error.details || 'Unknown error'
+    );
+    throw error;
+  }
+
+  // Now data will be strongly typed as Project[]
   return data;
 }

@@ -1,4 +1,8 @@
-export default function ProjectTags({ tags }: { tags: string[] }): JSX.Element {
+export default function ProjectTags({
+  tags,
+}: {
+  tags: string[] | null;
+}): JSX.Element {
   return (
     <>
       {tags?.map((tag, index) => (

@@ -1,9 +1,16 @@
 import PageHeader from '@/src/components/PageHeader/PageHeader';
-import { Project } from '@/src/types/';
 import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import ProjectTags from '@/src/components/Projects/ProjectTags';
 import { getProject } from '@/src/services/projects/project';
 import Image from 'next/image';
+
+import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
+
+type Project = Database['public']['Tables']['projects']['Row'];
+type ProjectWithDetails = Project & {
+  projectimages: Database['public']['Tables']['projectimages']['Row'][];
+  projectdetails: Database['public']['Tables']['projectdetails']['Row'][];
+};
 
 export default async function ProjectPage({
   params,
@@ -14,19 +21,19 @@ export default async function ProjectPage({
   const projectData = await getProject(projectID);
 
   // Map data to match the Project type
-  const project: Project = {
+  const project: ProjectWithDetails = {
     id: projectData.id,
     title: projectData.title,
     tags: projectData.tags,
     featured: projectData.featured,
     description: projectData.description,
-    details: projectData.projectdetails,
-    images: projectData.projectimages,
+    projectdetails: projectData.projectdetails,
+    projectimages: projectData.projectimages,
   };
 
   return (
     <div>
-      <PageHeader header={project.title} subHeader={project.description} />
+      <PageHeader header={project.title} subHeader={project.description!} />
       <div className="mt-2">
         <div className="flex flex-wrap gap-x-3">
           <ProjectTags tags={project.tags} />
@@ -35,8 +42,8 @@ export default async function ProjectPage({
       {/* Content */}
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-4">
-          {project.details
-            .sort((a, b) => a.order - b.order) // Sort by the 'order' property
+          {project.projectdetails
+            .sort((a, b) => a.order! - b.order!) // Sort by the 'order' property
             .map((detail) => (
               <BarebonesCard key={detail.id}>
                 <h3 className="font-bold text-lg mb-2">{detail.title}</h3>
@@ -47,7 +54,7 @@ export default async function ProjectPage({
 
         {/* Images */}
         <div className="flex-1 space-y-4">
-          {project.images.map((image, index) => (
+          {project.projectimages.map((image, index) => (
             <div key={index} className="rounded-md overflow-hidden">
               <Image
                 src={image.url}
