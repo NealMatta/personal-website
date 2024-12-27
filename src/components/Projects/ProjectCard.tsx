@@ -1,9 +1,7 @@
 import React from 'react';
 // import Image from 'next/image';
 import ProjectTags from './ProjectTags';
-import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
-
-type Project = Database['public']['Tables']['projects']['Row'];
+import { Project } from '@/src/types';
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (

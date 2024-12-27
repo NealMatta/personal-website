@@ -3,14 +3,7 @@ import BarebonesCard from '@/src/components/cards/BarebonesCard';
 import ProjectTags from '@/src/components/Projects/ProjectTags';
 import { getProject } from '@/src/services/projects/project';
 import Image from 'next/image';
-
-import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
-
-type Project = Database['public']['Tables']['projects']['Row'];
-type ProjectWithDetails = Project & {
-  projectimages: Database['public']['Tables']['projectimages']['Row'][];
-  projectdetails: Database['public']['Tables']['projectdetails']['Row'][];
-};
+import { ProjectWithDetails } from '@/src/types';
 
 export default async function ProjectPage({
   params,

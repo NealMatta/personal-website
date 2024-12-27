@@ -2,13 +2,8 @@
 import supabase from '@/src/lib/supabaseClient';
 import { notFound } from 'next/navigation';
 import { PostgrestError } from '@supabase/supabase-js';
-import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
+import { Project, ProjectWithDetails } from '@/src/types';
 
-type Project = Database['public']['Tables']['projects']['Row'];
-type ProjectWithDetails = Project & {
-  projectimages: Database['public']['Tables']['projectimages']['Row'][];
-  projectdetails: Database['public']['Tables']['projectdetails']['Row'][];
-};
 export async function getProject(projectID: string) {
   const {
     data,

@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import ProjectCard from './ProjectCard';
-import { Database } from '@/src/types/supabase'; // Adjust the import path as needed
-
-type Project = Database['public']['Tables']['projects']['Row'];
+import { Project } from '@/src/types';
 
 export default function AllProjects({
   projects,
