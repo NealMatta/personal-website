@@ -6,10 +6,9 @@ import { getChicagoRedLineStatus } from '@/src/services/cta/cta';
 
 export async function GET() {
   try {
-    const track = await getChicagoRedLineStatus();
+    const res = await getChicagoRedLineStatus();
 
-    // A null value would be returned if no songs were able to be found or the Spotify API is erroring out
-    if (!track) {
+    if (!res) {
       return new Response(
         JSON.stringify({ error: 'No CTA information found' }),
         {
@@ -19,7 +18,7 @@ export async function GET() {
       );
     }
 
-    return new Response(JSON.stringify(track), {
+    return new Response(JSON.stringify(res), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

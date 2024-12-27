@@ -1,24 +1,14 @@
-import { TrainAlertProps } from '@/src/types/cta';
+import { TrainAlertData } from '@/src/types/cta';
 import moment from 'moment-timezone';
 
+// Update the props to use the flat TrainAlertData type
 interface IndividualTrainAlertProps {
-  data: TrainAlertProps['data'];
+  data: TrainAlertData;
 }
 
 export default function IndividualTrainAlert({
   data,
 }: IndividualTrainAlertProps) {
-  console.log(data);
-
-  if (!data) {
-    // Show a loading placeholder or fallback UI until data is available
-    return (
-      <div className="bg-gray-200 text-gray-700 p-4 rounded-sm shadow-md mb-3">
-        Loading train data...
-      </div>
-    );
-  }
-
   const timeZone = 'America/Chicago'; // CST time zone
 
   // Convert arrivalTime from CST to UTC

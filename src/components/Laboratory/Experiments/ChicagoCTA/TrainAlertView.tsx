@@ -1,10 +1,10 @@
-import { TrainAlertProps } from '@/src/types/cta';
+import { TrainAlertData } from '@/src/types/cta';
 import IndividualTrainAlert from './IndividualTrainAlert';
 
 interface TrainStatusViewProps {
   isLoading: boolean;
   isError: boolean;
-  allTrainData: TrainAlertProps['data'][] | undefined;
+  allTrainData: TrainAlertData[] | undefined; // Use the flat TrainAlertData type
 }
 
 export default function TrainAlertView({
@@ -12,22 +12,22 @@ export default function TrainAlertView({
   isError,
   allTrainData,
 }: TrainStatusViewProps) {
-  // Handle loading state
   if (isLoading) {
-    return <div>Loading train data...</div>;
+    return <div className="w-full h-24 bg-gray-200 p-4 rounded-sm  mb-3" />;
   }
 
-  // Handle error state
   if (isError) {
-    return <div>Error loading train data. Please try again later.</div>;
+    return (
+      <div className="text-red-600">
+        Error loading train data. Please try again later.
+      </div>
+    );
   }
 
-  // Render train data
   return (
     <div>
       {allTrainData &&
         allTrainData.map((train, index) => (
-          // Pass the correct train data to IndividualTrainAlert
           <IndividualTrainAlert key={index} data={train} />
         ))}
     </div>

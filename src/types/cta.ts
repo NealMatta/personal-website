@@ -1,11 +1,9 @@
-export interface TrainAlertProps {
-  data: {
-    stationName: string; // Station Name
-    destination: string; // Destination Name
-    arrivalTime: string; // Arrival Time
-    route: string; // Route (e.g., Red, Blue)
-    trainNumber: string; // Train number
-  };
+export interface TrainAlertData {
+  stationName: string; // Station Name
+  destination: string; // Destination Name
+  arrivalTime: string; // Arrival Time
+  route: string; // Route (e.g., Red, Blue)
+  trainNumber: string; // Train number
 }
 
 export interface TrainETA {

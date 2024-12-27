@@ -1,5 +1,5 @@
-import { TrainETA, TrainAlertProps } from '@/src/types/cta';
-export async function getChicagoRedLineStatus(): Promise<TrainAlertProps[]> {
+import { TrainETA, TrainAlertData } from '@/src/types/cta';
+export async function getChicagoRedLineStatus(): Promise<TrainAlertData[]> {
   const ctaAccessToken = process.env.CTA_TRACKER;
 
   try {
@@ -21,9 +21,6 @@ export async function getChicagoRedLineStatus(): Promise<TrainAlertProps[]> {
 
     // Extract the `eta` array from the response
     const etaData = data.ctatt.eta;
-
-    // Process or return the extracted data
-    // console.log('Upcoming Train Arrivals:', etaData);
 
     // Return the processed data
     return etaData.map((train: TrainETA) => ({

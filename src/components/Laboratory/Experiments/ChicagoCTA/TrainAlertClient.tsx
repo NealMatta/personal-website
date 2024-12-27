@@ -17,8 +17,8 @@ export default function TrainAlertClient() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['ctaStatus'],
     queryFn: fetchCTAInfo,
-    refetchInterval: 60 * 1000, // Automatically refetch every 30 seconds
-    staleTime: 30 * 1000, // Data is considered fresh for 15 seconds
+    refetchInterval: 60 * 1000, // Automatically refetch every 60 seconds
+    staleTime: 30 * 1000, // Data is considered fresh for 30 seconds
   });
 
   // Pass all data and states to the presentational component
