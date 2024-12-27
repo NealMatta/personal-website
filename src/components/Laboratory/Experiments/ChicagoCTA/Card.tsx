@@ -1,7 +1,7 @@
-import PlaygroundCard from '../ExperimentSkeleton';
-export default function ChicagoCta() {
+import ExperimentSkeleton from '../ExperimentSkeleton';
+export function Card() {
   return (
-    <PlaygroundCard
+    <ExperimentSkeleton
       title="Chicago CTA"
       details="CTA Red Line from the Chicago Stop"
       url="chicagoCTA"

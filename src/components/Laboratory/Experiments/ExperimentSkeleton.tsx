@@ -1,4 +1,4 @@
-import BarebonesCard from '../cards/BarebonesCard';
+import BarebonesCard from '../../cards/BarebonesCard';
 import Link from 'next/link';
 
 interface ExperimentSkeletonProps {
@@ -7,7 +7,7 @@ interface ExperimentSkeletonProps {
   url: string;
 }
 
-export default function PlaygroundCard({
+export default function ExperimentSkeleton({
   title,
   details,
   url,
