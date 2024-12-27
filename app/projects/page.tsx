@@ -1,9 +1,10 @@
 import React from 'react';
 import PageHeader from '@/src/components/PageHeader/PageHeader';
-import PROJECTS from '@/src/mockData/projects.json';
-import ClientSideProjects from '@/src/components/Projects/ClientSideProjects';
+import AllProjects from '@/src/components/Projects/AllProjects';
+import { getAllProjects } from '@/src/services/projects/project';
 
-const Projects = () => {
+export default async function Projects() {
+  const allProjects = await getAllProjects();
   return (
     <>
       <PageHeader
@@ -12,12 +13,10 @@ const Projects = () => {
           pursuits to personal growth and volleyball goals."
       />
 
-      <div className="grid gap-4 my-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 my-4 grid-cols-1 sm:grid-cols-2">
         {/* Pass mock project details to the client-side component */}
-        <ClientSideProjects projects={PROJECTS} />
+        <AllProjects projects={allProjects} />
       </div>
     </>
   );
-};
-
-export default Projects;
+}

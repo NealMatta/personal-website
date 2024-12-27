@@ -7,17 +7,14 @@ export default function NavBar() {
         <div className="container flex flex-wrap justify-between items-center">
           {/* Logo Section */}
           <div>
-            <Link
-              href="/"
-              className="text-slate-900 uppercase tracking-widest font-bold"
-            >
+            <Link href="/" className="uppercase tracking-widest font-bold">
               Neal Matta
             </Link>
           </div>
 
           {/* Navigation Links */}
           <div className="flex flex-wrap gap-x-8 gap-y-4 mt-4 sm:mt-0">
-            <NavLink href="#" label="Projects" disabled={true} />
+            <NavLink href="/projects" label="Projects" />
             <NavLink href="#" label="Playground" disabled={true} />
             <NavLink href="#" label="Cookbook" disabled={true} />
             <NavLink href="#" label="Articles" disabled={true} />
@@ -40,8 +37,10 @@ const NavLink = ({
 }) => (
   <Link
     href={href}
-    className={`text-gray-500 hover:text-gray-700 transition-colors duration-300 ${
-      disabled ? 'pointer-events-none' : ''
+    className={`${
+      disabled
+        ? 'line-through pointer-events-none'
+        : 'hover:text-primary transition-colors duration-300'
     }`}
   >
     {label}

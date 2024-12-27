@@ -20,7 +20,11 @@ export default function SpotifyStatusView({
     <BarebonesCard
       title={
         <div className="flex items-center">
-          <FontAwesomeIcon icon={faSpotify} className="mr-2 fa-icon" />
+          <FontAwesomeIcon
+            size="lg"
+            icon={faSpotify}
+            className="mr-2 w-6 flex-shrink-0 text-[#1Ed760]"
+          />
           {isLoading && (
             <>
               <div className="w-full flex items-center text-center">

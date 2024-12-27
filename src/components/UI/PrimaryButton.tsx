@@ -16,7 +16,7 @@ export default function Button({
     <Link
       href={linkTo}
       target="_blank"
-      className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ${className}`}
+      className={`bg-primary hover:bg-primary-dark focus:bg-primary-light text-white font-bold py-2 px-4 rounded-full ${className}`}
     >
       {children}
     </Link>

@@ -1,23 +1,24 @@
 import BarebonesCard from '../cards/BarebonesCard';
 import Link from 'next/link';
-import ClientSideProjects from './ClientSideProjects';
-import PROJECTS from '@/src/mockData/projects.json';
+import AllProjects from './AllProjects';
+import { getAllProjects } from '@/src/services/projects/project';
 
-export default function FeaturedProjects() {
+export default async function FeaturedProjects() {
+  const allProjects = await getAllProjects();
   // Dummy Data but same logic
-  const featuredProjects = PROJECTS.filter((project) => project.featured);
+  const featuredProjects =
+    allProjects && allProjects.filter((project) => project.featured);
 
   return (
-    <BarebonesCard title="Featured Projects" wip={true}>
+    <BarebonesCard title="Featured Projects">
       <div className="flex flex-col">
-        <div className="flex flex-col lg:flex-row gap-2 my-2">
-          {/* Pass mock project details to the client-side component */}
-          <ClientSideProjects projects={featuredProjects} />
+        <div className="grid gap-4 my-4 grid-cols-1 lg:grid-cols-2 ">
+          <AllProjects projects={featuredProjects} />
         </div>
         <div className="ml-auto text-right">
           <Link
             href="/projects"
-            className="text-md italic underline text-blue-500 hover:text-blue-950"
+            className="text-md italic underline text-primary hover:text-primary-dark"
           >
             Check out all my Projects
           </Link>

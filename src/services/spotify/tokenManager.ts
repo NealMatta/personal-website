@@ -1,14 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
+import supabase from '@/src/lib/supabaseClient';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
 // Environment variables
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
 const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN!;
-const SUPABASE_URL = process.env.SUPABASE_URL!;
-const SUPABASE_KEY = process.env.SUPABASE_KEY!;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function saveAccessTokenToSupabase(
   accessToken: string,
@@ -93,6 +89,7 @@ export async function getAccessToken(): Promise<string> {
   const tokenData = await getAccessTokenFromSupabase();
 
   if (tokenData && accessTokenValid(tokenData.expiry_date)) {
+    console.log('SUCCESS - Grabbed Access Token');
     return tokenData.access_token;
   }
 
@@ -101,6 +98,6 @@ export async function getAccessToken(): Promise<string> {
     newAccessToken,
     new Date(Date.now() + 3600 * 1000).toISOString()
   );
-  console.log('SUCCESS - Grabbed Token');
+  console.log('SUCCESS - Grabbed New Token');
   return newAccessToken;
 }

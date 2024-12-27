@@ -27,26 +27,26 @@ export default function About() {
             <SocialLinks />
           </div>
           <div className="text-md space-y-4">
-            <div>
+            <p>
               ... a tech enthusiast, lifelong learner, and self-proclaimed
               serial hobbyist working as an Enterprise Architect at Workday. I
               thrive on turning chaos into clarity, solving complex problems,
               and occasionally pushing my body past its limits with (far too
               much) volleyball.
-            </div>
-            <div>
+            </p>
+            <p>
               When I&lsquo;m not diving into technology, you&lsquo;ll find me on
               the volleyball court, exploring new cuisines as an adventurous
               foodie, or bringing my latest creative ideas to life. This site is
               my space to sharpen my coding skills, share what I&lsquo;m
               learning, and build tools that bring even more structure to my
               world.
-            </div>
-            <div>
+            </p>
+            <p>
               If you&lsquo;re interested in connecting further, you can find my
               LinkedIn and resume via the social links above. Thanks for
               stopping by—enjoy exploring!
-            </div>
+            </p>
           </div>
         </div>
       </div>
