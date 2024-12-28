@@ -2,13 +2,13 @@
 import React from 'react';
 
 interface PageHeaderProps {
-  header: string | (() => string);
+  header: string | (() => string) | React.ReactNode;
   subHeader: string | (() => string);
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ header, subHeader }) => {
   // Function to resolve the prop value if it's a function or return the string directly
-  const resolveValue = (value: string | (() => string)) => {
+  const resolveValue = (value: string | (() => string) | React.ReactNode) => {
     return typeof value === 'function' ? value() : value;
   };
 
