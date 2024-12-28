@@ -16,7 +16,11 @@ export default function NavBar() {
           <div className="flex flex-wrap gap-x-8 gap-y-4 mt-4 sm:mt-0">
             <NavLink href="/projects" label="Projects" />
             <NavLink href="/lab" label="Laboratory" />
-            <NavLink href="#" label="Cookbook" disabled={true} />
+            <NavLink
+              href="https://nealmatta.notion.site/678c6cac55d144a6a3e4f5d6aadd880d?v=e35eeb4db6eb447aba852c45b3771cfb"
+              label="Cookbook"
+              external={true}
+            />
             <NavLink href="#" label="Articles" disabled={true} />
           </div>
         </div>
@@ -30,10 +34,12 @@ const NavLink = ({
   href,
   label,
   disabled = false,
+  external = false,
 }: {
   href: string;
   label: string;
   disabled?: boolean;
+  external?: boolean;
 }) => (
   <Link
     href={href}
@@ -42,6 +48,7 @@ const NavLink = ({
         ? 'line-through pointer-events-none'
         : 'hover:text-primary transition-colors duration-300'
     }`}
+    target={external ? '_blank' : undefined}
   >
     {label}
   </Link>
