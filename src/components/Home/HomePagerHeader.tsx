@@ -28,13 +28,15 @@ const HomePageHeader = () => {
     });
     const numericHours = parseInt(hours, 10);
 
-    if (numericHours < 18) {
+    const size = 'sm';
+
+    if (numericHours < 16) {
       return (
         <FontAwesomeIcon
           icon={faSun}
-          size="sm"
-          color="gold"
-          className="hover:animate-spin"
+          size={size}
+          color="#F7AB02"
+          className="hover:animate-spin-slow"
           style={{ marginRight: '8px' }}
         />
       );
@@ -42,8 +44,8 @@ const HomePageHeader = () => {
     return (
       <FontAwesomeIcon
         icon={faMoon}
-        size="sm"
-        color="dodgerblue"
+        size={size}
+        color="#193154"
         className="hover:animate-pulse"
         style={{ marginRight: '8px' }}
       />

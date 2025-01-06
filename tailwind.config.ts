@@ -23,6 +23,7 @@ export default {
       },
       animation: {
         marquee: 'marquee 2s linear 1 forwards',
+        'spin-slow': 'spin 3s linear infinite', // Default is 1s; change to 3s for slower rotation
       },
       keyframes: {
         marquee: {
