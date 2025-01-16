@@ -15,13 +15,31 @@ export async function login(formData: FormData) {
     password: formData.get('password') as string,
   };
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+  // const { error } = await supabase.auth.signInWithPassword(data);
+  await supabase.auth.signInWithPassword(data);
 
-  if (error) {
-    redirect('/error');
-  }
+  // if (error) {
+  //   redirect('/error');
+  // }
 
-  revalidatePath('/', 'layout');
+  // revalidatePath('/', 'layout');
+  redirect('/');
+}
+
+export async function logout() {
+  const supabase = await createClient();
+
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+
+  // const { error } = await supabase.auth.signInWithPassword(data);
+  await supabase.auth.signOut();
+
+  // if (error) {
+  //   redirect('/error');
+  // }
+
+  // revalidatePath('/', 'layout');
   redirect('/');
 }
 
