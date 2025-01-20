@@ -1,4 +1,4 @@
-import supabase from '@/src/lib/supabaseClient';
+import supabase from '@/src/lib/supabase/db/supabaseClient';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
 // Environment variables

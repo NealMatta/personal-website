@@ -1,5 +1,5 @@
 // Fetch project data from Supabase
-import supabase from '@/src/lib/supabaseClient';
+import supabase from '@/src/lib/supabase/db/supabaseClient';
 import { notFound } from 'next/navigation';
 import { PostgrestError } from '@supabase/supabase-js';
 import { Project, ProjectWithDetails } from '@/src/types';

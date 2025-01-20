@@ -1,5 +1,5 @@
 import { login, logout } from './actions';
-import { createClient } from '@/src/lib/supabase/server';
+import { createClient } from '@/src/lib/supabase/auth/server';
 
 export default async function LoginPage() {
   const supabase = await createClient();

@@ -12,7 +12,6 @@ export default function Button({
   linkTo,
   className = '',
   target = '_blank',
-
   children,
 }: ButtonProps) {
   return (
