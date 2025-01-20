@@ -1,6 +1,6 @@
 import React from 'react';
-import BarebonesCard from '../cards/BarebonesCard';
-import PrimaryButton from '../UI/PrimaryButton';
+import BarebonesCard from '@/src/components/reusable/cards/BarebonesCard';
+import PrimaryButton from '@/src/components/reusable/UI/PrimaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 

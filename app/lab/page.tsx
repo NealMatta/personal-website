@@ -1,5 +1,5 @@
-import AllPlaygroundCards from '@/src/components/Laboratory/AllExperiments';
-import PageHeader from '@/src/components/PageHeader/PageHeader';
+import AllPlaygroundCards from '@/src/components/pages/Laboratory/AllExperiments';
+import PageHeader from '@/src/components/reusable/pageHeader/PageHeader';
 
 export default function Playground() {
   return (

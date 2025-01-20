@@ -1,4 +1,4 @@
-import BarebonesCard from '../../cards/BarebonesCard';
+import BarebonesCard from '@/src/components/reusable/cards/BarebonesCard';
 import Link from 'next/link';
 
 interface ExperimentSkeletonProps {

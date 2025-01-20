@@ -1,5 +1,5 @@
 import React from 'react';
-import BarebonesCard from '../cards/BarebonesCard';
+import BarebonesCard from '../../../reusable/cards/BarebonesCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { SpotifyOutput } from '@/src/types/spotify';

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import '@/src/styles/globals.css';
-import NavBar from '@/src/components/navigation/NavBar';
-import Footer from '@/src/components/navigation/Footer';
-import ReactQueryProvider from '@/src/components/providers/ReactQueryProvider';
+import NavBar from '@/src/components/reusable/navigation/NavBar';
+import Footer from '@/src/components/reusable/navigation/Footer';
+import ReactQueryProvider from '@/src/lib/providers/ReactQueryProvider';
 import { Rubik, Lora } from 'next/font/google';
 // The following import prevents a Font Awesome icon server-side rendering bug,
 // where the icons flash from a very large icon down to a properly sized one:

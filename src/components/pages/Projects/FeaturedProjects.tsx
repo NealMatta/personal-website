@@ -1,7 +1,7 @@
-import BarebonesCard from '../cards/BarebonesCard';
+import BarebonesCard from '../../reusable/cards/BarebonesCard';
 import Link from 'next/link';
 import AllProjects from './AllProjects';
-import { getAllProjects } from '@/src/services/projects/project';
+import { getAllProjects } from '@/src/apiManagement/projects/project';
 
 export default async function FeaturedProjects() {
   const allProjects = await getAllProjects();

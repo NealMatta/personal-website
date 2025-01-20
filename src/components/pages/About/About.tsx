@@ -1,4 +1,4 @@
-import BarebonesCard from '../cards/BarebonesCard';
+import BarebonesCard from '../../reusable/cards/BarebonesCard';
 import SocialLinks from './SocialLinks';
 import Image from 'next/image';
 

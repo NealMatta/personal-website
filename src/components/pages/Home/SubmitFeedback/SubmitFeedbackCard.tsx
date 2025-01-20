@@ -1,5 +1,5 @@
-import BarebonesCard from '../cards/BarebonesCard';
-import PrimaryButton from '../UI/PrimaryButton';
+import BarebonesCard from '../../../reusable/cards/BarebonesCard';
+import PrimaryButton from '../../../reusable/UI/PrimaryButton';
 
 export default function WebsiteStatus() {
   return (

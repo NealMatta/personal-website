@@ -2,7 +2,7 @@
 - Calling the getChicagoRedLineStatus function here ensures that I'm executing the API on the server side
 */
 
-import { getChicagoRedLineStatus } from '@/src/services/cta/cta';
+import { getChicagoRedLineStatus } from '@/src/apiManagement/cta/cta';
 
 export async function GET() {
   try {

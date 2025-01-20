@@ -1,7 +1,7 @@
-import PageHeader from '@/src/components/PageHeader/PageHeader';
-import BarebonesCard from '@/src/components/cards/BarebonesCard';
-import ProjectTags from '@/src/components/Projects/ProjectTags';
-import { getProject } from '@/src/services/projects/project';
+import PageHeader from '@/src/components/reusable/pageHeader/PageHeader';
+import BarebonesCard from '@/src/components/reusable/cards/BarebonesCard';
+import ProjectTags from '@/src/components/pages/Projects/ProjectTags';
+import { getProject } from '@/src/apiManagement/projects/project';
 import Image from 'next/image';
 
 export default async function ProjectPage({

@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
+import PageHeader from '../../reusable/pageHeader/PageHeader';
 
 // Import FontAwesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

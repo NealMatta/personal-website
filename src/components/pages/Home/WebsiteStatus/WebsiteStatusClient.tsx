@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCommits } from '@/src/services/githubAPI';
+import { fetchCommits } from '@/src/apiManagement/githubAPI';
 import WebsiteStatusView from './WebsiteStatusView';
 
 export default function WebsiteStatusClient() {
