@@ -2,7 +2,7 @@
 - Calling the getMostRecentTrack function here ensures that I'm executing the API on the server side
   - This helps ensure the API Tokens and the logic is safer */
 
-import { getMostRecentTrack } from '@/src/services/spotify/spotify';
+import { getMostRecentTrack } from '@/src/apiManagement/spotify/spotify';
 
 export async function GET() {
   try {

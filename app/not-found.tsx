@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import PrimaryButton from '@/src/components/reusable/UI/PrimaryButton';
 
 export default function NotFound() {
   return (
@@ -8,12 +8,14 @@ export default function NotFound() {
       <p className="text-gray-500 mb-6">
         Sorry, the page you’re looking for doesn’t exist or has been moved.
       </p>
-      <Link
-        href="/"
-        className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition"
+      <PrimaryButton
+        linkTo="/"
+        target=""
+        aria-label="Home"
+        className="inline-flex items-center space-x-2"
       >
-        Return Home
-      </Link>
+        <span>Return Home</span>
+      </PrimaryButton>
     </div>
   );
 }

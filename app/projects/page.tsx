@@ -1,7 +1,7 @@
 import React from 'react';
-import PageHeader from '@/src/components/PageHeader/PageHeader';
-import AllProjects from '@/src/components/Projects/AllProjects';
-import { getAllProjects } from '@/src/services/projects/project';
+import PageHeader from '@/src/components/reusable/pageHeader/PageHeader';
+import AllProjects from '@/src/components/pages/Projects/AllProjects';
+import { getAllProjects } from '@/src/apiManagement/projects/project';
 
 export default async function Projects() {
   const allProjects = await getAllProjects();

@@ -1,21 +1,14 @@
-/* Notes
-- Calling the getChicagoRedLineStatus function here ensures that I'm executing the API on the server side
-*/
-
-import { getChicagoRedLineStatus } from '@/src/apiManagement/cta/cta';
+import { fetchCommits } from '@/src/apiManagement/githubAPI';
 
 export async function GET() {
   try {
-    const res = await getChicagoRedLineStatus();
+    const res = await fetchCommits();
 
     if (!res) {
-      return new Response(
-        JSON.stringify({ error: 'No CTA information found' }),
-        {
-          status: 404,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'No commits found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     return new Response(JSON.stringify(res), {
@@ -29,7 +22,7 @@ export async function GET() {
 
     return new Response(
       JSON.stringify({
-        error: 'Failed to fetch CTA Info',
+        error: 'Failed to fetch commit Info',
         details: errorMessage,
       }),
       {

@@ -1,10 +1,10 @@
-import About from '@/src/components/About/About';
-import FeaturedProjects from '@/src/components/Projects/FeaturedProjects';
-import HomePageHeader from '@/src/components/Home/HomePagerHeader';
-import Quotes from '@/src/components/Quotes/Quotes';
-import WebsiteStatusCard from '@/src/components/WebsiteStatus/WebsiteStatusCard';
-import SubmitFeedbackCard from '@/src/components/SubmitFeedback/SubmitFeedbackCard';
-import SpotifyStatusCard from '@/src/components/Spotify/SpotifyStatusCard';
+import About from '@/src/components/pages/About/About';
+import FeaturedProjects from '@/src/components/pages/Projects/FeaturedProjects';
+import HomePageHeader from '@/src/components/pages/Home/HomePagerHeader';
+import Quotes from '@/src/components/pages/Home/Quotes/Quotes';
+import WebsiteStatusCard from '@/src/components/pages/Home/WebsiteStatus/WebsiteStatusCard';
+import SubmitFeedbackCard from '@/src/components/pages/Home/SubmitFeedback/SubmitFeedbackCard';
+import SpotifyStatusCard from '@/src/components/pages/Home/Spotify/SpotifyStatusCard';
 
 export default function Home() {
   return (
@@ -22,7 +22,6 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="space-y-4">
           <WebsiteStatusCard />
-          {/* <SpotifyCard /> */}
           <SpotifyStatusCard />
           <SubmitFeedbackCard />
         </aside>
