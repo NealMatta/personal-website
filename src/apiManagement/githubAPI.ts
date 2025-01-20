@@ -1,4 +1,3 @@
-'use client';
 type Commit = {
   sha: string;
   commit: {
@@ -11,10 +10,10 @@ type Commit = {
 };
 
 export const fetchCommits = async (): Promise<Commit[]> => {
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 30);
+  const dateRange = new Date();
+  dateRange.setDate(dateRange.getDate() - 30);
 
-  const isoDate = oneWeekAgo.toISOString();
+  const isoDate = dateRange.toISOString();
   const perPage = 100; // Maximum allowed by GitHub
   let page = 1;
   let allCommits: Commit[] = [];

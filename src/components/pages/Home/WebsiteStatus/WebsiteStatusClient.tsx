@@ -1,9 +1,16 @@
 'use client';
 
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCommits } from '@/src/apiManagement/githubAPI';
 import WebsiteStatusView from './WebsiteStatusView';
+
+async function fetchCommits() {
+  const response = await fetch('/api/github/commits');
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return response.json();
+}
 
 export default function WebsiteStatusClient() {
   // Client-side logic: Fetch commits

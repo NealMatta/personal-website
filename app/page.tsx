@@ -22,7 +22,6 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="space-y-4">
           <WebsiteStatusCard />
-          {/* <SpotifyCard /> */}
           <SpotifyStatusCard />
           <SubmitFeedbackCard />
         </aside>
