@@ -1,36 +1,25 @@
 import React from 'react';
 import PageHeader from '../../reusable/pageHeader/PageHeader';
-
-// Import FontAwesome Icons
+import moment from 'moment-timezone';
+// FontAwesome Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const HomePageHeader = () => {
-  const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const clientTimeZone = moment.tz.guess(); // Guess the client's timezone
 
   const getHeader = () => {
-    const hours = new Date().toLocaleString('en-US', {
-      timeZone: clientTimeZone,
-      hour: '2-digit',
-      hour12: false,
-    });
-    const numericHours = parseInt(hours, 10);
-    if (numericHours < 12) return 'Good Morning!';
-    else if (numericHours < 18) return 'Good Afternoon!';
+    const currentHour = moment.tz(clientTimeZone).hour(); // Get the current hour in the client's timezone
+    if (currentHour < 12) return 'Good Morning!';
+    else if (currentHour < 18) return 'Good Afternoon!';
     return 'Good Evening!';
   };
 
   const getIcon = () => {
-    const hours = new Date().toLocaleString('en-US', {
-      timeZone: clientTimeZone,
-      hour: '2-digit',
-      hour12: false,
-    });
-    const numericHours = parseInt(hours, 10);
-
+    const currentHour = moment.tz(clientTimeZone).hour(); // Get the current hour in the client's timezone
     const size = 'sm';
 
-    if (numericHours < 16) {
+    if (currentHour < 16) {
       return (
         <FontAwesomeIcon
           icon={faSun}
@@ -53,15 +42,9 @@ const HomePageHeader = () => {
   };
 
   const getSubHeader = () => {
-    const date = new Date();
-    const formattedDate = new Intl.DateTimeFormat('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-      timeZone: clientTimeZone,
-    }).format(date);
-
+    const formattedDate = moment
+      .tz(clientTimeZone)
+      .format('dddd, MMMM Do, YYYY');
     return `It's ${formattedDate}`;
   };
 
