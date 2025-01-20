@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import PageHeader from '../../reusable/pageHeader/PageHeader';
 import moment from 'moment-timezone';
