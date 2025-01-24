@@ -1,5 +1,7 @@
-export default function Cookbook() {
-  const recipes = fetch('/cookbook/allRecipes');
+export default async function Cookbook() {
+  const res = await fetch('http://localhost:3000/api/cookbook/allRecipes');
+  const recipes = await res.json();
+
   return (
     <>
       <div>
