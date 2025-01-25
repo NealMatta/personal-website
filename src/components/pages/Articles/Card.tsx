@@ -16,6 +16,7 @@ export default function Card({
       <div className="items-start p-6 bg-white border rounded-lg shadow-md">
         <div className="flex">
           {/* Image Section */}
+          {/* TODO: Replace this with Image from next.js and add the domain as well */}
           <img
             src={imageUrl}
             alt={title}

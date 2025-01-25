@@ -21,7 +21,7 @@ export default function NavBar() {
               label="Cookbook"
               external={true}
             />
-            <NavLink href="#" label="Articles" disabled={true} />
+            <NavLink href="/articles" label="Articles" />
           </div>
         </div>
       </div>
