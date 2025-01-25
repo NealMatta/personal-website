@@ -1,12 +1,25 @@
-export default function IndividualArticle({
+import style from '@/src/styles/article.module.css';
+import ReactMarkdown from 'react-markdown';
+
+import { getArticle } from '@/src/apiManagement/articles/articles';
+export default async function IndividualArticle({
   params,
 }: {
-  params: { articleId: string };
+  params: Promise<{ articleId: string }>;
 }) {
-  const articleId = params.articleId;
+  const articleID = (await params).articleId;
+  const post = await getArticle(articleID);
+
   return (
     <>
-      <h1>{articleId}</h1>
+      <section>
+        <h2>{post.metadata.title}</h2>
+        <span>{post.metadata.date}</span>
+        <p>{post.metadata.tags.join(', ')}</p>
+        <div className={style.notion}>
+          <ReactMarkdown>{post.markdown.parent}</ReactMarkdown>
+        </div>
+      </section>
     </>
   );
 }

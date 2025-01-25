@@ -2,14 +2,14 @@ interface CardProps {
   title: string;
   details: string;
   postedDate: string;
-  imageUrl: string; // Add a new prop for the image URL
+  // imageUrl: string; // Add a new prop for the image URL
 }
 
 export default function Card({
   title,
   details,
   postedDate,
-  imageUrl,
+  // imageUrl,
 }: CardProps) {
   return (
     <>
@@ -17,11 +17,11 @@ export default function Card({
         <div className="flex">
           {/* Image Section */}
           {/* TODO: Replace this with Image from next.js and add the domain as well */}
-          <img
+          {/* <img
             src={imageUrl}
             alt={title}
             className="w-24 h-24 object-cover rounded-lg mr-6"
-          />
+          /> */}
 
           {/* Text Content Section */}
           <div>
