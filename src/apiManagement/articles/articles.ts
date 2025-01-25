@@ -1,6 +1,6 @@
 import { Client } from '@notionhq/client';
 
-export async function GET() {
+export async function getArticles() {
   const notion = new Client({ auth: process.env.NOTION_SECRET });
 
   const response = await notion.databases.query({
@@ -9,8 +9,11 @@ export async function GET() {
 
   const data = response.results;
 
-  return new Response(JSON.stringify(data), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  return data;
+  //     return new Response(JSON.stringify(data), {
+  //       status: 200,
+  //       headers: { 'Content-Type': 'application/json' },
+  //     });
+
+  //   return data;
 }
