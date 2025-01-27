@@ -10,16 +10,23 @@ export default async function IndividualArticle({
   const articleID = (await params).articleId;
   const post = await getArticle(articleID);
 
+  console.log(post.markdown.parent);
+
   return (
-    <>
-      <section>
-        <h2>{post.metadata.title}</h2>
-        <span>{post.metadata.date}</span>
-        <p>{post.metadata.tags.join(', ')}</p>
-        <div className={style.notion}>
-          <ReactMarkdown>{post.markdown.parent}</ReactMarkdown>
+    <section className="flex flex-col gap-y-4">
+      <div className="">
+        <h1 className="text-4xl font-bold">{post.metadata.title}</h1>
+        <div className="flex space-x-2">
+          <p>{post.metadata.date}</p>
+          <p>-</p>
+          <p className="italic">{post.metadata.tags.join(', ')}</p>
         </div>
-      </section>
-    </>
+      </div>
+      <hr />
+
+      <div className={style.notion}>
+        <ReactMarkdown>{post.markdown.parent}</ReactMarkdown>
+      </div>
+    </section>
   );
 }
