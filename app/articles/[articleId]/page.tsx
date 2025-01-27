@@ -10,8 +10,6 @@ export default async function IndividualArticle({
   const articleID = (await params).articleId;
   const post = await getArticle(articleID);
 
-  console.log(post.markdown.parent);
-
   return (
     <section className="flex flex-col gap-y-4">
       <div className="">

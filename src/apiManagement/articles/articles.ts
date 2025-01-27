@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
+import { NotionPage, MultiSelect } from '@/src/types/notion';
 
 const notion = new Client({ auth: process.env.NOTION_SECRET });
 
@@ -28,12 +29,18 @@ function getToday(datestring) {
   const day = date.getDate();
   const month = months[date.getMonth()];
   const year = date.getFullYear();
-  let today = `${month} ${day}, ${year}`;
+  const today = `${month} ${day}, ${year}`;
 
   return today;
 }
 
 function getPageMetaData(post) {
+  // console.log('title', post.properties['Article Title'].title[0]);
+  // console.log('tags', post.properties.Tags);
+  // console.log('desc', post.properties.Description);
+  // console.log('date posted', post.properties['Date Posted']);
+  // console.log('slug', post.properties.Slug);
+
   const getTags = (tags) => {
     const allTags = tags.map((tag) => {
       return tag.name;
@@ -47,7 +54,7 @@ function getPageMetaData(post) {
     title: post.properties['Article Title'].title[0].plain_text,
     tags: getTags(post.properties.Tags.multi_select),
     description: post.properties.Description.rich_text[0].plain_text,
-    date: getToday(post.properties['Date Posted'].last_edited_time),
+    date: post.properties['Date Posted'].date.start,
     slug: post.properties.Slug.rich_text[0].plain_text,
   };
 }
