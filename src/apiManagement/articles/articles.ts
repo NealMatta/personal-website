@@ -1,48 +1,12 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
-import { NotionPage, MultiSelect } from '@/src/types/notion';
+import { NotionPage } from '@/src/types/notion';
 
 const notion = new Client({ auth: process.env.NOTION_SECRET });
 
-function getToday(datestring) {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
-  let date = new Date();
-
-  if (datestring) {
-    date = new Date(datestring);
-  }
-
-  const day = date.getDate();
-  const month = months[date.getMonth()];
-  const year = date.getFullYear();
-  const today = `${month} ${day}, ${year}`;
-
-  return today;
-}
-
-function getPageMetaData(post) {
-  // console.log('title', post.properties['Article Title'].title[0]);
-  // console.log('tags', post.properties.Tags);
-  // console.log('desc', post.properties.Description);
-  // console.log('date posted', post.properties['Date Posted']);
-  // console.log('slug', post.properties.Slug);
-
-  const getTags = (tags) => {
-    const allTags = tags.map((tag) => {
+function getPageMetaData(post: NotionPage) {
+  const getTags = (tags: { name: string }[]) => {
+    const allTags = tags.map((tag: { name: string }) => {
       return tag.name;
     });
 
@@ -79,7 +43,7 @@ export async function getArticles() {
     ],
   });
 
-  const allPosts = response.results;
+  const allPosts = response.results as NotionPage[];
 
   return allPosts.map((post) => {
     return getPageMetaData(post);
@@ -101,7 +65,7 @@ export async function getArticle(articleId: string) {
       },
     },
   });
-  const page = response.results[0];
+  const page = response.results[0] as NotionPage;
   const metadata = getPageMetaData(page);
   const mdblocks = await n2m.pageToMarkdown(page.id);
   const mdString = n2m.toMarkdownString(mdblocks);
