@@ -3,7 +3,7 @@ import FullDashboard from '@/src/components/pages/Laboratory/Experiments/Dashboa
 export default function Dashboard() {
   return (
     <>
-      <div className="container">
+      <div className="">
         <FullDashboard />
       </div>
     </>
