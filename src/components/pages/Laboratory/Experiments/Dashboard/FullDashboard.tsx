@@ -4,14 +4,15 @@ export default function FullDashboard() {
   return (
     <div className="w-full px-8 py-4">
       {/* Date & Time */}
-      <div className="text-center text-2xl font-semibold mb-6 bg-red-700">
-        Sunday, April 6 | 09:30 PM
+      <div className="text-center text-8xl font-semibold mb-6 ">
+        Sunday, April 6 2025 | 09:30 PM
       </div>
 
       {/* Two-Column Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left: Train Alerts */}
-        <div>
+        <div className="p-6 bg-white border rounded-lg shadow-md">
+          <h1 className="text-4xl font-semibold mb-3">Chicago Red Line Stop</h1>
           <TrainAlertClient />
         </div>
 
