@@ -1,45 +1,114 @@
+import BarebonesCard from '@/src/components/reusable/cards/BarebonesCard';
 import TrainAlertClient from '../ChicagoCTA/TrainAlertClient';
+import Quotes from '../../../Home/Quotes/Quotes';
 
 export default function FullDashboard() {
   return (
-    <div className="w-full px-8 py-4">
+    <div className="w-full p-16">
       {/* Date & Time */}
-      <div className="text-center text-8xl font-semibold mb-6 ">
+      <div className="text-center text-8xl font-semibold mb-6 uppercase letter tracking-wide ">
         Sunday, April 6 2025 | 09:30 PM
       </div>
 
       {/* Two-Column Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-6">
         {/* Left: Train Alerts */}
-        <div className="p-6 bg-white border rounded-lg shadow-md">
-          <h1 className="text-4xl font-semibold mb-3">Chicago Red Line Stop</h1>
-          <TrainAlertClient />
-        </div>
+        <section className="col-span-1">
+          <BarebonesCard title={'Chicago Red Line Stop'}>
+            <TrainAlertClient />
+          </BarebonesCard>
+          <div className="mt-6">
+            <Quotes />
+          </div>
+        </section>
 
         {/* Right: Hardcoded To-Do Lists */}
-        <div>
-          <div className="mb-6">
-            <h2 className="text-xl font-bold mb-2">Morning Routine</h2>
-            <ul className="list-disc list-inside">
-              <li>Wake up at 6:30 AM</li>
-              <li>Brush teeth & shower</li>
-              <li>Make breakfast</li>
-              <li>Stretch or light workout</li>
-              <li>Plan the day</li>
-            </ul>
+        <section className="col-span-1">
+          <div className="flex flex-wrap gap-6">
+            <div className="">
+              <BarebonesCard title={'Morning Routine'}>
+                <ul className="space-y-2 text-lg">
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Wake up at 6:30 AM</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Brush teeth & shower</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Make breakfast</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Stretch or light workout</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Plan the day</span>
+                    </label>
+                  </li>
+                </ul>
+              </BarebonesCard>
+            </div>
+            <div className="">
+              <BarebonesCard title={'Weather'}>
+                <div className="text-5xl font-bold mb-2 text-center">72°F</div>
+                <div className="text-sm text-gray-600">
+                  Partly cloudy with light breeze. Feels like spring.
+                  <br />
+                  Bring a light jacket. No rain expected today.
+                </div>
+              </BarebonesCard>
+            </div>
+            <div className="">
+              <BarebonesCard title={'Tasks Today'}>
+                <ul className="space-y-2 text-lg">
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Wake up at 6:30 AM</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Brush teeth & shower</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Make breakfast</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Stretch or light workout</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" />
+                      <span>Plan the day</span>
+                    </label>
+                  </li>
+                </ul>
+              </BarebonesCard>
+            </div>
           </div>
-
-          <div>
-            <h2 className="text-xl font-bold mb-2">Evening Routine</h2>
-            <ul className="list-disc list-inside">
-              <li>Eat dinner</li>
-              <li>Go for a walk</li>
-              <li>Shower & skincare</li>
-              <li>Read a book or journal</li>
-              <li>Sleep by 11 PM</li>
-            </ul>
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   );
