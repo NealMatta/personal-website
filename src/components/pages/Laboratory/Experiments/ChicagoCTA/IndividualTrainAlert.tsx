@@ -24,7 +24,7 @@ export default function IndividualTrainAlert({
   }
 
   return (
-    <div className="grid grid-cols-3 items-center bg-[#C92032] text-white p-4 rounded-sm shadow-md mb-3">
+    <div className="grid grid-cols-3 items-center bg-[#C92032] text-white p-4 rounded-xs shadow-md mb-3">
       {/* Left Column: Train Details */}
       <div className="col-span-2">
         <div className="text-sm font-semibold">

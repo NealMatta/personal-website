@@ -15,7 +15,7 @@ export default function About() {
               width={128}
               height={128}
               quality={100}
-              className="rounded border-4 border-slate-900"
+              className="rounded-sm border-4 border-slate-900"
             />
           </div>
         </div>

@@ -8,7 +8,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <div
       className={
-        'flex flex-col p-2 border-2 rounded shadow-md bg-white hover:opacity-50 transition'
+        'flex flex-col p-2 border-2 rounded-sm shadow-md bg-white hover:opacity-50 transition'
       }
     >
       {/* Image would go here */}
@@ -20,7 +20,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full h-46 rounded"
+            className="w-full h-46 rounded-sm"
           />
         )}
 

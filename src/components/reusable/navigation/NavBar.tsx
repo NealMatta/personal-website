@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function NavBar() {
   return (
-    <nav className="sticky top-0 z-50 px-4 py-8 transition-all duration-300 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 px-4 py-8 transition-all duration-300 backdrop-blur-xs">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-16">
         <div className="container flex flex-wrap justify-between items-center">
           {/* Logo Section */}

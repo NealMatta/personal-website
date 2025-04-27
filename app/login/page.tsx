@@ -26,7 +26,7 @@ export default async function LoginPage() {
                   name="email"
                   type="email"
                   required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary"
                 />
               </div>
               <div>
@@ -41,12 +41,12 @@ export default async function LoginPage() {
                   name="password"
                   type="password"
                   required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary"
                 />
               </div>
               <button
                 formAction={login}
-                className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark focus:outline-hidden focus:ring-2 focus:ring-primary"
               >
                 Log in
               </button>
@@ -59,7 +59,7 @@ export default async function LoginPage() {
             </h1>
             <button
               formAction={logout}
-              className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-dark focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               Log Out
             </button>

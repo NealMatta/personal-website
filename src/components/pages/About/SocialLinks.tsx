@@ -49,7 +49,7 @@ export default function SocialLinks() {
             <FontAwesomeIcon
               icon={icon}
               size="lg"
-              className="w-4 flex-shrink-0 group-hover:text-primary"
+              className="w-4 shrink-0 group-hover:text-primary"
             />
           </Link>
         );

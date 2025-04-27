@@ -13,7 +13,7 @@ export default function TrainAlertView({
   allTrainData,
 }: TrainStatusViewProps) {
   if (isLoading) {
-    return <div className="w-full h-24 bg-gray-200 p-4 rounded-sm  mb-3" />;
+    return <div className="w-full h-24 bg-gray-200 p-4 rounded-xs  mb-3" />;
   }
 
   if (isError) {

@@ -23,12 +23,12 @@ export default function SpotifyStatusView({
           <FontAwesomeIcon
             size="lg"
             icon={faSpotify}
-            className="mr-2 w-6 flex-shrink-0 text-[#1Ed760]"
+            className="mr-2 w-6 shrink-0 text-[#1Ed760]"
           />
           {isLoading && (
             <>
               <div className="w-full flex items-center text-center">
-                <div className="h-8 w-48 bg-gray-200 rounded mb-2"></div>{' '}
+                <div className="h-8 w-48 bg-gray-200 rounded-sm mb-2"></div>{' '}
               </div>
             </>
           )}
@@ -49,9 +49,9 @@ export default function SpotifyStatusView({
 
               {/* Right Side: Placeholder Song and Artist */}
               <div className="w-full flex flex-col justify-center items-center text-center">
-                <div className="h-6 w-32 bg-gray-200 rounded mb-2"></div>{' '}
+                <div className="h-6 w-32 bg-gray-200 rounded-sm mb-2"></div>{' '}
                 {/* Placeholder for Song */}
-                <div className="h-4 w-24 bg-gray-200 rounded"></div>{' '}
+                <div className="h-4 w-24 bg-gray-200 rounded-sm"></div>{' '}
                 {/* Placeholder for Artist */}
               </div>
             </div>

@@ -2,12 +2,12 @@ export default function Loading() {
   return (
     <div className="animate-pulse">
       {/* Header Section */}
-      <div className="h-8 w-2/3 bg-gray-300 rounded mt-4"></div>
+      <div className="h-8 w-2/3 bg-gray-300 rounded-sm mt-4"></div>
       <div className="mt-2">
         <div className="flex flex-wrap gap-3">
-          <div className="h-6 w-20 bg-gray-300 rounded"></div>
-          <div className="h-6 w-24 bg-gray-300 rounded"></div>
-          <div className="h-6 w-16 bg-gray-300 rounded"></div>
+          <div className="h-6 w-20 bg-gray-300 rounded-sm"></div>
+          <div className="h-6 w-24 bg-gray-300 rounded-sm"></div>
+          <div className="h-6 w-16 bg-gray-300 rounded-sm"></div>
         </div>
       </div>
 
