@@ -1,8 +1,13 @@
+'use client';
+
 import BarebonesCard from '@/src/components/reusable/cards/BarebonesCard';
 import TrainAlertClient from '../ChicagoCTA/TrainAlertClient';
-import Quotes from '../../../Home/Quotes/Quotes';
+// import Quotes from '../../../Home/Quotes/Quotes';
+import { useState } from 'react';
 
 export default function FullDashboard() {
+  const [isMorning, setIsMorning] = useState(true);
+
   return (
     <div className="w-full p-16">
       {/* Date & Time */}
@@ -17,48 +22,93 @@ export default function FullDashboard() {
           <BarebonesCard title={'Chicago Red Line Stop'}>
             <TrainAlertClient />
           </BarebonesCard>
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <Quotes />
-          </div>
+          </div> */}
         </section>
 
         {/* Right: Hardcoded To-Do Lists */}
         <section className="col-span-1">
-          <div className="flex flex-wrap gap-6">
+          <div className="grid grid-cols-2 gap-6">
             <div className="">
-              <BarebonesCard title={'Morning Routine'}>
-                <ul className="space-y-2 text-lg">
-                  <li>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" />
-                      <span>Wake up at 6:30 AM</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" />
-                      <span>Brush teeth & shower</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" />
-                      <span>Make breakfast</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" />
-                      <span>Stretch or light workout</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" />
-                      <span>Plan the day</span>
-                    </label>
-                  </li>
-                </ul>
+              <BarebonesCard
+                title={isMorning ? 'Morning Routine' : 'Night Routine'}
+              >
+                <div className="mb-4">
+                  <button
+                    className="text-sm text-blue-600 underline"
+                    onClick={() => setIsMorning(!isMorning)}
+                  >
+                    Switch to {isMorning ? 'Night' : 'Morning'} Routine
+                  </button>
+                </div>
+                {isMorning ? (
+                  <ul className="space-y-2 text-lg">
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Wake up at 6:30 AM</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Brush teeth & shower</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Make breakfast</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Stretch or light workout</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Plan the day</span>
+                      </label>
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="space-y-2 text-lg">
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Prep for Tomorrow</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Clean out kitchen sink</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Vacuum Apartment</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Wipe down island</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label className="flex items-center space-x-2">
+                        <input type="checkbox" />
+                        <span>Dental Hygiene</span>
+                      </label>
+                    </li>
+                  </ul>
+                )}
               </BarebonesCard>
             </div>
             <div className="">
@@ -104,6 +154,16 @@ export default function FullDashboard() {
                       <span>Plan the day</span>
                     </label>
                   </li>
+                </ul>
+              </BarebonesCard>
+            </div>
+            <div className="">
+              <BarebonesCard title={'Habits'}>
+                <ul className="list-disc pl-6 text-lg space-y-1">
+                  <li>Gym 3x a week</li>
+                  <li>Do the night shift</li>
+                  <li>Meal prep</li>
+                  <li>No mids — only Ends or early nights</li>
                 </ul>
               </BarebonesCard>
             </div>
