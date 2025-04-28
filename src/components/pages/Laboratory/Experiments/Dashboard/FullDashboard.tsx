@@ -23,18 +23,9 @@ export default function FullDashboard() {
               <TrainAlertClient />
             </BarebonesCard>
           </div>
-          <div className="col-span-2">
-            <BarebonesCard title={'Weather'}>
-              <div className="text-5xl font-bold mb-2 text-center">72°F</div>
-              <div className="text-sm text-gray-600">
-                Partly cloudy with light breeze. Feels like spring.
-                <br />
-                Bring a light jacket. No rain expected today.
-              </div>
-            </BarebonesCard>
-          </div>
         </div>
 
+        {/* Side Content */}
         <div className="grid grid-cols-3 gap-3">
           <div className="">
             <BarebonesCard
@@ -152,6 +143,16 @@ export default function FullDashboard() {
                   </label>
                 </li>
               </ul>
+            </BarebonesCard>
+          </div>
+          <div className="">
+            <BarebonesCard title={'Weather'}>
+              <div className="text-5xl font-bold mb-2 text-center">72°F</div>
+              <div className="text-sm text-gray-600">
+                Partly cloudy with light breeze. Feels like spring.
+                <br />
+                Bring a light jacket. No rain expected today.
+              </div>
             </BarebonesCard>
           </div>
 
