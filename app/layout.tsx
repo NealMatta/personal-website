@@ -11,12 +11,6 @@ import {
   JetBrains_Mono,
   Caveat,
 } from 'next/font/google';
-// Still needed by the pages that haven't been redesigned yet (Lab, Projects).
-// Prevents the icon server-side rendering flash:
-import '@fortawesome/fontawesome-svg-core/styles.css';
-// Prevent fontawesome from adding its CSS since we did it manually above:
-import { config } from '@fortawesome/fontawesome-svg-core';
-config.autoAddCss = false; /* eslint-disable import/first */
 
 export const metadata: Metadata = {
   title: 'Neal Matta',

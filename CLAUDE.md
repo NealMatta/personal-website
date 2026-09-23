@@ -30,8 +30,8 @@ Put these in `.env.local`:
 
 - `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA).
 - `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI — `navigation/`, `sky/`, and `UI/`.
-- `src/lib/`: Supabase clients, the React Query provider, the sky engine, and small helpers.
-- `src/types/`: `supabase.ts` holds the generated Supabase `Database` types. The other files define domain types, re-exported from `src/types/index.ts`.
+- `src/lib/`: the Supabase client, the React Query provider, the sky engine, and small helpers.
+- `src/types/`: `supabase.ts` holds the generated Supabase `Database` types, kept for reference; nothing imports it. The other files define domain types and are imported directly (there is no barrel file).
 - `src/content/`: typed content files — shelf boxes, projects, Lab experiments, About, field notes, quotes. Most page content lives here rather than in a database.
 
 **Data flow for live widgets (Spotify, website status/commits, CTA trains):** the widgets use a Card → Client → View split:
@@ -50,15 +50,13 @@ Add new external-data widgets the same way. Route handlers return JSON through `
 
 **Projects come from `src/content/projects.ts`, not Supabase.** The design needs kind, status, stack, and full case-study sections, none of which the `projects` table has, and a Firebase move is planned — so the table and its `getProject`/`getAllProjects` plumbing were dropped rather than extended. A project is a discriminated union: `SoftwareProject` renders as a case study, `woodwork` and `3d-print` render as a build log with specs and a cut list. Adding a project means adding an entry, not touching a page.
 
-**Supabase has two kinds of client:**
-- `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It now only serves the `spotify_tokens` table. It calls `createClient` at module scope, so a build without `NEXT_PUBLIC_SUPABASE_URL` set fails on import.
-- `src/lib/supabase/auth/{server,client,middleware}.ts` are `@supabase/ssr` cookie-based clients for auth. The server actions in `app/login/actions.ts` use them. Root `middleware.ts` runs `updateSession` only for `/admin`, and redirects users who aren't logged in to `/login`.
+**Supabase is down to one client:** `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It only serves the `spotify_tokens` table. It calls `createClient` at module scope, so a build without `NEXT_PUBLIC_SUPABASE_URL` set fails on import. The site has no login, auth or middleware; if one comes back it will be on Firebase, not Supabase.
 
 **Spotify token caching:** `src/apiManagement/spotify/tokenManager.ts` stores the access token and its expiry in the Supabase `spotify_tokens` table (row `id = 1`). It uses the refresh token only when the stored token has expired.
 
 **Remote images:** `next/image` accepts remote images only from the hosts listed in `next.config.ts` (`i.scdn.co` for Spotify and the Supabase storage host). Add any new image host there.
 
-**Styling — "paper, tape and sky":** the ground is paper (`#F4F1EA`) and ink (`#1C1B19`); color appears *only* inside sky windows. Tailwind colors (`paper`, `card`, `ink`, `pencil`, `graphite`, `rule`, `tape`, `marker`, `status.*`) map to CSS variables in `src/styles/globals.css`. Four typefaces come from `next/font/google` in `app/layout.tsx` and are exposed as CSS variables: Bricolage Grotesque (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`, metadata), Caveat (`font-label`, tape labels only — never body copy). Font Awesome CSS is imported manually there with `autoAddCss = false`, for the pages not yet redesigned.
+**Styling — "paper, tape and sky":** the ground is paper (`#F4F1EA`) and ink (`#1C1B19`); color appears *only* inside sky windows. Tailwind colors (`paper`, `card`, `ink`, `pencil`, `graphite`, `rule`, `tape`, `marker`, `status.*`) map to CSS variables in `src/styles/globals.css`. Four typefaces come from `next/font/google` in `app/layout.tsx` and are exposed as CSS variables: Bricolage Grotesque (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`, metadata), Caveat (`font-label`, tape labels only — never body copy).
 
 The design lives in the "Second Brain Redesign" canvas: https://claude.ai/artifact/17YUxwuEjgezbPRiTDATjn
 
@@ -77,7 +75,6 @@ Both classes read `--sky-gradient`, `--sky-ink` and `--sky-line` from `<html>`. 
 **Reusable UI** (`src/components/reusable/UI/`): `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / idea / shelved), `Chip`, `InfoTip` (the ⓘ on a live card, showing its data path and tools), `PageIntro` (a section page's masthead — `stats` for counts on the right, `aside` for a card there instead), `FilterPills`, `Breadcrumb`, `PhotoSlot`, `TableOfContents` and `ProseSection`. The last two are what a write-up is made of, shared by project case studies, build logs and field notes; the `Section` shape they read lives in `src/types/content.ts`.
 
 **Notes:**
-- `app/_starting-project/` is the leftover create-next-app template. The `_` prefix keeps it out of routing.
 - `app/lab/dashboard/layout.tsx` renders its own `<html>`/`<body>`.
 - The redesign is landing in passes. Done: the design system, nav/footer, Home, About, Projects (index, case study, build log), Laboratory, Field notes and Curriculum. Still to build: Commonplace. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
 - Images the site doesn't have yet render as `PhotoSlot` — a labeled dashed frame that becomes the picture once given a `src`. Real assets go in `public/`.
