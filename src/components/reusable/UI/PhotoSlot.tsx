@@ -30,7 +30,12 @@ export default function PhotoSlot({
 }: PhotoSlotProps) {
   if (src) {
     return (
-      <div className={`relative overflow-hidden ${className}`} style={style}>
+      <div
+        // A real photo gets the same frame the empty slot has, just solid,
+        // so a screenshot sits on the page rather than floating on it.
+        className={`relative overflow-hidden border border-rule ${className}`}
+        style={style}
+      >
         <Image
           src={src}
           alt={label}
