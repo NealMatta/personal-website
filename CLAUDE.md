@@ -28,8 +28,8 @@ Put these in `.env.local`:
 
 **Layout split:** `app/` contains only Next.js routes, layouts, and API route handlers. Everything else is in `src/`. The `@/*` path alias resolves to the repo root, so imports look like `@/src/components/...`, not `@/components/...`.
 
-- `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA) or query Supabase (projects).
-- `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI (NavBar, Footer, cards, PageHeader).
+- `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA).
+- `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI — `navigation/`, `sky/`, and `UI/`.
 - `src/lib/`: Supabase clients, the React Query provider, the sky engine, and small helpers.
 - `src/types/`: `supabase.ts` holds the generated Supabase `Database` types. The other files define domain types, re-exported from `src/types/index.ts`.
 - `src/content/`: typed content files — shelf boxes, projects, Lab experiments, About, field notes, quotes. Most page content lives here rather than in a database.
@@ -62,7 +62,7 @@ The design lives in the "Second Brain Redesign" canvas: https://claude.ai/artifa
 
 Sky windows are the only colored surfaces: the hero widget, the closing quote, and the nav's logo mark. Section rules borrow the gradient as a hairline.
 
-**Reusable UI:** `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / shelved), `Chip`, and `InfoTip` — the ⓘ on a live card that shows the data path and tools behind it.
+**Reusable UI** (`src/components/reusable/UI/`): `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / idea / shelved), `Chip`, `InfoTip` (the ⓘ on a live card, showing its data path and tools), `PageIntro` (a section page's masthead), `FilterPills`, `Breadcrumb` and `PhotoSlot`.
 
 **Notes:**
 - `app/_starting-project/` is the leftover create-next-app template. The `_` prefix keeps it out of routing.
