@@ -73,9 +73,11 @@ export default function FeaturedProject({ project }: { project: Project }) {
           <div className="mt-auto flex flex-wrap gap-3 pt-2">
             <Link
               href={`/projects/${project.slug}`}
-              className="rounded-lg bg-ink px-[18px] py-3 text-[15px] font-semibold text-paper no-underline"
+              className="sky-button bg-ink px-[18px] py-3 text-[15px] font-semibold text-paper no-underline"
             >
-              {isBuild(project) ? 'Read the build log' : 'Read the write-up'}
+              <span>
+                {isBuild(project) ? 'Read the build log' : 'Read the write-up'}
+              </span>
             </Link>
             {!isBuild(project) &&
               project.links

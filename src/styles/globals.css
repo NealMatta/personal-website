@@ -44,6 +44,14 @@ of the visitor's local time shows through.
   --sky-cloud-light: #ffffff;
   --sky-cloud-shade: #b9cbe0;
   --sky-cloud-opacity: 0.95;
+
+  /* The same sky turned on its side, for anything too thin to show a
+     vertical gradient — section hairlines and the underline under a link. */
+  --sky-line: linear-gradient(90deg, #2f7ed8, #6eb0ec, #b9ddf7);
+
+  /* One duration and one curve, so every hover on the site moves alike. */
+  --sky-t: 0.26s;
+  --sky-ease: cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 body {
@@ -82,6 +90,116 @@ apartment is labeled.
       3% 32%,
       0 14%
     );
+  }
+}
+
+/*
+How a link answers a cursor.
+
+One idea, two shapes: pointing at a link into this site opens a little of
+the sky the visitor is under. A button becomes a window; a text link gets
+the sky as a hairline under the words. Both borrow the phase published
+onto <html> by SkyRoot, so every hover on the page is the same color as
+the hero's window and changes with the visitor's own clock.
+
+This is for navigation *within* the site. A link that leaves — a social
+mark, a repo, a handle — keeps its own quiet hover, so the sky always
+means "another room in this house".
+
+Both fire on keyboard focus too, so a link answers a tab as well as a
+cursor.
+*/
+@layer components {
+  /*
+  A button that opens into the sky.
+
+  Resting, it is what it always was: ink filled, or a hairline box in the
+  same line work as the rest of the page. On hover the sky fades up over
+  that, the corners soften toward the window radius, and the label reads
+  in that phase's ink. Set `--btn` to the button's own height so the two
+  radii scale with it.
+
+  The label has to sit in an element of its own — the sky is an absolutely
+  positioned ::before, and it would paint straight over a bare text node.
+  */
+  .sky-button {
+    --btn: 50px;
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--btn) * 0.16);
+    transition:
+      color var(--sky-t) var(--sky-ease),
+      border-color var(--sky-t) var(--sky-ease),
+      border-radius var(--sky-t) var(--sky-ease);
+  }
+
+  .sky-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--sky-gradient);
+    opacity: 0;
+    transition: opacity var(--sky-t) var(--sky-ease);
+  }
+
+  /* The frame, put back on the inside once the border goes transparent. */
+  .sky-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(28, 27, 25, 0.14);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--sky-t) var(--sky-ease);
+  }
+
+  /* The label rides above the weather. */
+  .sky-button > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .sky-button:is(:hover, :focus-visible) {
+    border-color: transparent;
+    border-radius: calc(var(--btn) * 0.32);
+    color: var(--sky-ink);
+  }
+
+  .sky-button:is(:hover, :focus-visible)::before,
+  .sky-button:is(:hover, :focus-visible)::after {
+    opacity: 1;
+  }
+
+  /*
+  A text link with the sky under it.
+
+  Drawn as a background rather than a pseudo-element so it survives a line
+  break and never collides with an ::after a component already uses. It
+  wipes in from the left, the same direction the section hairlines run.
+  */
+  .sky-link {
+    background-image: var(--sky-line);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: 0 100%;
+    background-size: 0% 2px;
+    transition:
+      background-size var(--sky-t) var(--sky-ease),
+      color var(--sky-t) var(--sky-ease);
+  }
+
+  .sky-link:is(:hover, :focus-visible) {
+    background-size: 100% 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-button,
+  .sky-button::before,
+  .sky-button::after,
+  .sky-link {
+    transition-duration: 0.01ms;
   }
 }
 

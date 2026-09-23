@@ -44,9 +44,9 @@ export default function AboutIntro() {
           </Link>
           <Link
             href="#contact"
-            className="rounded-lg border border-ink px-5 py-[13px] text-base font-semibold no-underline"
+            className="sky-button border border-ink px-5 py-[13px] text-base font-semibold no-underline"
           >
-            Get in touch
+            <span>Get in touch</span>
           </Link>
         </div>
       </div>

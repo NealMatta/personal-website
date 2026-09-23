@@ -22,7 +22,7 @@ export default function Breadcrumb({ trail }: { trail: Crumb[] }) {
           {crumb.href ? (
             <Link
               href={crumb.href}
-              className="text-graphite no-underline hover:text-ink"
+              className="sky-link text-graphite no-underline hover:text-ink"
             >
               {crumb.label}
             </Link>

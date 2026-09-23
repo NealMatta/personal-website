@@ -4,6 +4,7 @@ import NavBar from '@/src/components/reusable/navigation/NavBar';
 import Footer from '@/src/components/reusable/navigation/Footer';
 import ReactQueryProvider from '@/src/lib/providers/ReactQueryProvider';
 import CloudFilters from '@/src/components/reusable/sky/CloudFilters';
+import SkyRoot from '@/src/components/reusable/sky/SkyRoot';
 import {
   Bricolage_Grotesque,
   Instrument_Sans,
@@ -60,6 +61,8 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col">
         {/* Referenced by id from every sky window on the page. */}
         <CloudFilters />
+        {/* Puts the visitor's sky on <html>, where every hover reads it. */}
+        <SkyRoot />
         <ReactQueryProvider>
           <NavBar />
           <main className="flex-grow">{children}</main>

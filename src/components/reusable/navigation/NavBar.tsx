@@ -158,13 +158,17 @@ function NavLink({
   const current =
     pathname === item.href || pathname.startsWith(`${item.href}/`);
 
+  /*
+  The page you are on is already underlined in ink, so it keeps that and
+  sits out the hover; every other entry opens its own sliver of sky.
+  */
   return (
     <Link
       href={item.href}
       onClick={onNavigate}
       aria-current={current ? 'page' : undefined}
       className={`flex items-baseline gap-1.5 py-2.5 text-[15px] font-medium no-underline ${
-        current ? 'underline underline-offset-[6px]' : ''
+        current ? 'underline underline-offset-[6px]' : 'sky-link'
       }`}
     >
       {number}
