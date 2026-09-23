@@ -22,6 +22,11 @@ export interface SkyPhase {
   line: string;
   /** The gradient painted into every window. */
   gradient: string;
+  /**
+   * The gradient's colour stops on their own, so a shape that isn't a
+   * window can rebuild it on a different axis — see `skyLine`.
+   */
+  stops: string[];
   /** Text color that clears 4.5:1 against that gradient. */
   ink: string;
   /** Lit and shaded faces of the drifting clouds. */
@@ -62,6 +67,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     label: 'Midnight',
     line: 'The Big Dipper is up over Canton, and most of the house is asleep.',
     gradient: `${STARFIELD},linear-gradient(165deg,#070B1F 0%,#141B45 50%,#2A2C68 100%)`,
+    stops: ['#070B1F', '#141B45', '#2A2C68'],
     ink: '#F4F1EA',
     cloudLight: '#9AA3D1',
     cloudShade: '#3A4078',
@@ -73,6 +79,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     label: 'Dawn',
     line: 'First light. The sky is still deciding what color it wants to be.',
     gradient: 'linear-gradient(170deg,#28336A 0%,#6A6CA6 48%,#D6A8BE 100%)',
+    stops: ['#28336A', '#6A6CA6', '#D6A8BE'],
     ink: '#F7F4FA',
     cloudLight: '#F6E3EC',
     cloudShade: '#9C8FB8',
@@ -84,6 +91,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     label: 'Sunrise',
     line: 'The good hour. Coffee, and whatever I said I would finish yesterday.',
     gradient: 'linear-gradient(175deg,#6F9BD6 0%,#E9B3A8 55%,#FFD49A 100%)',
+    stops: ['#6F9BD6', '#E9B3A8', '#FFD49A'],
     ink: '#1C1B19',
     cloudLight: '#FFF6EE',
     cloudShade: '#E3B7B0',
@@ -95,6 +103,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     label: 'Midday',
     line: 'Full daylight. Somewhere between a build and a volleyball game.',
     gradient: 'linear-gradient(180deg,#2F7ED8 0%,#6EB0EC 55%,#B9DDF7 100%)',
+    stops: ['#2F7ED8', '#6EB0EC', '#B9DDF7'],
     ink: '#10233D',
     cloudLight: '#FFFFFF',
     cloudShade: '#B9CBE0',
@@ -107,6 +116,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     line: 'The sky does its best work right as I stop looking at it.',
     gradient:
       'linear-gradient(175deg,#34427F 0%,#B55C86 42%,#F08A5D 75%,#FFC978 100%)',
+    stops: ['#34427F', '#B55C86', '#F08A5D', '#FFC978'],
     ink: '#FFF8EE',
     cloudLight: '#FFE6D6',
     cloudShade: '#C77A86',
@@ -118,6 +128,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     label: 'Dusk',
     line: 'Color draining out of the west. The stars are about to show up.',
     gradient: 'linear-gradient(170deg,#161B4A 0%,#4B3A7C 50%,#A65A86 100%)',
+    stops: ['#161B4A', '#4B3A7C', '#A65A86'],
     ink: '#F7EEF4',
     cloudLight: '#E3CFE6',
     cloudShade: '#6D5A8E',
@@ -189,6 +200,18 @@ export function greetingFor(date: Date): string {
   if (hour < 12) return 'Good morning';
   if (hour < 18) return 'Good afternoon';
   return 'Good evening';
+}
+
+/**
+ * The sky rebuilt on a horizontal axis, for the hairline above each
+ * section.
+ *
+ * A window is tall enough to show a vertical gradient; a 3px rule is not,
+ * so running the sky top to bottom there just reads as one flat color.
+ * Turned on its side, the same colors travel the width of the page.
+ */
+export function skyLine(phase: SkyPhase): string {
+  return `linear-gradient(270deg, ${phase.stops.join(', ')})`;
 }
 
 /** The CSS custom properties a window needs to paint this phase. */

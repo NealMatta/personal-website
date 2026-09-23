@@ -1,6 +1,7 @@
 'use client';
 
 import { useSky } from '@/src/lib/sky/useSky';
+import { skyLine } from '@/src/lib/sky/phases';
 
 /*
 A section rule and its heading.
@@ -30,7 +31,7 @@ export default function SectionHeading({
       <div
         aria-hidden="true"
         className="h-[3px] w-full"
-        style={{ background: phase.gradient }}
+        style={{ background: skyLine(phase) }}
       />
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <h2 className="m-0 font-display text-4xl font-extrabold tracking-[-.01em] lg:text-[44px]">
