@@ -1,55 +1,173 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useSky } from '@/src/lib/sky/useSky';
+
+/*
+The top bar.
+
+The logo mark is one of the three places color is allowed on the page: it
+carries the current sky, so the site's only accent changes through the
+day. The nav is numbered because the whole site is a set of labeled boxes
+and these are the first four.
+*/
+
+interface NavItem {
+  number: string;
+  label: string;
+  href: string;
+  /** Sections the redesign hasn't built yet. */
+  soon?: boolean;
+}
+
+const ITEMS: NavItem[] = [
+  { number: '01', label: 'Curriculum', href: '/curriculum', soon: true },
+  { number: '02', label: 'Projects', href: '/projects' },
+  { number: '03', label: 'Laboratory', href: '/lab' },
+  { number: '04', label: 'Field notes', href: '/writing', soon: true },
+];
+
+const LINKEDIN = 'https://www.linkedin.com/in/nealmatta/';
 
 export default function NavBar() {
-  return (
-    <nav className="sticky top-0 z-50 px-4 py-8 transition-all duration-300 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-16">
-        <div className="container flex flex-wrap justify-between items-center">
-          {/* Logo Section */}
-          <div>
-            <Link href="/" className="uppercase tracking-widest font-bold">
-              Neal Matta
-            </Link>
-          </div>
+  const { phase } = useSky();
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
-          {/* Navigation Links */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4 mt-4 sm:mt-0">
-            <NavLink href="/projects" label="Projects" />
-            <NavLink href="/lab" label="Laboratory" />
-            <NavLink
-              href="https://nealmatta.notion.site/678c6cac55d144a6a3e4f5d6aadd880d?v=e35eeb4db6eb447aba852c45b3771cfb"
-              label="Cookbook"
-              external={true}
-            />
-            <NavLink href="#" label="Articles" disabled={true} />
-          </div>
+  return (
+    <header className="border-b border-rule">
+      <div className="flex items-center justify-between px-6 py-5 lg:px-16 lg:py-6">
+        <Link href="/" className="flex items-center gap-3 no-underline">
+          <span
+            className="h-7 w-7 rounded-md"
+            style={{ background: phase.gradient }}
+            aria-hidden="true"
+          />
+          <span className="font-display text-lg font-extrabold tracking-[.02em]">
+            NEAL MATTA
+          </span>
+        </Link>
+
+        <nav aria-label="Primary" className="hidden gap-8 lg:flex">
+          {ITEMS.map((item) => (
+            <NavLink key={item.label} item={item} pathname={pathname} />
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href={LINKEDIN}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden rounded-lg bg-ink px-[18px] py-3 text-sm font-semibold text-paper no-underline transition-colors hover:bg-[#0A66C2] hover:text-white focus-visible:bg-[#0A66C2] lg:block"
+          >
+            Connect on LinkedIn
+          </Link>
+
+          <button
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-rule lg:hidden"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {open ? (
+                <>
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </>
+              ) : (
+                <>
+                  <path d="M4 7h16" />
+                  <path d="M4 12h16" />
+                  <path d="M4 17h16" />
+                </>
+              )}
+            </svg>
+          </button>
         </div>
       </div>
-    </nav>
+
+      {open && (
+        <nav
+          aria-label="Primary"
+          className="flex flex-col gap-1 border-t border-rule px-6 py-4 lg:hidden"
+        >
+          {ITEMS.map((item) => (
+            <NavLink
+              key={item.label}
+              item={item}
+              pathname={pathname}
+              onNavigate={() => setOpen(false)}
+            />
+          ))}
+          <Link
+            href={LINKEDIN}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 rounded-lg bg-ink px-[18px] py-3 text-center text-sm font-semibold text-paper no-underline"
+          >
+            Connect on LinkedIn
+          </Link>
+        </nav>
+      )}
+    </header>
   );
 }
 
-/* Reusable NavLink Component */
-const NavLink = ({
-  href,
-  label,
-  disabled = false,
-  external = false,
+function NavLink({
+  item,
+  pathname,
+  onNavigate,
 }: {
-  href: string;
-  label: string;
-  disabled?: boolean;
-  external?: boolean;
-}) => (
-  <Link
-    href={href}
-    className={`${
-      disabled
-        ? 'line-through pointer-events-none'
-        : 'hover:text-primary transition-colors duration-300'
-    }`}
-    target={external ? '_blank' : undefined}
-  >
-    {label}
-  </Link>
-);
+  item: NavItem;
+  pathname: string;
+  onNavigate?: () => void;
+}) {
+  const number = (
+    <span className="font-mono text-xs uppercase tracking-[.06em] text-graphite">
+      {item.number}
+    </span>
+  );
+
+  if (item.soon) {
+    return (
+      <span
+        aria-disabled="true"
+        title="Coming in the next pass of the redesign"
+        className="flex items-baseline gap-1.5 py-2.5 text-[15px] font-medium text-graphite"
+      >
+        {number}
+        {item.label}
+      </span>
+    );
+  }
+
+  const current = pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+  return (
+    <Link
+      href={item.href}
+      onClick={onNavigate}
+      aria-current={current ? 'page' : undefined}
+      className={`flex items-baseline gap-1.5 py-2.5 text-[15px] font-medium no-underline ${
+        current ? 'underline underline-offset-[6px]' : ''
+      }`}
+    >
+      {number}
+      {item.label}
+    </Link>
+  );
+}

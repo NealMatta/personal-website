@@ -2,57 +2,223 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-1. Foreground: Neutral for readability.
-2. Primary Color: Stands out for emphasis (e.g., buttons or links).
-3. Secondary Color: Complements the primary color and adds depth to the design 
+/*
+Paper, tape and sky.
+
+The ground is always paper and ink. Color only ever appears inside a
+"window" — the hero widget, the quote block, the logo mark — where the sky
+of the visitor's local time shows through.
 */
 
 :root {
-  --background: #eff1f2;
-  --foreground: #171717; /* Neutral dark gray for text */
-  --font-primary-font: 'Rubik', sans-serif;
-  --font-secondary-font: 'Lora', serif;
-  --primary-color: #3db8ea; /* Bright blue for CTAs and highlights */
-  --primary-color-light: #6dcaf0;
-  --primary-color-dark: #2a94ba;
-  --secondary-color: #4caf50; /* A fresh green for accents */
-  --secondary-color-light: #81c784;
-  --secondary-color-dark: #388e3c;
-}
+  /* Ground */
+  --paper: #f4f1ea; /* the page */
+  --card: #fbfaf6; /* boxes */
+  --ink: #1c1b19; /* text, buttons */
+  --pencil: #4a4640; /* secondary body */
+  --graphite: #6b675f; /* metadata */
+  --rule: #d9d3c7; /* borders */
+  --tape: #eadbb3; /* labels */
+  --marker: #2a2620; /* label ink */
 
-/* Dark mode */
-[data-theme='dark'] {
-  --background: #18181b;
-  --foreground: #f9fafb; /* Light gray for text */
-  --primary-color: #3db8ea; /* Retain blue for CTAs */
-  --primary-color-light: #6dcaf0;
-  --primary-color-dark: #2a94ba;
-  --secondary-color: #4caf50; /* Same green for accents */
-  --secondary-color-light: #81c784;
-  --secondary-color-dark: #388e3c;
+  /* Status */
+  --live: #1e8e4e;
+  --prototype: #d08a1e;
+  --shelved: #8a857b;
+
+  /* Aliases kept so older components still resolve */
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  /*
+  The current sky. Set on <html> by the sky provider once the visitor's
+  local time is known; these values are the server-rendered fallback.
+  */
+  --sky-gradient: linear-gradient(
+    180deg,
+    #2f7ed8 0%,
+    #6eb0ec 55%,
+    #b9ddf7 100%
+  );
+  --sky-ink: #10233d;
+  --sky-cloud-light: #ffffff;
+  --sky-cloud-shade: #b9cbe0;
+  --sky-cloud-opacity: 0.95;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-primary-font); /* Rubik as the default font */
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-primary-font); /* Use Lora for headings */
+/*
+A strip of masking tape with a torn edge, the way every bin in my
+apartment is labeled.
+*/
+@layer components {
+  .tape {
+    @apply inline-block px-[18px] pb-px pt-[3px] font-label font-bold;
+    color: var(--marker);
+    background-color: var(--tape);
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.18) 0 2px,
+      transparent 2px 6px
+    );
+    clip-path: polygon(
+      2% 0,
+      98% 0,
+      100% 18%,
+      97% 36%,
+      100% 54%,
+      97% 72%,
+      100% 90%,
+      98% 100%,
+      2% 100%,
+      0 86%,
+      3% 68%,
+      0 50%,
+      3% 32%,
+      0 14%
+    );
+  }
 }
 
-blockquote,
-em,
-p,
-.secondary-font {
-  font-family: var(
-    --font-secondary-font
-  ); /* Lora for emphasis or secondary text */
+/* The sky's weather, shared by every window that shows it. */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dipper {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+  0% {
+    translate: -45cqw 0;
+  }
+  33% {
+    translate: 4.5cqw var(--y1);
+  }
+  67% {
+    translate: 55.5cqw var(--y2);
+  }
+  100% {
+    translate: 105cqw 0;
+  }
+}
+
+/*
+Clouds. The layer is a size container so clouds cross in `cqw` and travel
+at the same apparent speed in a small card or a wide banner.
+*/
+.cloud-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  container-type: size;
+  opacity: var(--sky-cloud-opacity);
+}
+
+.cloud {
+  position: absolute;
+  left: 0;
+  top: var(--t);
+  width: 240px;
+  height: 120px;
+  transform-origin: 0 0;
+  transform: scale(calc(var(--k) * var(--s)));
+  translate: var(--x0) 0;
+  will-change: translate;
+  backface-visibility: hidden;
+}
+
+.puff {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.puff-base {
+  left: 20px;
+  top: 34px;
+  width: 200px;
+  height: 62px;
+  background: radial-gradient(
+    ellipse at 50% 25%,
+    var(--sky-cloud-light) 45%,
+    var(--sky-cloud-shade) 115%
+  );
+}
+
+.puff-top {
+  left: 62px;
+  top: 12px;
+  width: 100px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse at 45% 30%,
+    var(--sky-cloud-light) 50%,
+    var(--sky-cloud-shade) 140%
+  );
+}
+
+.puff-shade {
+  left: 36px;
+  top: 68px;
+  width: 170px;
+  height: 30px;
+  background: var(--sky-cloud-shade);
+  opacity: 0.5;
+}
+
+.filter-cloud-a {
+  filter: url(#cloud-a);
+}
+.filter-cloud-b {
+  filter: url(#cloud-b);
+}
+.filter-cloud-c {
+  filter: url(#cloud-c);
+}
+
+/* Three offset star layers, each fading on its own schedule. */
+.twinkle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.twinkle-layer-b {
+  animation-duration: 6.5s;
+  animation-delay: -2.2s;
+}
+
+.twinkle-layer-c {
+  animation-duration: 8s;
+  animation-delay: -4.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twinkle-layer {
+    animation: none;
+    opacity: 0.7;
+  }
+  .dipper-star,
+  .cloud {
+    animation: none;
+  }
 }

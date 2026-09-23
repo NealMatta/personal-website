@@ -3,9 +3,15 @@ import '@/src/styles/globals.css';
 import NavBar from '@/src/components/reusable/navigation/NavBar';
 import Footer from '@/src/components/reusable/navigation/Footer';
 import ReactQueryProvider from '@/src/lib/providers/ReactQueryProvider';
-import { Rubik, Lora } from 'next/font/google';
-// The following import prevents a Font Awesome icon server-side rendering bug,
-// where the icons flash from a very large icon down to a properly sized one:
+import CloudFilters from '@/src/components/reusable/sky/CloudFilters';
+import {
+  Bricolage_Grotesque,
+  Instrument_Sans,
+  JetBrains_Mono,
+  Caveat,
+} from 'next/font/google';
+// Still needed by the pages that haven't been redesigned yet (Lab, Projects).
+// Prevents the icon server-side rendering flash:
 import '@fortawesome/fontawesome-svg-core/styles.css';
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -13,20 +19,32 @@ config.autoAddCss = false; /* eslint-disable import/first */
 
 export const metadata: Metadata = {
   title: 'Neal Matta',
-  description: 'Everything about Neal Matta',
+  description:
+    'My second brain: part lab, part notebook, and the place I practice building. Everything here is labeled, shelved, and findable.',
 };
 
-const primaryText = Rubik({
+/* Headlines. */
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '700'], // Specify weights for Rubik
-  variable: '--font-primary-font', // CSS variable for easy usage
+  variable: '--font-display',
 });
 
-const secondaryText = Lora({
+/* Everything you read top to bottom. */
+const body = Instrument_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'], // Specify weights for Lora
-  style: ['normal', 'italic'], // Add italic if needed
-  variable: '--font-secondary-font', // CSS variable for Lora
+  variable: '--font-body',
+});
+
+/* Metadata: dates, codes, counts, data paths. */
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+});
+
+/* Tape labels only. Never body copy. */
+const label = Caveat({
+  subsets: ['latin'],
+  variable: '--font-label',
 });
 
 export default function RootLayout({
@@ -37,14 +55,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${primaryText.variable} ${secondaryText.variable}`}
+      className={`${display.variable} ${body.variable} ${mono.variable} ${label.variable}`}
     >
-      <body>
+      <body className="flex min-h-screen flex-col">
+        {/* Referenced by id from every sky window on the page. */}
+        <CloudFilters />
         <ReactQueryProvider>
           <NavBar />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-            <div className="mt-5">{children}</div>
-          </div>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </ReactQueryProvider>
       </body>
