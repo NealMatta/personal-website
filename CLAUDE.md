@@ -32,7 +32,7 @@ Put these in `.env.local`:
 - `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI (NavBar, Footer, cards, PageHeader).
 - `src/lib/`: Supabase clients, the React Query provider, the sky engine, and small helpers.
 - `src/types/`: `supabase.ts` holds the generated Supabase `Database` types. The other files define domain types, re-exported from `src/types/index.ts`.
-- `src/content/`: typed content files (shelf boxes, field notes, quotes) for the sections that don't have a data store yet.
+- `src/content/`: typed content files — shelf boxes, projects, Lab experiments, About, field notes, quotes. Most page content lives here rather than in a database.
 
 **Data flow for live widgets (Spotify, website status/commits, CTA trains):** the widgets use a Card → Client → View split:
 1. `XCard.tsx` is a server component wrapper.
@@ -42,10 +42,12 @@ Put these in `.env.local`:
 
 Add new external-data widgets the same way. Route handlers return JSON through `new Response(JSON.stringify(...))` and follow the 404/500 error shape used in the existing routes.
 
-**Server-rendered pages** (for example `app/projects/[projectID]/page.tsx`) are async server components that call `src/apiManagement` directly, with no React Query. `params` is a `Promise` (Next 15) and must be awaited. `getProject` calls `notFound()` when no row exists.
+**Server-rendered pages** (for example `app/projects/[slug]/page.tsx`) are async server components that read from `src/content/` and render directly, with no React Query. `params` is a `Promise` (Next 15) and must be awaited; missing content calls `notFound()`.
+
+**Projects come from `src/content/projects.ts`, not Supabase.** The design needs kind, status, stack, and full case-study sections, none of which the `projects` table has, and a Firebase move is planned — so the table and its `getProject`/`getAllProjects` plumbing were dropped rather than extended. A project is a discriminated union: `SoftwareProject` renders as a case study, `woodwork` and `3d-print` render as a build log with specs and a cut list. Adding a project means adding an entry, not touching a page.
 
 **Supabase has two kinds of client:**
-- `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It handles data queries (`projects` with `projectimages`/`projectdetails` joins) and the `spotify_tokens` table.
+- `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It now only serves the `spotify_tokens` table. It calls `createClient` at module scope, so a build without `NEXT_PUBLIC_SUPABASE_URL` set fails on import.
 - `src/lib/supabase/auth/{server,client,middleware}.ts` are `@supabase/ssr` cookie-based clients for auth. The server actions in `app/login/actions.ts` use them. Root `middleware.ts` runs `updateSession` only for `/admin`, and redirects users who aren't logged in to `/login`.
 
 **Spotify token caching:** `src/apiManagement/spotify/tokenManager.ts` stores the access token and its expiry in the Supabase `spotify_tokens` table (row `id = 1`). It uses the refresh token only when the stored token has expired.
@@ -65,4 +67,5 @@ Sky windows are the only colored surfaces: the hero widget, the closing quote, a
 **Notes:**
 - `app/_starting-project/` is the leftover create-next-app template. The `_` prefix keeps it out of routing.
 - `app/lab/dashboard/layout.tsx` renders its own `<html>`/`<body>`.
-- The redesign is landing in passes. Home, the design system and the nav/footer are done; About, Projects, Laboratory, Field notes, Curriculum and Commonplace still need rebuilding. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
+- The redesign is landing in passes. Done: the design system, nav/footer, Home, About, Projects (index, case study, build log) and Laboratory. Still to build: Field notes, Curriculum and Commonplace. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
+- Images the site doesn't have yet render as `PhotoSlot` — a labeled dashed frame that becomes the picture once given a `src`. Real assets go in `public/`.
