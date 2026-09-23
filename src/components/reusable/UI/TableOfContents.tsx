@@ -1,4 +1,4 @@
-import type { Section } from '@/src/content/projects';
+import type { Section } from '@/src/types/content';
 
 /*
 The "on this page" rail beside a write-up. Anchors, so it works without
@@ -18,7 +18,7 @@ export default function TableOfContents({ sections }: { sections: Section[] }) {
         <a
           key={section.id}
           href={`#${section.id}`}
-          className="block py-1.5 text-[15px] text-pencil no-underline hover:text-ink"
+          className="sky-link block py-1.5 text-[15px] text-pencil no-underline hover:text-ink"
         >
           {section.heading}
         </a>

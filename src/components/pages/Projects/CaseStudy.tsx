@@ -4,8 +4,9 @@ import Chip from '@/src/components/reusable/UI/Chip';
 import StatusDot, { statusLabel } from '@/src/components/reusable/UI/StatusDot';
 import PhotoSlot from '@/src/components/reusable/UI/PhotoSlot';
 import Tape from '@/src/components/reusable/UI/Tape';
+import ProseSection from '@/src/components/reusable/UI/ProseSection';
+import TableOfContents from '@/src/components/reusable/UI/TableOfContents';
 import SpecList from './SpecList';
-import TableOfContents from './TableOfContents';
 import type { SoftwareProject } from '@/src/content/projects';
 
 /*
@@ -101,7 +102,7 @@ export default function CaseStudy({ project }: { project: SoftwareProject }) {
 
         <article className="prose flex flex-col gap-6 lg:col-span-7 lg:col-start-3">
           {project.sections.map((section) => (
-            <Section
+            <ProseSection
               key={section.id}
               section={section}
               /* The approach cards belong under their own heading. */
@@ -168,38 +169,18 @@ export default function CaseStudy({ project }: { project: SoftwareProject }) {
                 Related notes
               </Tape>
               {project.relatedNotes.map((note) => (
-                <span
+                <Link
                   key={note.slug}
-                  className="text-[15px] font-semibold leading-snug text-graphite"
-                  title="The writing section is coming next"
+                  href={`/writing/${note.slug}`}
+                  className="text-[15px] font-semibold leading-snug no-underline"
                 >
                   {note.title}
-                </span>
+                </Link>
               ))}
             </div>
           )}
         </aside>
       </section>
-    </>
-  );
-}
-
-function Section({
-  section,
-  extra,
-}: {
-  section: { id: string; heading: string; body: string[] };
-  extra?: React.ReactNode;
-}) {
-  return (
-    <>
-      <h2 id={section.id} className="scroll-mt-8">
-        {section.heading}
-      </h2>
-      {section.body.map((paragraph, i) => (
-        <p key={i}>{paragraph}</p>
-      ))}
-      {extra}
     </>
   );
 }

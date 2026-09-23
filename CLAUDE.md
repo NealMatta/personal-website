@@ -44,6 +44,8 @@ Add new external-data widgets the same way. Route handlers return JSON through `
 
 **Server-rendered pages** (for example `app/projects/[slug]/page.tsx`) are async server components that read from `src/content/` and render directly, with no React Query. `params` is a `Promise` (Next 15) and must be awaited; missing content calls `notFound()`.
 
+**Field notes come from `src/content/posts.ts`.** A note carries the same `sections` shape a case study does, plus the Lab experiment or project it came out of, so `/writing` and `/writing/[slug]` render straight from the file. Headings in there are real; paragraphs still in [brackets] are Neal's to write. `/writing/rss.xml` is a route handler that builds the feed from the same list and takes its absolute URLs from the request, since the site has no configured domain. The masthead card offers RSS and LinkedIn rather than an email signup, because there is no list behind one yet.
+
 **Projects come from `src/content/projects.ts`, not Supabase.** The design needs kind, status, stack, and full case-study sections, none of which the `projects` table has, and a Firebase move is planned — so the table and its `getProject`/`getAllProjects` plumbing were dropped rather than extended. A project is a discriminated union: `SoftwareProject` renders as a case study, `woodwork` and `3d-print` render as a build log with specs and a cut list. Adding a project means adding an entry, not touching a page.
 
 **Supabase has two kinds of client:**
@@ -60,12 +62,20 @@ The design lives in the "Second Brain Redesign" canvas: https://claude.ai/artifa
 
 **The sky:** `src/lib/sky/` picks one of six phases (midnight, dawn, sunrise, midday, sunset, dusk) from the *visitor's* local clock. `useSky()` returns the default midday phase until the client mounts, so SSR and hydration agree. `SkyWindow` paints a phase plus its weather — drifting clouds, and stars with the Big Dipper at night. Cloud layout comes from a seeded generator (`src/lib/sky/clouds.ts`); keep every draw from it deterministic and fixed in count, or server and client lay out different skies and hydration breaks.
 
-Sky windows are the only colored surfaces: the hero widget, the closing quote, and the nav's logo mark. Section rules borrow the gradient as a hairline.
+Sky windows are the only colored surfaces at rest: the hero widget, the closing quote, and the nav's logo mark. Section rules borrow the gradient as a hairline.
 
-**Reusable UI** (`src/components/reusable/UI/`): `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / idea / shelved), `Chip`, `InfoTip` (the ⓘ on a live card, showing its data path and tools), `PageIntro` (a section page's masthead), `FilterPills`, `Breadcrumb` and `PhotoSlot`.
+**Hover is where the rest of the color lives — but only for links that stay on the site.** The sky means "another room in this house", so a link that leaves (a social mark, a repo, a resume PDF, the LinkedIn button) keeps its own quiet ink-or-tape hover. Two shapes, both component classes in `globals.css`, both firing on `:focus-visible` too:
+- `.sky-button` — an internal button. Ink-filled or outlined at rest; on hover the sky fades up over it, the corners soften from `--btn * .16` to `--btn * .32`, and the label reads in `--sky-ink`. Set `--btn` to the button's own height (default 50px) so both radii scale. **Wrap the label in a `<span>`** — the sky is an absolutely positioned `::before` and paints straight over a bare text node.
+- `.sky-link` — an internal text link. The sky, turned on its side, wipes in from the left as a 2px underline. Drawn as a background image, not an `::after`, so it survives a line break and never collides with a pseudo-element a component already uses. Used by the nav (the current page keeps its ink underline and sits out the hover), `Breadcrumb` and `TableOfContents`.
+
+A box keeps its own hover — `BoxCard` lifts on a shadow — because a box is a surface, not a link in a line of text.
+
+Both classes read `--sky-gradient`, `--sky-ink` and `--sky-line` from `<html>`. `SkyRoot` (`src/components/reusable/sky/SkyRoot.tsx`, mounted in `app/layout.tsx`) writes them there on mount; the fallbacks in `globals.css` cover the server render. A `SkyWindow` still carries its own phase locally, so nothing on the page needs a sky hook just to answer a cursor.
+
+**Reusable UI** (`src/components/reusable/UI/`): `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / idea / shelved), `Chip`, `InfoTip` (the ⓘ on a live card, showing its data path and tools), `PageIntro` (a section page's masthead — `stats` for counts on the right, `aside` for a card there instead), `FilterPills`, `Breadcrumb`, `PhotoSlot`, `TableOfContents` and `ProseSection`. The last two are what a write-up is made of, shared by project case studies, build logs and field notes; the `Section` shape they read lives in `src/types/content.ts`.
 
 **Notes:**
 - `app/_starting-project/` is the leftover create-next-app template. The `_` prefix keeps it out of routing.
 - `app/lab/dashboard/layout.tsx` renders its own `<html>`/`<body>`.
-- The redesign is landing in passes. Done: the design system, nav/footer, Home, About, Projects (index, case study, build log) and Laboratory. Still to build: Field notes, Curriculum and Commonplace. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
+- The redesign is landing in passes. Done: the design system, nav/footer, Home, About, Projects (index, case study, build log), Laboratory and Field notes. Still to build: Curriculum and Commonplace. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
 - Images the site doesn't have yet render as `PhotoSlot` — a labeled dashed frame that becomes the picture once given a `src`. Real assets go in `public/`.

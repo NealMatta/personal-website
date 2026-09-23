@@ -1,4 +1,5 @@
 import type { Status } from '@/src/components/reusable/UI/StatusDot';
+import type { Section } from '@/src/types/content';
 
 /*
 Projects: finished work with the thinking written down.
@@ -23,13 +24,8 @@ export const KIND_STYLE: Record<
   '3d-print': { label: '3D print', background: '#E6E3F1', color: '#4B4380' },
 };
 
-export interface Section {
-  /** Anchor for the "on this page" rail. */
-  id: string;
-  heading: string;
-  /** One string per paragraph. */
-  body: string[];
-}
+/* The write-up shape is shared with field notes; it lives in `src/types`. */
+export type { Section };
 
 interface ProjectBase {
   slug: string;

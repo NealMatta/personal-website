@@ -2,6 +2,9 @@
 The masthead every section page opens with: a big title, a line about
 what's in here, and an optional set of counts on the right, over a heavy
 rule.
+
+Field notes puts a card in that right-hand column instead of counts, so
+the slot takes either: `stats` for numbers, `aside` for anything else.
 */
 
 interface Stat {
@@ -13,12 +16,15 @@ interface PageIntroProps {
   title: string;
   description: React.ReactNode;
   stats?: Stat[];
+  /** Fills the right-hand column when the page has no counts to show. */
+  aside?: React.ReactNode;
 }
 
 export default function PageIntro({
   title,
   description,
   stats,
+  aside,
 }: PageIntroProps) {
   return (
     <section className="mx-6 grid grid-cols-1 items-end gap-8 border-b-2 border-ink pb-12 pt-14 lg:mx-16 lg:grid-cols-12 lg:gap-x-6">
@@ -50,6 +56,8 @@ export default function PageIntro({
           ))}
         </dl>
       )}
+
+      {aside && <div className="lg:col-span-4">{aside}</div>}
     </section>
   );
 }
