@@ -208,10 +208,11 @@ export function greetingFor(date: Date): string {
  *
  * A window is tall enough to show a vertical gradient; a 3px rule is not,
  * so running the sky top to bottom there just reads as one flat color.
- * Turned on its side, the same colors travel the width of the page.
+ * Turned on its side, the same colors travel the width of the page,
+ * deepest on the left and fading out to the right.
  */
 export function skyLine(phase: SkyPhase): string {
-  return `linear-gradient(270deg, ${phase.stops.join(', ')})`;
+  return `linear-gradient(90deg, ${phase.stops.join(', ')})`;
 }
 
 /** The CSS custom properties a window needs to paint this phase. */
