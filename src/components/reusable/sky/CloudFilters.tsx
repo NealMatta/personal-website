@@ -23,14 +23,7 @@ export default function CloudFilters() {
     >
       <defs>
         {VARIANTS.map(({ id, frequency, seed, scale, blur }) => (
-          <filter
-            key={id}
-            id={id}
-            x="-50%"
-            y="-80%"
-            width="200%"
-            height="260%"
-          >
+          <filter key={id} id={id} x="-50%" y="-80%" width="200%" height="260%">
             <feTurbulence
               type="fractalNoise"
               baseFrequency={frequency}

@@ -59,7 +59,16 @@ export function cloudSet(key: string): Cloud[] {
   const range = (min: number, max: number) => min + random() * (max - min);
 
   // Shuffle which cloud takes which band, so the big one isn't always high.
-  const bands = [...BANDS].sort(() => random() - 0.5);
+  //
+  // Fisher-Yates rather than `sort(() => random() - 0.5)`: sort calls the
+  // comparator a number of times that depends on the engine, which drains
+  // the generator differently in Node and the browser and desynchronizes
+  // server and client renders.
+  const bands = [...BANDS];
+  for (let i = bands.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [bands[i], bands[j]] = [bands[j], bands[i]];
+  }
 
   return bands.map((band, i) => {
     const duration = range(90, 165);

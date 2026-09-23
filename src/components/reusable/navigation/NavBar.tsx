@@ -155,7 +155,8 @@ function NavLink({
     );
   }
 
-  const current = pathname === item.href || pathname.startsWith(`${item.href}/`);
+  const current =
+    pathname === item.href || pathname.startsWith(`${item.href}/`);
 
   return (
     <Link
