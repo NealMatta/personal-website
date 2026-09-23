@@ -30,8 +30,9 @@ Put these in `.env.local`:
 
 - `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA) or query Supabase (projects).
 - `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI (NavBar, Footer, cards, PageHeader).
-- `src/lib/`: Supabase clients, the React Query provider, and small helpers.
+- `src/lib/`: Supabase clients, the React Query provider, the sky engine, and small helpers.
 - `src/types/`: `supabase.ts` holds the generated Supabase `Database` types. The other files define domain types, re-exported from `src/types/index.ts`.
+- `src/content/`: typed content files (shelf boxes, field notes, quotes) for the sections that don't have a data store yet.
 
 **Data flow for live widgets (Spotify, website status/commits, CTA trains):** the widgets use a Card → Client → View split:
 1. `XCard.tsx` is a server component wrapper.
@@ -51,8 +52,17 @@ Add new external-data widgets the same way. Route handlers return JSON through `
 
 **Remote images:** `next/image` accepts remote images only from the hosts listed in `next.config.ts` (`i.scdn.co` for Spotify and the Supabase storage host). Add any new image host there.
 
-**Styling:** Tailwind colors (`primary`, `secondary`, `background`, `foreground`) map to CSS variables defined in `src/styles/globals.css`. Fonts come from `next/font/google` in `app/layout.tsx` (Rubik is the primary font, Lora the secondary) and are exposed as CSS variables. Font Awesome CSS is imported manually there, with `autoAddCss = false`.
+**Styling — "paper, tape and sky":** the ground is paper (`#F4F1EA`) and ink (`#1C1B19`); color appears *only* inside sky windows. Tailwind colors (`paper`, `card`, `ink`, `pencil`, `graphite`, `rule`, `tape`, `marker`, `status.*`) map to CSS variables in `src/styles/globals.css`. Four typefaces come from `next/font/google` in `app/layout.tsx` and are exposed as CSS variables: Bricolage Grotesque (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`, metadata), Caveat (`font-label`, tape labels only — never body copy). Font Awesome CSS is imported manually there with `autoAddCss = false`, for the pages not yet redesigned.
+
+The design lives in the "Second Brain Redesign" canvas: https://claude.ai/artifact/17YUxwuEjgezbPRiTDATjn
+
+**The sky:** `src/lib/sky/` picks one of six phases (midnight, dawn, sunrise, midday, sunset, dusk) from the *visitor's* local clock. `useSky()` returns the default midday phase until the client mounts, so SSR and hydration agree. `SkyWindow` paints a phase plus its weather — drifting clouds, and stars with the Big Dipper at night. Cloud layout comes from a seeded generator (`src/lib/sky/clouds.ts`); keep every draw from it deterministic and fixed in count, or server and client lay out different skies and hydration breaks.
+
+Sky windows are the only colored surfaces: the hero widget, the closing quote, and the nav's logo mark. Section rules borrow the gradient as a hairline.
+
+**Reusable UI:** `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / shelved), `Chip`, and `InfoTip` — the ⓘ on a live card that shows the data path and tools behind it.
 
 **Notes:**
 - `app/_starting-project/` is the leftover create-next-app template. The `_` prefix keeps it out of routing.
 - `app/lab/dashboard/layout.tsx` renders its own `<html>`/`<body>`.
+- The redesign is landing in passes. Home, the design system and the nav/footer are done; About, Projects, Laboratory, Field notes, Curriculum and Commonplace still need rebuilding. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
