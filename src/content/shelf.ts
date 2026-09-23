@@ -31,8 +31,8 @@ export const SHELF: ShelfBox[] = [
     tilt: -2,
     description:
       'Finished work with the thinking written down: the problem, the approach, and what I’d do differently.',
-    items: ['Personal website v3', 'Henna & Harmony', 'Home dashboard'],
-    meta: 'Live from Supabase',
+    items: ['Personal website v3', 'Henna & Harmony'],
+    meta: '2 write-ups',
   },
   {
     label: 'Laboratory',
@@ -94,8 +94,7 @@ export const SHELF: ShelfBox[] = [
     tilt: 1,
     description:
       'The short version: volleyball, food, what I’m building, and how to reach me.',
-    items: ['Resume (PDF)', 'LinkedIn', 'What I’m doing now'],
-    meta: 'Coming next',
-    soon: true,
+    items: ['Resume (PDF)', 'LinkedIn', 'Volleyball, food, classes'],
+    meta: 'Updated Sep 2026',
   },
 ];

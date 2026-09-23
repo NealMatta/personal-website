@@ -122,6 +122,29 @@ apartment is labeled.
 }
 
 /*
+Long-form body copy: case studies, build logs, field notes. Set on the
+<article> so the writing inside can stay plain markup.
+*/
+@layer components {
+  .prose > p {
+    @apply m-0 text-[19px] leading-[1.7];
+    color: var(--marker);
+  }
+
+  .prose > h2 {
+    @apply mb-0 mt-4 font-display text-[30px] font-bold tracking-[-.01em];
+  }
+
+  .prose > h2:first-child {
+    @apply mt-0;
+  }
+
+  .prose > h3 {
+    @apply m-0 font-display text-[22px] font-bold;
+  }
+}
+
+/*
 Clouds. The layer is a size container so clouds cross in `cqw` and travel
 at the same apparent speed in a small card or a wide banner.
 */

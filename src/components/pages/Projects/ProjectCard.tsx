@@ -1,37 +1,63 @@
-import React from 'react';
-// import Image from 'next/image';
-import ProjectTags from './ProjectTags';
-import { Project } from '@/src/types';
-import Image from 'next/image';
+import BoxCard from '@/src/components/reusable/UI/BoxCard';
+import Chip from '@/src/components/reusable/UI/Chip';
+import PhotoSlot from '@/src/components/reusable/UI/PhotoSlot';
+import {
+  KIND_STYLE,
+  formatFinished,
+  type Project,
+} from '@/src/content/projects';
+
+/*
+One project on the index: a labeled box with its cover, what kind of thing
+it is, and where it came from.
+*/
 
 export default function ProjectCard({ project }: { project: Project }) {
-  return (
-    <div
-      className={
-        'flex flex-col p-2 border-2 rounded shadow-md bg-white hover:opacity-50 transition'
-      }
-    >
-      {/* Image would go here */}
-      <div className=" ">
-        {project.header_image && (
-          <Image
-            src={project.header_image}
-            alt={project.header_image}
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-full h-46 rounded"
-          />
-        )}
+  const kind = KIND_STYLE[project.kind];
 
-        {/* <FontAwesomeIcon icon={faUser} className="fa-icon" /> */}
+  return (
+    <BoxCard
+      label={project.name}
+      tilt={project.tilt}
+      labelSize={26}
+      href={`/projects/${project.slug}`}
+    >
+      <PhotoSlot
+        label={project.coverLabel}
+        src={project.coverSrc}
+        tone="paper"
+        className="h-[200px] rounded-lg"
+        sizes="(max-width: 640px) 100vw, 33vw"
+      />
+
+      <div className="flex items-center justify-between gap-2">
+        <span
+          className="rounded px-2 py-1 font-mono text-[11px]"
+          style={{ background: kind.background, color: kind.color }}
+        >
+          {kind.label}
+        </span>
+        <span className="truncate font-mono text-[11px] uppercase tracking-[.06em] text-graphite">
+          {project.origin}
+        </span>
       </div>
-      <div className="pt-3">
-        <h1 className="font-bold text-3xl mb-1.5">{project.title}</h1>
-        <div className="flex flex-wrap gap-x-3">
-          <ProjectTags tags={project.tags} />
-        </div>
+
+      <span className="text-[17px] leading-snug text-[#2A2824]">
+        {project.summary}
+      </span>
+
+      <div className="flex flex-wrap gap-1.5">
+        {project.stack.slice(0, 3).map((tool) => (
+          <Chip key={tool}>{tool}</Chip>
+        ))}
       </div>
-    </div>
+
+      <div className="mt-auto flex justify-between border-t border-dashed border-rule pt-3.5">
+        <span className="font-mono text-xs uppercase tracking-[.06em] text-graphite">
+          {formatFinished(project)}
+        </span>
+        <span className="text-[15px] font-semibold">Write-up →</span>
+      </div>
+    </BoxCard>
   );
 }

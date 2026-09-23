@@ -1,16 +1,18 @@
-import AllPlaygroundCards from '@/src/components/pages/Laboratory/AllExperiments';
-import PageHeader from '@/src/components/reusable/pageHeader/PageHeader';
+import PageIntro from '@/src/components/reusable/UI/PageIntro';
+import ExperimentGrid from '@/src/components/pages/Laboratory/ExperimentGrid';
+import LabNotebook from '@/src/components/pages/Laboratory/LabNotebook';
+import { experimentCounts } from '@/src/content/experiments';
 
-export default function Playground() {
+export default function Laboratory() {
   return (
     <>
-      <PageHeader
-        header={'The Experiment Zone'}
-        subHeader={'A Space to Tinker, Test, and Learn'}
+      <PageIntro
+        title="Laboratory"
+        description="Where I try APIs, patterns and ideas before they earn a spot on the shelf. Each experiment says what I’m testing, what it runs on, and whether it works yet."
+        stats={experimentCounts()}
       />
-      <div className="grid gap-4 my-4 grid-cols-1 sm:grid-cols-3 ">
-        <AllPlaygroundCards />
-      </div>
+      <ExperimentGrid />
+      <LabNotebook />
     </>
   );
 }

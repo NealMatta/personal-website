@@ -1,21 +1,24 @@
 /*
-Where something stands: live, still a prototype, or shelved.
+Where something stands: live, still a prototype, just an idea, or shelved.
 
 Used on Lab experiments, project cards and the live wires. The color never
 carries the meaning on its own — the label is always next to it.
 */
 
-export type Status = 'live' | 'prototype' | 'shelved';
+export type Status = 'live' | 'prototype' | 'idea' | 'shelved';
 
 const COLORS: Record<Status, string> = {
   live: 'var(--live)',
   prototype: 'var(--prototype)',
+  // An idea and a shelved thing are both "not running", and read the same.
+  idea: 'var(--shelved)',
   shelved: 'var(--shelved)',
 };
 
 const LABELS: Record<Status, string> = {
   live: 'Live',
   prototype: 'Prototype',
+  idea: 'Idea',
   shelved: 'Shelved',
 };
 
@@ -28,6 +31,10 @@ interface StatusDotProps {
   /** Any color, for one-offs like the CTA Red Line. */
   color?: string;
   className?: string;
+}
+
+export function statusLabel(status: Status): string {
+  return LABELS[status];
 }
 
 export default function StatusDot({
