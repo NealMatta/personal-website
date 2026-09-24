@@ -1,4 +1,4 @@
-import { publishedPosts } from '@/src/content/posts';
+import { publishedPosts } from '@/src/lib/posts';
 
 /*
 The Field notes feed.

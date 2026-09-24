@@ -27,8 +27,13 @@ export default function FieldNote({ post }: { post: Post }) {
     .filter(Boolean)
     .join(' · ');
 
-  /* The figure goes under the second heading, or the only one there is. */
-  const figureAfter = Math.min(1, post.sections.length - 1);
+  /* The figure goes under the second heading, or the only one there is.
+     An untitled opening doesn't count as a heading. */
+  const headed = post.sections
+    .map((section, i) => (section.heading ? i : -1))
+    .filter((i) => i !== -1);
+  const figureAfter =
+    headed[Math.min(1, headed.length - 1)] ?? post.sections.length - 1;
 
   return (
     <>

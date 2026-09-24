@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import FieldNote from '@/src/components/pages/Writing/FieldNote';
-import { getPost, postNeighbors, publishedPosts } from '@/src/content/posts';
+import { getPost, postNeighbors, publishedPosts } from '@/src/lib/posts';
 
 type Params = Promise<{ slug: string }>;
 

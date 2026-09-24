@@ -3,7 +3,7 @@ import PageIntro from '@/src/components/reusable/UI/PageIntro';
 import LatestNote from '@/src/components/pages/Writing/LatestNote';
 import NoteArchive from '@/src/components/pages/Writing/NoteArchive';
 import SubscribeCard from '@/src/components/pages/Writing/SubscribeCard';
-import { publishedPosts, postTopics } from '@/src/content/posts';
+import { publishedPosts, postTopics } from '@/src/lib/posts';
 
 export const metadata: Metadata = {
   title: 'Field notes — Neal Matta',
