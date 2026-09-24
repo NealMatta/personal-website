@@ -469,63 +469,91 @@ export const QUARTERS: Quarter[] = [
         final: 'Make the centerpiece for the Thanksgiving table.',
         finalWeek: 9,
         finalOn: 'Thu Nov 26',
-        midterm: 'Focal, filler and greenery in one arrangement',
+        midterm:
+          'Focal, filler and greenery in one arrangement, designed from scratch',
         midtermWeek: 7,
         syllabus: {
-          weeklyMinimum: ['One arrangement every other week', 'Post a photo'],
+          weeklyMinimum: [
+            "Flower weeks (1, 3, 5, 7, 9): up to $50 at Trader Joe's — condition, sort by role, build big to small",
+            'Post a front + side photo with the recipe, what worked, and one thing to change',
+            'Learning weeks: one or two short videos on the next topic, plus fresh water and a recut',
+          ],
           whenWhere:
-            'On my own, every other week, with grocery or market flowers',
+            "On my own, every other week, with Trader Joe's flowers (up to $50 a haul); Flower Moxie and FlowerSchool videos in between",
         },
         units: [
           {
             n: 1,
             title: 'Tools & care',
             from: 1,
-            to: 3,
+            to: 2,
             steps: [
               {
                 week: 1,
-                text: 'Get floral shears and one good vase; learn to condition stems',
+                text: 'Flower day: buy floral shears, a medium vase and clear tape; condition one single-variety bunch and arrange it at 1.5× the vase height',
               },
               {
-                week: 3,
-                text: 'Single-variety bud vases from grocery flowers',
+                week: 2,
+                text: 'Learn: videos on conditioning and flower roles (focal, line, filler, greenery); refresh the water and recut',
               },
             ],
           },
           {
             n: 2,
-            title: 'Structure',
-            from: 5,
-            to: 7,
+            title: 'The recipe',
+            from: 3,
+            to: 4,
             steps: [
-              { week: 5, text: 'Hand-tied bouquet with a spiral grip' },
               {
-                week: 7,
-                text: 'Focal, filler and greenery in one arrangement',
-                kind: 'midterm',
+                week: 3,
+                text: 'Flower day: pull a mixed haul apart, sort it by role and rebuild it on a tape grid, greenery first',
+              },
+              {
+                week: 4,
+                text: 'Learn: videos on shape — odd numbers, varying heights, an off-center focal; refresh the water',
               },
             ],
           },
           {
             n: 3,
-            title: 'Centerpiece',
-            from: 8,
-            to: 9,
+            title: 'Shape',
+            from: 5,
+            to: 6,
             steps: [
               {
-                week: 8,
-                text: 'Plan the centerpiece: colors, low height, shopping list',
+                week: 5,
+                text: 'Flower day: split one haul into two arrangements, a tall vase and a trio of bud vases',
               },
               {
-                week: 9,
-                text: 'FINAL: Thanksgiving centerpiece',
-                kind: 'final',
+                week: 6,
+                text: 'Learn: a centerpiece tutorial; write down your midterm recipe',
               },
             ],
           },
           {
             n: 4,
+            title: 'Midterm & centerpiece',
+            from: 7,
+            to: 9,
+            steps: [
+              {
+                week: 7,
+                text: 'Focal, filler and greenery in one arrangement, designed from scratch',
+                kind: 'midterm',
+              },
+              {
+                week: 8,
+                text: 'Learn: plan the centerpiece — colors, low enough to talk over, a shopping list, tape grid or a pin frog in a low bowl',
+              },
+              {
+                week: 9,
+                text: 'FINAL: Thanksgiving centerpiece — buy the day before and condition overnight',
+                kind: 'final',
+              },
+            ],
+          },
+          {
+            n: 5,
             title: 'Bonus',
             from: 11,
             to: 11,
