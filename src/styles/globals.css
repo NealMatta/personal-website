@@ -260,6 +260,72 @@ Long-form body copy: case studies, build logs, field notes. Set on the
   .prose > h3 {
     @apply m-0 font-display text-[22px] font-bold;
   }
+
+  /*
+  A field note's Markdown. The wrapper is `display: contents`, so each
+  block below is a flex child of the article and gets its gap, the same
+  as a case study's plain paragraphs.
+  */
+  .prose > .md {
+    display: contents;
+  }
+
+  .prose > .md > p,
+  .prose > .md > ul,
+  .prose > .md > ol {
+    @apply m-0 text-[19px] leading-[1.7];
+    color: var(--marker);
+  }
+
+  .prose > .md > ul {
+    @apply list-disc pl-6;
+  }
+
+  .prose > .md > ol {
+    @apply list-decimal pl-6;
+  }
+
+  .prose > .md li + li {
+    @apply mt-1.5;
+  }
+
+  .prose > .md > h3 {
+    @apply m-0 mt-2 font-display text-[22px] font-bold;
+  }
+
+  .prose > .md > h4 {
+    @apply m-0 font-display text-lg font-bold;
+  }
+
+  .prose > .md a {
+    @apply underline decoration-rule decoration-2 underline-offset-4 hover:decoration-ink;
+  }
+
+  .prose > .md > blockquote {
+    @apply m-0 border-l-2 border-ink pl-5 text-[19px] italic leading-[1.7] text-pencil;
+  }
+
+  .prose > .md > blockquote > p {
+    @apply m-0;
+  }
+
+  .prose > .md :not(pre) > code {
+    @apply rounded bg-card px-1.5 py-0.5 font-mono text-[.85em];
+    border: 1px solid var(--rule);
+  }
+
+  .prose > .md > pre {
+    @apply m-0 overflow-x-auto rounded-xl bg-ink p-6 font-mono text-sm leading-[1.8];
+    color: #e8ddc4;
+  }
+
+  .prose > .md img {
+    @apply h-auto max-w-full rounded-xl;
+  }
+
+  .prose > .md > hr {
+    @apply my-2 w-full border-0 border-t border-rule;
+  }
 }
 
 /*

@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Chip from '@/src/components/reusable/UI/Chip';
 import SectionHeading from '../SectionHeading';
-import { publishedPosts, formatPostDate } from '@/src/content/posts';
+import { formatPostDate } from '@/src/content/posts';
+import { publishedPosts } from '@/src/lib/posts';
 
 /*
 The four most recent field notes, each row opening the note it names.
