@@ -246,23 +246,25 @@ export const QUARTERS: Quarter[] = [
         dept: 'SKT',
         code: 'SKT 101',
         title: 'Sketching 101',
-        why: 'Travel with a sketchbook and come home with drawings of skylines and landscapes, in ink and watercolor.',
+        why: 'Travel with a sketchbook and come home with drawings of skylines and landscapes.',
         credits: 2,
         status: 'in-progress',
         ...ACCENT.sketching,
         final:
-          "On location in San Diego over New Year's: one ink-and-watercolor sketch, finished in under an hour.",
+          "On location in San Diego over New Year's: one ink sketch in my travel sketchbook, finished in under an hour.",
         finalWeek: 13,
         finalOn: 'Thu Dec 31',
         midterm:
-          'Chicago skyline on location, Riverwalk or lakefront, under an hour',
+          'Chicago skyline on location in the travel sketchbook, Riverwalk or lakefront, under an hour',
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            'Three 15-minute sketches (one becomes a watercolor from Wk 7)',
+            'One lesson from my art class or Draw Like a Sir',
+            'Two 15-minute sketches (in the travel sketchbook once I have it)',
             'Post the best page of the week',
           ],
-          whenWhere: 'On my own, anywhere with a view',
+          whenWhere:
+            'On my own: my art class and Draw Like a Sir lessons at home, plus a small travel sketchbook for drawing out and about',
         },
         units: [
           {
@@ -273,11 +275,14 @@ export const QUARTERS: Quarter[] = [
             steps: [
               {
                 week: 1,
-                text: 'Get a sketchbook and a fineliner; three line-drill sessions',
+                text: 'Start the art class and the first Draw Like a Sir lesson; three line-drill sessions',
               },
               { week: 2, text: 'Contour-draw objects around the apartment' },
               { week: 3, text: 'One-point perspective: a street or hallway' },
-              { week: 4, text: 'Two-point perspective: buildings as boxes' },
+              {
+                week: 4,
+                text: 'Buy a small travel sketchbook; two-point perspective: buildings as boxes',
+              },
             ],
           },
           {
@@ -292,27 +297,30 @@ export const QUARTERS: Quarter[] = [
               },
               {
                 week: 6,
-                text: 'Chicago skyline on location, Riverwalk or lakefront, under an hour',
+                text: 'Chicago skyline on location in the travel sketchbook, Riverwalk or lakefront, under an hour',
                 kind: 'midterm',
               },
             ],
           },
           {
             n: 3,
-            title: 'Watercolor',
+            title: 'Shading & landscapes',
             from: 7,
             to: 10,
             steps: [
               {
                 week: 7,
-                text: 'Buy a travel watercolor kit + water brush; practice washes',
+                text: 'Hatching and cross-hatching drills; a five-step value scale',
               },
-              { week: 8, text: 'Sky wash with a skyline silhouette' },
+              {
+                week: 8,
+                text: 'Trees and a landscape from a photo, shaded in ink',
+              },
               {
                 week: 9,
                 text: 'Thanksgiving: sketch something from the day, low pressure',
               },
-              { week: 10, text: 'Ink first, then a watercolor wash over it' },
+              { week: 10, text: 'Redraw the midterm skyline with shading' },
             ],
           },
           {
@@ -321,14 +329,17 @@ export const QUARTERS: Quarter[] = [
             from: 11,
             to: 13,
             steps: [
-              { week: 11, text: 'On location, ink + wash, 45 minutes' },
+              {
+                week: 11,
+                text: 'On location in the travel sketchbook, 45 minutes',
+              },
               {
                 week: 12,
-                text: 'Three timed 30-minute pieces; pack the travel kit',
+                text: 'Three timed 30-minute pieces; pack the travel sketchbook',
               },
               {
                 week: 13,
-                text: 'FINAL in San Diego: ink + watercolor on location',
+                text: 'FINAL in San Diego: ink sketch on location, under an hour',
                 kind: 'final',
               },
             ],
