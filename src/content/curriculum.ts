@@ -259,42 +259,48 @@ export const QUARTERS: Quarter[] = [
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            'One lesson from my art class or Draw Like a Sir',
-            'Two 15-minute sketches (in the travel sketchbook once I have it)',
-            'Post the best page of the week',
+            'The book, every day, 15–20 minutes. Missed a day? Pick up at the next lesson, no make-ups',
+            'From Wk 4: one quick sketch a week in the travel sketchbook',
+            'Optional: a Draw Like a Sir video when a topic needs more',
           ],
           whenWhere:
-            'On my own: my art class and Draw Like a Sir lessons at home, plus a small travel sketchbook for drawing out and about',
+            "Every day at home with This Is Not a Sketchbook, It's an Art Class (arrives Oct 1); a small travel sketchbook out and about from Wk 4",
         },
         units: [
           {
             n: 1,
-            title: 'Line & perspective',
+            title: 'The book: first chapters',
             from: 1,
-            to: 4,
+            to: 5,
             steps: [
               {
                 week: 1,
-                text: 'Start the art class and the first Draw Like a Sir lesson; three line-drill sessions',
+                text: 'Book arrives Oct 1: start lesson 1 and photograph the table of contents',
               },
-              { week: 2, text: 'Contour-draw objects around the apartment' },
-              { week: 3, text: 'One-point perspective: a street or hallway' },
+              {
+                week: 2,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 3,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
               {
                 week: 4,
-                text: 'Buy a small travel sketchbook; two-point perspective: buildings as boxes',
+                text: 'Buy a small travel sketchbook; first quick sketch in it',
+              },
+              {
+                week: 5,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
               },
             ],
           },
           {
             n: 2,
-            title: 'Buildings & skylines',
-            from: 5,
+            title: 'Midterm',
+            from: 6,
             to: 6,
             steps: [
-              {
-                week: 5,
-                text: 'One building from a photo, with windows and detail',
-              },
               {
                 week: 6,
                 text: 'Chicago skyline on location in the travel sketchbook, Riverwalk or lakefront, under an hour',
@@ -304,42 +310,45 @@ export const QUARTERS: Quarter[] = [
           },
           {
             n: 3,
-            title: 'Shading & landscapes',
+            title: 'The book, continued',
             from: 7,
-            to: 10,
+            to: 11,
             steps: [
               {
                 week: 7,
-                text: 'Hatching and cross-hatching drills; a five-step value scale',
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
               },
               {
                 week: 8,
-                text: 'Trees and a landscape from a photo, shaded in ink',
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
               },
               {
                 week: 9,
-                text: 'Thanksgiving: sketch something from the day, low pressure',
+                text: 'Daily book lessons; Thanksgiving sketch, low pressure',
               },
-              { week: 10, text: 'Redraw the midterm skyline with shading' },
+              {
+                week: 10,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 11,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
             ],
           },
           {
             n: 4,
-            title: 'Field work',
-            from: 11,
+            title: 'Finish & field work',
+            from: 12,
             to: 13,
             steps: [
               {
-                week: 11,
-                text: 'On location in the travel sketchbook, 45 minutes',
-              },
-              {
                 week: 12,
-                text: 'Three timed 30-minute pieces; pack the travel sketchbook',
+                text: 'Finish the book; one timed 30-minute sketch; pack the travel sketchbook',
               },
               {
                 week: 13,
-                text: 'FINAL in San Diego: ink sketch on location, under an hour',
+                text: 'FINAL in San Diego: sketch on location in the travel sketchbook, under an hour',
                 kind: 'final',
               },
             ],
