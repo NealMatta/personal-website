@@ -11,9 +11,8 @@ data for now rather than a table, so planning a quarter means editing a
 list instead of writing a migration. Once the shape stops moving it goes
 to a real store and the pages stop importing this file.
 
-What's real here: the classes, the credits, the units, the midterms and
-the finals. Weekly steps still in [brackets] are mine to write — same
-rule the field notes follow.
+The quarters and classes here are copied from the Curriculum artifact,
+which is the source of truth until the Firebase move — edit there first.
 
 To mark a step done, add `done: true` to it. To pass a class, set
 `status: 'passed'` and a `passedOn` date; the transcript reads both.
@@ -30,8 +29,12 @@ export type CourseStatus =
 export type StepKind = 'midterm' | 'final' | 'buffer';
 
 export interface Step {
-  /** Which week of the quarter this step belongs to. One step a week. */
-  week: number;
+  /**
+   * Which week of the quarter this step belongs to — usually one a week,
+   * sometimes every other. A planned class can leave it off until the
+   * quarter's weeks are laid out.
+   */
+  week?: number;
   text: string;
   kind?: StepKind;
   /** Set once it's actually done. */
@@ -141,160 +144,97 @@ export const QUARTERS: Quarter[] = [
         dept: 'SWM',
         code: 'SWM 101',
         title: 'Swimming 101',
-        why: '[Why this class, in one line.]',
+        why: 'Get comfortable in the water, enough to swim a full lap on my own.',
         credits: 4,
         status: 'in-progress',
         ...ACCENT.swimming,
-        final: 'One full length unassisted, on video',
+        final:
+          'Swim one full length of the pool unassisted: no wall, no board, no standing. On video.',
         finalWeek: 12,
         finalOn: 'Thu Dec 17',
-        midterm: 'Glide + kick a full length with a board',
+        midterm: 'Glide + kick a full length with a board, no stops',
         midtermWeek: 7,
         syllabus: {
           weeklyMinimum: [
-            '[Habit 1 — e.g. two sessions in the pool]',
-            '[Habit 2]',
-            '[Habit 3]',
+            'Thursday swim class',
+            'One solo practice swim, 30 minutes',
+            'Quick check-in after class',
           ],
-          whenWhere: '[e.g. Tue and Sat mornings, at the pool]',
+          whenWhere:
+            'Thursdays: swim class at Lakeview Athletic Club (Tuesdays are volleyball)',
         },
         units: [
           {
             n: 1,
-            title: 'Water comfort',
+            title: 'Get in the water',
             from: 1,
             to: 3,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                week: 1,
+                text: 'Sign up for the free month + Thursday class; get goggles, cap, suit',
+              },
+              {
+                week: 2,
+                text: 'Exhale underwater: 10 bubble bobs holding the wall',
+              },
+              {
+                week: 3,
+                text: 'Front and back float, 5 seconds each, on your own',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Kick and glide',
+            title: 'Glide & kick',
             from: 4,
             to: 7,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
-              { week: 6, text: '[Week 6 step]' },
+              {
+                week: 4,
+                text: 'Push off the wall and glide; decide on a membership before the free month ends',
+              },
+              { week: 5, text: 'Flutter kick with a board, half a length' },
+              { week: 6, text: 'Flutter kick with a board, a full length' },
               {
                 week: 7,
-                text: 'Midterm: glide + kick a full length with a board',
+                text: 'Glide + kick a full length with a board, no stops',
                 kind: 'midterm',
               },
             ],
           },
           {
             n: 3,
-            title: 'Arms and breathing',
+            title: 'Stroke & breath',
             from: 8,
             to: 10,
             steps: [
-              { week: 8, text: '[Week 8 step]' },
-              { week: 9, text: '[Week 9 step]' },
-              { week: 10, text: '[Week 10 step]' },
+              { week: 8, text: 'Freestyle arms with a pull buoy' },
+              {
+                week: 9,
+                text: 'Thanksgiving week: no Thursday class, one solo practice swim',
+              },
+              {
+                week: 10,
+                text: 'Arms and side-breathing together, half a length',
+              },
             ],
           },
           {
             n: 4,
-            title: 'Full length',
+            title: 'The full length',
             from: 11,
             to: 13,
             steps: [
-              { week: 11, text: '[Week 11 step]' },
+              { week: 11, text: 'Full length with fins or a spotter' },
               {
                 week: 12,
-                text: 'Final: one full length unassisted, on video',
+                text: 'FINAL: full length unassisted, filmed',
                 kind: 'final',
               },
               {
                 week: 13,
-                text: 'Buffer week: catch up or retake',
-                kind: 'buffer',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        slug: 'spa-101',
-        dept: 'SPA',
-        code: 'SPA 101',
-        title: 'Spanish 101',
-        why: '[Why this class, in one line.]',
-        credits: 3,
-        status: 'in-progress',
-        ...ACCENT.spanish,
-        final:
-          '2 minutes describing my day, unscripted, plus 3 follow-up questions, on video',
-        finalWeek: 12,
-        finalOn: 'Week 12',
-        midterm: '60-second morning routine',
-        midtermWeek: 6,
-        syllabus: {
-          weeklyMinimum: [
-            '[Habit 1 — e.g. fifteen minutes a day]',
-            '[Habit 2]',
-            '[Habit 3]',
-          ],
-          whenWhere: '[e.g. weekday mornings, over coffee]',
-        },
-        units: [
-          {
-            n: 1,
-            title: 'Sounds and basics',
-            from: 1,
-            to: 3,
-            steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
-            ],
-          },
-          {
-            n: 2,
-            title: 'Routines',
-            from: 4,
-            to: 6,
-            steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
-              {
-                week: 6,
-                text: 'Midterm: 60-second morning routine',
-                kind: 'midterm',
-              },
-            ],
-          },
-          {
-            n: 3,
-            title: 'Describing my day',
-            from: 7,
-            to: 10,
-            steps: [
-              { week: 7, text: '[Week 7 step]' },
-              { week: 8, text: '[Week 8 step]' },
-              { week: 9, text: '[Week 9 step]' },
-              { week: 10, text: '[Week 10 step]' },
-            ],
-          },
-          {
-            n: 4,
-            title: 'Conversation',
-            from: 11,
-            to: 13,
-            steps: [
-              { week: 11, text: '[Week 11 step]' },
-              {
-                week: 12,
-                text: 'Final: 2 minutes on my day, unscripted, plus 3 follow-up questions',
-                kind: 'final',
-              },
-              {
-                week: 13,
-                text: 'Buffer week: catch up or retake',
+                text: 'Holiday week: rest, or a celebration swim',
                 kind: 'buffer',
               },
             ],
@@ -306,75 +246,212 @@ export const QUARTERS: Quarter[] = [
         dept: 'SKT',
         code: 'SKT 101',
         title: 'Sketching 101',
-        why: '[Why this class, in one line.]',
+        why: 'Travel with a sketchbook and come home with drawings of skylines and landscapes.',
         credits: 2,
         status: 'in-progress',
         ...ACCENT.sketching,
         final:
-          'Ink + watercolor on location in San Diego over New Year’s, in under an hour',
+          "On location in San Diego over New Year's: one ink sketch in my travel sketchbook, finished in under an hour.",
         finalWeek: 13,
-        finalOn: 'New Year’s',
-        midterm: 'Chicago skyline, on location',
+        finalOn: 'Thu Dec 31',
+        midterm:
+          'Chicago skyline on location in the travel sketchbook, Riverwalk or lakefront, under an hour',
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            '[Habit 1 — e.g. one page a week]',
-            '[Habit 2]',
-            '[Habit 3]',
+            'The book, every day, 15–20 minutes. Missed a day? Pick up at the next lesson, no make-ups',
+            'From Wk 4: one quick sketch a week in the travel sketchbook',
+            'Optional: a Draw Like a Sir video when a topic needs more',
           ],
-          whenWhere: '[e.g. Sunday afternoons, wherever I end up]',
+          whenWhere:
+            "Every day at home with This Is Not a Sketchbook, It's an Art Class (arrives Oct 1); a small travel sketchbook out and about from Wk 4",
         },
         units: [
           {
             n: 1,
-            title: 'Lines and shapes',
+            title: 'The book: first chapters',
             from: 1,
-            to: 3,
+            to: 5,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                week: 1,
+                text: 'Book arrives Oct 1: start lesson 1 and photograph the table of contents',
+              },
+              {
+                week: 2,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 3,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 4,
+                text: 'Buy a small travel sketchbook; first quick sketch in it',
+              },
+              {
+                week: 5,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Perspective and the skyline',
-            from: 4,
+            title: 'Midterm',
+            from: 6,
             to: 6,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
               {
                 week: 6,
-                text: 'Midterm: Chicago skyline, on location',
+                text: 'Chicago skyline on location in the travel sketchbook, Riverwalk or lakefront, under an hour',
                 kind: 'midterm',
               },
             ],
           },
           {
             n: 3,
-            title: 'Ink and watercolor',
+            title: 'The book, continued',
             from: 7,
-            to: 10,
+            to: 11,
             steps: [
-              { week: 7, text: '[Week 7 step]' },
-              { week: 8, text: '[Week 8 step]' },
-              { week: 9, text: '[Week 9 step]' },
-              { week: 10, text: '[Week 10 step]' },
+              {
+                week: 7,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 8,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 9,
+                text: 'Daily book lessons; Thanksgiving sketch, low pressure',
+              },
+              {
+                week: 10,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                week: 11,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
             ],
           },
           {
             n: 4,
-            title: 'Speed on location',
+            title: 'Finish & field work',
+            from: 12,
+            to: 13,
+            steps: [
+              {
+                week: 12,
+                text: 'Finish the book; one timed 30-minute sketch; pack the travel sketchbook',
+              },
+              {
+                week: 13,
+                text: 'FINAL in San Diego: sketch on location in the travel sketchbook, under an hour',
+                kind: 'final',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        slug: 'spa-101',
+        dept: 'SPA',
+        code: 'SPA 101',
+        title: 'Spanish 101',
+        why: 'Talk about my own life in Spanish without reaching for a script.',
+        credits: 3,
+        status: 'in-progress',
+        ...ACCENT.spanish,
+        final:
+          'Describe my day in Spanish for 2 minutes with no script, then answer 3 follow-up questions from my tutor or partner. On video.',
+        finalWeek: 12,
+        finalOn: 'Sun Dec 20',
+        midterm: '60-second morning routine from notes',
+        midtermWeek: 6,
+        syllabus: {
+          weeklyMinimum: [
+            'One chapter + its vocabulary',
+            'One speaking session, recorded',
+            "Post the recording as this week's video",
+          ],
+          whenWhere:
+            'On my own, plus one weekly speaking session with a tutor or partner',
+        },
+        units: [
+          {
+            n: 1,
+            title: 'Foundations',
+            from: 1,
+            to: 4,
+            steps: [
+              {
+                week: 1,
+                text: 'Pick a textbook or course; book a weekly tutor or partner; record a 20-second intro',
+              },
+              {
+                week: 2,
+                text: 'Numbers and telling time: what time I do things',
+              },
+              {
+                week: 3,
+                text: 'Ser vs. estar: describe myself and where I am',
+              },
+              { week: 4, text: 'Regular present tense: -ar, -er, -ir' },
+            ],
+          },
+          {
+            n: 2,
+            title: 'Daily routine',
+            from: 5,
+            to: 6,
+            steps: [
+              {
+                week: 5,
+                text: 'Reflexive verbs: me levanto, me ducho, me visto',
+              },
+              {
+                week: 6,
+                text: '60-second morning routine from notes',
+                kind: 'midterm',
+              },
+            ],
+          },
+          {
+            n: 3,
+            title: 'Work, food & plans',
+            from: 7,
+            to: 10,
+            steps: [
+              { week: 7, text: 'Irregulars: ir, tener, hacer, querer, poder' },
+              {
+                week: 8,
+                text: 'Connectors: primero, luego, después, por la noche',
+              },
+              {
+                week: 9,
+                text: 'Thanksgiving week: food and family vocab, lighter week',
+              },
+              { week: 10, text: 'Describe my job in simple Spanish' },
+            ],
+          },
+          {
+            n: 4,
+            title: 'Unscripted',
             from: 11,
             to: 13,
             steps: [
-              { week: 11, text: '[Week 11 step]' },
-              { week: 12, text: '[Week 12 step]' },
+              { week: 11, text: 'Full day from bullet points only, 2 minutes' },
+              {
+                week: 12,
+                text: 'FINAL: 2 minutes unscripted + 3 follow-up questions, on video',
+                kind: 'final',
+              },
               {
                 week: 13,
-                text: 'Final: ink + watercolor in San Diego, under an hour',
-                kind: 'final',
+                text: 'Holiday week: one fun conversation, no homework',
+                kind: 'buffer',
               },
             ],
           },
@@ -385,58 +462,106 @@ export const QUARTERS: Quarter[] = [
         dept: 'FLR',
         code: 'FLR 101',
         title: 'Flower Arranging 101',
-        why: '[Why this class, in one line.]',
+        why: 'Put together arrangements that look intentional.',
         credits: 1,
         status: 'in-progress',
         ...ACCENT.flowers,
-        final: 'Thanksgiving centerpiece',
+        final: 'Make the centerpiece for the Thanksgiving table.',
         finalWeek: 9,
         finalOn: 'Thu Nov 26',
-        midterm: 'Focal, filler and greenery arrangement',
+        midterm:
+          'Focal, filler and greenery in one arrangement, designed from scratch',
         midtermWeek: 7,
         syllabus: {
-          weeklyMinimum: ['[Habit 1]', '[Habit 2]'],
-          whenWhere: '[e.g. whenever there are flowers in the house]',
+          weeklyMinimum: [
+            "Flower weeks (1, 3, 5, 7, 9): up to $50 at Trader Joe's — condition, sort by role, build big to small",
+            'Post a front + side photo with the recipe, what worked, and one thing to change',
+            'Learning weeks: one or two short videos on the next topic, plus fresh water and a recut',
+          ],
+          whenWhere:
+            "On my own, every other week, with Trader Joe's flowers (up to $50 a haul); Flower Moxie and FlowerSchool videos in between",
         },
         units: [
           {
             n: 1,
-            title: 'Tools and flowers',
+            title: 'Tools & care',
             from: 1,
-            to: 3,
+            to: 2,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                week: 1,
+                text: 'Flower day: buy floral shears, a medium vase and clear tape; condition one single-variety bunch and arrange it at 1.5× the vase height',
+              },
+              {
+                week: 2,
+                text: 'Learn: videos on conditioning and flower roles (focal, line, filler, greenery); refresh the water and recut',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Structure',
-            from: 4,
-            to: 7,
+            title: 'The recipe',
+            from: 3,
+            to: 4,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
-              { week: 6, text: '[Week 6 step]' },
               {
-                week: 7,
-                text: 'Midterm: focal, filler and greenery arrangement',
-                kind: 'midterm',
+                week: 3,
+                text: 'Flower day: pull a mixed haul apart, sort it by role and rebuild it on a tape grid, greenery first',
+              },
+              {
+                week: 4,
+                text: 'Learn: videos on shape — odd numbers, varying heights, an off-center focal; refresh the water',
               },
             ],
           },
           {
             n: 3,
-            title: 'Centerpiece',
-            from: 8,
+            title: 'Shape',
+            from: 5,
+            to: 6,
+            steps: [
+              {
+                week: 5,
+                text: 'Flower day: split one haul into two arrangements, a tall vase and a trio of bud vases',
+              },
+              {
+                week: 6,
+                text: 'Learn: a centerpiece tutorial; write down your midterm recipe',
+              },
+            ],
+          },
+          {
+            n: 4,
+            title: 'Midterm & centerpiece',
+            from: 7,
             to: 9,
             steps: [
-              { week: 8, text: '[Week 8 step]' },
+              {
+                week: 7,
+                text: 'Focal, filler and greenery in one arrangement, designed from scratch',
+                kind: 'midterm',
+              },
+              {
+                week: 8,
+                text: 'Learn: plan the centerpiece — colors, low enough to talk over, a shopping list, tape grid or a pin frog in a low bowl',
+              },
               {
                 week: 9,
-                text: 'Final: Thanksgiving centerpiece',
+                text: 'FINAL: Thanksgiving centerpiece — buy the day before and condition overnight',
                 kind: 'final',
+              },
+            ],
+          },
+          {
+            n: 5,
+            title: 'Bonus',
+            from: 11,
+            to: 11,
+            steps: [
+              {
+                week: 11,
+                text: 'Optional: winter greenery arrangement',
+                kind: 'buffer',
               },
             ],
           },
@@ -458,21 +583,70 @@ export const QUARTERS: Quarter[] = [
         dept: 'CUL',
         code: 'CUL 101',
         title: 'Cooking 101',
-        why: '[Why this class, in one line.]',
+        why: 'Cook Indian food well enough to host friends for dinner.',
         credits: 3,
-        status: 'planned',
+        status: 'in-progress',
         ...ACCENT.cooking,
-        final: 'Host a dinner party with Indian food I cooked',
+        final: 'Host a dinner party with Indian food I cooked myself.',
         finalWeek: 13,
         finalOn: 'Week 13',
         midterm: '[Midterm]',
         midtermWeek: 7,
         syllabus: {
-          weeklyMinimum: ['[Habit 1]'],
-          whenWhere: '[When and where]',
+          weeklyMinimum: [
+            'Cook one new dish',
+            'Post a photo and one note on what to change next time',
+          ],
+          whenWhere: 'On my own: one new dish a week',
         },
-        /* No syllabus yet — the quarter is still being planned. */
-        units: [],
+        units: [
+          {
+            n: 1,
+            title: 'Pantry & basics',
+            from: 1,
+            to: 3,
+            steps: [
+              { text: 'Stock whole and ground spices' },
+              { text: 'Cook basmati rice that comes out fluffy' },
+              { text: 'Learn a tadka (tempering)' },
+              { text: 'Make a basic raita' },
+            ],
+          },
+          {
+            n: 2,
+            title: 'Dal & sabzi',
+            from: 4,
+            to: 6,
+            steps: [
+              { text: 'Tadka dal' },
+              { text: 'One dry sabzi (aloo gobi or bhindi)' },
+              { text: 'Get one family recipe written down' },
+            ],
+          },
+          {
+            n: 3,
+            title: 'Curries',
+            from: 7,
+            to: 9,
+            steps: [
+              { text: 'Master an onion-tomato masala base' },
+              { text: 'Chana masala' },
+              { text: 'A paneer or chicken curry' },
+            ],
+          },
+          {
+            n: 4,
+            title: 'The dinner party',
+            from: 10,
+            to: 13,
+            steps: [
+              { text: 'Pick a menu of 4–5 dishes' },
+              { text: 'Cook a dry run for 2–3 people' },
+              { text: 'Write a prep timeline for the day' },
+              { text: 'Send the invites' },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -609,9 +783,9 @@ export function courseSteps(course: Course): Step[] {
   return course.units.flatMap((u) => u.steps);
 }
 
-/** A step's id, derived rather than stored: one step per class per week. */
+/** A step's id, derived rather than stored: its class and its place in the syllabus. */
 export function stepKey(course: Course, step: Step): string {
-  return `${course.slug}-w${step.week}`;
+  return `${course.slug}-${courseSteps(course).indexOf(step)}`;
 }
 
 export interface CourseProgress {
@@ -642,7 +816,8 @@ export function courseProgress(
     behind:
       clock.phase === 'before'
         ? 0
-        : steps.filter((s) => s.week < clock.week && !s.done).length,
+        : steps.filter((s) => s.week != null && s.week < clock.week && !s.done)
+            .length,
     units: course.units.map((u) => ({
       n: u.n,
       title: u.title,

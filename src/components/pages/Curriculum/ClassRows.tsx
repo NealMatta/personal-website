@@ -120,7 +120,9 @@ export default function ClassRows({ quarter, clock }: ClassRowsProps) {
 
             <div className="flex flex-col gap-1">
               <span className="font-mono text-[11px] uppercase tracking-[.06em] text-graphite">
-                Next · {progress.next ? `Wk ${progress.next.week}` : '—'}
+                {progress.next?.week != null
+                  ? `Next · Wk ${progress.next.week}`
+                  : 'Next up'}
               </span>
               <span className="text-sm leading-snug">
                 {progress.next ? progress.next.text : 'All steps done'}

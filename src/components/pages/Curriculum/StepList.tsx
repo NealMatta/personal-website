@@ -93,7 +93,7 @@ export default function StepList({
               </span>
             </span>
 
-            {showWeek ? (
+            {showWeek && step.week != null ? (
               <span
                 className={`font-mono text-[11px] uppercase tracking-[.06em] ${
                   step.week === currentWeek
