@@ -1,8 +1,6 @@
 /*
 The Big Dipper as it hangs over Canton, Michigan — where I learned to find
 it. Only comes out on the night sky.
-
-The dotted line running up from Dubhe is the pointer to Polaris.
 */
 
 interface Star {
@@ -23,7 +21,7 @@ const STARS: Star[] = [
   { x: 6.0, y: 96.1, r: 0.93 },
 ];
 
-/** Polaris, at the end of the pointer line. */
+/** Polaris, the North Star — the bowl's two end stars point up to it. */
 const POLARIS: Star = { x: 78.8, y: 6.0, r: 0.9 };
 
 const OUTLINE =
@@ -39,17 +37,6 @@ export default function BigDipper({ className = '' }: { className?: string }) {
       className={`pointer-events-none absolute ${className}`}
       focusable="false"
     >
-      {/* Pointer to Polaris */}
-      <line
-        x1="78.3"
-        y1="85.0"
-        x2="78.8"
-        y2="9.0"
-        stroke="rgba(255,255,255,.22)"
-        strokeWidth=".35"
-        strokeDasharray="0.6 2"
-        strokeLinecap="round"
-      />
       {/* The dipper itself */}
       <polyline
         points={OUTLINE}
