@@ -60,16 +60,16 @@ export default function ClassRows({ quarter, clock }: ClassRowsProps) {
           <Link
             key={course.slug}
             href={`/curriculum/${course.slug}`}
-            className="group grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl border border-rule bg-card py-[22px] pl-5 pr-6 no-underline transition-[border-color,box-shadow] hover:border-ink hover:shadow-[0_8px_20px_rgba(28,27,25,.08)] lg:grid-cols-[6px_250px_250px_minmax(0,1fr)_200px_140px] lg:gap-6 lg:py-0 lg:pl-0"
+            className="group grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl border border-rule bg-card py-[22px] pl-5 pr-6 no-underline transition-[border-color,box-shadow] hover:border-ink hover:shadow-[0_8px_20px_rgba(28,27,25,.08)] lg:grid-cols-[6px_250px_250px_minmax(0,1fr)_200px_140px] lg:gap-6 lg:py-7 lg:pl-0"
           >
             {/* The class color: a full-width cap stacked, an edge in a row. */}
             <span
               aria-hidden="true"
-              className="-ml-5 -mr-6 -mt-[22px] mb-1 block h-1.5 lg:m-0 lg:h-auto lg:self-stretch"
+              className="-ml-5 -mr-6 -mt-[22px] mb-1 block h-1.5 lg:-my-7 lg:mx-0 lg:h-auto lg:self-stretch"
               style={{ background: course.accent }}
             />
 
-            <div className="flex flex-col gap-1 lg:py-[22px]">
+            <div className="flex flex-col gap-1">
               <span
                 className="font-mono text-xs font-medium uppercase tracking-[.06em]"
                 style={{ color: course.accent }}
