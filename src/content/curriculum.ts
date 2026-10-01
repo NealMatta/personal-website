@@ -30,7 +30,9 @@ export type CourseStatus =
 export type StepKind = 'midterm' | 'final' | 'buffer';
 
 export interface Step {
-  /** Which week of the quarter this step belongs to. One step a week. */
+  /** Stable within its class, so two steps in one week don't collide. */
+  id?: string;
+  /** Which week of the quarter this step belongs to. */
   week: number;
   text: string;
   kind?: StepKind;
@@ -59,6 +61,8 @@ export interface Course {
   why: string;
   /** Credits are hours a week. Roughly twelve is a full load. */
   credits: number;
+  /** A class that starts partway through the quarter, e.g. after another ends. */
+  startWeek?: number;
   status: CourseStatus;
   /** ISO date, once the final is passed. */
   passedOn?: string;
@@ -117,13 +121,14 @@ export interface CheckIn {
   photos?: { label: string; src?: string }[];
 }
 
-/* The five class colors, so a class keeps its color everywhere. */
+/* The class colors, so a class keeps its color everywhere. */
 const ACCENT = {
   swimming: { accent: '#1F6F94', tint: '#DDEBF1' },
   spanish: { accent: '#B3402E', tint: '#F5DFD9' },
   sketching: { accent: '#8A5A2B', tint: '#F1E6D8' },
-  flowers: { accent: '#B04C69', tint: '#F4DFE5' },
   cooking: { accent: '#A8761A', tint: '#F4E8CF' },
+  woodworking: { accent: '#5F7A1F', tint: '#E6EBD6' },
+  cad: { accent: '#6B4FB8', tint: '#E7E1F4' },
 };
 
 export const QUARTERS: Quarter[] = [
@@ -137,81 +142,161 @@ export const QUARTERS: Quarter[] = [
     state: 'current',
     courses: [
       {
-        slug: 'swm-101',
-        dept: 'SWM',
-        code: 'SWM 101',
-        title: 'Swimming 101',
-        why: '[Why this class, in one line.]',
-        credits: 4,
+        slug: 'wdw-101',
+        dept: 'WDW',
+        code: 'WDW 101',
+        title: 'Woodworking 101',
+        why: 'Build one real thing for the apartment and build it well: design the behind-the-couch ledge, test it, change it, and finish it properly.',
+        credits: 2,
         status: 'in-progress',
-        ...ACCENT.swimming,
-        final: 'One full length unassisted, on video',
-        finalWeek: 12,
-        finalOn: 'Thu Dec 17',
-        midterm: 'Glide + kick a full length with a board',
-        midtermWeek: 7,
+        ...ACCENT.woodworking,
+        final:
+          'The behind-the-couch ledge I designed and would be proud of: space for plants and a place for coasters to sit neatly. Square with no wobble, sanded, stained and sealed, and in daily use.',
+        finalWeek: 8,
+        finalOn: 'Sun Nov 22',
+        midterm:
+          'Revise to v2 and a final cut list; stain test on offcuts; have the store cut the lumber; line up rentals for build weekend',
+        midtermWeek: 4,
         syllabus: {
           weeklyMinimum: [
-            '[Habit 1 — e.g. two sessions in the pool]',
-            '[Habit 2]',
-            '[Habit 3]',
+            'One session, about 2 hours: design weeks can be done anywhere, build weekends (Wk 4, 5, 7) run longer',
+            'Every design change goes into a new numbered drawing: v1, v2, v3',
+            'Write every dimension down before cutting: measure twice',
+            'A check-in with a photo or sketch after each session',
           ],
-          whenWhere: '[e.g. Tue and Sat mornings, at the pool]',
+          whenWhere:
+            'Learn as I go: Home Depot on-demand How-To Workshops plus YouTube, no multi-week class. Design work travels (sketchbook or laptop). Build weekends at home: Oct 10 warm-up frame, Oct 24–25 mockup, Oct 31–Nov 1 build, Nov 14–15 finish, Nov 21–22 install. Fallback if it slips: Dec 5–6. Rent or borrow tools as each step needs them instead of buying up front; have the store make the long cuts.',
         },
         units: [
           {
             n: 1,
-            title: 'Water comfort',
+            title: 'Measure, watch & a warm-up build',
             from: 1,
-            to: 3,
+            to: 2,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                id: 'hd1',
+                week: 1,
+                text: 'Home Depot workshops: Tape Measure Basics + Woodworking Tool Basics (before measuring)',
+              },
+              {
+                id: 'hd2',
+                week: 1,
+                text: 'Home Depot workshop: Power Tool Basics (before the Oct 10 frame)',
+              },
+              {
+                id: 'd1b',
+                week: 1,
+                text: 'Measure the couch space: back height, gap to the wall, length. Photo + numbers',
+              },
+              {
+                id: 'd1c',
+                week: 1,
+                text: 'Measure what goes on the ledge: plant pots and coasters',
+              },
+              {
+                id: 'd1f',
+                week: 1,
+                text: 'Measure the odd wall space and pick the picture for the warm-up frame',
+              },
+              {
+                id: 'd1e',
+                week: 2,
+                text: 'Save 10+ reference photos of behind-couch tables with plants and a neat spot for coasters',
+              },
+              {
+                id: 'd1d',
+                week: 2,
+                text: 'Warm-up build Sat Oct 10: the picture frame, with tools rented or borrowed for the day. Four cuts, glue + brads or screws, sand, stain; hang it once back',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Kick and glide',
-            from: 4,
-            to: 7,
+            title: 'Design & iterate',
+            from: 3,
+            to: 4,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
-              { week: 6, text: '[Week 6 step]' },
               {
-                week: 7,
-                text: 'Midterm: glide + kick a full length with a board',
+                id: 'hd3',
+                week: 3,
+                text: 'Away Oct 11–18: Home Depot workshops How to Maintain Woodworking Tools + How to Repair Drywall (for hanging the frame and patching holes)',
+              },
+              {
+                id: 'd2a',
+                week: 3,
+                text: 'Away Oct 11–18: sketch 3 different layouts for plants and coasters; pick one',
+              },
+              {
+                id: 'd2b',
+                week: 3,
+                text: 'Draw the favorite to scale with every dimension (v1)',
+              },
+              {
+                id: 'd2d',
+                week: 4,
+                text: "Oct 24–25: full-size mockup behind the couch in cardboard + painter's tape; set real plants and coasters on it",
+              },
+              {
+                id: 'd2e',
+                week: 4,
+                text: 'Revise to v2 and a final cut list; stain test on offcuts; have the store cut the lumber; line up rentals for build weekend',
                 kind: 'midterm',
               },
             ],
           },
           {
             n: 3,
-            title: 'Arms and breathing',
-            from: 8,
-            to: 10,
+            title: 'Build',
+            from: 5,
+            to: 6,
             steps: [
-              { week: 8, text: '[Week 8 step]' },
-              { week: 9, text: '[Week 9 step]' },
-              { week: 10, text: '[Week 10 step]' },
+              {
+                id: 'd3a',
+                week: 5,
+                text: 'Oct 31–Nov 1: cut, dry-fit, glue + screw; build the coaster spot',
+              },
+              {
+                id: 'd3b',
+                week: 6,
+                text: 'Party test: the unfinished ledge in use on Nov 7. Note what to change',
+              },
             ],
           },
           {
             n: 4,
-            title: 'Full length',
-            from: 11,
-            to: 13,
+            title: 'Finish it well',
+            from: 7,
+            to: 8,
             steps: [
-              { week: 11, text: '[Week 11 step]' },
               {
-                week: 12,
-                text: 'Final: one full length unassisted, on video',
-                kind: 'final',
+                id: 'd4a',
+                week: 7,
+                text: 'Nov 14–15: make the party fixes, fill screw holes, sand 120 → 150 → 180, conditioner, stain',
               },
               {
-                week: 13,
-                text: 'Buffer week: catch up or retake',
+                id: 'd4b',
+                week: 7,
+                text: 'Weeknights: 2–3 coats of water-based poly, a light 220 sand between coats',
+              },
+              {
+                id: 'd4c',
+                week: 8,
+                text: 'FINAL, Nov 21–22: plants and coasters in place, ledge in daily use',
+                kind: 'final',
+              },
+            ],
+          },
+          {
+            n: 5,
+            title: 'Optional extra',
+            from: 10,
+            to: 10,
+            steps: [
+              {
+                id: 'd5a',
+                week: 10,
+                text: 'Only if the ledge is done: a small plant holder, Dec 5–6',
                 kind: 'buffer',
               },
             ],
@@ -219,82 +304,131 @@ export const QUARTERS: Quarter[] = [
         ],
       },
       {
-        slug: 'spa-101',
-        dept: 'SPA',
-        code: 'SPA 101',
-        title: 'Spanish 101',
-        why: '[Why this class, in one line.]',
-        credits: 3,
+        slug: 'cad-101',
+        dept: 'CAD',
+        code: 'CAD 101',
+        title: '3D Printing & CAD 101',
+        why: "I can already print other people's models. Now learn to design my own: a clean Gridfinity shelf with a custom shadow box for each of my everyday-carry items.",
+        credits: 2,
+        startWeek: 6,
         status: 'in-progress',
-        ...ACCENT.spanish,
+        ...ACCENT.cad,
         final:
-          '2 minutes describing my day, unscripted, plus 3 follow-up questions, on video',
+          'One shelf fully kitted out in Gridfinity: a baseplate that fills it and a shadow box I designed for every everyday-carry item. One filament color, everything drops in and lifts out cleanly.',
         finalWeek: 12,
-        finalOn: 'Week 12',
-        midterm: '60-second morning routine',
-        midtermWeek: 6,
+        finalOn: 'Sun Dec 20',
+        midterm:
+          'Back home: print the baseplate and the first shadow box. The item drops in and lifts out cleanly',
+        midtermWeek: 10,
         syllabus: {
           weeklyMinimum: [
-            '[Habit 1 — e.g. fifteen minutes a day]',
-            '[Habit 2]',
-            '[Habit 3]',
+            'Two CAD sessions of about 45 minutes',
+            'One test print a week, even a small one',
+            'A check-in with the print and what to change',
           ],
-          whenWhere: '[e.g. weekday mornings, over coffee]',
+          whenWhere:
+            'Starts Wk 6 as woodworking wraps, so the indoor work lands in the cold months. Printer + digital calipers already in hand. CAD in Autodesk Fusion (free for personal use) with the GridfinityGenerator add-in for baseplates and bins; the shadow-box cutouts are modeled by hand, which is the point of the class.',
         },
         units: [
           {
             n: 1,
-            title: 'Sounds and basics',
-            from: 1,
-            to: 3,
+            title: 'Plan the shelf',
+            from: 6,
+            to: 7,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                id: 'p1a',
+                week: 6,
+                text: 'Measure the shelf with calipers: width, depth, usable height. Work out how many 42 mm Gridfinity units fit',
+              },
+              {
+                id: 'p1b',
+                week: 6,
+                text: "Print one stock 2x2 baseplate and a 1x1 bin to check fit and your printer's tolerances",
+              },
+              {
+                id: 'p1c',
+                week: 7,
+                text: 'Photo shoot for the shadow boxes: each item alone, shot straight down on a grid or cutting mat with a ruler in frame (phone held level, no zoom)',
+              },
+              {
+                id: 'p1e',
+                week: 7,
+                text: "Caliper each item (length, width, thickness) and save the photos + numbers in one folder on the laptop, ready for Thanksgiving at my parents'",
+              },
+              {
+                id: 'p1d',
+                week: 7,
+                text: 'Sketch the shelf layout to scale: which item gets which bin size, and pick one filament color',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Routines',
-            from: 4,
-            to: 6,
+            title: 'Learn Fusion',
+            from: 8,
+            to: 9,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
               {
-                week: 6,
-                text: 'Midterm: 60-second morning routine',
-                kind: 'midterm',
+                id: 'p2a',
+                week: 8,
+                text: 'Before Thanksgiving travel: install Fusion; beginner tutorial on sketch, constrain, extrude, offset',
+              },
+              {
+                id: 'p2b',
+                week: 8,
+                text: 'Install the GridfinityGenerator add-in; generate a baseplate sized to the shelf, split to fit the print bed',
+              },
+              {
+                id: 'p2c',
+                week: 9,
+                text: "At my parents', laptop only: model the first shadow box by tracing one item's photo (a calibrated canvas), offset for clearance, add a finger notch",
               },
             ],
           },
           {
             n: 3,
-            title: 'Describing my day',
-            from: 7,
+            title: 'First shadow box',
+            from: 10,
             to: 10,
             steps: [
-              { week: 7, text: '[Week 7 step]' },
-              { week: 8, text: '[Week 8 step]' },
-              { week: 9, text: '[Week 9 step]' },
-              { week: 10, text: '[Week 10 step]' },
+              {
+                id: 'p3a',
+                week: 10,
+                text: 'Back home: print the baseplate and the first shadow box. The item drops in and lifts out cleanly',
+                kind: 'midterm',
+              },
             ],
           },
           {
             n: 4,
-            title: 'Conversation',
+            title: 'Build out the shelf',
             from: 11,
-            to: 13,
+            to: 12,
             steps: [
-              { week: 11, text: '[Week 11 step]' },
               {
-                week: 12,
-                text: 'Final: 2 minutes on my day, unscripted, plus 3 follow-up questions',
-                kind: 'final',
+                id: 'p4a',
+                week: 11,
+                text: 'Model and print the rest of the shadow boxes; reprint anything that is too tight or too loose',
               },
               {
+                id: 'p4b',
+                week: 12,
+                text: 'FINAL: shelf fully kitted out, one color, every item in its own shadow box; photo + the CAD files',
+                kind: 'final',
+              },
+            ],
+          },
+          {
+            n: 5,
+            title: 'Wind down',
+            from: 13,
+            to: 13,
+            steps: [
+              {
+                id: 'p5a',
                 week: 13,
-                text: 'Buffer week: catch up or retake',
+                text: 'San Diego week: rest',
                 kind: 'buffer',
               },
             ],
@@ -306,74 +440,122 @@ export const QUARTERS: Quarter[] = [
         dept: 'SKT',
         code: 'SKT 101',
         title: 'Sketching 101',
-        why: '[Why this class, in one line.]',
+        why: 'Travel with a sketchbook and come home with drawings of skylines and landscapes.',
         credits: 2,
         status: 'in-progress',
         ...ACCENT.sketching,
         final:
-          'Ink + watercolor on location in San Diego over New Year’s, in under an hour',
+          "On location in San Diego over New Year's: one ink sketch in my travel sketchbook, finished in under an hour.",
         finalWeek: 13,
-        finalOn: 'New Year’s',
-        midterm: 'Chicago skyline, on location',
+        finalOn: 'Thu Dec 31',
+        midterm:
+          'Chicago skyline from my own reference photo, drawn indoors in the travel sketchbook, under an hour',
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            '[Habit 1 — e.g. one page a week]',
-            '[Habit 2]',
-            '[Habit 3]',
+            'The book, every day, 15–20 minutes. Missed a day? Pick up at the next lesson, no make-ups',
+            'From Wk 2: one quick sketch a week in the travel sketchbook, indoors: the apartment, a café window, or a reference photo',
+            'Optional: a Draw Like a Sir video when a topic needs more',
           ],
-          whenWhere: '[e.g. Sunday afternoons, wherever I end up]',
+          whenWhere:
+            "Every day at home with This Is Not a Sketchbook, It's an Art Class (arrives Oct 1); a small travel sketchbook from Wk 2 (bought before the Oct 11 trip), used indoors or with reference photos while it's cold",
         },
         units: [
           {
             n: 1,
-            title: 'Lines and shapes',
+            title: 'The book: first chapters',
             from: 1,
-            to: 3,
+            to: 5,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                id: 's1a',
+                week: 1,
+                text: 'Book arrives Oct 1 while I am traveling: start lesson 1 once home and photograph the table of contents',
+              },
+              {
+                id: 's1b',
+                week: 2,
+                text: 'Buy a small travel sketchbook before the Oct 11 trip; daily book lessons',
+              },
+              {
+                id: 's1c',
+                week: 3,
+                text: 'Away Oct 11–18: pack the book + travel sketchbook, keep the daily lessons, one sketch from the trip',
+              },
+              {
+                id: 's1d',
+                week: 4,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                id: 's1e',
+                week: 5,
+                text: 'Daily book lessons; on a clear day, snap a few skyline reference photos (Riverwalk or lakefront) for the midterm',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Perspective and the skyline',
-            from: 4,
+            title: 'Midterm',
+            from: 6,
             to: 6,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
               {
+                id: 's2b',
                 week: 6,
-                text: 'Midterm: Chicago skyline, on location',
+                text: 'Chicago skyline from my own reference photo, drawn indoors in the travel sketchbook, under an hour',
                 kind: 'midterm',
               },
             ],
           },
           {
             n: 3,
-            title: 'Ink and watercolor',
+            title: 'The book, continued',
             from: 7,
-            to: 10,
+            to: 11,
             steps: [
-              { week: 7, text: '[Week 7 step]' },
-              { week: 8, text: '[Week 8 step]' },
-              { week: 9, text: '[Week 9 step]' },
-              { week: 10, text: '[Week 10 step]' },
+              {
+                id: 's3a',
+                week: 7,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                id: 's3b',
+                week: 8,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                id: 's3c',
+                week: 9,
+                text: "Thanksgiving at my parents' (Nov 24–29): pack the book + travel sketchbook; one low-pressure sketch there",
+              },
+              {
+                id: 's3d',
+                week: 10,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
+              {
+                id: 's3e',
+                week: 11,
+                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+              },
             ],
           },
           {
             n: 4,
-            title: 'Speed on location',
-            from: 11,
+            title: 'Finish & field work',
+            from: 12,
             to: 13,
             steps: [
-              { week: 11, text: '[Week 11 step]' },
-              { week: 12, text: '[Week 12 step]' },
               {
+                id: 's4b',
+                week: 12,
+                text: 'Finish the book; one timed 30-minute sketch from a photo; pack the travel sketchbook',
+              },
+              {
+                id: 's4c',
                 week: 13,
-                text: 'Final: ink + watercolor in San Diego, under an hour',
+                text: 'FINAL in San Diego: sketch on location in the travel sketchbook, under an hour',
                 kind: 'final',
               },
             ],
@@ -381,62 +563,127 @@ export const QUARTERS: Quarter[] = [
         ],
       },
       {
-        slug: 'flr-101',
-        dept: 'FLR',
-        code: 'FLR 101',
-        title: 'Flower Arranging 101',
-        why: '[Why this class, in one line.]',
-        credits: 1,
+        slug: 'spa-101',
+        dept: 'SPA',
+        code: 'SPA 101',
+        title: 'Spanish 101',
+        why: 'Talk about my own life in Spanish without reaching for a script.',
+        credits: 3,
         status: 'in-progress',
-        ...ACCENT.flowers,
-        final: 'Thanksgiving centerpiece',
-        finalWeek: 9,
-        finalOn: 'Thu Nov 26',
-        midterm: 'Focal, filler and greenery arrangement',
-        midtermWeek: 7,
+        ...ACCENT.spanish,
+        final:
+          'Describe my day in Spanish for 2 minutes with no script, then answer 3 follow-up questions from my tutor or partner. On video.',
+        finalWeek: 12,
+        finalOn: 'Sun Dec 20',
+        midterm: '60-second morning routine from notes',
+        midtermWeek: 6,
         syllabus: {
-          weeklyMinimum: ['[Habit 1]', '[Habit 2]'],
-          whenWhere: '[e.g. whenever there are flowers in the house]',
+          weeklyMinimum: [
+            'One chapter + its vocabulary',
+            'One speaking session, recorded',
+            "Post the recording as this week's video",
+          ],
+          whenWhere:
+            'On my own, plus one weekly speaking session with a tutor or partner',
         },
         units: [
           {
             n: 1,
-            title: 'Tools and flowers',
+            title: 'Foundations',
             from: 1,
-            to: 3,
+            to: 4,
             steps: [
-              { week: 1, text: '[Week 1 step]' },
-              { week: 2, text: '[Week 2 step]' },
-              { week: 3, text: '[Week 3 step]' },
+              {
+                id: 'p1a',
+                week: 1,
+                text: 'Back from the work trip: pick a textbook or course; book a weekly tutor or partner; record a 20-second intro',
+              },
+              {
+                id: 'p1b',
+                week: 2,
+                text: 'Numbers and telling time: what time I do things',
+              },
+              {
+                id: 'p1c',
+                week: 3,
+                text: 'Ser vs. estar: describe myself and where I am (away Oct 11–18: take the session by video)',
+              },
+              {
+                id: 'p1d',
+                week: 4,
+                text: 'Regular present tense: -ar, -er, -ir',
+              },
             ],
           },
           {
             n: 2,
-            title: 'Structure',
-            from: 4,
-            to: 7,
+            title: 'Daily routine',
+            from: 5,
+            to: 6,
             steps: [
-              { week: 4, text: '[Week 4 step]' },
-              { week: 5, text: '[Week 5 step]' },
-              { week: 6, text: '[Week 6 step]' },
               {
-                week: 7,
-                text: 'Midterm: focal, filler and greenery arrangement',
+                id: 'p2a',
+                week: 5,
+                text: 'Reflexive verbs: me levanto, me ducho, me visto',
+              },
+              {
+                id: 'p2b',
+                week: 6,
+                text: '60-second morning routine from notes',
                 kind: 'midterm',
               },
             ],
           },
           {
             n: 3,
-            title: 'Centerpiece',
-            from: 8,
-            to: 9,
+            title: 'Work, food & plans',
+            from: 7,
+            to: 10,
             steps: [
-              { week: 8, text: '[Week 8 step]' },
               {
+                id: 'p3a',
+                week: 7,
+                text: 'Irregulars: ir, tener, hacer, querer, poder',
+              },
+              {
+                id: 'p3b',
+                week: 8,
+                text: 'Connectors: primero, luego, después, por la noche',
+              },
+              {
+                id: 'p3c',
                 week: 9,
-                text: 'Final: Thanksgiving centerpiece',
+                text: "Thanksgiving at my parents': food and family vocab, lighter week; session by video",
+              },
+              {
+                id: 'p3d',
+                week: 10,
+                text: 'Describe my job in simple Spanish',
+              },
+            ],
+          },
+          {
+            n: 4,
+            title: 'Unscripted',
+            from: 11,
+            to: 13,
+            steps: [
+              {
+                id: 'p4a',
+                week: 11,
+                text: 'Full day from bullet points only, 2 minutes',
+              },
+              {
+                id: 'p4b',
+                week: 12,
+                text: 'FINAL: 2 minutes unscripted + 3 follow-up questions, on video',
                 kind: 'final',
+              },
+              {
+                id: 'p4c',
+                week: 13,
+                text: 'Holiday week: one fun conversation, no homework',
+                kind: 'buffer',
               },
             ],
           },
@@ -458,21 +705,213 @@ export const QUARTERS: Quarter[] = [
         dept: 'CUL',
         code: 'CUL 101',
         title: 'Cooking 101',
-        why: '[Why this class, in one line.]',
+        why: 'Cook Indian food well enough to host friends for dinner.',
         credits: 3,
         status: 'planned',
         ...ACCENT.cooking,
-        final: 'Host a dinner party with Indian food I cooked',
+        final: 'Host a dinner party with Indian food I cooked myself.',
         finalWeek: 13,
         finalOn: 'Week 13',
         midterm: '[Midterm]',
         midtermWeek: 7,
         syllabus: {
-          weeklyMinimum: ['[Habit 1]'],
-          whenWhere: '[When and where]',
+          weeklyMinimum: [
+            'Cook one new dish',
+            'Post a photo and one note on what to change next time',
+          ],
+          whenWhere: 'On my own: one new dish a week',
         },
-        /* No syllabus yet — the quarter is still being planned. */
-        units: [],
+        units: [
+          {
+            n: 1,
+            title: 'Pantry & basics',
+            from: 1,
+            to: 3,
+            steps: [
+              { id: 'k1a', week: 1, text: 'Stock whole and ground spices' },
+              {
+                id: 'k1b',
+                week: 2,
+                text: 'Cook basmati rice that comes out fluffy',
+              },
+              { id: 'k1c', week: 3, text: 'Learn a tadka (tempering)' },
+              { id: 'k1d', week: 3, text: 'Make a basic raita' },
+            ],
+          },
+          {
+            n: 2,
+            title: 'Dal & sabzi',
+            from: 4,
+            to: 6,
+            steps: [
+              { id: 'k2a', week: 4, text: 'Tadka dal' },
+              {
+                id: 'k2b',
+                week: 5,
+                text: 'One dry sabzi (aloo gobi or bhindi)',
+              },
+              {
+                id: 'k2c',
+                week: 6,
+                text: 'Get one family recipe written down',
+              },
+            ],
+          },
+          {
+            n: 3,
+            title: 'Curries',
+            from: 7,
+            to: 9,
+            steps: [
+              {
+                id: 'k3a',
+                week: 7,
+                text: 'Master an onion-tomato masala base',
+              },
+              { id: 'k3b', week: 8, text: 'Chana masala' },
+              { id: 'k3c', week: 9, text: 'A paneer or chicken curry' },
+            ],
+          },
+          {
+            n: 4,
+            title: 'The dinner party',
+            from: 10,
+            to: 13,
+            steps: [
+              { id: 'k4a', week: 10, text: 'Pick a menu of 4–5 dishes' },
+              { id: 'k4b', week: 11, text: 'Cook a dry run for 2–3 people' },
+              {
+                id: 'k4c',
+                week: 12,
+                text: 'Write a prep timeline for the day',
+              },
+              { id: 'k4d', week: 13, text: 'Send the invites' },
+            ],
+          },
+        ],
+      },
+      {
+        slug: 'swm-101',
+        dept: 'SWM',
+        code: 'SWM 101',
+        title: 'Swimming 101',
+        why: 'Get comfortable in the water, enough to swim a full lap on my own.',
+        credits: 4,
+        status: 'planned',
+        ...ACCENT.swimming,
+        final:
+          'Swim one full length of the pool unassisted: no wall, no board, no standing. On video.',
+        finalWeek: 12,
+        finalOn: 'Thu Mar 25',
+        midterm: 'Glide + kick a full length with a board, no stops',
+        midtermWeek: 7,
+        syllabus: {
+          weeklyMinimum: [
+            'Thursday swim class',
+            'One solo practice swim, 30 minutes',
+            'Quick check-in after class',
+          ],
+          whenWhere:
+            'Thursdays: swim class at Lakeview Athletic Club (Tuesdays are volleyball)',
+        },
+        units: [
+          {
+            n: 1,
+            title: 'Get in the water',
+            from: 1,
+            to: 3,
+            steps: [
+              {
+                id: 'w1a',
+                week: 1,
+                text: 'Sign up for the free month + Thursday class; get goggles, cap, suit',
+              },
+              {
+                id: 'w1b',
+                week: 2,
+                text: 'Exhale underwater: 10 bubble bobs holding the wall',
+              },
+              {
+                id: 'w1c',
+                week: 3,
+                text: 'Front and back float, 5 seconds each, on your own',
+              },
+            ],
+          },
+          {
+            n: 2,
+            title: 'Glide & kick',
+            from: 4,
+            to: 7,
+            steps: [
+              {
+                id: 'w2a',
+                week: 4,
+                text: 'Push off the wall and glide; decide on a membership before the free month ends',
+              },
+              {
+                id: 'w2b',
+                week: 5,
+                text: 'Flutter kick with a board, half a length',
+              },
+              {
+                id: 'w2c',
+                week: 6,
+                text: 'Flutter kick with a board, a full length',
+              },
+              {
+                id: 'w2d',
+                week: 7,
+                text: 'Glide + kick a full length with a board, no stops',
+                kind: 'midterm',
+              },
+            ],
+          },
+          {
+            n: 3,
+            title: 'Stroke & breath',
+            from: 8,
+            to: 10,
+            steps: [
+              { id: 'w3a', week: 8, text: 'Freestyle arms with a pull buoy' },
+              {
+                id: 'w3b',
+                week: 9,
+                text: 'Thursday class plus one solo practice swim',
+              },
+              {
+                id: 'w3c',
+                week: 10,
+                text: 'Arms and side-breathing together, half a length',
+              },
+            ],
+          },
+          {
+            n: 4,
+            title: 'The full length',
+            from: 11,
+            to: 13,
+            steps: [
+              {
+                id: 'w4a',
+                week: 11,
+                text: 'Full length with fins or a spotter',
+              },
+              {
+                id: 'w4b',
+                week: 12,
+                text: 'FINAL: full length unassisted, filmed',
+                kind: 'final',
+              },
+              {
+                id: 'w4c',
+                week: 13,
+                text: 'Buffer week: make-up swim, or a celebration swim',
+                kind: 'buffer',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -609,9 +1048,9 @@ export function courseSteps(course: Course): Step[] {
   return course.units.flatMap((u) => u.steps);
 }
 
-/** A step's id, derived rather than stored: one step per class per week. */
+/** A step's key: its own id when it has one, else its week. */
 export function stepKey(course: Course, step: Step): string {
-  return `${course.slug}-w${step.week}`;
+  return `${course.slug}-${step.id ?? `w${step.week}`}`;
 }
 
 export interface CourseProgress {
@@ -652,7 +1091,7 @@ export function courseProgress(
   };
 }
 
-/** What a class owes this week. Usually one step; sometimes none. */
+/** What a class owes this week. Usually a step or two; sometimes none. */
 export function stepsForWeek(course: Course, week: number): Step[] {
   return courseSteps(course).filter((s) => s.week === week);
 }

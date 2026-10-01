@@ -1,18 +1,32 @@
 import Link from 'next/link';
-import type { Quarter, QuarterClock } from '@/src/content/curriculum';
-import { courseProgress, stepsForWeek } from '@/src/content/curriculum';
+import type { Course, Quarter, QuarterClock } from '@/src/content/curriculum';
+import {
+  courseProgress,
+  courseSteps,
+  stepsForWeek,
+} from '@/src/content/curriculum';
 import StepList from '@/src/components/pages/Curriculum/StepList';
 
 /*
 What every class owes me this week, in one row of cards.
 
-One step a week per class is the whole design of the thing: if I can't
-see the week's four steps at once, the quarter is too heavy.
+A step or two a week per class is the whole design of the thing: if I
+can't see the week at a glance, the quarter is too heavy.
 */
 
 interface ThisWeekProps {
   quarter: Quarter;
   clock: QuarterClock;
+}
+
+/* Why a class has nothing this week: not started, between steps, or done. */
+function idleNote(course: Course, week: number): string {
+  if (course.startWeek && week < course.startWeek)
+    return `Starts week ${course.startWeek}.`;
+  const last = Math.max(0, ...courseSteps(course).map((s) => s.week));
+  return week > last
+    ? 'Nothing this week. Class is done.'
+    : 'Nothing due this week.';
 }
 
 export default function ThisWeek({ quarter, clock }: ThisWeekProps) {
@@ -62,7 +76,7 @@ export default function ThisWeek({ quarter, clock }: ThisWeekProps) {
                 <StepList course={course} steps={steps} />
               ) : (
                 <span className="py-2.5 text-sm text-graphite">
-                  Nothing this week. Class is done.
+                  {idleNote(course, clock.week)}
                 </span>
               )}
 
