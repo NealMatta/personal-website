@@ -17,6 +17,8 @@ interface StepListProps {
   showWeek?: boolean;
   /** Highlights the week in session. */
   currentWeek?: number;
+  /** A dashed rule between steps, for a list without week labels. */
+  divided?: boolean;
 }
 
 const TAGS = {
@@ -30,6 +32,7 @@ export default function StepList({
   steps,
   showWeek = false,
   currentWeek,
+  divided = false,
 }: StepListProps) {
   return (
     <ul className="m-0 flex list-none flex-col p-0">
@@ -48,7 +51,11 @@ export default function StepList({
           <li
             key={stepKey(course, step)}
             className={`grid grid-cols-[26px_minmax(0,1fr)_auto] items-center gap-3 py-2.5 ${
-              showWeek ? 'border-b border-dashed border-rule' : ''
+              showWeek
+                ? 'border-b border-dashed border-rule'
+                : divided
+                  ? 'border-t border-dashed border-rule first:border-t-0'
+                  : ''
             }`}
           >
             <span
