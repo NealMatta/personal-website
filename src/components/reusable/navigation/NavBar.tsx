@@ -27,7 +27,7 @@ const ITEMS: NavItem[] = [
   { number: '01', label: 'Curriculum', href: '/curriculum' },
   { number: '02', label: 'Projects', href: '/projects' },
   { number: '03', label: 'Laboratory', href: '/lab' },
-  { number: '04', label: 'Field notes', href: '/writing' },
+  { number: '04', label: 'Field notes', href: '/writing', soon: true },
 ];
 
 const LINKEDIN = 'https://www.linkedin.com/in/nealmatta/';

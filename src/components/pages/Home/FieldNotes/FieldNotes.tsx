@@ -9,6 +9,7 @@ The four most recent field notes, each row opening the note it names.
 
 export default function FieldNotes() {
   const posts = publishedPosts().slice(0, 4);
+  if (posts.length === 0) return null;
 
   return (
     <section className="flex flex-col gap-8 px-6 pb-16 lg:px-16">

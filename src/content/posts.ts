@@ -43,6 +43,7 @@ export interface Post {
 export const POSTS: Post[] = [
   {
     slug: 'caching-spotify-tokens-in-a-postgres-row',
+    draft: true,
     title: 'Caching Spotify tokens in a Postgres row',
     dek: 'Why my now-playing card only refreshes the token when it actually expires, and why one row in Supabase is enough.',
     topic: 'APIs',
@@ -98,6 +99,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: 'card-client-view',
+    draft: true,
     title: 'Card → Client → View: how I structure live widgets',
     dek: 'A small pattern that keeps secrets on the server and components boring.',
     topic: 'Architecture',
@@ -144,6 +146,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: 'labeling-everything',
+    draft: true,
     title: 'Labeling everything: masking tape as a system',
     dek: 'IKEA bins, garage boxes, deli containers, and why this site works the same way.',
     topic: 'Organization',
@@ -180,6 +183,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: 'cta-arrival-board',
+    draft: true,
     title: 'Building a CTA arrival board in an afternoon',
     dek: 'Polling, stale times and what “live” really means.',
     topic: 'Laboratory',
