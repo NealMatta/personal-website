@@ -51,7 +51,7 @@ export default function PhotoSlot({
     <div
       role="img"
       aria-label={label}
-      className={`flex flex-col items-center justify-center gap-2.5 border border-dashed border-[#BDB5A5] ${
+      className={`photo-slot flex flex-col items-center justify-center gap-2.5 border border-dashed border-rule-strong ${
         tone === 'card' ? 'bg-card' : 'bg-paper'
       } ${className}`}
       style={style}

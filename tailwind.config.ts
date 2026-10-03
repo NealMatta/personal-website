@@ -1,6 +1,9 @@
 import type { Config } from 'tailwindcss';
 
 export default {
+  // Night is a set of token values on <html data-theme="dark">, so most
+  // classes need nothing; `dark:` is there for the rare one that does.
+  darkMode: ['selector', '[data-theme="dark"]'],
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
@@ -13,6 +16,13 @@ export default {
         rule: 'var(--rule)',
         tape: 'var(--tape)',
         marker: 'var(--marker)',
+        copy: 'var(--copy)',
+        'rule-strong': 'var(--rule-strong)',
+        wash: 'var(--wash)',
+        panel: {
+          DEFAULT: 'var(--panel)',
+          ink: 'var(--panel-ink)',
+        },
 
         status: {
           live: 'var(--live)',
@@ -29,6 +39,9 @@ export default {
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
         label: ['var(--font-label)', 'cursive'],
+      },
+      boxShadow: {
+        lift: 'var(--lift)',
       },
       borderRadius: {
         box: '6px',

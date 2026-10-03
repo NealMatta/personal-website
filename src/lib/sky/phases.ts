@@ -29,6 +29,12 @@ export interface SkyPhase {
   stops: string[];
   /** Text color that clears 4.5:1 against that gradient. */
   ink: string;
+  /**
+   * The light a window throws onto the paper around it at night. Brighter
+   * than any of the stops on a dark sky, or the glow would vanish into a
+   * dark page.
+   */
+  glow: string;
   /** Lit and shaded faces of the drifting clouds. */
   cloudLight: string;
   cloudShade: string;
@@ -69,6 +75,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     gradient: `${STARFIELD},linear-gradient(165deg,#070B1F 0%,#141B45 50%,#2A2C68 100%)`,
     stops: ['#070B1F', '#141B45', '#2A2C68'],
     ink: '#F4F1EA',
+    glow: '#6064E6',
     cloudLight: '#9AA3D1',
     cloudShade: '#3A4078',
     cloudOpacity: 0.35,
@@ -81,6 +88,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     gradient: 'linear-gradient(170deg,#28336A 0%,#6A6CA6 48%,#D6A8BE 100%)',
     stops: ['#28336A', '#6A6CA6', '#D6A8BE'],
     ink: '#F7F4FA',
+    glow: '#D6A8BE',
     cloudLight: '#F6E3EC',
     cloudShade: '#9C8FB8',
     cloudOpacity: 0.8,
@@ -93,6 +101,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     gradient: 'linear-gradient(175deg,#6F9BD6 0%,#E9B3A8 55%,#FFD49A 100%)',
     stops: ['#6F9BD6', '#E9B3A8', '#FFD49A'],
     ink: '#1C1B19',
+    glow: '#FFD49A',
     cloudLight: '#FFF6EE',
     cloudShade: '#E3B7B0',
     cloudOpacity: 0.9,
@@ -105,6 +114,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     gradient: 'linear-gradient(180deg,#2F7ED8 0%,#6EB0EC 55%,#B9DDF7 100%)',
     stops: ['#2F7ED8', '#6EB0EC', '#B9DDF7'],
     ink: '#10233D',
+    glow: '#6EB0EC',
     cloudLight: '#FFFFFF',
     cloudShade: '#B9CBE0',
     cloudOpacity: 0.95,
@@ -118,6 +128,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
       'linear-gradient(175deg,#34427F 0%,#B55C86 42%,#F08A5D 75%,#FFC978 100%)',
     stops: ['#34427F', '#B55C86', '#F08A5D', '#FFC978'],
     ink: '#FFF8EE',
+    glow: '#F08A5D',
     cloudLight: '#FFE6D6',
     cloudShade: '#C77A86',
     cloudOpacity: 0.8,
@@ -130,6 +141,7 @@ export const SKY_PHASES: Record<SkyPhaseName, SkyPhase> = {
     gradient: 'linear-gradient(170deg,#161B4A 0%,#4B3A7C 50%,#A65A86 100%)',
     stops: ['#161B4A', '#4B3A7C', '#A65A86'],
     ink: '#F7EEF4',
+    glow: '#A65A86',
     cloudLight: '#E3CFE6',
     cloudShade: '#6D5A8E',
     cloudOpacity: 0.6,
@@ -220,6 +232,7 @@ export function skyVars(phase: SkyPhase): React.CSSProperties {
   return {
     '--sky-gradient': phase.gradient,
     '--sky-ink': phase.ink,
+    '--sky-glow': phase.glow,
     '--sky-cloud-light': phase.cloudLight,
     '--sky-cloud-shade': phase.cloudShade,
     '--sky-cloud-opacity': String(phase.cloudOpacity),

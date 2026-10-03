@@ -80,7 +80,7 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
         <span className="font-mono text-[11px] uppercase tracking-[.06em] text-graphite">
           Testing
         </span>
-        <span className="text-[17px] leading-snug text-[#2A2824]">
+        <span className="text-[17px] leading-snug text-copy">
           {experiment.question}
         </span>
       </div>

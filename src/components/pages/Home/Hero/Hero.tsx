@@ -57,7 +57,7 @@ export default function Hero() {
           I&rsquo;m Neal. I turn chaos into clarity.
         </h1>
 
-        <p className="m-0 max-w-[600px] text-lg leading-relaxed text-[#3D3A35] lg:text-xl">
+        <p className="m-0 max-w-[600px] text-lg leading-relaxed text-copy lg:text-xl">
           This site is my second brain: part lab, part notebook, and the place I
           practice building. Everything here is labeled, shelved, and findable.
         </p>
@@ -89,7 +89,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-[#BDB5A5] text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-paper focus-visible:border-ink focus-visible:bg-ink focus-visible:text-paper"
+                className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-rule-strong text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-paper focus-visible:border-ink focus-visible:bg-ink focus-visible:text-paper"
               >
                 <svg
                   width="22"

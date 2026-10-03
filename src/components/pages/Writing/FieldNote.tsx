@@ -87,7 +87,7 @@ export default function FieldNote({ post }: { post: Post }) {
               extra={
                 <>
                   {i === 0 && post.dataPath && (
-                    <div className="flex flex-col gap-3 rounded-xl bg-ink p-6 text-paper">
+                    <div className="flex flex-col gap-3 rounded-xl bg-panel p-6 text-panel-ink">
                       <span className="font-mono text-xs uppercase tracking-[.06em] text-[#BDB5A5]">
                         Data path
                       </span>

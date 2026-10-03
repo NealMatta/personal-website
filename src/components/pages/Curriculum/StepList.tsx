@@ -39,16 +39,16 @@ export default function StepList({
         /* The final wears the class color; the others a quiet tint. */
         const tagStyle =
           step.kind === 'final'
-            ? { background: course.accent, color: '#FFFFFF' }
+            ? { background: course.accent, color: 'var(--paper)' }
             : step.kind === 'midterm'
               ? { background: course.tint, color: course.accent }
-              : { background: '#ECE6D8', color: 'var(--pencil)' };
+              : { background: 'var(--wash)', color: 'var(--pencil)' };
 
         return (
           <li
             key={stepKey(course, step)}
             className={`grid grid-cols-[26px_minmax(0,1fr)_auto] items-center gap-3 py-2.5 ${
-              showWeek ? 'border-b border-dashed border-[#E2DCCF]' : ''
+              showWeek ? 'border-b border-dashed border-rule' : ''
             }`}
           >
             <span

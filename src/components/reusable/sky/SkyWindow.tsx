@@ -38,7 +38,7 @@ export default function SkyWindow({
 }: SkyWindowProps) {
   return (
     <div
-      className={`relative overflow-hidden ${className}`}
+      className={`sky-window relative overflow-hidden ${className}`}
       style={{
         ...skyVars(phase),
         background: phase.gradient,

@@ -10,7 +10,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="mx-6 mb-24 grid grid-cols-1 gap-10 rounded-xl bg-ink p-8 text-paper sm:p-14 lg:mx-16 lg:grid-cols-12 lg:gap-x-6"
+      className="mx-6 mb-24 grid grid-cols-1 gap-10 rounded-xl bg-panel p-8 text-panel-ink sm:p-14 lg:mx-16 lg:grid-cols-12 lg:gap-x-6"
     >
       <div className="flex flex-col gap-5 lg:col-span-6">
         <span className="font-mono text-xs uppercase tracking-[.06em] text-[#BDB5A5]">
@@ -44,7 +44,7 @@ export default function Contact() {
             href={social.href}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-between border-b border-[#3A3833] py-4 text-lg font-medium text-paper no-underline hover:text-tape"
+            className="flex items-center justify-between border-b border-[#3A3833] py-4 text-lg font-medium text-panel-ink no-underline hover:text-tape"
           >
             {social.label}
             <span className="font-mono text-xs uppercase tracking-[.06em] text-[#9A948A]">

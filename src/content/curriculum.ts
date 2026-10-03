@@ -121,14 +121,24 @@ export interface CheckIn {
   photos?: { label: string; src?: string }[];
 }
 
-/* The class colors, so a class keeps its color everywhere. */
+/*
+The class colors, so a class keeps its color everywhere. The values live
+in globals.css, where each has a lighter accent and a darker tint for
+night; that means they only work where CSS reads them (a style or a
+class), not as hex to compute with.
+*/
+const classColor = (name: string) => ({
+  accent: `var(--class-${name})`,
+  tint: `var(--class-${name}-tint)`,
+});
+
 const ACCENT = {
-  swimming: { accent: '#1F6F94', tint: '#DDEBF1' },
-  spanish: { accent: '#B3402E', tint: '#F5DFD9' },
-  sketching: { accent: '#8A5A2B', tint: '#F1E6D8' },
-  cooking: { accent: '#A8761A', tint: '#F4E8CF' },
-  woodworking: { accent: '#5F7A1F', tint: '#E6EBD6' },
-  cad: { accent: '#6B4FB8', tint: '#E7E1F4' },
+  swimming: classColor('swimming'),
+  spanish: classColor('spanish'),
+  sketching: classColor('sketching'),
+  cooking: classColor('cooking'),
+  woodworking: classColor('woodworking'),
+  cad: classColor('cad'),
 };
 
 export const QUARTERS: Quarter[] = [
@@ -1122,31 +1132,36 @@ export function courseGrade(course: Course): {
       return {
         grade: 'P',
         title: 'Passed',
-        fg: '#1E6B3E',
-        bg: '#DCEBDD',
+        fg: 'var(--ok-fg)',
+        bg: 'var(--ok-bg)',
       };
     case 'incomplete':
       return {
         grade: 'INC',
         title: 'Incomplete, rolls into next quarter',
-        fg: '#9A3324',
-        bg: '#F5DFD9',
+        fg: 'var(--bad-fg)',
+        bg: 'var(--bad-bg)',
       };
     case 'withdrawn':
-      return { grade: 'W', title: 'Withdrawn', fg: '#4A4640', bg: '#ECE6D8' };
+      return {
+        grade: 'W',
+        title: 'Withdrawn',
+        fg: 'var(--pencil)',
+        bg: 'var(--wash)',
+      };
     case 'planned':
       return {
         grade: '—',
         title: 'Not started',
-        fg: '#4A4640',
-        bg: '#ECE6D8',
+        fg: 'var(--pencil)',
+        bg: 'var(--wash)',
       };
     default:
       return {
         grade: 'IP',
         title: 'In progress',
-        fg: '#8A4A12',
-        bg: '#F6E6CC',
+        fg: 'var(--warn-fg)',
+        bg: 'var(--warn-bg)',
       };
   }
 }

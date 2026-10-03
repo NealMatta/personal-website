@@ -35,7 +35,7 @@ export default function About() {
               tilt={fact.tilt}
               labelSize={26}
             >
-              <p className="m-0 text-[17px] leading-snug text-[#2A2824]">
+              <p className="m-0 text-[17px] leading-snug text-copy">
                 {fact.description}
               </p>
               <div className="mt-auto flex flex-col gap-1.5">

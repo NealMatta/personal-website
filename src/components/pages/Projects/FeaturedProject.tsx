@@ -56,7 +56,7 @@ export default function FeaturedProject({ project }: { project: Project }) {
                     <span className="font-mono text-[11px] uppercase tracking-[.06em] text-graphite">
                       {line.label}
                     </span>
-                    <span className="line-clamp-3 text-base leading-snug text-[#2A2824]">
+                    <span className="line-clamp-3 text-base leading-snug text-copy">
                       {line.text}
                     </span>
                   </div>

@@ -20,7 +20,7 @@ export default function AboutIntro() {
           Hi, I&rsquo;m Neal.
         </h1>
 
-        <p className="m-0 max-w-[640px] text-xl leading-snug text-[#2A2824] lg:text-2xl">
+        <p className="m-0 max-w-[640px] text-xl leading-snug text-copy lg:text-2xl">
           I live in {CONTACT.city}, I label everything, and I&rsquo;m almost
           always in the middle of learning something new.
         </p>

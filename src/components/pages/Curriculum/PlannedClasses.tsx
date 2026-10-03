@@ -65,7 +65,7 @@ export default function PlannedClasses({ quarter }: { quarter: Quarter }) {
               <span className="text-base leading-snug">{course.final}</span>
             </div>
 
-            <span className="justify-self-start rounded-md bg-[#ECE6D8] px-2 py-[5px] font-mono text-[11px] uppercase tracking-[.06em] text-pencil">
+            <span className="justify-self-start rounded-md bg-wash px-2 py-[5px] font-mono text-[11px] uppercase tracking-[.06em] text-pencil">
               {course.units.length > 0
                 ? `${course.units.length} units`
                 : 'Syllabus not built yet'}

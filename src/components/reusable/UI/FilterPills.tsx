@@ -40,7 +40,7 @@ export default function FilterPills({
             className={`h-11 rounded-full border px-4 text-sm font-medium transition-colors ${
               active
                 ? 'border-ink bg-ink text-paper'
-                : 'border-[#BDB5A5] bg-transparent text-ink hover:border-ink'
+                : 'border-rule-strong bg-transparent text-ink hover:border-ink'
             }`}
           >
             {option}

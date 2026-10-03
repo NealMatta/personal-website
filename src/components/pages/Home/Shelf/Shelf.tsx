@@ -26,7 +26,7 @@ export default function Shelf() {
             href={box.soon ? undefined : box.href}
             className="min-h-[240px]"
           >
-            <p className="m-0 text-[17px] leading-snug text-[#2A2824]">
+            <p className="m-0 text-[17px] leading-snug text-copy">
               {box.description}
             </p>
 

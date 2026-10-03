@@ -42,7 +42,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </span>
       </div>
 
-      <span className="text-[17px] leading-snug text-[#2A2824]">
+      <span className="text-[17px] leading-snug text-copy">
         {project.summary}
       </span>
 

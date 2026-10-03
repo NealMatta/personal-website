@@ -121,14 +121,14 @@ export default function CaseStudy({ project }: { project: SoftwareProject }) {
                         >
                           {card.label}
                         </Tape>
-                        <span className="text-[15px] leading-relaxed text-[#2A2824]">
+                        <span className="text-[15px] leading-relaxed text-copy">
                           {card.text}
                         </span>
                       </div>
                     ))}
                   </div>
                 ) : section.id === 'how-its-built' && project.dataPath ? (
-                  <div className="flex flex-col gap-3 rounded-xl bg-ink p-6 text-paper">
+                  <div className="flex flex-col gap-3 rounded-xl bg-panel p-6 text-panel-ink">
                     <span className="font-mono text-xs uppercase tracking-[.06em] text-[#BDB5A5]">
                       Data path
                     </span>

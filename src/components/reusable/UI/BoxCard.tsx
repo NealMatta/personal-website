@@ -30,8 +30,7 @@ export default function BoxCard({
     'relative flex flex-col gap-4 rounded-box border border-rule bg-card',
     // Top padding leaves room for the tape hanging over the edge.
     'px-6 pb-5 pt-9',
-    href &&
-      'no-underline transition-shadow hover:shadow-[0_10px_28px_rgba(28,27,25,.10)]',
+    href && 'no-underline transition-shadow hover:shadow-lift',
     className,
   ]
     .filter(Boolean)

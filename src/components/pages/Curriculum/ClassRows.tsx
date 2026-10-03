@@ -28,8 +28,8 @@ function attendance(course: Course, clock: QuarterClock) {
   if (last) {
     return {
       label: `Checked in ${formatCurriculumDay(last.at)}`,
-      fg: '#1E6B3E',
-      bg: '#DCEBDD',
+      fg: 'var(--ok-fg)',
+      bg: 'var(--ok-bg)',
     };
   }
 
@@ -37,12 +37,16 @@ function attendance(course: Course, clock: QuarterClock) {
   if (clock.phase !== 'before' && clock.week > 1) {
     return {
       label: `No check-in in ${clock.week - 1} ${clock.week === 2 ? 'week' : 'weeks'}`,
-      fg: '#8A4A12',
-      bg: '#F6E6CC',
+      fg: 'var(--warn-fg)',
+      bg: 'var(--warn-bg)',
     };
   }
 
-  return { label: 'No check-ins yet', fg: 'var(--graphite)', bg: '#ECE6D8' };
+  return {
+    label: 'No check-ins yet',
+    fg: 'var(--graphite)',
+    bg: 'var(--wash)',
+  };
 }
 
 export default function ClassRows({ quarter, clock }: ClassRowsProps) {
@@ -60,7 +64,7 @@ export default function ClassRows({ quarter, clock }: ClassRowsProps) {
           <Link
             key={course.slug}
             href={`/curriculum/${course.slug}`}
-            className="group grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl border border-rule bg-card py-[22px] pl-5 pr-6 no-underline transition-[border-color,box-shadow] hover:border-ink hover:shadow-[0_8px_20px_rgba(28,27,25,.08)] lg:grid-cols-[6px_250px_250px_minmax(0,1fr)_200px_140px] lg:gap-6 lg:py-7 lg:pl-0"
+            className="group grid grid-cols-1 items-center gap-4 overflow-hidden rounded-xl border border-rule bg-card py-[22px] pl-5 pr-6 no-underline transition-[border-color,box-shadow] hover:border-ink hover:shadow-lift lg:grid-cols-[6px_250px_250px_minmax(0,1fr)_200px_140px] lg:gap-6 lg:py-7 lg:pl-0"
           >
             {/* The class color: a full-width cap stacked, an edge in a row. */}
             <span
@@ -88,7 +92,7 @@ export default function ClassRows({ quarter, clock }: ClassRowsProps) {
                   ? ''
                   : ` · ${course.finalOn}`}
               </span>
-              <span className="text-sm leading-snug text-marker">
+              <span className="text-sm leading-snug text-copy">
                 {course.final}
               </span>
             </div>

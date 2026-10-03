@@ -13,7 +13,7 @@ const LINKEDIN = 'https://www.linkedin.com/in/nealmatta/';
 
 export default function SubscribeCard() {
   return (
-    <div className="flex flex-col gap-3 rounded-xl bg-ink p-6 text-paper">
+    <div className="flex flex-col gap-3 rounded-xl bg-panel p-6 text-panel-ink">
       <span className="font-mono text-xs uppercase tracking-[.06em] text-[#BDB5A5]">
         Get new notes
       </span>
@@ -32,7 +32,7 @@ export default function SubscribeCard() {
           href={LINKEDIN}
           target="_blank"
           rel="noreferrer"
-          className="rounded-lg border border-[#3A3833] px-4 py-3 text-sm font-semibold text-paper no-underline transition-colors hover:border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white"
+          className="rounded-lg border border-[#3A3833] px-4 py-3 text-sm font-semibold text-panel-ink no-underline transition-colors hover:border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white"
         >
           Follow on LinkedIn
         </Link>

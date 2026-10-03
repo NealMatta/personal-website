@@ -86,7 +86,7 @@ export default function Transcript() {
             <div
               className={`flex flex-col ${
                 planning
-                  ? 'border-t border-dashed border-[#9A948A]'
+                  ? 'border-t border-dashed border-rule-strong'
                   : 'border-t-2 border-ink'
               }`}
             >

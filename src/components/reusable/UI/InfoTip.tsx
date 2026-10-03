@@ -75,7 +75,7 @@ export default function InfoTip({
       {open && (
         <div
           role="note"
-          className="absolute right-0 top-full z-20 flex w-[300px] flex-col gap-3 rounded-xl bg-ink p-[18px] text-paper shadow-[0_18px_40px_rgba(28,27,25,.28)]"
+          className="absolute right-0 top-full z-20 flex w-[300px] flex-col gap-3 rounded-xl bg-panel p-[18px] text-panel-ink shadow-[0_18px_40px_rgba(28,27,25,.28)]"
         >
           <span className="font-mono text-xs uppercase tracking-[.06em] text-[#BDB5A5]">
             How I built this

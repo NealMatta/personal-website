@@ -90,8 +90,8 @@ export default function QuarterSwitcher({
                 href={`/curriculum?quarter=${quarter.slug}`}
                 aria-current={here ? 'page' : undefined}
                 onClick={() => setOpen(false)}
-                className={`grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 rounded-[10px] px-4 py-3.5 no-underline hover:bg-[#ECE6D8] ${
-                  here ? 'bg-[#ECE6D8]' : ''
+                className={`grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 rounded-[10px] px-4 py-3.5 no-underline hover:bg-wash ${
+                  here ? 'bg-wash' : ''
                 }`}
               >
                 <span className="font-display text-2xl font-bold">

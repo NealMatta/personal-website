@@ -14,7 +14,7 @@ const SOCIAL = [
 
 export default function Footer() {
   return (
-    <footer className="mt-auto bg-ink px-6 py-8 text-paper lg:px-16">
+    <footer className="mt-auto bg-panel px-6 py-8 text-panel-ink lg:px-16">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <span className="font-mono text-xs uppercase tracking-[.06em] text-[#9A948A]">
           Neal Matta · Chicago

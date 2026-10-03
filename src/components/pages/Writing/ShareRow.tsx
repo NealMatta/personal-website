@@ -48,7 +48,7 @@ export default function ShareRow() {
         <button
           type="button"
           onClick={copy}
-          className="h-11 rounded-lg border border-[#BDB5A5] px-3.5 text-sm font-semibold transition-colors hover:border-ink"
+          className="h-11 rounded-lg border border-rule-strong px-3.5 text-sm font-semibold transition-colors hover:border-ink"
         >
           <span aria-live="polite">{copied ? 'Copied' : 'Copy link'}</span>
         </button>

@@ -15,7 +15,7 @@ interface WeekRibbonProps {
 
 /* The pencil cross over a week that's gone. */
 const CROSS =
-  'linear-gradient(to top right, transparent calc(50% - 1px), rgba(28,27,25,.28) 50%, transparent calc(50% + 1px)), linear-gradient(to bottom right, transparent calc(50% - 1px), rgba(28,27,25,.28) 50%, transparent calc(50% + 1px))';
+  'linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--ink) 28%, transparent) 50%, transparent calc(50% + 1px)), linear-gradient(to bottom right, transparent calc(50% - 1px), color-mix(in srgb, var(--ink) 28%, transparent) 50%, transparent calc(50% + 1px))';
 
 export default function WeekRibbon({ quarter, clock }: WeekRibbonProps) {
   const weeks = Array.from({ length: quarter.weeks }, (_, i) => i + 1);
@@ -74,7 +74,7 @@ export default function WeekRibbon({ quarter, clock }: WeekRibbonProps) {
                   now
                     ? 'border-ink bg-ink text-paper'
                     : spent
-                      ? 'border-rule bg-[#E6E0D2] opacity-60'
+                      ? 'border-rule bg-wash opacity-60'
                       : 'border-rule bg-card'
                 }`}
                 style={spent ? { backgroundImage: CROSS } : undefined}

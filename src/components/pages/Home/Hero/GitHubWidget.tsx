@@ -14,7 +14,13 @@ green — color on this page belongs to the sky.
 const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 /* Less → more. The lightest step is an empty day. */
-const STEPS = ['#E6E0D2', '#CBC1AB', '#978C76', '#5A5347', '#1C1B19'];
+const STEPS = [
+  'var(--heat-0)',
+  'var(--heat-1)',
+  'var(--heat-2)',
+  'var(--heat-3)',
+  'var(--heat-4)',
+];
 
 function stepFor(count: number): string {
   if (count === 0) return STEPS[0];

@@ -21,6 +21,20 @@ const WIDGETS = [
 /* Ignore small drags, which are usually the start of a vertical scroll. */
 const SWIPE_THRESHOLD = 48;
 
+/*
+A few stars that have wandered out of the window onto the page — the only
+time the sky leaves its frame, and only with the lights off. A fixed list
+rather than a random one, so the server and the client agree. Kept within
+18px of the edge so they never push the page sideways on a phone.
+*/
+const STRAYS = [
+  { top: '14%', right: '-10px', size: 2, delay: '0s' },
+  { top: '31%', right: '-17px', size: 1.5, delay: '-1.8s' },
+  { top: '-12px', right: '24%', size: 2, delay: '-3.1s' },
+  { top: '-17px', right: '42%', size: 1.5, delay: '-0.9s' },
+  { top: '55%', right: '-8px', size: 1.5, delay: '-4.2s' },
+];
+
 export default function WidgetStack() {
   const { phase, now, sun } = useSky();
   const [index, setIndex] = useState(0);
@@ -64,6 +78,27 @@ export default function WidgetStack() {
             label="Next widget"
             onClick={() => go(index + 1)}
           />
+        )}
+
+        {phase.night && index === 0 && (
+          <span
+            className="night-only pointer-events-none absolute inset-0"
+            aria-hidden="true"
+          >
+            {STRAYS.map((star) => (
+              <span
+                key={`${star.top} ${star.right}`}
+                className="absolute animate-twinkle rounded-full bg-white"
+                style={{
+                  top: star.top,
+                  right: star.right,
+                  width: star.size,
+                  height: star.size,
+                  animationDelay: star.delay,
+                }}
+              />
+            ))}
+          </span>
         )}
 
         {WIDGETS.map((w, i) => {
@@ -134,7 +169,7 @@ function Arrow({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`absolute top-1/2 z-[3] -mt-5 flex h-10 w-10 items-center justify-center rounded-full border-none bg-[rgba(251,250,246,.82)] p-0 text-ink opacity-0 shadow-[0_4px_14px_rgba(28,27,25,.18)] backdrop-blur-lg transition-[opacity,transform] duration-200 hover:bg-card focus-visible:opacity-100 group-hover:opacity-100 ${
+      className={`absolute top-1/2 z-[3] -mt-5 flex h-10 w-10 items-center justify-center rounded-full border-none bg-[color-mix(in_srgb,var(--card)_82%,transparent)] p-0 text-ink opacity-0 shadow-[0_4px_14px_rgba(28,27,25,.18)] backdrop-blur-lg transition-[opacity,transform] duration-200 hover:bg-card focus-visible:opacity-100 group-hover:opacity-100 ${
         side === 'left'
           ? 'left-3.5 -translate-x-1.5 group-hover:translate-x-0'
           : 'right-3.5 translate-x-1.5 group-hover:translate-x-0'

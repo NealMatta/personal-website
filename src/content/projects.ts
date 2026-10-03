@@ -14,14 +14,29 @@ touching a page.
 
 export type ProjectKind = 'software' | 'woodwork' | '3d-print';
 
-/** The chip on a project card. Each kind gets its own quiet tint. */
+/**
+ * The chip on a project card. Each kind gets its own quiet tint; the
+ * values live in globals.css so they can change at night.
+ */
 export const KIND_STYLE: Record<
   ProjectKind,
   { label: string; background: string; color: string }
 > = {
-  software: { label: 'Software', background: '#DDEBF1', color: '#1F5F80' },
-  woodwork: { label: 'Woodwork', background: '#F1E6D8', color: '#7A4E24' },
-  '3d-print': { label: '3D print', background: '#E6E3F1', color: '#4B4380' },
+  software: {
+    label: 'Software',
+    background: 'var(--kind-software-tint)',
+    color: 'var(--kind-software)',
+  },
+  woodwork: {
+    label: 'Woodwork',
+    background: 'var(--kind-woodwork-tint)',
+    color: 'var(--kind-woodwork)',
+  },
+  '3d-print': {
+    label: '3D print',
+    background: 'var(--kind-print-tint)',
+    color: 'var(--kind-print)',
+  },
 };
 
 /* The write-up shape is shared with field notes; it lives in `src/types`. */

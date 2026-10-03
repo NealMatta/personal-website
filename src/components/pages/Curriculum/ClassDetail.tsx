@@ -85,7 +85,7 @@ export default function ClassDetail({
           </div>
 
           {course.units.length === 0 ? (
-            <p className="m-0 rounded-[10px] border border-dashed border-[#9A948A] p-6 text-base leading-relaxed text-pencil">
+            <p className="m-0 rounded-[10px] border border-dashed border-rule-strong p-6 text-base leading-relaxed text-pencil">
               No syllabus yet. This class is planned for {quarter.label}; the
               units get written before the quarter starts.
             </p>
@@ -155,8 +155,8 @@ export default function ClassDetail({
                     className="rounded px-2 py-[3px] font-mono text-[11px] uppercase tracking-[.06em]"
                     style={
                       checkIn.kind === 'exam'
-                        ? { background: '#DCEBDD', color: '#1E6B3E' }
-                        : { background: '#ECE6D8', color: 'var(--pencil)' }
+                        ? { background: 'var(--ok-bg)', color: 'var(--ok-fg)' }
+                        : { background: 'var(--wash)', color: 'var(--pencil)' }
                     }
                   >
                     {checkIn.kind === 'exam' ? 'Final exam' : 'Update'}
@@ -192,13 +192,13 @@ export default function ClassDetail({
             className="relative flex flex-col gap-3.5 rounded-xl bg-card px-6 pb-6 pt-7"
             style={{
               border: passed
-                ? '2px solid #1E6B3E'
+                ? '2px solid var(--ok-fg)'
                 : `2px dashed ${course.accent}`,
             }}
           >
             {passed && course.passedOn && (
               <span
-                className="absolute -top-3.5 right-4 rounded-md border-2 border-[#1E6B3E] bg-[#DCEBDD] px-3 py-2 font-mono text-[13px] font-medium uppercase tracking-[.06em] text-[#1E6B3E]"
+                className="absolute -top-3.5 right-4 rounded-md border-2 border-[var(--ok-fg)] bg-[var(--ok-bg)] px-3 py-2 font-mono text-[13px] font-medium uppercase tracking-[.06em] text-[var(--ok-fg)]"
                 style={{ transform: 'rotate(-4deg)' }}
               >
                 Passed · {formatCurriculumDay(course.passedOn)}

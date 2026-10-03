@@ -21,10 +21,60 @@ of the visitor's local time shows through.
   --tape: #eadbb3; /* labels */
   --marker: #2a2620; /* label ink */
 
+  --copy: #2a2824; /* body copy on a card */
+  --rule-strong: #bdb5a5; /* outlines that have to read as a control */
+  --wash: #ece6d8; /* a quiet tag, a hovered row */
+
+  /* The one inked block: footer, contact card, info tips, asides. It
+     stays dark at night too, so its own text never flips. */
+  --panel: #1c1b19;
+  --panel-ink: #f4f1ea;
+
   /* Status */
   --live: #1e8e4e;
   --prototype: #d08a1e;
   --shelved: #8a857b;
+
+  /* Tags that say how something went. */
+  --ok-fg: #1e6b3e;
+  --ok-bg: #dcebdd;
+  --warn-fg: #8a4a12;
+  --warn-bg: #f6e6cc;
+  --bad-fg: #9a3324;
+  --bad-bg: #f5dfd9;
+
+  /* What a box does when it lifts under a cursor. */
+  --lift: 0 10px 28px rgba(28, 27, 25, 0.1);
+
+  /* The GitHub heat map, empty day to busiest. */
+  --heat-0: #e6e0d2;
+  --heat-1: #cbc1ab;
+  --heat-2: #978c76;
+  --heat-3: #5a5347;
+  --heat-4: #1c1b19;
+
+  /* Each class keeps its color everywhere (src/content/curriculum.ts):
+     the accent is an edge, a bar or a heading, the tint a tag behind it. */
+  --class-swimming: #1f6f94;
+  --class-swimming-tint: #ddebf1;
+  --class-spanish: #b3402e;
+  --class-spanish-tint: #f5dfd9;
+  --class-sketching: #8a5a2b;
+  --class-sketching-tint: #f1e6d8;
+  --class-cooking: #a8761a;
+  --class-cooking-tint: #f4e8cf;
+  --class-woodworking: #5f7a1f;
+  --class-woodworking-tint: #e6ebd6;
+  --class-cad: #6b4fb8;
+  --class-cad-tint: #e7e1f4;
+
+  /* The chip on a project card, one per kind (src/content/projects.ts). */
+  --kind-software: #1f5f80;
+  --kind-software-tint: #ddebf1;
+  --kind-woodwork: #7a4e24;
+  --kind-woodwork-tint: #f1e6d8;
+  --kind-print: #4b4380;
+  --kind-print-tint: #e6e3f1;
 
   /* Aliases kept so older components still resolve */
   --background: var(--paper);
@@ -52,6 +102,75 @@ of the visitor's local time shows through.
   /* One duration and one curve, so every hover on the site moves alike. */
   --sky-t: 0.26s;
   --sky-ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/*
+Lamplight: the same paper with the lights off.
+
+Set by the script in app/layout.tsx before the first paint, from the
+visitor's own choice if they made one and their OS setting if not. The
+paper goes dark but stays warm, tape stays the brightest thing in the
+room, and the sky windows don't change at all — they follow the clock,
+not the theme.
+*/
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --paper: #1b1916;
+  --card: #24211d;
+  --ink: #f1ebdd;
+  --pencil: #cfc7b6;
+  --graphite: #a39b8b;
+  --rule: #3a352e;
+  --tape: #d2bd8a;
+  --marker: #221d14;
+
+  --copy: #e6dfd0;
+  --rule-strong: #5a5347;
+  --wash: #2e2a25;
+
+  --panel: #100f0d;
+
+  --live: #4cc27f;
+  --prototype: #e0a14a;
+  --shelved: #8a857b;
+
+  --ok-fg: #7fd49c;
+  --ok-bg: #1f3326;
+  --warn-fg: #e9b26e;
+  --warn-bg: #3a2a17;
+  --bad-fg: #f08f7c;
+  --bad-bg: #3d211c;
+
+  /* Shadows vanish on a dark ground, so a box lifts on a rim of light. */
+  --lift: 0 0 0 1px rgba(241, 235, 221, 0.22),
+    0 18px 40px -18px rgba(0, 0, 0, 0.85);
+
+  --heat-0: #2e2a25;
+  --heat-1: #4a443c;
+  --heat-2: #7a7264;
+  --heat-3: #b3aa98;
+  --heat-4: #f1ebdd;
+
+  --class-swimming: #6cb4d6;
+  --class-swimming-tint: #1c2b33;
+  --class-spanish: #e8806c;
+  --class-spanish-tint: #3a221d;
+  --class-sketching: #d4a06c;
+  --class-sketching-tint: #33281d;
+  --class-cooking: #e0b054;
+  --class-cooking-tint: #352b18;
+  --class-woodworking: #a8c25e;
+  --class-woodworking-tint: #262d1a;
+  --class-cad: #a994ee;
+  --class-cad-tint: #29243a;
+
+  --kind-software: #8cc3de;
+  --kind-software-tint: #1c2b33;
+  --kind-woodwork: #d9ae80;
+  --kind-woodwork-tint: #33281d;
+  --kind-print: #b3a9ec;
+  --kind-print-tint: #29243a;
 }
 
 body {
@@ -246,7 +365,7 @@ Long-form body copy: case studies, build logs, field notes. Set on the
 @layer components {
   .prose > p {
     @apply m-0 text-[19px] leading-[1.7];
-    color: var(--marker);
+    color: var(--copy);
   }
 
   .prose > h2 {
@@ -361,5 +480,109 @@ at the same apparent speed in a small card or a wide banner.
   .dipper-star,
   .cloud {
     animation: none;
+  }
+}
+
+/*
+Night.
+
+Everything below only happens with the lights off. The tokens above do
+the real work; these are the few things a dark room makes room for.
+*/
+
+/* A sky window throws its own color onto the paper around it. */
+:root[data-theme='dark'] .sky-window {
+  box-shadow:
+    0 40px 110px -30px color-mix(in srgb, var(--sky-glow) 45%, transparent),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Tape, under a lamp: the brightest thing on the shelf. */
+:root[data-theme='dark'] .tape {
+  background-image: linear-gradient(
+      180deg,
+      rgba(255, 240, 200, 0.32),
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.18) 0 2px,
+      transparent 2px 6px
+    );
+}
+
+/* Pictures drop a little so a white photo doesn't glare. */
+:root[data-theme='dark'] main img,
+:root[data-theme='dark'] .photo-slot {
+  filter: brightness(0.8);
+}
+
+.night-only {
+  display: none;
+}
+
+:root[data-theme='dark'] .night-only {
+  display: block;
+}
+
+/*
+The lights going down. ThemeButton puts this on <html> for the length of
+a switch, so the page fades rather than snaps — but never on first load,
+and never for someone who asked for less motion.
+*/
+.theme-fading,
+.theme-fading *:not(.theme-orb),
+.theme-fading *::before,
+.theme-fading *::after {
+  transition-property: background-color, color, border-color, box-shadow !important;
+  transition-duration: 0.5s !important;
+  transition-timing-function: ease !important;
+}
+
+/*
+The sun and the moon, on one arc.
+
+Both glyphs ride a circle centered below the button, and the button's
+own edge is the horizon. The body that's up sits at the top of the arc;
+the one that's down waits past the eastern (left) horizon with no
+transition, so whichever comes up always rises from the east. On a
+switch the outgoing one is marked `data-setting` and carried west for
+the length of the animation, then drops back to wait in the east.
+*/
+@layer components {
+  .theme-orb {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+    transform-origin: 50% 300%;
+    transform: rotate(-75deg);
+    opacity: 0;
+  }
+
+  :root:not([data-theme='dark']) .theme-orb-sun,
+  :root[data-theme='dark'] .theme-orb-moon {
+    transform: rotate(0deg);
+    opacity: 1;
+    transition:
+      transform 0.7s cubic-bezier(0.45, 0, 0.2, 1),
+      opacity 0.7s ease;
+  }
+
+  .theme-orb[data-setting] {
+    transform: rotate(75deg);
+    opacity: 0;
+    transition:
+      transform 0.7s cubic-bezier(0.45, 0, 0.2, 1),
+      opacity 0.7s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-orb,
+  :root .theme-orb-sun,
+  :root .theme-orb-moon {
+    transition: none !important;
   }
 }

@@ -90,7 +90,7 @@ export default async function Curriculum({
               <dd className="m-0 font-display text-4xl font-semibold leading-none lg:text-5xl">
                 {inSession ? passed : clock.startsIn}
                 {inSession && (
-                  <span className="text-2xl text-[#9A948A]">
+                  <span className="text-2xl text-graphite">
                     /{quarter.courses.length}
                   </span>
                 )}
@@ -102,7 +102,7 @@ export default async function Curriculum({
           </dl>
 
           {credits > CREDIT_LOAD && (
-            <span className="rounded-lg bg-[#F6E6CC] px-3 py-2 text-sm text-[#8A4A12]">
+            <span className="rounded-lg bg-[var(--warn-bg)] px-3 py-2 text-sm text-[var(--warn-fg)]">
               Over ~{CREDIT_LOAD} credits. That&rsquo;s more than {CREDIT_LOAD}{' '}
               hours a week on top of everything else.
             </span>

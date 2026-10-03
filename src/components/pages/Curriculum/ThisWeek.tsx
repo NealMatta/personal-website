@@ -81,7 +81,7 @@ export default function ThisWeek({ quarter, clock }: ThisWeekProps) {
               )}
 
               {behind > 0 && (
-                <span className="self-start rounded-md bg-[#F6E6CC] px-2.5 py-1.5 text-[13px] text-[#8A4A12]">
+                <span className="self-start rounded-md bg-[var(--warn-bg)] px-2.5 py-1.5 text-[13px] text-[var(--warn-fg)]">
                   {behind} {behind === 1 ? 'step' : 'steps'} from earlier weeks
                 </span>
               )}

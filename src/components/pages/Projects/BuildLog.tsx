@@ -90,7 +90,7 @@ export default function BuildLog({ project }: { project: BuildProject }) {
                       <span className="font-display text-[26px] font-bold">
                         {step.title}
                       </span>
-                      <span className="text-[17px] leading-relaxed text-[#2A2824]">
+                      <span className="text-[17px] leading-relaxed text-copy">
                         {step.body}
                       </span>
                     </div>

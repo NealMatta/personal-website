@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSky } from '@/src/lib/sky/useSky';
+import ThemeButton from '@/src/components/reusable/theme/ThemeButton';
 
 /*
 The top bar.
@@ -57,6 +58,7 @@ export default function NavBar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeButton className="hidden lg:flex" />
           <Link
             href={LINKEDIN}
             target="_blank"
@@ -113,14 +115,19 @@ export default function NavBar() {
               onNavigate={() => setOpen(false)}
             />
           ))}
-          <Link
-            href={LINKEDIN}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 rounded-lg bg-ink px-[18px] py-3 text-center text-sm font-semibold text-paper no-underline"
-          >
-            Connect on LinkedIn
-          </Link>
+          {/* The light switch rides along with LinkedIn rather than
+              getting a section of its own. */}
+          <div className="mt-3 flex gap-2.5">
+            <Link
+              href={LINKEDIN}
+              target="_blank"
+              rel="noreferrer"
+              className="flex-1 rounded-lg bg-ink px-[18px] py-3 text-center text-sm font-semibold text-paper no-underline"
+            >
+              Connect on LinkedIn
+            </Link>
+            <ThemeButton />
+          </div>
         </nav>
       )}
     </header>

@@ -17,7 +17,7 @@ export default function Chip({
   className = '',
 }: ChipProps) {
   const tones = {
-    paper: 'border-[#CFC8B9] bg-paper text-pencil',
+    paper: 'border-rule-strong bg-paper text-pencil',
     dark: 'border-[#3A3833] text-[#E8DDC4]',
   };
 
