@@ -28,10 +28,11 @@ Put these in `.env.local`:
 
 **Layout split:** `app/` contains only Next.js routes, layouts, and API route handlers. Everything else is in `src/`. The `@/*` path alias resolves to the repo root, so imports look like `@/src/components/...`, not `@/components/...`.
 
-- `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA) or query Supabase (projects).
-- `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI (NavBar, Footer, cards, PageHeader).
-- `src/lib/`: Supabase clients, the React Query provider, and small helpers.
-- `src/types/`: `supabase.ts` holds the generated Supabase `Database` types. The other files define domain types, re-exported from `src/types/index.ts`.
+- `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA).
+- `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI — `navigation/`, `sky/`, and `UI/`.
+- `src/lib/`: the Supabase client, the React Query provider, the sky engine, and small helpers.
+- `src/types/`: `supabase.ts` holds the generated Supabase `Database` types, kept for reference; nothing imports it. The other files define domain types and are imported directly (there is no barrel file).
+- `src/content/`: typed content files — shelf boxes, projects, Lab experiments, About, field notes, quotes. Most page content lives here rather than in a database.
 
 **Data flow for live widgets (Spotify, website status/commits, CTA trains):** the widgets use a Card → Client → View split:
 1. `XCard.tsx` is a server component wrapper.
@@ -41,18 +42,45 @@ Put these in `.env.local`:
 
 Add new external-data widgets the same way. Route handlers return JSON through `new Response(JSON.stringify(...))` and follow the 404/500 error shape used in the existing routes.
 
-**Server-rendered pages** (for example `app/projects/[projectID]/page.tsx`) are async server components that call `src/apiManagement` directly, with no React Query. `params` is a `Promise` (Next 15) and must be awaited. `getProject` calls `notFound()` when no row exists.
+**Server-rendered pages** (for example `app/projects/[slug]/page.tsx`) are async server components that read from `src/content/` and render directly, with no React Query. `params` is a `Promise` (Next 15) and must be awaited; missing content calls `notFound()`.
 
-**Supabase has two kinds of client:**
-- `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It handles data queries (`projects` with `projectimages`/`projectdetails` joins) and the `spotify_tokens` table.
-- `src/lib/supabase/auth/{server,client,middleware}.ts` are `@supabase/ssr` cookie-based clients for auth. The server actions in `app/login/actions.ts` use them. Root `middleware.ts` runs `updateSession` only for `/admin`, and redirects users who aren't logged in to `/login`.
+**Field notes come from `src/content/posts.ts`.** A note carries the same `sections` shape a case study does, plus the Lab experiment or project it came out of, so `/writing` and `/writing/[slug]` render straight from the file. Headings in there are real; paragraphs still in [brackets] are Neal's to write. `/writing/rss.xml` is a route handler that builds the feed from the same list and takes its absolute URLs from the request, since the site has no configured domain. The masthead card offers RSS and LinkedIn rather than an email signup, because there is no list behind one yet.
+
+**The Curriculum runs on `src/content/curriculum.ts`.** A quarter is thirteen weeks; a class is a syllabus of units, one weekly step each, a midterm and a final it either passes or doesn't. The file holds the quarters, their classes, every step and the check-ins, and the pages read it directly — `/curriculum` (the quarter in session, or a planned one via `?quarter=<slug>`), `/curriculum/transcript` and `/curriculum/[code]` (a class, e.g. `/curriculum/swm-101`). There is no write path yet: a step is done because `done: true` is in the file, a class is passed because its `status` says so, so the pages render the record rather than keeping one. `quarterClock()` decides which week the quarter is in from a `Date` the page passes in; the pages `revalidate = 3600` so that stays honest without being rebuilt. Each class carries its own `accent`/`tint` — the one colour that lands outside a sky window, and only ever as an edge, a tag tint or a progress bar, never a surface.
+
+**Projects come from `src/content/projects.ts`, not Supabase.** The design needs kind, status, stack, and full case-study sections, none of which the `projects` table has, and a Firebase move is planned — so the table and its `getProject`/`getAllProjects` plumbing were dropped rather than extended. A project is a discriminated union: `SoftwareProject` renders as a case study, `woodwork` and `3d-print` render as a build log with specs and a cut list. Adding a project means adding an entry, not touching a page.
+
+**Supabase is down to one client:** `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It only serves the `spotify_tokens` table. It calls `createClient` at module scope, so a build without `NEXT_PUBLIC_SUPABASE_URL` set fails on import. The site has no login, auth or middleware; if one comes back it will be on Firebase, not Supabase.
 
 **Spotify token caching:** `src/apiManagement/spotify/tokenManager.ts` stores the access token and its expiry in the Supabase `spotify_tokens` table (row `id = 1`). It uses the refresh token only when the stored token has expired.
 
 **Remote images:** `next/image` accepts remote images only from the hosts listed in `next.config.ts` (`i.scdn.co` for Spotify and the Supabase storage host). Add any new image host there.
 
-**Styling:** Tailwind colors (`primary`, `secondary`, `background`, `foreground`) map to CSS variables defined in `src/styles/globals.css`. Fonts come from `next/font/google` in `app/layout.tsx` (Rubik is the primary font, Lora the secondary) and are exposed as CSS variables. Font Awesome CSS is imported manually there, with `autoAddCss = false`.
+**Styling — "paper, tape and sky":** the ground is paper (`#F4F1EA`) and ink (`#1C1B19`); color appears *only* inside sky windows. Tailwind colors (`paper`, `card`, `ink`, `pencil`, `graphite`, `rule`, `tape`, `marker`, `status.*`) map to CSS variables in `src/styles/globals.css`. Four typefaces come from `next/font/google` in `app/layout.tsx` and are exposed as CSS variables: Bricolage Grotesque (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`, metadata), Caveat (`font-label`, tape labels only — never body copy).
+
+**Night — "Lamplight":** the same paper with the lights off. Every ground color is a CSS variable, and `:root[data-theme='dark']` in `globals.css` gives each one a night value (dark warm paper `#1B1916`, cream ink, tape a touch dimmer and lit as if under a lamp). Night follows the visitor's OS setting; the sun/moon `ThemeButton` (`src/components/reusable/theme/`) overrides it, and a press that lands back on the OS's own choice clears the override (`localStorage.theme`) instead of storing it, so there's no "Auto" control. `THEME_SCRIPT` (`src/lib/theme/theme.ts`) runs inline in `<head>` to set `data-theme` before first paint; `ThemeRoot` keeps following OS changes; `useTheme()` reads the attribute. The button's sunset/moonrise arc and the page fade (`.theme-fading`, only during a switch) live in `globals.css`. Rules that keep night working:
+- **Never hardcode a ground color.** Use the tokens — `copy` for body text on a card, `rule-strong` for an outline that's a control, `wash` for a quiet tag or hovered row, `--ok-*`/`--warn-*`/`--bad-*` for how-it-went tags, `shadow-lift` for a box lifting. `marker` is ink *on tape* only; it stays dark at night.
+- **Inked blocks** (footer, contact card, info tips, data-path asides) use `bg-panel text-panel-ink`, which stay dark at night, not `bg-ink text-paper`, which invert. Text inside a panel can keep its fixed light colors.
+- **Class and project-kind colors** are `var(--class-*)` / `var(--kind-*)` strings, so they only work as CSS values, not as hex to compute with.
+- Night-only touches: sky windows glow (`.sky-window` reads each phase's `glow`), a few fixed stray stars sit past the hero window (`.night-only`), and `main img` / `.photo-slot` dim to 80%.
+
+The design lives in the "Second Brain Redesign" canvas: https://claude.ai/artifact/17YUxwuEjgezbPRiTDATjn
+
+**The sky:** `src/lib/sky/` picks one of six phases (midnight, dawn, sunrise, midday, sunset, dusk) from the *visitor's* local clock. `useSky()` returns the default midday phase until the client mounts, so SSR and hydration agree. `SkyWindow` paints a phase plus its weather — drifting clouds, and stars with the Big Dipper at night. Cloud layout comes from a seeded generator (`src/lib/sky/clouds.ts`); keep every draw from it deterministic and fixed in count, or server and client lay out different skies and hydration breaks.
+
+Sky windows are the only colored surfaces at rest: the hero widget, the closing quote, and the nav's logo mark. Section rules borrow the gradient as a hairline.
+
+**Hover is where the rest of the color lives — but only for links that stay on the site.** The sky means "another room in this house", so a link that leaves (a social mark, a repo, a resume PDF, the LinkedIn button) keeps its own quiet ink-or-tape hover. Two shapes, both component classes in `globals.css`, both firing on `:focus-visible` too:
+- `.sky-button` — an internal button. Ink-filled or outlined at rest; on hover the sky fades up over it, the corners soften from `--btn * .16` to `--btn * .32`, and the label reads in `--sky-ink`. Set `--btn` to the button's own height (default 50px) so both radii scale. **Wrap the label in a `<span>`** — the sky is an absolutely positioned `::before` and paints straight over a bare text node.
+- `.sky-link` — an internal text link. The sky, turned on its side, wipes in from the left as a 2px underline. Drawn as a background image, not an `::after`, so it survives a line break and never collides with a pseudo-element a component already uses. Used by the nav (the current page keeps its ink underline and sits out the hover), `Breadcrumb` and `TableOfContents`.
+
+A box keeps its own hover — `BoxCard` lifts on a shadow — because a box is a surface, not a link in a line of text.
+
+Both classes read `--sky-gradient`, `--sky-ink` and `--sky-line` from `<html>`. `SkyRoot` (`src/components/reusable/sky/SkyRoot.tsx`, mounted in `app/layout.tsx`) writes them there on mount; the fallbacks in `globals.css` cover the server render. A `SkyWindow` still carries its own phase locally, so nothing on the page needs a sky hook just to answer a cursor.
+
+**Reusable UI** (`src/components/reusable/UI/`): `Tape` (a tilted masking-tape label), `BoxCard` (a labeled box), `StatusDot` (live / prototype / idea / shelved), `Chip`, `InfoTip` (the ⓘ on a live card, showing its data path and tools), `PageIntro` (a section page's masthead — `stats` for counts on the right, `aside` for a card there instead), `FilterPills`, `Breadcrumb`, `PhotoSlot`, `TableOfContents` and `ProseSection`. The last two are what a write-up is made of, shared by project case studies, build logs and field notes; the `Section` shape they read lives in `src/types/content.ts`.
 
 **Notes:**
-- `app/_starting-project/` is the leftover create-next-app template. The `_` prefix keeps it out of routing.
 - `app/lab/dashboard/layout.tsx` renders its own `<html>`/`<body>`.
+- The redesign is landing in passes. Done: the design system, nav/footer, Home, About, Projects (index, case study, build log), Laboratory, Field notes and Curriculum. Still to build: Commonplace. Nav entries and shelf boxes for unbuilt sections are marked `soon` rather than linking to 404s.
+- Images the site doesn't have yet render as `PhotoSlot` — a labeled dashed frame that becomes the picture once given a `src`. Real assets go in `public/`.

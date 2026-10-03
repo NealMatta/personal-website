@@ -9,12 +9,17 @@ export function isTrackObject(
 
 export function formatTrackData(
   track: SpotifyApi.TrackObjectFull,
-  isCurrentlyPlaying: boolean = false
+  isCurrentlyPlaying: boolean = false,
+  playedAt: string | null = null
 ): SpotifyOutput {
   return {
     albumCover: track.album.images[0]?.url || '',
     songName: track.name,
     artist: track.artists.map((artist) => artist.name).join(', '),
+    album: track.album.name,
+    url: track.external_urls?.spotify || '',
     lastPlayed: isCurrentlyPlaying ? 'Currently Playing' : 'Last Listened To',
+    isPlaying: isCurrentlyPlaying,
+    playedAt,
   };
 }

@@ -58,7 +58,7 @@ export async function getMostRecentTrack(): Promise<SpotifyOutput | null> {
       console.warn('No recently played track found.');
       return null;
     }
-    return formatTrackData(firstItem.track);
+    return formatTrackData(firstItem.track, false, firstItem.played_at);
   } catch (error) {
     console.error(
       'Error fetching the most recent track:',

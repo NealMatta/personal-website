@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Neal Matta - Projects and Experiments',
+  title: 'Laboratory — Neal Matta',
   description:
-    'Explore a collection of Neal Matta’s personal and professional projects, showcasing creativity, technical skills, and innovative experiments.',
+    'Where I try APIs, patterns and ideas before they earn a spot on the shelf. Each experiment says what I’m testing, what it runs on, and whether it works yet.',
   keywords:
-    'Neal Matta, projects, portfolio, experiments, web development, personal projects',
+    'Neal Matta, experiments, prototypes, APIs, web development, Next.js, Supabase',
 };
 
 export default function Layout({

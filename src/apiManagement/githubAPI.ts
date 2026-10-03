@@ -1,4 +1,4 @@
-type Commit = {
+export type Commit = {
   sha: string;
   commit: {
     author: {

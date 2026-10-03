@@ -1,31 +1,17 @@
-import About from '@/src/components/pages/About/About';
-import FeaturedProjects from '@/src/components/pages/Projects/FeaturedProjects';
-import HomePageHeader from '@/src/components/pages/Home/HomePagerHeader';
-import Quotes from '@/src/components/pages/Home/Quotes/Quotes';
-import WebsiteStatusCard from '@/src/components/pages/Home/WebsiteStatus/WebsiteStatusCard';
-import SubmitFeedbackCard from '@/src/components/pages/Home/SubmitFeedback/SubmitFeedbackCard';
-import SpotifyStatusCard from '@/src/components/pages/Home/Spotify/SpotifyStatusCard';
+import Hero from '@/src/components/pages/Home/Hero/Hero';
+import Shelf from '@/src/components/pages/Home/Shelf/Shelf';
+import LiveWires from '@/src/components/pages/Home/LiveWires/LiveWires';
+import FieldNotes from '@/src/components/pages/Home/FieldNotes/FieldNotes';
+import QuoteBlock from '@/src/components/pages/Home/QuoteBlock/QuoteBlock';
 
 export default function Home() {
   return (
     <>
-      <HomePageHeader />
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4">
-        {/* Main Content */}
-        <main className="col-span-2 space-y-4">
-          <About />
-          <Quotes />
-          <FeaturedProjects />
-        </main>
-
-        {/* Sidebar */}
-        <aside className="space-y-4">
-          <WebsiteStatusCard />
-          <SpotifyStatusCard />
-          <SubmitFeedbackCard />
-        </aside>
-      </div>
+      <Hero />
+      <Shelf />
+      <LiveWires />
+      <FieldNotes />
+      <QuoteBlock />
     </>
   );
 }
