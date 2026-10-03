@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal website for Neal Matta, built mainly to learn Next.js and Supabase. It uses Next.js 15 (App Router), React 18, TypeScript (strict), Tailwind CSS, Supabase, and TanStack React Query.
+Personal website for Neal Matta, built mainly to learn Next.js. It uses Next.js 15 (App Router), React 18, TypeScript (strict), Tailwind CSS and TanStack React Query.
 
 ## Commands
 
@@ -20,7 +20,6 @@ The repo has no test framework.
 ## Environment variables
 
 Put these in `.env.local`:
-- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`
 - `CTA_TRACKER` (Chicago Transit Authority train tracker API key)
 
@@ -30,8 +29,8 @@ Put these in `.env.local`:
 
 - `src/apiManagement/`: server-side functions that call external APIs (Spotify, GitHub commits, CTA).
 - `src/components/pages/<Page>/`: components used by one page. `src/components/reusable/` holds shared UI — `navigation/`, `sky/`, and `UI/`.
-- `src/lib/`: the Supabase client, the React Query provider, the sky engine, and small helpers.
-- `src/types/`: `supabase.ts` holds the generated Supabase `Database` types, kept for reference; nothing imports it. The other files define domain types and are imported directly (there is no barrel file).
+- `src/lib/`: the React Query provider, the sky engine, and small helpers.
+- `src/types/`: domain types, imported directly (there is no barrel file).
 - `src/content/`: typed content files — shelf boxes, projects, Lab experiments, About, field notes, quotes. Most page content lives here rather than in a database.
 
 **Data flow for live widgets (Spotify, website status/commits, CTA trains):** the widgets use a Card → Client → View split:
@@ -48,13 +47,13 @@ Add new external-data widgets the same way. Route handlers return JSON through `
 
 **The Curriculum runs on `src/content/curriculum.ts`.** A quarter is thirteen weeks; a class is a syllabus of units, one weekly step each, a midterm and a final it either passes or doesn't. The file holds the quarters, their classes, every step and the check-ins, and the pages read it directly — `/curriculum` (the quarter in session, or a planned one via `?quarter=<slug>`), `/curriculum/transcript` and `/curriculum/[code]` (a class, e.g. `/curriculum/swm-101`). There is no write path yet: a step is done because `done: true` is in the file, a class is passed because its `status` says so, so the pages render the record rather than keeping one. `quarterClock()` decides which week the quarter is in from a `Date` the page passes in; the pages `revalidate = 3600` so that stays honest without being rebuilt. Each class carries its own `accent`/`tint` — the one colour that lands outside a sky window, and only ever as an edge, a tag tint or a progress bar, never a surface.
 
-**Projects come from `src/content/projects.ts`, not Supabase.** The design needs kind, status, stack, and full case-study sections, none of which the `projects` table has, and a Firebase move is planned — so the table and its `getProject`/`getAllProjects` plumbing were dropped rather than extended. A project is a discriminated union: `SoftwareProject` renders as a case study, `woodwork` and `3d-print` render as a build log with specs and a cut list. Adding a project means adding an entry, not touching a page.
+**Projects come from `src/content/projects.ts`.** A project is a discriminated union: `SoftwareProject` renders as a case study, `woodwork` and `3d-print` render as a build log with specs and a cut list. Adding a project means adding an entry, not touching a page.
 
-**Supabase is down to one client:** `src/lib/supabase/db/supabaseClient.ts` is a plain singleton `supabase-js` client using the anon key. It only serves the `spotify_tokens` table. It calls `createClient` at module scope, so a build without `NEXT_PUBLIC_SUPABASE_URL` set fails on import. The site has no login, auth or middleware; if one comes back it will be on Firebase, not Supabase.
+**No database.** The site has no login, auth, middleware or database; if one comes back it will be on Firebase. Supabase was removed in October 2026.
 
-**Spotify token caching:** `src/apiManagement/spotify/tokenManager.ts` stores the access token and its expiry in the Supabase `spotify_tokens` table (row `id = 1`). It uses the refresh token only when the stored token has expired.
+**Spotify token caching:** `src/apiManagement/spotify/tokenManager.ts` keeps the access token and its expiry in module memory. Vercel reuses function instances, so most requests hit the cache; a fresh instance uses the refresh token once.
 
-**Remote images:** `next/image` accepts remote images only from the hosts listed in `next.config.ts` (`i.scdn.co` for Spotify and the Supabase storage host). Add any new image host there.
+**Remote images:** `next/image` accepts remote images only from the hosts listed in `next.config.ts` (`i.scdn.co` for Spotify). Add any new image host there.
 
 **Styling — "paper, tape and sky":** the ground is paper (`#F4F1EA`) and ink (`#1C1B19`); color appears *only* inside sky windows. Tailwind colors (`paper`, `card`, `ink`, `pencil`, `graphite`, `rule`, `tape`, `marker`, `status.*`) map to CSS variables in `src/styles/globals.css`. Four typefaces come from `next/font/google` in `app/layout.tsx` and are exposed as CSS variables: Bricolage Grotesque (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`, metadata), Caveat (`font-label`, tape labels only — never body copy).
 
