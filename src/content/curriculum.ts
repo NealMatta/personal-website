@@ -139,6 +139,7 @@ const ACCENT = {
   cooking: classColor('cooking'),
   woodworking: classColor('woodworking'),
   cad: classColor('cad'),
+  calisthenics: classColor('calisthenics'),
 };
 
 export const QUARTERS: Quarter[] = [
@@ -693,6 +694,188 @@ export const QUARTERS: Quarter[] = [
                 id: 'p4c',
                 week: 13,
                 text: 'Holiday week: one fun conversation, no homework',
+                kind: 'buffer',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        slug: 'cal-101',
+        dept: 'CAL',
+        code: 'CAL 101',
+        title: 'Calisthenics 101',
+        why: 'Turn the pull-up I already have into a muscle-up, twenty minutes at a time, and build a handstand and a pistol squat alongside it.',
+        credits: 2,
+        status: 'in-progress',
+        ...ACCENT.calisthenics,
+        final:
+          'One bar muscle-up: from a dead hang to locked out over the bar. A kip is fine; no band, no jump. On video.',
+        finalWeek: 12,
+        finalOn: 'Sat Dec 19',
+        midterm:
+          '8 strict pull-ups in one set, 3 chest-to-bar pull-ups, and 5 straight-bar dips. Both AMRAPs beat their Wk 4 rounds',
+        midtermWeek: 6,
+        syllabus: {
+          weeklyMinimum: [
+            "Upper day: a 20-minute AMRAP of the unit's circuit, then 10 minutes of handstand and muscle-up drills",
+            "Lower day: a 20-minute AMRAP of the unit's circuit, then 10 minutes of pistol-squat work",
+            'Skill day, about 30 minutes and no clock: muscle-up, handstand and pistol practice, done fresh',
+            'A check-in at the end of the week with the rounds from both AMRAPs. The circuit stays the same for a whole unit, so the rounds compare week to week',
+          ],
+          whenWhere:
+            "Upper and skill days need a bar I can get over: the gym's pull-up bar or a park bar, not a doorway bar. A low bar (Smith machine or a park's low bar) for transition drills, parallel bars or two sturdy chairs for dips, a resistance band from Wk 7. Lower days work anywhere. A day off between the upper day and the skill day, so the pulling muscles get a rest. Travel weeks (Oct 11–18, Thanksgiving) swap the bar for towel-on-a-door rows and chair dips.",
+        },
+        units: [
+          {
+            n: 1,
+            title: 'Pulling volume',
+            from: 1,
+            to: 3,
+            steps: [
+              {
+                id: 'c1a',
+                week: 1,
+                text: "Baseline: max strict pull-ups, max chest-to-bar pull-ups, max dips, max push-ups, chest-to-wall handstand hold, and the lowest seat I can pistol down to on each leg. Write them all in this week's check-in",
+              },
+              {
+                id: 'c1b',
+                week: 1,
+                text: 'Upper circuit A1, a 20-min AMRAP: 3 strict pull-ups (about half my max), 8 dips, 10 push-ups, 6 pike push-ups, 20 s hollow hold. Then 3 × 30 s chest-to-wall handstand and 3 × 10 s false-grip hang',
+              },
+              {
+                id: 'c1c',
+                week: 1,
+                text: 'Lower circuit B1, a 20-min AMRAP: 12 air squats, 8 reverse lunges each leg, 12 glute bridges, 15 calf raises, 30 s plank. Then pistols to a chair: lower on one leg, stand on the same leg, 3 × 5 each, holding a doorframe if needed, plus 1 min in a deep squat',
+              },
+              {
+                id: 'c1d',
+                week: 2,
+                text: 'Skill day S1: pull-up ladders (1, 2, 3, then back to 1) × 3; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang; 3 chest-to-wall walk-ups, holding 30 s; 3 × 5 doorframe-assisted pistols each leg',
+              },
+              {
+                id: 'c1e',
+                week: 2,
+                text: 'Same circuits as Wk 1; beat its rounds on both days',
+              },
+              {
+                id: 'c1f',
+                week: 3,
+                text: 'Away Oct 11–18, no bar: towel-on-a-door rows for the pull-ups, chair dips for the dips; both AMRAPs and the pistol work as usual',
+              },
+            ],
+          },
+          {
+            n: 2,
+            title: 'Pull higher',
+            from: 4,
+            to: 6,
+            steps: [
+              {
+                id: 'c2a',
+                week: 4,
+                text: 'Upper circuit A2: 3 chest-to-bar pull-ups (or pull-ups as high as I can), 8 dips, 10 push-ups, 6 pike push-ups with feet on a chair, 6 hanging knee raises. Then 3 × 30 s chest-to-wall handstand and 3 × 3 explosive pull-ups, bar to chest',
+              },
+              {
+                id: 'c2b',
+                week: 4,
+                text: 'Lower circuit B2: 8 Bulgarian split squats each leg (back foot on a chair), 10 squat jumps, 10 single-leg glute bridges each leg, 30 s wall sit. Then pistols to a lower seat, 3 × 5 each, and 3 slow pistol negatives all the way to the floor',
+              },
+              {
+                id: 'c2c',
+                week: 4,
+                text: 'Skill day S2: 5 × 3 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 5 false-grip pull-ups; 10 back-to-wall handstand kick-ups; 3 × 5 pistols holding a light weight out front. New circuits, so these rounds are the new baseline',
+              },
+              {
+                id: 'c2d',
+                week: 5,
+                text: 'Same circuits as Wk 4; beat its rounds on both days',
+              },
+              {
+                id: 'c2e',
+                week: 6,
+                text: '8 strict pull-ups in one set, 3 chest-to-bar pull-ups, and 5 straight-bar dips. Both AMRAPs beat their Wk 4 rounds',
+                kind: 'midterm',
+              },
+            ],
+          },
+          {
+            n: 3,
+            title: 'The transition',
+            from: 7,
+            to: 9,
+            steps: [
+              {
+                id: 'c3a',
+                week: 7,
+                text: 'Upper circuit A3: 3 chest-to-bar pull-ups, 5 straight-bar dips, 10 push-ups, 6 pike push-ups from a higher box, 8 hanging knee raises. Then 3 × 30 s back-to-wall handstand and 3 × 2 muscle-up negatives: start locked out over the bar, lower slowly through the transition to a hang',
+              },
+              {
+                id: 'c3b',
+                week: 7,
+                text: 'Lower circuit B3: 10 jumping lunges, 8 Bulgarian split squats each leg, 6 skater squats each leg (back knee to a pillow), 12 single-leg calf raises each leg. Then pistols to the lowest step I can, and 3 × 3 full pistols holding a doorframe',
+              },
+              {
+                id: 'c3c',
+                week: 7,
+                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist; 10 freestanding handstand kick-ups plus 1 min against the wall; 3 × 3 counterbalanced full pistols',
+              },
+              {
+                id: 'c3d',
+                week: 8,
+                text: 'Same circuits as Wk 7; beat its rounds. Band muscle-ups easy? Drop to a lighter band',
+              },
+              {
+                id: 'c3e',
+                week: 9,
+                text: "Thanksgiving at my parents': a lighter week. Both AMRAPs without a bar (towel-on-a-door rows and chair dips), skill day optional",
+              },
+            ],
+          },
+          {
+            n: 4,
+            title: 'The muscle-up',
+            from: 10,
+            to: 12,
+            steps: [
+              {
+                id: 'c4a',
+                week: 10,
+                text: 'Upper circuit A4: 2 chest-to-bar pull-ups, 2 explosive pull-ups to the waist, 6 straight-bar dips, 10 push-ups, 6 hanging leg raises. Then 5 min of freestanding handstand kick-ups and 3 × 2 muscle-up negatives',
+              },
+              {
+                id: 'c4b',
+                week: 10,
+                text: 'Lower circuit B4: 5 pistols each leg to the lowest box, 10 squat jumps, 8 Bulgarian split squats each leg, 30 s wall sit. Then 3 × 2 full pistols each leg, heels on a plate or book if needed',
+              },
+              {
+                id: 'c4c',
+                week: 10,
+                text: 'Skill day S4: first muscle-up attempts, fresh, on video: 5 × 1 with full rest, band-assisted if they fail. Then handstand and pistol practice',
+              },
+              {
+                id: 'c4d',
+                week: 11,
+                text: 'Same circuits as Wk 10; beat its rounds. Keep the skill day light so the final is fresh',
+              },
+              {
+                id: 'c4e',
+                week: 12,
+                text: 'FINAL: one bar muscle-up, filmed. Then retake every Wk 1 baseline and post both side by side',
+                kind: 'final',
+              },
+            ],
+          },
+          {
+            n: 5,
+            title: 'Wind down',
+            from: 13,
+            to: 13,
+            steps: [
+              {
+                id: 'c5a',
+                week: 13,
+                text: 'San Diego week: rest, or one beach AMRAP for fun',
                 kind: 'buffer',
               },
             ],

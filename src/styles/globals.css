@@ -67,6 +67,8 @@ of the visitor's local time shows through.
   --class-woodworking-tint: #e6ebd6;
   --class-cad: #6b4fb8;
   --class-cad-tint: #e7e1f4;
+  --class-calisthenics: #17766b;
+  --class-calisthenics-tint: #d9ece8;
 
   /* The chip on a project card, one per kind (src/content/projects.ts). */
   --kind-software: #1f5f80;
@@ -164,6 +166,8 @@ not the theme.
   --class-woodworking-tint: #262d1a;
   --class-cad: #a994ee;
   --class-cad-tint: #29243a;
+  --class-calisthenics: #5fc4b3;
+  --class-calisthenics-tint: #1a2e2b;
 
   --kind-software: #8cc3de;
   --kind-software-tint: #1c2b33;
