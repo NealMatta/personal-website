@@ -7,16 +7,18 @@ four classes at ten credits is ten hours a week I've actually promised.
 
 Everything the Curriculum pages render comes from this file: the quarters,
 the classes inside them, every weekly step, and the check-ins. It's typed
-data for now rather than a table, so planning a quarter means editing a
-list instead of writing a migration. Once the shape stops moving it goes
-to a real store and the pages stop importing this file.
+data rather than a table, so planning a quarter means editing a list
+instead of writing a migration. The one thing that isn't here is which
+steps are done: that record lives in Firestore and is laid over this file
+by `src/apiManagement/curriculum/progress.ts`.
 
 What's real here: the classes, the credits, the units, the midterms and
 the finals. Weekly steps still in [brackets] are mine to write — same
 rule the field notes follow.
 
-To mark a step done, add `done: true` to it. To pass a class, set
-`status: 'passed'` and a `passedOn` date; the transcript reads both.
+A step is ticked off on the site itself, once `/curriculum/unlock` has
+taken the passcode. To pass a class, set `status: 'passed'` and a
+`passedOn` date; the transcript reads both.
 */
 
 export type CourseStatus =
@@ -36,7 +38,7 @@ export interface Step {
   week: number;
   text: string;
   kind?: StepKind;
-  /** Set once it's actually done. */
+  /** Set once it's actually done. Comes from the record, not this file. */
   done?: boolean;
 }
 
@@ -1241,9 +1243,14 @@ export function courseSteps(course: Course): Step[] {
   return course.units.flatMap((u) => u.steps);
 }
 
-/** A step's key: its own id when it has one, else its week. */
+/** What a step is called inside its class: its own id, else its week. */
+export function stepId(step: Step): string {
+  return step.id ?? `w${step.week}`;
+}
+
+/** A step's key across every class. */
 export function stepKey(course: Course, step: Step): string {
-  return `${course.slug}-${step.id ?? `w${step.week}`}`;
+  return `${course.slug}-${stepId(step)}`;
 }
 
 export interface CourseProgress {

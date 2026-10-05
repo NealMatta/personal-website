@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ClassDetail from '@/src/components/pages/Curriculum/ClassDetail';
+import { recordedQuarters } from '@/src/apiManagement/curriculum/progress';
 import { allCourses, getCourse, quarterClock } from '@/src/content/curriculum';
 
 type Params = Promise<{ code: string }>;
@@ -27,13 +28,16 @@ export async function generateMetadata({
 }
 
 export default async function ClassPage({ params }: { params: Params }) {
-  const found = getCourse((await params).code);
+  const { code } = await params;
+  const quarter = (await recordedQuarters()).find((q) =>
+    q.courses.some((c) => c.slug === code)
+  );
+  const course = quarter?.courses.find((c) => c.slug === code);
 
-  if (!found) {
+  if (!quarter || !course) {
     notFound();
   }
 
-  const { course, quarter } = found;
   const clock = quarterClock(quarter, new Date());
 
   /* The other classes in the same quarter, so a class isn't a dead end. */

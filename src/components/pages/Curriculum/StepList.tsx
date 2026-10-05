@@ -1,13 +1,14 @@
 import type { Course, Step } from '@/src/content/curriculum';
-import { stepKey } from '@/src/content/curriculum';
+import { stepId, stepKey } from '@/src/content/curriculum';
+import StepBox from '@/src/components/pages/Curriculum/StepBox';
 
 /*
 A run of weekly steps with their boxes ticked or not.
 
-The boxes are drawn, not clickable: what's done lives in the curriculum
-file, so this reads the record rather than keeping one. The box is
-decoration — the state is said out loud for a screen reader, because a
-line through text is the one thing it can't see.
+What's done comes in on each step, already read from the record. For a
+visitor the box is decoration — the state is said out loud for a screen
+reader, because a line through text is the one thing it can't see. For me,
+once the browser is unlocked, `StepBox` turns it into a real checkbox.
 */
 
 interface StepListProps {
@@ -58,26 +59,12 @@ export default function StepList({
                   : ''
             }`}
           >
-            <span
-              aria-hidden="true"
-              className="flex h-[22px] w-[22px] items-center justify-center rounded-md border-2 border-ink"
-              style={step.done ? { background: 'var(--ink)' } : undefined}
-            >
-              {step.done && (
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="var(--paper)"
-                  strokeWidth="3.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12.5l4.5 4.5L19 7.5" />
-                </svg>
-              )}
-            </span>
+            <StepBox
+              course={course.slug}
+              step={stepId(step)}
+              done={step.done === true}
+              label={step.text}
+            />
 
             <span className="flex flex-wrap items-center gap-2.5">
               {tag && (
