@@ -8,15 +8,13 @@ import ThisWeek from '@/src/components/pages/Curriculum/ThisWeek';
 import ClassRows from '@/src/components/pages/Curriculum/ClassRows';
 import CheckInFeed from '@/src/components/pages/Curriculum/CheckInFeed';
 import PlannedClasses from '@/src/components/pages/Curriculum/PlannedClasses';
+import { recordedQuarters } from '@/src/apiManagement/curriculum/progress';
 import {
   CREDIT_LOAD,
-  currentQuarter,
-  getQuarter,
   quarterCheckIns,
   quarterClock,
   quarterCredits,
   quarterStatus,
-  quarters,
 } from '@/src/content/curriculum';
 
 export const metadata: Metadata = {
@@ -39,7 +37,10 @@ export default async function Curriculum({
   searchParams: Search;
 }) {
   const requested = (await searchParams).quarter;
-  const quarter = requested ? getQuarter(requested) : currentQuarter();
+  const all = await recordedQuarters();
+  const quarter = requested
+    ? all.find((q) => q.slug === requested)
+    : (all.find((q) => q.state === 'current') ?? all[0]);
 
   if (!quarter) {
     notFound();
@@ -59,7 +60,7 @@ export default async function Curriculum({
           </span>
 
           <div className="flex flex-wrap items-center gap-6">
-            <QuarterSwitcher quarters={quarters()} current={quarter} />
+            <QuarterSwitcher quarters={all} current={quarter} />
             <Tape tilt={-2}>
               {inSession ? quarterStatus(clock, quarter) : 'Planning'}
             </Tape>
