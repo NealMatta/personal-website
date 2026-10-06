@@ -476,34 +476,34 @@ export const QUARTERS: Quarter[] = [
         units: [
           {
             n: 1,
-            title: 'The book: first chapters',
+            title: 'The book: seeing, contour & perspective',
             from: 1,
             to: 5,
             steps: [
               {
                 id: 's1a',
                 week: 1,
-                text: 'Book arrives Oct 1 while I am traveling: start lesson 1 once home and photograph the table of contents',
+                text: 'Pages 2–9: Meet your teacher, Intro, Your first self portrait (keep it as your baseline), How to see like an artist, SAM skills. Cut out the viewfinders (pp. 63, 65) and skim the SAM guide (p. 67)',
               },
               {
                 id: 's1b',
                 week: 2,
-                text: 'Buy a small travel sketchbook before the Oct 11 trip; daily book lessons',
+                text: 'Pages 11–21: Upside down drawing, Negative space, Continuous contour, plus practice pages 52–55. Buy the travel sketchbook before Oct 11',
               },
               {
                 id: 's1c',
                 week: 3,
-                text: 'Away Oct 11–18: pack the book + travel sketchbook, keep the daily lessons, one sketch from the trip',
+                text: 'Away Oct 11–18: pages 22–23 Blind contour (travels well, no prep). One trip sketch in the travel sketchbook',
               },
               {
                 id: 's1d',
                 week: 4,
-                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+                text: "Pages 24–31 + 62: Perspective, One point, Two point, and the perspective reference images. This is the skyline unit, so don't rush it",
               },
               {
                 id: 's1e',
                 week: 5,
-                text: 'Daily book lessons; on a clear day, snap a few skyline reference photos (Riverwalk or lakefront) for the midterm',
+                text: 'Pages 32–35 + 69 Value, pages 40–43 Gridding and Reference photos 101. On a clear day, shoot your own skyline reference photos (Riverwalk or lakefront)',
               },
             ],
           },
@@ -514,6 +514,11 @@ export const QUARTERS: Quarter[] = [
             to: 6,
             steps: [
               {
+                id: 's2a',
+                week: 6,
+                text: 'Pages 48–49 Drawing from a reference photo (midterm warm-up)',
+              },
+              {
                 id: 's2b',
                 week: 6,
                 text: 'Chicago skyline from my own reference photo, drawn indoors in the travel sketchbook, under an hour',
@@ -523,34 +528,34 @@ export const QUARTERS: Quarter[] = [
           },
           {
             n: 3,
-            title: 'The book, continued',
+            title: 'The book: faces & observation',
             from: 7,
             to: 11,
             steps: [
               {
                 id: 's3a',
                 week: 7,
-                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+                text: 'Pages 36–39 Drawing a face, plus practice pages 56–61 (nose, eyes, mouth)',
               },
               {
                 id: 's3b',
                 week: 8,
-                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+                text: 'Pages 44–47: Self portrait #2 and A message to the artist. Put it next to the week 1 baseline and post the comparison',
               },
               {
                 id: 's3c',
                 week: 9,
-                text: "Thanksgiving at my parents' (Nov 24–29): pack the book + travel sketchbook; one low-pressure sketch there",
+                text: "Thanksgiving at my parents' (Nov 24–29): page 50 Drawing from observation. One low-pressure sketch there",
               },
               {
                 id: 's3d',
                 week: 10,
-                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+                text: 'Page 51 Drawing from imagination + drawing prompts (pp. 71–72)',
               },
               {
                 id: 's3e',
                 week: 11,
-                text: 'Daily book lessons (chapters to fill in from the table of contents)',
+                text: 'Open sketchbook pages (73+): two skyline or street-scene sketches from photos, using perspective + value',
               },
             ],
           },
@@ -563,7 +568,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 's4b',
                 week: 12,
-                text: 'Finish the book; one timed 30-minute sketch from a photo; pack the travel sketchbook',
+                text: 'Finish any leftover book pages; one timed 30-minute sketch from a photo; pack the travel sketchbook',
               },
               {
                 id: 's4c',
