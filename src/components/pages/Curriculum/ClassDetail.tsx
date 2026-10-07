@@ -1,13 +1,21 @@
 import Breadcrumb from '@/src/components/reusable/UI/Breadcrumb';
 import PhotoSlot from '@/src/components/reusable/UI/PhotoSlot';
 import StepList from '@/src/components/pages/Curriculum/StepList';
-import type { Course, Quarter, QuarterClock } from '@/src/content/curriculum';
+import CheckInComposer from '@/src/components/pages/Curriculum/CheckInComposer';
+import CheckInEntry from '@/src/components/pages/Curriculum/CheckInEntry';
+import type {
+  CheckIn,
+  Course,
+  Quarter,
+  QuarterClock,
+} from '@/src/content/curriculum';
 import {
   checkInsFor,
   courseGrade,
   courseProgress,
   courseStatusLabel,
   formatCurriculumDay,
+  takesCheckIns,
 } from '@/src/content/curriculum';
 
 /*
@@ -22,16 +30,19 @@ interface ClassDetailProps {
   course: Course;
   quarter: Quarter;
   clock: QuarterClock;
+  /** Every check-in on record; the class picks out its own. */
+  checkIns: CheckIn[];
 }
 
 export default function ClassDetail({
   course,
   quarter,
   clock,
+  checkIns: recorded,
 }: ClassDetailProps) {
   const progress = courseProgress(course, clock);
   const grade = courseGrade(course);
-  const checkIns = checkInsFor(course.slug);
+  const checkIns = checkInsFor(recorded, course.slug);
   const passed = course.status === 'passed';
   const running = quarter.state === 'current';
 
@@ -137,6 +148,15 @@ export default function ClassDetail({
             </span>
           </div>
 
+          {takesCheckIns(quarter) && (
+            <CheckInComposer
+              className="pb-2"
+              courses={[
+                { slug: course.slug, code: course.code, title: course.title },
+              ]}
+            />
+          )}
+
           {checkIns.length === 0 ? (
             <p className="m-0 py-2 text-base text-pencil">
               No check-ins yet. The first one counts as attendance for week 1.
@@ -164,9 +184,13 @@ export default function ClassDetail({
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <p className="m-0 whitespace-pre-line text-[17px] leading-relaxed">
-                    {checkIn.body}
-                  </p>
+                  <CheckInEntry
+                    checkIn={{
+                      id: checkIn.id,
+                      body: checkIn.body,
+                      kind: checkIn.kind,
+                    }}
+                  />
 
                   {checkIn.photos && checkIn.photos.length > 0 && (
                     <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">

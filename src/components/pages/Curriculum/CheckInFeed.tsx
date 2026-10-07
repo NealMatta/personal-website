@@ -1,13 +1,15 @@
 import type { CheckIn, Quarter } from '@/src/content/curriculum';
 import { formatCurriculumDay } from '@/src/content/curriculum';
 import PhotoSlot from '@/src/components/reusable/UI/PhotoSlot';
+import CheckInComposer from '@/src/components/pages/Curriculum/CheckInComposer';
+import CheckInEntry from '@/src/components/pages/Curriculum/CheckInEntry';
 
 /*
-Check-ins: short updates with photos, filed against a class.
+Check-ins: short updates filed against a class.
 
-Each one counts as attendance for its week. They're written into the
-curriculum file for now, so this is the reading end of the thing — the
-writing end arrives with the store.
+Each one counts as attendance for its week. A visitor gets the reading
+end; a browser that holds the key also gets the composer above the list
+and an Edit and a Remove on each one.
 */
 
 interface CheckInFeedProps {
@@ -32,6 +34,15 @@ export default function CheckInFeed({ quarter, checkIns }: CheckInFeedProps) {
       </div>
 
       <div className="flex flex-col border-t-2 border-ink lg:col-span-8 lg:col-start-5">
+        <CheckInComposer
+          className="border-b border-rule py-6"
+          courses={quarter.courses.map(({ slug, code, title }) => ({
+            slug,
+            code,
+            title,
+          }))}
+        />
+
         {checkIns.length === 0 ? (
           <div className="flex flex-col gap-2 py-10">
             <span className="font-display text-2xl font-bold">
@@ -64,9 +75,13 @@ export default function CheckInFeed({ quarter, checkIns }: CheckInFeedProps) {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <p className="m-0 whitespace-pre-line text-[17px] leading-relaxed">
-                    {checkIn.body}
-                  </p>
+                  <CheckInEntry
+                    checkIn={{
+                      id: checkIn.id,
+                      body: checkIn.body,
+                      kind: checkIn.kind,
+                    }}
+                  />
 
                   {checkIn.photos && checkIn.photos.length > 0 && (
                     <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">

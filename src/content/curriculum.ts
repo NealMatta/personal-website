@@ -5,19 +5,20 @@ I run my own school. A quarter is thirteen weeks, a class is a syllabus
 with a final I either pass or don't, and credits are hours a week — so
 four classes at ten credits is ten hours a week I've actually promised.
 
-Everything the Curriculum pages render comes from this file: the quarters,
-the classes inside them, every weekly step, and the check-ins. It's typed
-data rather than a table, so planning a quarter means editing a list
-instead of writing a migration. The one thing that isn't here is which
-steps are done: that record lives in Firestore and is laid over this file
-by `src/apiManagement/curriculum/progress.ts`.
+The syllabus the Curriculum pages render comes from this file: the
+quarters, the classes inside them and every weekly step. It's typed data
+rather than a table, so planning a quarter means editing a list instead of
+writing a migration. What isn't here is what I did about it: which steps
+are done, and the check-ins. Both live in Firestore — the steps are laid
+over this file by `src/apiManagement/curriculum/progress.ts`, the
+check-ins are read by `src/apiManagement/curriculum/checkIns.ts`.
 
 What's real here: the classes, the credits, the units, the midterms and
 the finals. Weekly steps still in [brackets] are mine to write — same
 rule the field notes follow.
 
-A step is ticked off on the site itself, once `/curriculum/unlock` has
-taken the passcode. To pass a class, set `status: 'passed'` and a
+A step is ticked off, and a check-in written, on the site itself, once
+`/curriculum/unlock` has taken the passcode. To pass a class, set `status: 'passed'` and a
 `passedOn` date; the transcript reads both.
 */
 
@@ -114,7 +115,7 @@ export interface CheckIn {
   id: string;
   /** Course slug. A check-in always belongs to a class. */
   course: string;
-  /** ISO date. */
+  /** ISO date, the day it was posted. Never moved afterwards. */
   at: string;
   body: string;
   /** An exam check-in is the proof I passed; an update is everything else. */
@@ -599,7 +600,7 @@ export const QUARTERS: Quarter[] = [
           weeklyMinimum: [
             'One chapter + its vocabulary',
             'One speaking session, recorded',
-            "Post the recording as this week's video",
+            "From Week 4 on: post the recording as this week's video",
           ],
           whenWhere:
             'On my own, plus one weekly speaking session with a tutor or partner',
@@ -614,7 +615,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1a',
                 week: 1,
-                text: 'Back from the work trip: pick a textbook or course; book a weekly tutor or partner; record a 20-second intro',
+                text: 'Back from the work trip: pick a textbook or course; book a weekly tutor or partner',
               },
               {
                 id: 'p1b',
@@ -629,7 +630,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1d',
                 week: 4,
-                text: 'Regular present tense: -ar, -er, -ir',
+                text: 'Regular present tense: -ar, -er, -ir; record a 20-second intro and post it on TikTok',
               },
             ],
           },
@@ -1127,11 +1128,8 @@ export const QUARTERS: Quarter[] = [
   },
 ];
 
-/*
-Check-ins. Short updates with photos, filed against a class — each one
-counts as attendance for the week it lands in.
-*/
-export const CHECK_INS: CheckIn[] = [];
+/** How long a check-in can run. A note, not an essay. */
+export const CHECK_IN_LIMIT = 2000;
 
 /** Roughly a full load. Over this and the quarter is asking too much. */
 export const CREDIT_LOAD = 12;
@@ -1301,18 +1299,63 @@ export function stepsForWeek(course: Course, week: number): Step[] {
   return courseSteps(course).filter((s) => s.week === week);
 }
 
-export function checkInsFor(courseSlug: string): CheckIn[] {
-  return CHECK_INS.filter((c) => c.course === courseSlug).sort((a, b) =>
-    b.at.localeCompare(a.at)
-  );
+/*
+The check-ins come in from the record, so these take the list rather than
+reach for it. The sort is stable, so two on one day keep the order they
+arrived in.
+*/
+
+/** A class's check-ins, newest first. */
+export function checkInsFor(
+  checkIns: CheckIn[],
+  courseSlug: string
+): CheckIn[] {
+  return checkIns
+    .filter((c) => c.course === courseSlug)
+    .sort((a, b) => b.at.localeCompare(a.at));
 }
 
 /** Every check-in in a quarter, newest first. */
-export function quarterCheckIns(quarter: Quarter): CheckIn[] {
+export function quarterCheckIns(
+  checkIns: CheckIn[],
+  quarter: Quarter
+): CheckIn[] {
   const slugs = new Set(quarter.courses.map((c) => c.slug));
-  return CHECK_INS.filter((c) => slugs.has(c.course)).sort((a, b) =>
-    b.at.localeCompare(a.at)
+  return checkIns
+    .filter((c) => slugs.has(c.course))
+    .sort((a, b) => b.at.localeCompare(a.at));
+}
+
+/**
+ * Whether a class can be checked in to. Any class whose quarter has been
+ * in session can, including a finished one — a reflection months later
+ * still belongs to its class.
+ */
+export function takesCheckIns(quarter: Quarter): boolean {
+  return quarter.state !== 'planning';
+}
+
+/** Today, as the visitor's own calendar has it: "2026-10-04". */
+export function localDay(now: Date): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+/**
+ * Whether a day is today somewhere on Earth. The server runs in UTC and
+ * I don't, so "today" is the browser's to say — but only within a day of
+ * the server's own, which is what keeps a check-in from being backdated.
+ */
+export function isToday(iso: string, now: Date): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+  /* A day the calendar doesn't have, like the 35th, rolls over. */
+  if (new Date(utcDay(iso)).toISOString().slice(0, 10) !== iso) return false;
+  const today = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate()
   );
+  return Math.abs(utcDay(iso) - today) <= DAY;
 }
 
 /** How a class prints on the transcript. */
@@ -1386,7 +1429,7 @@ export interface TranscriptTotals {
 }
 
 /** Credits only count once the final is passed. */
-export function transcriptTotals(): TranscriptTotals {
+export function transcriptTotals(checkIns: CheckIn[]): TranscriptTotals {
   const taken = allCourses().filter(
     ({ quarter }) => quarter.state !== 'planning'
   );
@@ -1397,7 +1440,7 @@ export function transcriptTotals(): TranscriptTotals {
     attempted: taken.reduce((n, { course }) => n + course.credits, 0),
     passed: passed.length,
     classes: taken.length,
-    checkIns: CHECK_INS.length,
+    checkIns: checkIns.length,
   };
 }
 

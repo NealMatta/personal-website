@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import type { Quarter, QuarterClock, Course } from '@/src/content/curriculum';
+import type {
+  CheckIn,
+  Course,
+  Quarter,
+  QuarterClock,
+} from '@/src/content/curriculum';
 import {
   checkInsFor,
   courseProgress,
@@ -19,11 +24,12 @@ behind.
 interface ClassRowsProps {
   quarter: Quarter;
   clock: QuarterClock;
+  checkIns: CheckIn[];
 }
 
 /** The attendance note at the end of the row. */
-function attendance(course: Course, clock: QuarterClock) {
-  const [last] = checkInsFor(course.slug);
+function attendance(course: Course, clock: QuarterClock, checkIns: CheckIn[]) {
+  const [last] = checkInsFor(checkIns, course.slug);
 
   if (last) {
     return {
@@ -49,7 +55,11 @@ function attendance(course: Course, clock: QuarterClock) {
   };
 }
 
-export default function ClassRows({ quarter, clock }: ClassRowsProps) {
+export default function ClassRows({
+  quarter,
+  clock,
+  checkIns,
+}: ClassRowsProps) {
   return (
     <section className="flex flex-col gap-3.5 px-6 pt-16 lg:px-16">
       <h2 className="m-0 mb-1.5 font-display text-3xl font-extrabold lg:text-[40px]">
@@ -58,7 +68,7 @@ export default function ClassRows({ quarter, clock }: ClassRowsProps) {
 
       {quarter.courses.map((course) => {
         const progress = courseProgress(course, clock);
-        const note = attendance(course, clock);
+        const note = attendance(course, clock, checkIns);
 
         return (
           <Link

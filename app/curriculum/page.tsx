@@ -7,7 +7,9 @@ import WeekRibbon from '@/src/components/pages/Curriculum/WeekRibbon';
 import ThisWeek from '@/src/components/pages/Curriculum/ThisWeek';
 import ClassRows from '@/src/components/pages/Curriculum/ClassRows';
 import CheckInFeed from '@/src/components/pages/Curriculum/CheckInFeed';
+import CheckInJump from '@/src/components/pages/Curriculum/CheckInJump';
 import PlannedClasses from '@/src/components/pages/Curriculum/PlannedClasses';
+import { recordedCheckIns } from '@/src/apiManagement/curriculum/checkIns';
 import { recordedQuarters } from '@/src/apiManagement/curriculum/progress';
 import {
   CREDIT_LOAD,
@@ -37,7 +39,10 @@ export default async function Curriculum({
   searchParams: Search;
 }) {
   const requested = (await searchParams).quarter;
-  const all = await recordedQuarters();
+  const [all, checkIns] = await Promise.all([
+    recordedQuarters(),
+    recordedCheckIns(),
+  ]);
   const quarter = requested
     ? all.find((q) => q.slug === requested)
     : (all.find((q) => q.state === 'current') ?? all[0]);
@@ -115,6 +120,8 @@ export default async function Curriculum({
           >
             Transcript →
           </Link>
+
+          {inSession && <CheckInJump />}
         </div>
       </section>
 
@@ -122,8 +129,11 @@ export default async function Curriculum({
         <>
           <WeekRibbon quarter={quarter} clock={clock} />
           <ThisWeek quarter={quarter} clock={clock} />
-          <ClassRows quarter={quarter} clock={clock} />
-          <CheckInFeed quarter={quarter} checkIns={quarterCheckIns(quarter)} />
+          <ClassRows quarter={quarter} clock={clock} checkIns={checkIns} />
+          <CheckInFeed
+            quarter={quarter}
+            checkIns={quarterCheckIns(checkIns, quarter)}
+          />
         </>
       ) : (
         <PlannedClasses quarter={quarter} />

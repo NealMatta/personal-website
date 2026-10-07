@@ -1,5 +1,5 @@
 /* Notes
-- The only write path on the site: ticks a step off, or un-ticks it
+- One of the site's two write paths, with check-ins: ticks a step off, or un-ticks it
 - Refuses anyone without the unlock cookie, and any step the syllabus doesn't have */
 
 import { revalidateTag } from 'next/cache';
