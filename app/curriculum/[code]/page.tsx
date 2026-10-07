@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ClassDetail from '@/src/components/pages/Curriculum/ClassDetail';
+import { recordedCheckIns } from '@/src/apiManagement/curriculum/checkIns';
 import { recordedQuarters } from '@/src/apiManagement/curriculum/progress';
 import { allCourses, getCourse, quarterClock } from '@/src/content/curriculum';
 
@@ -29,9 +30,11 @@ export async function generateMetadata({
 
 export default async function ClassPage({ params }: { params: Params }) {
   const { code } = await params;
-  const quarter = (await recordedQuarters()).find((q) =>
-    q.courses.some((c) => c.slug === code)
-  );
+  const [all, checkIns] = await Promise.all([
+    recordedQuarters(),
+    recordedCheckIns(),
+  ]);
+  const quarter = all.find((q) => q.courses.some((c) => c.slug === code));
   const course = quarter?.courses.find((c) => c.slug === code);
 
   if (!quarter || !course) {
@@ -45,7 +48,12 @@ export default async function ClassPage({ params }: { params: Params }) {
 
   return (
     <>
-      <ClassDetail course={course} quarter={quarter} clock={clock} />
+      <ClassDetail
+        course={course}
+        quarter={quarter}
+        clock={clock}
+        checkIns={checkIns}
+      />
 
       {siblings.length > 0 && (
         <section className="flex flex-col gap-4 px-6 pb-[72px] lg:px-16">

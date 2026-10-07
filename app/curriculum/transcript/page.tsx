@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumb from '@/src/components/reusable/UI/Breadcrumb';
 import PageIntro from '@/src/components/reusable/UI/PageIntro';
+import { recordedCheckIns } from '@/src/apiManagement/curriculum/checkIns';
 import {
   courseGrade,
   formatCurriculumDay,
@@ -22,8 +23,12 @@ One table per quarter, oldest habits and all. A quarter still being
 planned prints in dashes, because nothing has been attempted yet — and
 credits stay uncounted until the final is passed.
 */
-export default function Transcript() {
-  const totals = transcriptTotals();
+
+/* The check-in count is read from the record; posting one clears it. */
+export const revalidate = 3600;
+
+export default async function Transcript() {
+  const totals = transcriptTotals(await recordedCheckIns());
   const terms = quarters();
 
   return (
