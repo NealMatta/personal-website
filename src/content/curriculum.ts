@@ -595,7 +595,7 @@ export const QUARTERS: Quarter[] = [
           weeklyMinimum: [
             'One chapter + its vocabulary',
             'One speaking session, recorded',
-            "Post the recording as this week's video",
+            "From Week 4 on: post the recording as this week's video",
           ],
           whenWhere:
             'On my own, plus one weekly speaking session with a tutor or partner',
@@ -610,7 +610,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1a',
                 week: 1,
-                text: 'Back from the work trip: pick a textbook or course; book a weekly tutor or partner; record a 20-second intro',
+                text: 'Back from the work trip: pick a textbook or course; book a weekly tutor or partner',
               },
               {
                 id: 'p1b',
@@ -625,7 +625,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1d',
                 week: 4,
-                text: 'Regular present tense: -ar, -er, -ir',
+                text: 'Regular present tense: -ar, -er, -ir; record a 20-second intro and post it on TikTok',
               },
             ],
           },
