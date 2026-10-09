@@ -722,18 +722,18 @@ export const QUARTERS: Quarter[] = [
         finalWeek: 12,
         finalOn: 'Sat Dec 19',
         midterm:
-          '5 strict pull-ups in one set, 1 chest-to-bar pull-up, and 5 straight-bar dips. Both AMRAPs beat their Wk 4 totals',
+          '5 strict pull-ups in one set, 1 chest-to-bar pull-up, and 5 straight-bar dips. The AMRAP beats its Wk 4 totals',
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            "Upper day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of muscle-up drills",
-            "Lower day: a 20-minute AMRAP of the unit's circuit, reps by feel",
+            "Circuit day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of muscle-up drills. Every movement in it is a piece of the muscle-up: the pull, the dip on top, and the body line",
             'Reps by feel: no set number per round. Open each movement at a number I could do again, then match or beat it every round, until the clock runs out or I can no longer hold the numbers',
-            'Skill day, about 30 minutes and no clock: muscle-up practice, done fresh',
-            'A check-in at the end of the week with the total for each movement from both AMRAPs, e.g. 120 air squats in 20 minutes. The movements stay the same for a whole unit, so the totals compare week to week',
+            'Skill day, about 30 minutes and no clock: the second pulling day of the week. Pull-ups and muscle-up practice, done fresh',
+            'A check-in at the end of the week with the total for each movement from the AMRAP, e.g. 12 pull-ups and 60 rows in 20 minutes. The movements stay the same for a whole unit, so the totals compare week to week',
+            'Legs, push-ups and everything else happen outside this class: yoga, and my own 20 minutes a day',
           ],
           whenWhere:
-            "Upper and skill days need a bar I can get over: the gym's pull-up bar or a park bar, not a doorway bar. A low bar (Smith machine or a park's low bar) for transition drills, parallel bars or two sturdy chairs for dips, a resistance band from Wk 7. Lower days work anywhere. A day off between the upper day and the skill day, so the pulling muscles get a rest. Travel weeks (Oct 11–18, Thanksgiving) swap the bar for towel-on-a-door rows and chair dips.",
+            "Both days need a bar I can get over: the gym's pull-up bar or a park bar, not a doorway bar. A low bar (Smith machine or a park's low bar) for rows and transition drills, parallel bars or two sturdy chairs for dips, a resistance band from Wk 7. A day off between the circuit day and the skill day, so the pulling muscles get a rest. Travel weeks (Oct 11–18, Thanksgiving) swap the bar for towel-on-a-door rows and chair dips.",
         },
         units: [
           {
@@ -750,12 +750,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1b',
                 week: 1,
-                text: 'Upper circuit A1, a 20-min AMRAP, reps by feel: strict pull-ups, dips, push-ups, pike push-ups, hollow hold. My pull-up max is 2 or 3, so 1 or 2 a round, always a rep short of failure; when a strict one will not go, jump to the top and lower for 5 s instead. Then 3 × 10 s false-grip hang',
-              },
-              {
-                id: 'c1c',
-                week: 1,
-                text: 'Lower circuit B1, a 20-min AMRAP, reps by feel: air squats, reverse lunges each leg, glute bridges, calf raises, plank',
+                text: 'Circuit A1, a 20-min AMRAP, reps by feel: strict pull-ups, rows on a low bar, dips, hollow hold. My pull-up max is 2 or 3, so 1 or 2 a round, always a rep short of failure; when a strict one will not go, jump to the top and lower for 5 s instead. The rows carry the pulling volume. Then 3 × 10 s false-grip hang',
               },
               {
                 id: 'c1d',
@@ -765,12 +760,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1e',
                 week: 2,
-                text: 'Same circuits as Wk 1; beat its totals on both days',
+                text: 'Same circuit as Wk 1; beat its totals',
               },
               {
                 id: 'c1f',
                 week: 3,
-                text: 'Away Oct 11–18, no bar: towel-on-a-door rows for the pull-ups, chair dips for the dips; both AMRAPs as usual',
+                text: 'Away Oct 11–18, no bar: towel-on-a-door rows for the pull-ups and the rows, chair dips for the dips; the AMRAP as usual',
               },
             ],
           },
@@ -783,27 +778,22 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c2a',
                 week: 4,
-                text: 'Upper circuit A2, reps by feel: strict pull-ups pulled as high as I can, dips, push-ups, pike push-ups with feet on a chair, hanging knee raises. Then 3 × 2 explosive pull-ups, as high as they go',
-              },
-              {
-                id: 'c2b',
-                week: 4,
-                text: 'Lower circuit B2, reps by feel: Bulgarian split squats each leg (back foot on a chair), squat jumps, single-leg glute bridges each leg, wall sit',
+                text: 'Circuit A2, reps by feel: strict pull-ups pulled as high as I can, rows with feet on a chair, dips, hanging knee raises. Then 3 × 2 explosive pull-ups, as high as they go. A new circuit, so these totals are the new baseline',
               },
               {
                 id: 'c2c',
                 week: 4,
-                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups. New circuits, so these totals are the new baseline',
+                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups',
               },
               {
                 id: 'c2d',
                 week: 5,
-                text: 'Same circuits as Wk 4; beat its totals on both days',
+                text: 'Same circuit as Wk 4; beat its totals',
               },
               {
                 id: 'c2e',
                 week: 6,
-                text: '5 strict pull-ups in one set, 1 chest-to-bar pull-up, and 5 straight-bar dips. Both AMRAPs beat their Wk 4 totals',
+                text: '5 strict pull-ups in one set, 1 chest-to-bar pull-up, and 5 straight-bar dips. The AMRAP beats its Wk 4 totals',
                 kind: 'midterm',
               },
             ],
@@ -817,12 +807,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c3a',
                 week: 7,
-                text: 'Upper circuit A3, reps by feel: chest-to-bar pull-ups (or as high as I can), straight-bar dips, push-ups, pike push-ups from a higher box, hanging knee raises. Then 3 × 2 muscle-up negatives: start locked out over the bar, lower slowly through the transition to a hang',
-              },
-              {
-                id: 'c3b',
-                week: 7,
-                text: 'Lower circuit B3, reps by feel: jumping lunges, Bulgarian split squats each leg, air squats, single-leg calf raises each leg',
+                text: 'Circuit A3, reps by feel: chest-to-bar pull-ups (or as high as I can), rows with feet on a chair, straight-bar dips, hanging knee raises. Then 3 × 2 muscle-up negatives: start locked out over the bar, lower slowly through the transition to a hang',
               },
               {
                 id: 'c3c',
@@ -832,12 +817,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c3d',
                 week: 8,
-                text: 'Same circuits as Wk 7; beat its totals. Band muscle-ups easy? Drop to a lighter band',
+                text: 'Same circuit as Wk 7; beat its totals. Band muscle-ups easy? Drop to a lighter band',
               },
               {
                 id: 'c3e',
                 week: 9,
-                text: "Thanksgiving at my parents': a lighter week. Both AMRAPs without a bar (towel-on-a-door rows and chair dips), skill day optional",
+                text: "Thanksgiving at my parents': a lighter week. The AMRAP without a bar (towel-on-a-door rows and chair dips), skill day optional",
               },
             ],
           },
@@ -850,12 +835,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c4a',
                 week: 10,
-                text: 'Upper circuit A4, reps by feel: chest-to-bar pull-ups, explosive pull-ups to the waist, straight-bar dips, push-ups, hanging leg raises. Then 3 × 2 muscle-up negatives',
-              },
-              {
-                id: 'c4b',
-                week: 10,
-                text: 'Lower circuit B4, reps by feel: jumping lunges, squat jumps, Bulgarian split squats each leg, wall sit',
+                text: 'Circuit A4, reps by feel: chest-to-bar pull-ups, explosive pull-ups to the waist, straight-bar dips, hanging leg raises. Then 3 × 2 muscle-up negatives',
               },
               {
                 id: 'c4c',
@@ -865,7 +845,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c4d',
                 week: 11,
-                text: 'Same circuits as Wk 10; beat its totals. Keep the skill day light so the final is fresh',
+                text: 'Same circuit as Wk 10; beat its totals. Keep the skill day light so the final is fresh',
               },
               {
                 id: 'c4e',
