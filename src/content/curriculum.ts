@@ -713,7 +713,7 @@ export const QUARTERS: Quarter[] = [
         dept: 'CAL',
         code: 'CAL 101',
         title: 'Calisthenics 101',
-        why: 'Turn the pull-up I already have into a muscle-up, twenty minutes at a time, and build a handstand alongside it.',
+        why: 'Turn the pull-up I already have into a muscle-up, twenty minutes at a time.',
         credits: 2,
         status: 'in-progress',
         ...ACCENT.calisthenics,
@@ -726,10 +726,10 @@ export const QUARTERS: Quarter[] = [
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            "Upper day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of handstand and muscle-up drills",
+            "Upper day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of muscle-up drills",
             "Lower day: a 20-minute AMRAP of the unit's circuit, reps by feel",
             'Reps by feel: no set number per round. Open each movement at a number I could do again, then match or beat it every round, until the clock runs out or I can no longer hold the numbers',
-            'Skill day, about 30 minutes and no clock: muscle-up and handstand practice, done fresh',
+            'Skill day, about 30 minutes and no clock: muscle-up practice, done fresh',
             'A check-in at the end of the week with the total for each movement from both AMRAPs, e.g. 120 air squats in 20 minutes. The movements stay the same for a whole unit, so the totals compare week to week',
           ],
           whenWhere:
@@ -745,12 +745,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1a',
                 week: 1,
-                text: "Baseline: max strict pull-ups, max chest-to-bar pull-ups, max dips, max push-ups, and a chest-to-wall handstand hold. Write them all in this week's check-in",
+                text: "Baseline: max strict pull-ups, max chest-to-bar pull-ups, max dips, and max push-ups. Write them all in this week's check-in",
               },
               {
                 id: 'c1b',
                 week: 1,
-                text: 'Upper circuit A1, a 20-min AMRAP, reps by feel: strict pull-ups, dips, push-ups, pike push-ups, hollow hold. My pull-up max is 2 or 3, so 1 or 2 a round, always a rep short of failure; when a strict one will not go, jump to the top and lower for 5 s instead. Then 3 × 30 s chest-to-wall handstand and 3 × 10 s false-grip hang',
+                text: 'Upper circuit A1, a 20-min AMRAP, reps by feel: strict pull-ups, dips, push-ups, pike push-ups, hollow hold. My pull-up max is 2 or 3, so 1 or 2 a round, always a rep short of failure; when a strict one will not go, jump to the top and lower for 5 s instead. Then 3 × 10 s false-grip hang',
               },
               {
                 id: 'c1c',
@@ -760,7 +760,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1d',
                 week: 2,
-                text: 'Skill day S1: 6 sets of 1 or 2 strict pull-ups with a full rest between, then 3 slow negatives, 5 s down; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang; 3 chest-to-wall walk-ups, holding 30 s',
+                text: 'Skill day S1: 6 sets of 1 or 2 strict pull-ups with a full rest between, then 3 slow negatives, 5 s down; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang',
               },
               {
                 id: 'c1e',
@@ -783,7 +783,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c2a',
                 week: 4,
-                text: 'Upper circuit A2, reps by feel: strict pull-ups pulled as high as I can, dips, push-ups, pike push-ups with feet on a chair, hanging knee raises. Then 3 × 30 s chest-to-wall handstand and 3 × 2 explosive pull-ups, as high as they go',
+                text: 'Upper circuit A2, reps by feel: strict pull-ups pulled as high as I can, dips, push-ups, pike push-ups with feet on a chair, hanging knee raises. Then 3 × 2 explosive pull-ups, as high as they go',
               },
               {
                 id: 'c2b',
@@ -793,7 +793,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c2c',
                 week: 4,
-                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups; 10 back-to-wall handstand kick-ups. New circuits, so these totals are the new baseline',
+                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups. New circuits, so these totals are the new baseline',
               },
               {
                 id: 'c2d',
@@ -817,7 +817,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c3a',
                 week: 7,
-                text: 'Upper circuit A3, reps by feel: chest-to-bar pull-ups (or as high as I can), straight-bar dips, push-ups, pike push-ups from a higher box, hanging knee raises. Then 3 × 30 s back-to-wall handstand and 3 × 2 muscle-up negatives: start locked out over the bar, lower slowly through the transition to a hang',
+                text: 'Upper circuit A3, reps by feel: chest-to-bar pull-ups (or as high as I can), straight-bar dips, push-ups, pike push-ups from a higher box, hanging knee raises. Then 3 × 2 muscle-up negatives: start locked out over the bar, lower slowly through the transition to a hang',
               },
               {
                 id: 'c3b',
@@ -827,7 +827,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c3c',
                 week: 7,
-                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist; 10 freestanding handstand kick-ups plus 1 min against the wall',
+                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist',
               },
               {
                 id: 'c3d',
@@ -850,7 +850,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c4a',
                 week: 10,
-                text: 'Upper circuit A4, reps by feel: chest-to-bar pull-ups, explosive pull-ups to the waist, straight-bar dips, push-ups, hanging leg raises. Then 5 min of freestanding handstand kick-ups and 3 × 2 muscle-up negatives',
+                text: 'Upper circuit A4, reps by feel: chest-to-bar pull-ups, explosive pull-ups to the waist, straight-bar dips, push-ups, hanging leg raises. Then 3 × 2 muscle-up negatives',
               },
               {
                 id: 'c4b',
@@ -860,7 +860,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c4c',
                 week: 10,
-                text: 'Skill day S4: first muscle-up attempts, fresh, on video: 5 × 1 with full rest, band-assisted if they fail. Then handstand practice',
+                text: 'Skill day S4: first muscle-up attempts, fresh, on video: 5 × 1 with full rest, band-assisted if they fail',
               },
               {
                 id: 'c4d',
