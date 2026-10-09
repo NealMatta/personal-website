@@ -713,7 +713,7 @@ export const QUARTERS: Quarter[] = [
         dept: 'CAL',
         code: 'CAL 101',
         title: 'Calisthenics 101',
-        why: 'Turn the pull-up I already have into a muscle-up, twenty minutes at a time, and build a handstand and a pistol squat alongside it.',
+        why: 'Turn the pull-up I already have into a muscle-up, twenty minutes at a time, and build a handstand alongside it.',
         credits: 2,
         status: 'in-progress',
         ...ACCENT.calisthenics,
@@ -727,9 +727,9 @@ export const QUARTERS: Quarter[] = [
         syllabus: {
           weeklyMinimum: [
             "Upper day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of handstand and muscle-up drills",
-            "Lower day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of pistol-squat work",
+            "Lower day: a 20-minute AMRAP of the unit's circuit, reps by feel",
             'Reps by feel: no set number per round. Open each movement at a number I could do again, then match or beat it every round, until the clock runs out or I can no longer hold the numbers',
-            'Skill day, about 30 minutes and no clock: muscle-up, handstand and pistol practice, done fresh',
+            'Skill day, about 30 minutes and no clock: muscle-up and handstand practice, done fresh',
             'A check-in at the end of the week with the total for each movement from both AMRAPs, e.g. 120 air squats in 20 minutes. The movements stay the same for a whole unit, so the totals compare week to week',
           ],
           whenWhere:
@@ -745,7 +745,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1a',
                 week: 1,
-                text: "Baseline: max strict pull-ups, max chest-to-bar pull-ups, max dips, max push-ups, chest-to-wall handstand hold, and the lowest seat I can pistol down to on each leg. Write them all in this week's check-in",
+                text: "Baseline: max strict pull-ups, max chest-to-bar pull-ups, max dips, max push-ups, and a chest-to-wall handstand hold. Write them all in this week's check-in",
               },
               {
                 id: 'c1b',
@@ -755,12 +755,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1c',
                 week: 1,
-                text: 'Lower circuit B1, a 20-min AMRAP, reps by feel: air squats, reverse lunges each leg, glute bridges, calf raises, plank. Then pistols to a chair: lower on one leg, stand on the same leg, 3 × 5 each, holding a doorframe if needed, plus 1 min in a deep squat',
+                text: 'Lower circuit B1, a 20-min AMRAP, reps by feel: air squats, reverse lunges each leg, glute bridges, calf raises, plank',
               },
               {
                 id: 'c1d',
                 week: 2,
-                text: 'Skill day S1: 6 sets of 1 or 2 strict pull-ups with a full rest between, then 3 slow negatives, 5 s down; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang; 3 chest-to-wall walk-ups, holding 30 s; 3 × 5 doorframe-assisted pistols each leg',
+                text: 'Skill day S1: 6 sets of 1 or 2 strict pull-ups with a full rest between, then 3 slow negatives, 5 s down; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang; 3 chest-to-wall walk-ups, holding 30 s',
               },
               {
                 id: 'c1e',
@@ -770,7 +770,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1f',
                 week: 3,
-                text: 'Away Oct 11–18, no bar: towel-on-a-door rows for the pull-ups, chair dips for the dips; both AMRAPs and the pistol work as usual',
+                text: 'Away Oct 11–18, no bar: towel-on-a-door rows for the pull-ups, chair dips for the dips; both AMRAPs as usual',
               },
             ],
           },
@@ -788,12 +788,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c2b',
                 week: 4,
-                text: 'Lower circuit B2, reps by feel: Bulgarian split squats each leg (back foot on a chair), squat jumps, single-leg glute bridges each leg, wall sit. Then pistols to a lower seat, 3 × 5 each, and 3 slow pistol negatives all the way to the floor',
+                text: 'Lower circuit B2, reps by feel: Bulgarian split squats each leg (back foot on a chair), squat jumps, single-leg glute bridges each leg, wall sit',
               },
               {
                 id: 'c2c',
                 week: 4,
-                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups; 10 back-to-wall handstand kick-ups; 3 × 5 pistols holding a light weight out front. New circuits, so these totals are the new baseline',
+                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups; 10 back-to-wall handstand kick-ups. New circuits, so these totals are the new baseline',
               },
               {
                 id: 'c2d',
@@ -822,12 +822,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c3b',
                 week: 7,
-                text: 'Lower circuit B3, reps by feel: jumping lunges, Bulgarian split squats each leg, skater squats each leg (back knee to a pillow), single-leg calf raises each leg. Then pistols to the lowest step I can, and 3 × 3 full pistols holding a doorframe',
+                text: 'Lower circuit B3, reps by feel: jumping lunges, Bulgarian split squats each leg, air squats, single-leg calf raises each leg',
               },
               {
                 id: 'c3c',
                 week: 7,
-                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist; 10 freestanding handstand kick-ups plus 1 min against the wall; 3 × 3 counterbalanced full pistols',
+                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist; 10 freestanding handstand kick-ups plus 1 min against the wall',
               },
               {
                 id: 'c3d',
@@ -855,12 +855,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c4b',
                 week: 10,
-                text: 'Lower circuit B4, reps by feel: pistols each leg to the lowest box, squat jumps, Bulgarian split squats each leg, wall sit. Then 3 × 2 full pistols each leg, heels on a plate or book if needed',
+                text: 'Lower circuit B4, reps by feel: jumping lunges, squat jumps, Bulgarian split squats each leg, wall sit',
               },
               {
                 id: 'c4c',
                 week: 10,
-                text: 'Skill day S4: first muscle-up attempts, fresh, on video: 5 × 1 with full rest, band-assisted if they fail. Then handstand and pistol practice',
+                text: 'Skill day S4: first muscle-up attempts, fresh, on video: 5 × 1 with full rest, band-assisted if they fail. Then handstand practice',
               },
               {
                 id: 'c4d',
