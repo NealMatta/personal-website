@@ -727,13 +727,14 @@ export const QUARTERS: Quarter[] = [
         syllabus: {
           weeklyMinimum: [
             "Circuit day: a 20-minute AMRAP of the unit's circuit, reps by feel, then 10 minutes of muscle-up drills. Every movement in it is a piece of the muscle-up: the pull, the dip on top, and the body line",
+            'Both days open with 2 × 8 scapular pull-ups (hang, then pull the shoulders down with straight arms) and a 20 s active hang. From Wk 4, 15 band pull-aparts too',
             'Reps by feel: no set number per round. Open each movement at a number I could do again, then match or beat it every round, until the clock runs out or I can no longer hold the numbers',
             'Skill day, about 30 minutes and no clock: the second pulling day of the week. Pull-ups and muscle-up practice, done fresh',
             'A check-in at the end of the week with the total for each movement from the AMRAP, e.g. 12 pull-ups and 60 rows in 20 minutes. The movements stay the same for a whole unit, so the totals compare week to week',
             'Legs, push-ups and everything else happen outside this class: yoga, and my own 20 minutes a day',
           ],
           whenWhere:
-            "Both days need a bar I can get over: the gym's pull-up bar or a park bar, not a doorway bar. A low bar (Smith machine or a park's low bar) for rows and transition drills, parallel bars or two sturdy chairs for dips, a resistance band from Wk 7. A day off between the circuit day and the skill day, so the pulling muscles get a rest. Travel weeks (Oct 11–18, Thanksgiving) swap the bar for towel-on-a-door rows and chair dips.",
+            "Both days need a bar I can get over: the gym's pull-up bar or a park bar, not a doorway bar. A low bar (Smith machine or a park's low bar) for rows and transition drills, parallel bars or two sturdy chairs for dips, a resistance band from Wk 4. A day off between the circuit day and the skill day, so the pulling muscles get a rest. Travel weeks (Oct 11–18, Thanksgiving) swap the bar for towel-on-a-door rows and chair dips.",
         },
         units: [
           {
@@ -750,12 +751,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c1b',
                 week: 1,
-                text: 'Circuit A1, a 20-min AMRAP, reps by feel: strict pull-ups, rows on a low bar, dips, hollow hold. My pull-up max is 2 or 3, so 1 or 2 a round, always a rep short of failure; when a strict one will not go, jump to the top and lower for 5 s instead. The rows carry the pulling volume. Then 3 × 10 s false-grip hang',
+                text: 'Circuit A1, a 20-min AMRAP, reps by feel: strict pull-ups, rows on a low bar, dips (deep, and slow on the way down), hollow hold. My pull-up max is 2 or 3, so 1 or 2 a round, always a rep short of failure; when a strict one will not go, jump to the top and lower for 5 s instead. The rows carry the pulling volume. Then 3 × 10 s false-grip hang',
               },
               {
                 id: 'c1d',
                 week: 2,
-                text: 'Skill day S1: 6 sets of 1 or 2 strict pull-ups with a full rest between, then 3 slow negatives, 5 s down; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang',
+                text: 'Skill day S1: 6 sets of 1 or 2 strict pull-ups with a full rest between, then 3 slow negatives, 5 s down; 3 sets of chin-ups, palms facing me, a rep short of failure; 3 × 5 s top holds, chin over the bar; 3 × 10 hollow-to-arch swings on the bar; 3 × 15 s false-grip hang',
               },
               {
                 id: 'c1e',
@@ -783,7 +784,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c2c',
                 week: 4,
-                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups',
+                text: 'Skill day S2: 5 × 2 explosive pull-ups; 3 × 5 straight-bar dips (jump to the top of the bar); 3 × 8 kip swings, hips to the bar; 3 × 2 false-grip pull-ups; 3 sets of chin-ups, a rep short of failure; 3 × 10 s top holds; 3 × 10 straight-arm band pulldowns, bar height to hips',
               },
               {
                 id: 'c2d',
@@ -812,7 +813,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'c3c',
                 week: 7,
-                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist',
+                text: 'Skill day S3: 3 × 5 transition drills on a chest-high bar, feet on the floor; 3 × 3 band-assisted muscle-ups; 5 × 2 kip to a high pull, bar to the waist; 3 × 10 straight-arm band pulldowns',
               },
               {
                 id: 'c3d',
