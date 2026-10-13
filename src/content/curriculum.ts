@@ -23,11 +23,7 @@ A step is ticked off, and a check-in written, on the site itself, once
 */
 
 export type CourseStatus =
-  | 'in-progress'
-  | 'passed'
-  | 'incomplete'
-  | 'withdrawn'
-  | 'planned';
+  'in-progress' | 'passed' | 'incomplete' | 'withdrawn' | 'planned';
 
 /** A week that's about more than the usual practice. */
 export type StepKind = 'midterm' | 'final' | 'buffer';
@@ -598,12 +594,13 @@ export const QUARTERS: Quarter[] = [
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
-            'One chapter + its vocabulary',
-            'One speaking session, recorded',
+            'One chapter of Complete Spanish Step by Step, with its Anki cards unlocked',
+            'Anki reviews every day',
+            "One italki session built around that week's chapter, recorded",
             "From Week 4 on: post the recording as this week's video",
           ],
           whenWhere:
-            'On my own, plus one weekly speaking session with a tutor or partner',
+            'On my own with the book and Anki, plus one weekly italki session with a tutor',
         },
         units: [
           {
@@ -615,22 +612,22 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1a',
                 week: 1,
-                text: 'Back from the work trip: pick a textbook or course; book a weekly tutor or partner',
+                text: 'Ch 1: nouns, articles and adjectives. Set up the Anki deck and book a weekly italki tutor',
               },
               {
                 id: 'p1b',
                 week: 2,
-                text: 'Numbers and telling time: what time I do things',
+                text: 'Ch 2: ser, estar and subject pronouns. On italki: introduce myself and say where I am',
               },
               {
                 id: 'p1c',
                 week: 3,
-                text: 'Ser vs. estar: describe myself and where I am (away Oct 11–18: take the session by video)',
+                text: 'Ch 3: hay, question words, days and months. On italki: ask and answer simple questions (away Oct 11–18: take the session by video)',
               },
               {
                 id: 'p1d',
                 week: 4,
-                text: 'Regular present tense: -ar, -er, -ir; record a 20-second intro and post it on TikTok',
+                text: 'Ch 4: numbers, dates and telling time. Record a 20-second intro and post it on TikTok',
               },
             ],
           },
@@ -643,7 +640,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p2a',
                 week: 5,
-                text: 'Reflexive verbs: me levanto, me ducho, me visto',
+                text: 'Ch 5: regular verbs (-ar, -er, -ir). On italki: what I do on a normal day',
+              },
+              {
+                id: 'p2c',
+                week: 6,
+                text: 'Ch 6: irregular verbs',
               },
               {
                 id: 'p2b',
@@ -662,22 +664,22 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p3a',
                 week: 7,
-                text: 'Irregulars: ir, tener, hacer, querer, poder',
+                text: 'Ch 7: ir and the future, tener idioms, que and para, time with hacer. On italki: my plans for the weekend',
               },
               {
                 id: 'p3b',
                 week: 8,
-                text: 'Connectors: primero, luego, después, por la noche',
+                text: 'Ch 8: adjectives and adverbs. On italki: describe my family and home, linking with primero, luego, después',
               },
               {
                 id: 'p3c',
                 week: 9,
-                text: "Thanksgiving at my parents': food and family vocab, lighter week; session by video",
+                text: "Thanksgiving at my parents': no new chapter. Catch up on Anki and review Ch 7's family vocab; session by video",
               },
               {
                 id: 'p3d',
                 week: 10,
-                text: 'Describe my job in simple Spanish',
+                text: 'Ch 9: negatives, prepositions, por vs. para. On italki: describe my job',
               },
             ],
           },
@@ -687,6 +689,11 @@ export const QUARTERS: Quarter[] = [
             from: 11,
             to: 13,
             steps: [
+              {
+                id: 'p4d',
+                week: 11,
+                text: 'Ch 10: gustar and indirect objects',
+              },
               {
                 id: 'p4a',
                 week: 11,
