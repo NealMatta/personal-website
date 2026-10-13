@@ -590,7 +590,8 @@ export const QUARTERS: Quarter[] = [
           'Describe my day in Spanish for 2 minutes with no script, then answer 3 follow-up questions from my tutor or partner. On video.',
         finalWeek: 12,
         finalOn: 'Sun Dec 20',
-        midterm: '60-second morning routine from notes',
+        midterm:
+          '60-second intro from notes: who I am, where I live, my week by day and time, and what I do on a normal day. Then answer 2 questions from my tutor, on video',
         midtermWeek: 6,
         syllabus: {
           weeklyMinimum: [
@@ -650,7 +651,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p2b',
                 week: 6,
-                text: '60-second morning routine from notes',
+                text: '60-second intro from notes: who I am, where I live, my week by day and time, and what I do on a normal day. Then answer 2 questions from my tutor, on video',
                 kind: 'midterm',
               },
             ],
