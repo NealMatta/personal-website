@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Quarter } from '@/src/content/curriculum';
 import { CREDIT_LOAD, quarterCredits } from '@/src/content/curriculum';
 
@@ -29,8 +30,11 @@ export default function PlannedClasses({ quarter }: { quarter: Quarter }) {
             Nothing planned yet
           </span>
           <span className="max-w-[560px] text-base leading-relaxed text-pencil">
-            Classes I&rsquo;d like to take land here first, rough ideas
-            included. Each one gets a syllabus before the quarter starts.
+            Classes for this quarter get picked from the{' '}
+            <Link href="/curriculum/catalog" className="sky-link no-underline">
+              course catalog
+            </Link>{' '}
+            before it starts.
           </span>
         </div>
       ) : (

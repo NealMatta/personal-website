@@ -17,13 +17,21 @@ What's real here: the classes, the credits, the units, the midterms and
 the finals. Weekly steps still in [brackets] are mine to write — same
 rule the field notes follow.
 
+Classes not on a quarter yet live in `CATALOG`, near the bottom, and
+`/curriculum/catalog` prints them. Planning a quarter means moving classes
+from there into its `courses`.
+
 A step is ticked off, and a check-in written, on the site itself, once
 `/curriculum/unlock` has taken the passcode. To pass a class, set `status: 'passed'` and a
 `passedOn` date; the transcript reads both.
 */
 
 export type CourseStatus =
-  'in-progress' | 'passed' | 'incomplete' | 'withdrawn' | 'planned';
+  | 'in-progress'
+  | 'passed'
+  | 'incomplete'
+  | 'withdrawn'
+  | 'planned';
 
 /** A week that's about more than the usual practice. */
 export type StepKind = 'midterm' | 'final' | 'buffer';
@@ -85,6 +93,12 @@ export interface Course {
   };
   units: Unit[];
 }
+
+/**
+ * A class in the catalog: the whole syllabus, not yet in a quarter, so
+ * nothing about it is dated or graded.
+ */
+export type CatalogCourse = Omit<Course, 'status' | 'passedOn' | 'finalOn'>;
 
 export interface Quarter {
   /** The URL and the `?quarter=` value, e.g. "q4-2026". */
@@ -152,168 +166,6 @@ export const QUARTERS: Quarter[] = [
     state: 'current',
     courses: [
       {
-        slug: 'wdw-101',
-        dept: 'WDW',
-        code: 'WDW 101',
-        title: 'Woodworking 101',
-        why: 'Build one real thing for the apartment and build it well: design the behind-the-couch ledge, test it, change it, and finish it properly.',
-        credits: 2,
-        status: 'in-progress',
-        ...ACCENT.woodworking,
-        final:
-          'The behind-the-couch ledge I designed and would be proud of: space for plants and a place for coasters to sit neatly. Square with no wobble, sanded, stained and sealed, and in daily use.',
-        finalWeek: 8,
-        finalOn: 'Sun Nov 22',
-        midterm:
-          'Revise to v2 and a final cut list; stain test on offcuts; have the store cut the lumber; line up rentals for build weekend',
-        midtermWeek: 4,
-        syllabus: {
-          weeklyMinimum: [
-            'One session, about 2 hours: design weeks can be done anywhere, build weekends (Wk 4, 5, 7) run longer',
-            'Every design change goes into a new numbered drawing: v1, v2, v3',
-            'Write every dimension down before cutting: measure twice',
-            'A check-in with a photo or sketch after each session',
-          ],
-          whenWhere:
-            'Learn as I go: Home Depot on-demand How-To Workshops plus YouTube, no multi-week class. Design work travels (sketchbook or laptop). Build weekends at home: Oct 10 warm-up frame, Oct 24–25 mockup, Oct 31–Nov 1 build, Nov 14–15 finish, Nov 21–22 install. Fallback if it slips: Dec 5–6. Rent or borrow tools as each step needs them instead of buying up front; have the store make the long cuts.',
-        },
-        units: [
-          {
-            n: 1,
-            title: 'Measure, watch & a warm-up build',
-            from: 1,
-            to: 2,
-            steps: [
-              {
-                id: 'hd1',
-                week: 1,
-                text: 'Home Depot workshops: Tape Measure Basics + Woodworking Tool Basics (before measuring)',
-              },
-              {
-                id: 'hd2',
-                week: 1,
-                text: 'Home Depot workshop: Power Tool Basics (before the Oct 10 frame)',
-              },
-              {
-                id: 'd1b',
-                week: 1,
-                text: 'Measure the couch space: back height, gap to the wall, length. Photo + numbers',
-              },
-              {
-                id: 'd1c',
-                week: 1,
-                text: 'Measure what goes on the ledge: plant pots and coasters',
-              },
-              {
-                id: 'd1f',
-                week: 1,
-                text: 'Measure the odd wall space and pick the picture for the warm-up frame',
-              },
-              {
-                id: 'd1e',
-                week: 2,
-                text: 'Save 10+ reference photos of behind-couch tables with plants and a neat spot for coasters',
-              },
-              {
-                id: 'd1d',
-                week: 2,
-                text: 'Warm-up build Sat Oct 10: the picture frame, with tools rented or borrowed for the day. Four cuts, glue + brads or screws, sand, stain; hang it once back',
-              },
-            ],
-          },
-          {
-            n: 2,
-            title: 'Design & iterate',
-            from: 3,
-            to: 4,
-            steps: [
-              {
-                id: 'hd3',
-                week: 3,
-                text: 'Away Oct 11–18: Home Depot workshops How to Maintain Woodworking Tools + How to Repair Drywall (for hanging the frame and patching holes)',
-              },
-              {
-                id: 'd2a',
-                week: 3,
-                text: 'Away Oct 11–18: sketch 3 different layouts for plants and coasters; pick one',
-              },
-              {
-                id: 'd2b',
-                week: 3,
-                text: 'Draw the favorite to scale with every dimension (v1)',
-              },
-              {
-                id: 'd2d',
-                week: 4,
-                text: "Oct 24–25: full-size mockup behind the couch in cardboard + painter's tape; set real plants and coasters on it",
-              },
-              {
-                id: 'd2e',
-                week: 4,
-                text: 'Revise to v2 and a final cut list; stain test on offcuts; have the store cut the lumber; line up rentals for build weekend',
-                kind: 'midterm',
-              },
-            ],
-          },
-          {
-            n: 3,
-            title: 'Build',
-            from: 5,
-            to: 6,
-            steps: [
-              {
-                id: 'd3a',
-                week: 5,
-                text: 'Oct 31–Nov 1: cut, dry-fit, glue + screw; build the coaster spot',
-              },
-              {
-                id: 'd3b',
-                week: 6,
-                text: 'Party test: the unfinished ledge in use on Nov 7. Note what to change',
-              },
-            ],
-          },
-          {
-            n: 4,
-            title: 'Finish it well',
-            from: 7,
-            to: 8,
-            steps: [
-              {
-                id: 'd4a',
-                week: 7,
-                text: 'Nov 14–15: make the party fixes, fill screw holes, sand 120 → 150 → 180, conditioner, stain',
-              },
-              {
-                id: 'd4b',
-                week: 7,
-                text: 'Weeknights: 2–3 coats of water-based poly, a light 220 sand between coats',
-              },
-              {
-                id: 'd4c',
-                week: 8,
-                text: 'FINAL, Nov 21–22: plants and coasters in place, ledge in daily use',
-                kind: 'final',
-              },
-            ],
-          },
-          {
-            n: 5,
-            title: 'Optional extra',
-            from: 10,
-            to: 10,
-            steps: [
-              {
-                id: 'd5a',
-                week: 10,
-                text: 'Only if the ledge is done: a small plant holder, Dec 5–6',
-                kind: 'buffer',
-              },
-            ],
-          },
-        ],
-      },
-      {
         slug: 'cad-101',
         dept: 'CAD',
         code: 'CAD 101',
@@ -337,7 +189,7 @@ export const QUARTERS: Quarter[] = [
             'A check-in with the print and what to change',
           ],
           whenWhere:
-            'Starts Wk 6 as woodworking wraps, so the indoor work lands in the cold months. Printer + digital calipers already in hand. CAD in Autodesk Fusion (free for personal use) with the GridfinityGenerator add-in for baseplates and bins; the shadow-box cutouts are modeled by hand, which is the point of the class.',
+            'Starts Wk 6, so the indoor work lands in the cold months. Printer + digital calipers already in hand. CAD in Autodesk Fusion (free for personal use) with the GridfinityGenerator add-in for baseplates and bins; the shadow-box cutouts are modeled by hand, which is the point of the class.',
         },
         units: [
           {
@@ -349,7 +201,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1a',
                 week: 6,
-                text: 'Measure the shelf with calipers: width, depth, usable height. Work out how many 42 mm Gridfinity units fit',
+                text: 'Measure the shelf with calipers: width, depth, usable height',
+              },
+              {
+                id: 'p1a2',
+                week: 6,
+                text: 'Work out how many 42 mm Gridfinity units fit',
               },
               {
                 id: 'p1b',
@@ -364,12 +221,22 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1e',
                 week: 7,
-                text: "Caliper each item (length, width, thickness) and save the photos + numbers in one folder on the laptop, ready for Thanksgiving at my parents'",
+                text: 'Caliper each item: length, width, thickness',
+              },
+              {
+                id: 'p1e2',
+                week: 7,
+                text: "Save the photos + numbers in one folder on the laptop, ready for Thanksgiving at my parents'",
               },
               {
                 id: 'p1d',
                 week: 7,
-                text: 'Sketch the shelf layout to scale: which item gets which bin size, and pick one filament color',
+                text: 'Sketch the shelf layout to scale: which item gets which bin size',
+              },
+              {
+                id: 'p1d2',
+                week: 7,
+                text: 'Pick one filament color',
               },
             ],
           },
@@ -382,12 +249,22 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p2a',
                 week: 8,
-                text: 'Before Thanksgiving travel: install Fusion; beginner tutorial on sketch, constrain, extrude, offset',
+                text: 'Before Thanksgiving travel: install Fusion',
+              },
+              {
+                id: 'p2a2',
+                week: 8,
+                text: 'Fusion beginner tutorial: sketch, constrain, extrude, offset',
               },
               {
                 id: 'p2b',
                 week: 8,
-                text: 'Install the GridfinityGenerator add-in; generate a baseplate sized to the shelf, split to fit the print bed',
+                text: 'Install the GridfinityGenerator add-in',
+              },
+              {
+                id: 'p2b2',
+                week: 8,
+                text: 'Generate a baseplate sized to the shelf, split to fit the print bed',
               },
               {
                 id: 'p2c',
@@ -419,7 +296,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p4a',
                 week: 11,
-                text: 'Model and print the rest of the shadow boxes; reprint anything that is too tight or too loose',
+                text: 'Model and print the rest of the shadow boxes',
+              },
+              {
+                id: 'p4a2',
+                week: 11,
+                text: 'Reprint anything that is too tight or too loose',
               },
               {
                 id: 'p4b',
@@ -480,17 +362,42 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 's1a',
                 week: 1,
-                text: 'Pages 2–9: Meet your teacher, Intro, Your first self portrait (keep it as your baseline), How to see like an artist, SAM skills. Cut out the viewfinders (pp. 63, 65) and skim the SAM guide (p. 67)',
+                text: 'Pages 2–9: Meet your teacher, Intro, Your first self portrait (keep it as your baseline), How to see like an artist, SAM skills',
+              },
+              {
+                id: 's1a2',
+                week: 1,
+                text: 'Cut out the viewfinders (pp. 63, 65)',
+              },
+              {
+                id: 's1a3',
+                week: 1,
+                text: 'Skim the SAM guide (p. 67)',
               },
               {
                 id: 's1b',
                 week: 2,
-                text: 'Pages 11–21: Upside down drawing, Negative space, Continuous contour, plus practice pages 52–55. Buy the travel sketchbook before Oct 11',
+                text: 'Pages 11–21: Upside down drawing, Negative space, Continuous contour',
+              },
+              {
+                id: 's1b2',
+                week: 2,
+                text: 'Practice pages 52–55',
+              },
+              {
+                id: 's1b3',
+                week: 2,
+                text: 'Buy the travel sketchbook before Oct 11',
               },
               {
                 id: 's1c',
                 week: 3,
-                text: 'Away Oct 11–18: pages 22–23 Blind contour (travels well, no prep). One trip sketch in the travel sketchbook',
+                text: 'Away Oct 11–18: pages 22–23 Blind contour (travels well, no prep)',
+              },
+              {
+                id: 's1c2',
+                week: 3,
+                text: 'Away Oct 11–18: one trip sketch in the travel sketchbook',
               },
               {
                 id: 's1d',
@@ -500,7 +407,17 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 's1e',
                 week: 5,
-                text: 'Pages 32–35 + 69 Value, pages 40–43 Gridding and Reference photos 101. On a clear day, shoot your own skyline reference photos (Riverwalk or lakefront)',
+                text: 'Pages 32–35 + 69: Value',
+              },
+              {
+                id: 's1e2',
+                week: 5,
+                text: 'Pages 40–43: Gridding and Reference photos 101',
+              },
+              {
+                id: 's1e3',
+                week: 5,
+                text: 'On a clear day, shoot my own skyline reference photos (Riverwalk or lakefront)',
               },
             ],
           },
@@ -532,22 +449,42 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 's3a',
                 week: 7,
-                text: 'Pages 36–39 Drawing a face, plus practice pages 56–61 (nose, eyes, mouth)',
+                text: 'Pages 36–39: Drawing a face',
+              },
+              {
+                id: 's3a2',
+                week: 7,
+                text: 'Practice pages 56–61 (nose, eyes, mouth)',
               },
               {
                 id: 's3b',
                 week: 8,
-                text: 'Pages 44–47: Self portrait #2 and A message to the artist. Put it next to the week 1 baseline and post the comparison',
+                text: 'Pages 44–47: Self portrait #2 and A message to the artist',
+              },
+              {
+                id: 's3b2',
+                week: 8,
+                text: 'Put self portrait #2 next to the week 1 baseline and post the comparison',
               },
               {
                 id: 's3c',
                 week: 9,
-                text: "Thanksgiving at my parents' (Nov 24–29): page 50 Drawing from observation. One low-pressure sketch there",
+                text: "Thanksgiving at my parents' (Nov 24–29): page 50 Drawing from observation",
+              },
+              {
+                id: 's3c2',
+                week: 9,
+                text: "One low-pressure sketch at my parents'",
               },
               {
                 id: 's3d',
                 week: 10,
-                text: 'Page 51 Drawing from imagination + drawing prompts (pp. 71–72)',
+                text: 'Page 51: Drawing from imagination',
+              },
+              {
+                id: 's3d2',
+                week: 10,
+                text: 'Drawing prompts (pp. 71–72)',
               },
               {
                 id: 's3e',
@@ -565,7 +502,17 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 's4b',
                 week: 12,
-                text: 'Finish any leftover book pages; one timed 30-minute sketch from a photo; pack the travel sketchbook',
+                text: 'Finish any leftover book pages',
+              },
+              {
+                id: 's4b2',
+                week: 12,
+                text: 'One timed 30-minute sketch from a photo',
+              },
+              {
+                id: 's4b3',
+                week: 12,
+                text: 'Pack the travel sketchbook',
               },
               {
                 id: 's4c',
@@ -613,22 +560,47 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p1a',
                 week: 1,
-                text: 'Ch 1: nouns, articles and adjectives. Set up the Anki deck and book a weekly italki tutor',
+                text: 'Ch 1: nouns, articles and adjectives',
+              },
+              {
+                id: 'p1a2',
+                week: 1,
+                text: 'Set up the Anki deck',
+              },
+              {
+                id: 'p1a3',
+                week: 1,
+                text: 'Book a weekly italki tutor',
               },
               {
                 id: 'p1b',
                 week: 2,
-                text: 'Ch 2: ser, estar and subject pronouns. On italki: introduce myself and say where I am',
+                text: 'Ch 2: ser, estar and subject pronouns',
+              },
+              {
+                id: 'p1b2',
+                week: 2,
+                text: 'On italki: introduce myself and say where I am',
               },
               {
                 id: 'p1c',
                 week: 3,
-                text: 'Ch 3: hay, question words, days and months. On italki: ask and answer simple questions (away Oct 11–18: take the session by video)',
+                text: 'Ch 3: hay, question words, days and months',
+              },
+              {
+                id: 'p1c2',
+                week: 3,
+                text: 'On italki: ask and answer simple questions (away Oct 11–18: take the session by video)',
               },
               {
                 id: 'p1d',
                 week: 4,
-                text: 'Ch 4: numbers, dates and telling time. Record a 20-second intro and post it on TikTok',
+                text: 'Ch 4: numbers, dates and telling time',
+              },
+              {
+                id: 'p1d2',
+                week: 4,
+                text: 'Record a 20-second intro and post it on TikTok',
               },
             ],
           },
@@ -641,7 +613,12 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p2a',
                 week: 5,
-                text: 'Ch 5: regular verbs (-ar, -er, -ir). On italki: what I do on a normal day',
+                text: 'Ch 5: regular verbs (-ar, -er, -ir)',
+              },
+              {
+                id: 'p2a2',
+                week: 5,
+                text: 'On italki: what I do on a normal day',
               },
               {
                 id: 'p2c',
@@ -665,22 +642,47 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 'p3a',
                 week: 7,
-                text: 'Ch 7: ir and the future, tener idioms, que and para, time with hacer. On italki: my plans for the weekend',
+                text: 'Ch 7: ir and the future, tener idioms, que and para, time with hacer',
+              },
+              {
+                id: 'p3a2',
+                week: 7,
+                text: 'On italki: my plans for the weekend',
               },
               {
                 id: 'p3b',
                 week: 8,
-                text: 'Ch 8: adjectives and adverbs. On italki: describe my family and home, linking with primero, luego, después',
+                text: 'Ch 8: adjectives and adverbs',
+              },
+              {
+                id: 'p3b2',
+                week: 8,
+                text: 'On italki: describe my family and home, linking with primero, luego, después',
               },
               {
                 id: 'p3c',
                 week: 9,
-                text: "Thanksgiving at my parents': no new chapter. Catch up on Anki and review Ch 7's family vocab; session by video",
+                text: "Thanksgiving at my parents', no new chapter: catch up on Anki",
+              },
+              {
+                id: 'p3c2',
+                week: 9,
+                text: "Review Ch 7's family vocab",
+              },
+              {
+                id: 'p3c3',
+                week: 9,
+                text: 'italki session by video',
               },
               {
                 id: 'p3d',
                 week: 10,
-                text: 'Ch 9: negatives, prepositions, por vs. para. On italki: describe my job',
+                text: 'Ch 9: negatives, prepositions, por vs. para',
+              },
+              {
+                id: 'p3d2',
+                week: 10,
+                text: 'On italki: describe my job',
               },
             ],
           },
@@ -890,221 +892,7 @@ export const QUARTERS: Quarter[] = [
     startsOn: '2027-01-01',
     weeks: 13,
     state: 'planning',
-    courses: [
-      {
-        slug: 'cul-101',
-        dept: 'CUL',
-        code: 'CUL 101',
-        title: 'Cooking 101',
-        why: 'Cook Indian food well enough to host friends for dinner.',
-        credits: 3,
-        status: 'planned',
-        ...ACCENT.cooking,
-        final: 'Host a dinner party with Indian food I cooked myself.',
-        finalWeek: 13,
-        finalOn: 'Week 13',
-        midterm: '[Midterm]',
-        midtermWeek: 7,
-        syllabus: {
-          weeklyMinimum: [
-            'Cook one new dish',
-            'Post a photo and one note on what to change next time',
-          ],
-          whenWhere: 'On my own: one new dish a week',
-        },
-        units: [
-          {
-            n: 1,
-            title: 'Pantry & basics',
-            from: 1,
-            to: 3,
-            steps: [
-              { id: 'k1a', week: 1, text: 'Stock whole and ground spices' },
-              {
-                id: 'k1b',
-                week: 2,
-                text: 'Cook basmati rice that comes out fluffy',
-              },
-              { id: 'k1c', week: 3, text: 'Learn a tadka (tempering)' },
-              { id: 'k1d', week: 3, text: 'Make a basic raita' },
-            ],
-          },
-          {
-            n: 2,
-            title: 'Dal & sabzi',
-            from: 4,
-            to: 6,
-            steps: [
-              { id: 'k2a', week: 4, text: 'Tadka dal' },
-              {
-                id: 'k2b',
-                week: 5,
-                text: 'One dry sabzi (aloo gobi or bhindi)',
-              },
-              {
-                id: 'k2c',
-                week: 6,
-                text: 'Get one family recipe written down',
-              },
-            ],
-          },
-          {
-            n: 3,
-            title: 'Curries',
-            from: 7,
-            to: 9,
-            steps: [
-              {
-                id: 'k3a',
-                week: 7,
-                text: 'Master an onion-tomato masala base',
-              },
-              { id: 'k3b', week: 8, text: 'Chana masala' },
-              { id: 'k3c', week: 9, text: 'A paneer or chicken curry' },
-            ],
-          },
-          {
-            n: 4,
-            title: 'The dinner party',
-            from: 10,
-            to: 13,
-            steps: [
-              { id: 'k4a', week: 10, text: 'Pick a menu of 4–5 dishes' },
-              { id: 'k4b', week: 11, text: 'Cook a dry run for 2–3 people' },
-              {
-                id: 'k4c',
-                week: 12,
-                text: 'Write a prep timeline for the day',
-              },
-              { id: 'k4d', week: 13, text: 'Send the invites' },
-            ],
-          },
-        ],
-      },
-      {
-        slug: 'swm-101',
-        dept: 'SWM',
-        code: 'SWM 101',
-        title: 'Swimming 101',
-        why: 'Get comfortable in the water, enough to swim a full lap on my own.',
-        credits: 4,
-        status: 'planned',
-        ...ACCENT.swimming,
-        final:
-          'Swim one full length of the pool unassisted: no wall, no board, no standing. On video.',
-        finalWeek: 12,
-        finalOn: 'Thu Mar 25',
-        midterm: 'Glide + kick a full length with a board, no stops',
-        midtermWeek: 7,
-        syllabus: {
-          weeklyMinimum: [
-            'Thursday swim class',
-            'One solo practice swim, 30 minutes',
-            'Quick check-in after class',
-          ],
-          whenWhere:
-            'Thursdays: swim class at Lakeview Athletic Club (Tuesdays are volleyball)',
-        },
-        units: [
-          {
-            n: 1,
-            title: 'Get in the water',
-            from: 1,
-            to: 3,
-            steps: [
-              {
-                id: 'w1a',
-                week: 1,
-                text: 'Sign up for the free month + Thursday class; get goggles, cap, suit',
-              },
-              {
-                id: 'w1b',
-                week: 2,
-                text: 'Exhale underwater: 10 bubble bobs holding the wall',
-              },
-              {
-                id: 'w1c',
-                week: 3,
-                text: 'Front and back float, 5 seconds each, on your own',
-              },
-            ],
-          },
-          {
-            n: 2,
-            title: 'Glide & kick',
-            from: 4,
-            to: 7,
-            steps: [
-              {
-                id: 'w2a',
-                week: 4,
-                text: 'Push off the wall and glide; decide on a membership before the free month ends',
-              },
-              {
-                id: 'w2b',
-                week: 5,
-                text: 'Flutter kick with a board, half a length',
-              },
-              {
-                id: 'w2c',
-                week: 6,
-                text: 'Flutter kick with a board, a full length',
-              },
-              {
-                id: 'w2d',
-                week: 7,
-                text: 'Glide + kick a full length with a board, no stops',
-                kind: 'midterm',
-              },
-            ],
-          },
-          {
-            n: 3,
-            title: 'Stroke & breath',
-            from: 8,
-            to: 10,
-            steps: [
-              { id: 'w3a', week: 8, text: 'Freestyle arms with a pull buoy' },
-              {
-                id: 'w3b',
-                week: 9,
-                text: 'Thursday class plus one solo practice swim',
-              },
-              {
-                id: 'w3c',
-                week: 10,
-                text: 'Arms and side-breathing together, half a length',
-              },
-            ],
-          },
-          {
-            n: 4,
-            title: 'The full length',
-            from: 11,
-            to: 13,
-            steps: [
-              {
-                id: 'w4a',
-                week: 11,
-                text: 'Full length with fins or a spotter',
-              },
-              {
-                id: 'w4b',
-                week: 12,
-                text: 'FINAL: full length unassisted, filmed',
-                kind: 'final',
-              },
-              {
-                id: 'w4c',
-                week: 13,
-                text: 'Buffer week: make-up swim, or a celebration swim',
-                kind: 'buffer',
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    courses: [],
   },
   {
     slug: 'q2-2027',
@@ -1115,6 +903,455 @@ export const QUARTERS: Quarter[] = [
     weeks: 13,
     state: 'planning',
     courses: [],
+  },
+];
+
+/*
+The course catalog: classes written and waiting, the way a college prints
+what it offers before anyone registers. Nothing here is scheduled. To take
+one, move it into a quarter's `courses`, give it a `status` and the date
+its final falls on (`finalOn`), and check its weeks against that quarter's
+calendar.
+*/
+export const CATALOG: CatalogCourse[] = [
+  {
+    slug: 'wdw-101',
+    dept: 'WDW',
+    code: 'WDW 101',
+    title: 'Woodworking 101',
+    why: 'Build one real thing for the apartment and build it well: design the behind-the-couch ledge, test it, change it, and finish it properly.',
+    credits: 2,
+    ...ACCENT.woodworking,
+    final:
+      'The behind-the-couch ledge I designed and would be proud of: space for plants and a place for coasters to sit neatly. Square with no wobble, sanded, stained and sealed, and in daily use.',
+    finalWeek: 8,
+    midterm:
+      'Revise to v2 and a final cut list; stain test on offcuts; have the store cut the lumber; line up rentals for build weekend',
+    midtermWeek: 4,
+    syllabus: {
+      weeklyMinimum: [
+        'One session, about 2 hours: design weeks can be done anywhere, build weekends (Wk 4, 5, 7) run longer',
+        'Every design change goes into a new numbered drawing: v1, v2, v3',
+        'Write every dimension down before cutting: measure twice',
+        'A check-in with a photo or sketch after each session',
+      ],
+      whenWhere:
+        'Learn as I go: Home Depot on-demand How-To Workshops plus YouTube, no multi-week class. Design work travels (sketchbook or laptop). Build weekends at home: Wk 2 warm-up frame, Wk 4 mockup, Wk 5 build, Wk 7 finish, Wk 8 install. Fallback if it slips: Wk 10. Rent or borrow tools as each step needs them instead of buying up front; have the store make the long cuts.',
+    },
+    units: [
+      {
+        n: 1,
+        title: 'Measure, watch & a warm-up build',
+        from: 1,
+        to: 2,
+        steps: [
+          {
+            id: 'hd1',
+            week: 1,
+            text: 'Home Depot workshop: Tape Measure Basics (before measuring)',
+          },
+          {
+            id: 'hd12',
+            week: 1,
+            text: 'Home Depot workshop: Woodworking Tool Basics (before measuring)',
+          },
+          {
+            id: 'hd2',
+            week: 1,
+            text: 'Home Depot workshop: Power Tool Basics (before the warm-up frame)',
+          },
+          {
+            id: 'd1b',
+            week: 1,
+            text: 'Measure the couch space: back height, gap to the wall, length. Photo + numbers',
+          },
+          {
+            id: 'd1c',
+            week: 1,
+            text: 'Measure what goes on the ledge: plant pots and coasters',
+          },
+          {
+            id: 'd1f',
+            week: 1,
+            text: 'Measure the odd wall space for the warm-up frame',
+          },
+          {
+            id: 'd1f2',
+            week: 1,
+            text: 'Pick the picture for the warm-up frame',
+          },
+          {
+            id: 'd1e',
+            week: 2,
+            text: 'Save 10+ reference photos of behind-couch tables with plants and a neat spot for coasters',
+          },
+          {
+            id: 'd1d',
+            week: 2,
+            text: 'Warm-up build, Saturday: the picture frame, with tools rented or borrowed for the day. Four cuts, glue + brads or screws, sand, stain',
+          },
+        ],
+      },
+      {
+        n: 2,
+        title: 'Design & iterate',
+        from: 3,
+        to: 4,
+        steps: [
+          {
+            id: 'hd3',
+            week: 3,
+            text: 'Home Depot workshop: How to Maintain Woodworking Tools',
+          },
+          {
+            id: 'hd32',
+            week: 3,
+            text: 'Home Depot workshop: How to Repair Drywall (for hanging the frame and patching holes)',
+          },
+          {
+            id: 'd2a',
+            week: 3,
+            text: 'Sketch 3 different layouts for plants and coasters',
+          },
+          {
+            id: 'd2a2',
+            week: 3,
+            text: 'Pick one layout',
+          },
+          {
+            id: 'd2b',
+            week: 3,
+            text: 'Draw the favorite to scale with every dimension (v1)',
+          },
+          {
+            id: 'd2d',
+            week: 4,
+            text: "Weekend: full-size mockup behind the couch in cardboard + painter's tape; set real plants and coasters on it",
+          },
+          {
+            id: 'd1d2',
+            week: 4,
+            text: 'Hang the picture frame',
+          },
+          {
+            id: 'd2e',
+            week: 4,
+            text: 'Revise to v2 with a final cut list',
+            kind: 'midterm',
+          },
+          {
+            id: 'd2e2',
+            week: 4,
+            text: 'Stain test on offcuts',
+          },
+          {
+            id: 'd2e3',
+            week: 4,
+            text: 'Have the store cut the lumber',
+          },
+          {
+            id: 'd2e4',
+            week: 4,
+            text: 'Line up rentals for build weekend',
+          },
+        ],
+      },
+      {
+        n: 3,
+        title: 'Build',
+        from: 5,
+        to: 6,
+        steps: [
+          {
+            id: 'd3a',
+            week: 5,
+            text: 'Build weekend: cut, dry-fit, glue + screw the ledge',
+          },
+          {
+            id: 'd3a2',
+            week: 5,
+            text: 'Build the coaster spot',
+          },
+          {
+            id: 'd3b',
+            week: 6,
+            text: 'Party test: the unfinished ledge in use at a get-together. Note what to change',
+          },
+        ],
+      },
+      {
+        n: 4,
+        title: 'Finish it well',
+        from: 7,
+        to: 8,
+        steps: [
+          {
+            id: 'd4a',
+            week: 7,
+            text: 'Finish weekend: make the party fixes',
+          },
+          {
+            id: 'd4a2',
+            week: 7,
+            text: 'Fill the screw holes and sand 120 → 150 → 180',
+          },
+          {
+            id: 'd4a3',
+            week: 7,
+            text: 'Wood conditioner, then stain',
+          },
+          {
+            id: 'd4b',
+            week: 7,
+            text: 'Weeknights: 2–3 coats of water-based poly, a light 220 sand between coats',
+          },
+          {
+            id: 'd4c',
+            week: 8,
+            text: 'FINAL, weekend: plants and coasters in place, ledge in daily use',
+            kind: 'final',
+          },
+        ],
+      },
+      {
+        n: 5,
+        title: 'Optional extra',
+        from: 10,
+        to: 10,
+        steps: [
+          {
+            id: 'd5a',
+            week: 10,
+            text: 'Only if the ledge is done: a small plant holder',
+            kind: 'buffer',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'cul-101',
+    dept: 'CUL',
+    code: 'CUL 101',
+    title: 'Cooking 101',
+    why: 'Cook Indian food well enough to host friends for dinner.',
+    credits: 3,
+    ...ACCENT.cooking,
+    final: 'Host a dinner party with Indian food I cooked myself.',
+    finalWeek: 13,
+    midterm: '[Midterm]',
+    midtermWeek: 7,
+    syllabus: {
+      weeklyMinimum: [
+        'Cook one new dish',
+        'Post a photo and one note on what to change next time',
+      ],
+      whenWhere: 'On my own: one new dish a week',
+    },
+    units: [
+      {
+        n: 1,
+        title: 'Pantry & basics',
+        from: 1,
+        to: 3,
+        steps: [
+          { id: 'k1a', week: 1, text: 'Stock whole and ground spices' },
+          {
+            id: 'k1b',
+            week: 2,
+            text: 'Cook basmati rice that comes out fluffy',
+          },
+          { id: 'k1c', week: 3, text: 'Learn a tadka (tempering)' },
+          { id: 'k1d', week: 3, text: 'Make a basic raita' },
+        ],
+      },
+      {
+        n: 2,
+        title: 'Dal & sabzi',
+        from: 4,
+        to: 6,
+        steps: [
+          { id: 'k2a', week: 4, text: 'Tadka dal' },
+          {
+            id: 'k2b',
+            week: 5,
+            text: 'One dry sabzi (aloo gobi or bhindi)',
+          },
+          {
+            id: 'k2c',
+            week: 6,
+            text: 'Get one family recipe written down',
+          },
+        ],
+      },
+      {
+        n: 3,
+        title: 'Curries',
+        from: 7,
+        to: 9,
+        steps: [
+          {
+            id: 'k3a',
+            week: 7,
+            text: 'Master an onion-tomato masala base',
+          },
+          { id: 'k3b', week: 8, text: 'Chana masala' },
+          { id: 'k3c', week: 9, text: 'A paneer or chicken curry' },
+        ],
+      },
+      {
+        n: 4,
+        title: 'The dinner party',
+        from: 10,
+        to: 13,
+        steps: [
+          { id: 'k4a', week: 10, text: 'Pick a menu of 4–5 dishes' },
+          { id: 'k4b', week: 11, text: 'Cook a dry run for 2–3 people' },
+          {
+            id: 'k4c',
+            week: 12,
+            text: 'Write a prep timeline for the day',
+          },
+          { id: 'k4d', week: 13, text: 'Send the invites' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'swm-101',
+    dept: 'SWM',
+    code: 'SWM 101',
+    title: 'Swimming 101',
+    why: 'Get comfortable in the water, enough to swim a full lap on my own.',
+    credits: 4,
+    ...ACCENT.swimming,
+    final:
+      'Swim one full length of the pool unassisted: no wall, no board, no standing. On video.',
+    finalWeek: 12,
+    midterm: 'Glide + kick a full length with a board, no stops',
+    midtermWeek: 7,
+    syllabus: {
+      weeklyMinimum: [
+        'Thursday swim class',
+        'One solo practice swim, 30 minutes',
+        'Quick check-in after class',
+      ],
+      whenWhere:
+        'Thursdays: swim class at Lakeview Athletic Club (Tuesdays are volleyball)',
+    },
+    units: [
+      {
+        n: 1,
+        title: 'Get in the water',
+        from: 1,
+        to: 3,
+        steps: [
+          {
+            id: 'w1a',
+            week: 1,
+            text: 'Sign up for the free month + Thursday class',
+          },
+          {
+            id: 'w1a2',
+            week: 1,
+            text: 'Get goggles, cap and suit',
+          },
+          {
+            id: 'w1b',
+            week: 2,
+            text: 'Exhale underwater: 10 bubble bobs holding the wall',
+          },
+          {
+            id: 'w1c',
+            week: 3,
+            text: 'Front and back float, 5 seconds each, on your own',
+          },
+        ],
+      },
+      {
+        n: 2,
+        title: 'Glide & kick',
+        from: 4,
+        to: 7,
+        steps: [
+          {
+            id: 'w2a',
+            week: 4,
+            text: 'Push off the wall and glide',
+          },
+          {
+            id: 'w2a2',
+            week: 4,
+            text: 'Decide on a membership before the free month ends',
+          },
+          {
+            id: 'w2b',
+            week: 5,
+            text: 'Flutter kick with a board, half a length',
+          },
+          {
+            id: 'w2c',
+            week: 6,
+            text: 'Flutter kick with a board, a full length',
+          },
+          {
+            id: 'w2d',
+            week: 7,
+            text: 'Glide + kick a full length with a board, no stops',
+            kind: 'midterm',
+          },
+        ],
+      },
+      {
+        n: 3,
+        title: 'Stroke & breath',
+        from: 8,
+        to: 10,
+        steps: [
+          { id: 'w3a', week: 8, text: 'Freestyle arms with a pull buoy' },
+          {
+            id: 'w3b',
+            week: 9,
+            text: 'Thursday class',
+          },
+          {
+            id: 'w3b2',
+            week: 9,
+            text: 'One solo practice swim',
+          },
+          {
+            id: 'w3c',
+            week: 10,
+            text: 'Arms and side-breathing together, half a length',
+          },
+        ],
+      },
+      {
+        n: 4,
+        title: 'The full length',
+        from: 11,
+        to: 13,
+        steps: [
+          {
+            id: 'w4a',
+            week: 11,
+            text: 'Full length with fins or a spotter',
+          },
+          {
+            id: 'w4b',
+            week: 12,
+            text: 'FINAL: full length unassisted, filmed',
+            kind: 'final',
+          },
+          {
+            id: 'w4c',
+            week: 13,
+            text: 'Buffer week: make-up swim, or a celebration swim',
+            kind: 'buffer',
+          },
+        ],
+      },
+    ],
   },
 ];
 

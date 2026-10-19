@@ -114,12 +114,20 @@ export default async function Curriculum({
             </span>
           )}
 
-          <Link
-            href="/curriculum/transcript"
-            className="sky-link self-start text-[15px] font-semibold no-underline"
-          >
-            Transcript →
-          </Link>
+          <div className="flex flex-wrap gap-6">
+            <Link
+              href="/curriculum/transcript"
+              className="sky-link text-[15px] font-semibold no-underline"
+            >
+              Transcript →
+            </Link>
+            <Link
+              href="/curriculum/catalog"
+              className="sky-link text-[15px] font-semibold no-underline"
+            >
+              Course catalog →
+            </Link>
+          </div>
 
           {inSession && <CheckInJump />}
         </div>
