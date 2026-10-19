@@ -108,7 +108,14 @@ export default async function Transcript() {
 
               {quarter.courses.length === 0 ? (
                 <p className="m-0 py-8 text-base text-pencil">
-                  Nothing planned in {quarter.label} yet.
+                  Nothing planned in {quarter.label} yet. Classes come from the{' '}
+                  <Link
+                    href="/curriculum/catalog"
+                    className="sky-link no-underline"
+                  >
+                    course catalog
+                  </Link>
+                  .
                 </p>
               ) : (
                 quarter.courses.map((course) => {
