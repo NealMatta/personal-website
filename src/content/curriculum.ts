@@ -153,6 +153,7 @@ const ACCENT = {
   woodworking: classColor('woodworking'),
   cad: classColor('cad'),
   calisthenics: classColor('calisthenics'),
+  sewing: classColor('sewing'),
 };
 
 export const QUARTERS: Quarter[] = [
@@ -1347,6 +1348,141 @@ export const CATALOG: CatalogCourse[] = [
             id: 'w4c',
             week: 13,
             text: 'Buffer week: make-up swim, or a celebration swim',
+            kind: 'buffer',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'sew-101',
+    dept: 'SEW',
+    code: 'SEW 101',
+    title: 'Sewing 101',
+    why: 'Put the sewing tools I already own to use: hem and alter my own clothes, then make something I designed.',
+    credits: 2,
+    ...ACCENT.sewing,
+    final:
+      'Design, sew and wear one original piece, and alter one item from my closet.',
+    finalWeek: 12,
+    midterm:
+      'Hem one item and do one alteration on my own machine, no instructor',
+    midtermWeek: 5,
+    syllabus: {
+      weeklyMinimum: [
+        'One session at the machine, about 2 hours',
+        'A check-in with a photo after each session',
+      ],
+      whenWhere:
+        'Starts with the Sew Crafty Studio Machine Basics & Alterations Crash Course (3845 N Lincoln Ave, two weekend sessions, 9AM–12PM, $250; bring my own machine): https://www.sewcraftystudio.com/classes-for-adults/p/sewing-crash-course-machine-basics. Dates not picked yet. After that, at home on my own machine.',
+    },
+    units: [
+      {
+        n: 1,
+        title: 'Crash course',
+        from: 1,
+        to: 2,
+        steps: [
+          {
+            id: 's1a',
+            week: 1,
+            text: 'Sew Crafty class 1: threading, bobbins, basic stitches, measuring for alterations, finishing',
+          },
+          {
+            id: 's1b',
+            week: 1,
+            text: 'Pick 2–3 simple garments to alter for class 2',
+          },
+          {
+            id: 's1c',
+            week: 2,
+            text: 'Sew Crafty class 2: alter my own garments with an instructor',
+          },
+        ],
+      },
+      {
+        n: 2,
+        title: 'Reps at home',
+        from: 3,
+        to: 5,
+        steps: [
+          {
+            id: 's2a',
+            week: 3,
+            text: 'Redo the class techniques solo on my own machine',
+          },
+          {
+            id: 's2b',
+            week: 3,
+            text: 'Hand sewing: buttons, running stitch, blind stitch',
+          },
+          { id: 's2c', week: 4, text: 'Hemming reps on shirts and pants' },
+          {
+            id: 's2d',
+            week: 5,
+            text: 'MIDTERM: hem one item and do one alteration, no help',
+            kind: 'midterm',
+          },
+        ],
+      },
+      {
+        n: 3,
+        title: 'Alterations',
+        from: 6,
+        to: 7,
+        steps: [
+          { id: 's3a', week: 6, text: 'Take in a shirt at the side seams' },
+          { id: 's3b', week: 7, text: 'Taper a pair of pants' },
+        ],
+      },
+      {
+        n: 4,
+        title: 'Patterns',
+        from: 8,
+        to: 9,
+        steps: [
+          {
+            id: 's4a',
+            week: 8,
+            text: 'Take my measurements and learn to read a pattern',
+          },
+          {
+            id: 's4b',
+            week: 9,
+            text: 'First build from a pattern: [tote bag or lounge pants]',
+          },
+        ],
+      },
+      {
+        n: 5,
+        title: 'Design',
+        from: 10,
+        to: 11,
+        steps: [
+          { id: 's5a', week: 10, text: 'Sketch my own piece: [what]' },
+          {
+            id: 's5b',
+            week: 11,
+            text: 'Modify a pattern to match the sketch',
+          },
+        ],
+      },
+      {
+        n: 6,
+        title: 'Final build',
+        from: 12,
+        to: 13,
+        steps: [
+          {
+            id: 's6a',
+            week: 12,
+            text: 'FINAL: sew and wear the original piece; alter one item from my closet',
+            kind: 'final',
+          },
+          {
+            id: 's6b',
+            week: 13,
+            text: 'Buffer week: finish or redo',
             kind: 'buffer',
           },
         ],
