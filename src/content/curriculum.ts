@@ -333,7 +333,7 @@ export const QUARTERS: Quarter[] = [
         dept: 'SKT',
         code: 'SKT 101',
         title: 'Sketching 101',
-        why: 'Travel with a sketchbook and come home with drawings of skylines and landscapes.',
+        why: "Sketch what's in front of me, well: buildings, streets, rooms and people, from life.",
         credits: 2,
         status: 'in-progress',
         ...ACCENT.sketching,
@@ -342,21 +342,21 @@ export const QUARTERS: Quarter[] = [
         finalWeek: 13,
         finalOn: 'Thu Dec 31',
         midterm:
-          'Chicago skyline from my own reference photo, drawn indoors in the travel sketchbook, under an hour',
-        midtermWeek: 6,
+          'A Chicago view drawn from life through a window (the apartment or a café), in the travel sketchbook, under an hour',
+        midtermWeek: 8,
         syllabus: {
           weeklyMinimum: [
-            'The book, every day, 15–20 minutes. Missed a day? Pick up at the next lesson, no make-ups',
-            'From Wk 2: one quick sketch a week in the travel sketchbook, indoors: the apartment, a café window, or a reference photo',
-            'Optional: a Draw Like a Sir video when a topic needs more',
+            'The sketchbook, every day: one sketch from life, 10 minutes minimum. This is the one that never gets skipped',
+            'The book, one page or spread at a time: 3–4 a week. Missed one? Pick up at the next, no make-ups',
+            'Draw Like a Sir: one video a week, then try its exercise in the sketchbook',
           ],
           whenWhere:
-            "Every day at home with This Is Not a Sketchbook, It's an Art Class (arrives Oct 1); a small travel sketchbook from Wk 2 (bought before the Oct 11 trip), used indoors or with reference photos while it's cold",
+            "Daily at home or out, in the travel sketchbook, drawing from life: the apartment, a café window, whatever's in front of me. The book (This Is Not a Sketchbook, It's an Art Class) is cut to the half that serves observation: contour, perspective, value and drawing from observation. Faces, gridding, drawing from photos and imagination are out. No watercolor.",
         },
         units: [
           {
             n: 1,
-            title: 'The book: seeing, contour & perspective',
+            title: 'The book: seeing & contour',
             from: 1,
             to: 5,
             steps: [
@@ -378,12 +378,7 @@ export const QUARTERS: Quarter[] = [
               {
                 id: 's1b',
                 week: 2,
-                text: 'Pages 11–21: Upside down drawing, Negative space, Continuous contour',
-              },
-              {
-                id: 's1b2',
-                week: 2,
-                text: 'Practice pages 52–55',
+                text: 'Pages 11–19: Upside down drawing, Negative space',
               },
               {
                 id: 's1b3',
@@ -391,124 +386,147 @@ export const QUARTERS: Quarter[] = [
                 text: 'Buy the travel sketchbook before Oct 11',
               },
               {
-                id: 's1c',
-                week: 3,
-                text: 'Away Oct 11–18: pages 22–23 Blind contour (travels well, no prep)',
-              },
-              {
                 id: 's1c2',
                 week: 3,
                 text: 'Away Oct 11–18: one trip sketch in the travel sketchbook',
               },
               {
-                id: 's1d',
+                id: 's1d1',
                 week: 4,
-                text: "Pages 24–31 + 62: Perspective, One point, Two point, and the perspective reference images. This is the skyline unit, so don't rush it",
+                text: 'p. 20: Continuous contour',
               },
               {
-                id: 's1e',
-                week: 5,
-                text: 'Pages 32–35 + 69: Value',
+                id: 's1d2',
+                week: 4,
+                text: 'p. 21: Continuous contour',
               },
               {
-                id: 's1e2',
-                week: 5,
-                text: 'Pages 40–43: Gridding and Reference photos 101',
+                id: 's1b2',
+                week: 4,
+                text: 'Practice pp. 52–53',
               },
               {
-                id: 's1e3',
+                id: 's1d3',
+                week: 4,
+                text: 'Practice pp. 54–55',
+              },
+              {
+                id: 's1c',
                 week: 5,
-                text: 'On a clear day, shoot my own skyline reference photos (Riverwalk or lakefront)',
+                text: 'pp. 22–23: Blind contour',
+              },
+              {
+                id: 's1e4',
+                week: 5,
+                text: 'pp. 24–25: Perspective',
+              },
+              {
+                id: 's1e5',
+                week: 5,
+                text: 'Draw Like a Sir: one video on contour or observation, then its exercise in the sketchbook',
               },
             ],
           },
           {
             n: 2,
-            title: 'Midterm',
+            title: 'The book: perspective & value',
             from: 6,
-            to: 6,
+            to: 7,
             steps: [
               {
-                id: 's2a',
+                id: 's2c',
                 week: 6,
-                text: 'Pages 48–49 Drawing from a reference photo (midterm warm-up)',
+                text: 'pp. 26–27: One point perspective',
               },
               {
-                id: 's2b',
+                id: 's2d',
                 week: 6,
-                text: 'Chicago skyline from my own reference photo, drawn indoors in the travel sketchbook, under an hour',
-                kind: 'midterm',
+                text: 'pp. 28–29: Two point perspective',
+              },
+              {
+                id: 's2e',
+                week: 6,
+                text: "pp. 30–31 + p. 62: Perspective reference images. This is the skyline unit, so don't rush it",
+              },
+              {
+                id: 's2f',
+                week: 7,
+                text: 'pp. 32–33: Value',
+              },
+              {
+                id: 's2g',
+                week: 7,
+                text: 'pp. 34–35 + p. 69: Value',
+              },
+              {
+                id: 's2h',
+                week: 7,
+                text: 'Draw Like a Sir: one video on perspective or value, then its exercise in the sketchbook',
               },
             ],
           },
           {
             n: 3,
-            title: 'The book: faces & observation',
-            from: 7,
-            to: 11,
+            title: 'Midterm',
+            from: 8,
+            to: 8,
             steps: [
               {
-                id: 's3a',
-                week: 7,
-                text: 'Pages 36–39: Drawing a face',
-              },
-              {
-                id: 's3a2',
-                week: 7,
-                text: 'Practice pages 56–61 (nose, eyes, mouth)',
-              },
-              {
-                id: 's3b',
+                id: 's3m1',
                 week: 8,
-                text: 'Pages 44–47: Self portrait #2 and A message to the artist',
+                text: 'p. 50: Drawing from observation (midterm warm-up)',
               },
               {
-                id: 's3b2',
+                id: 's3m2',
                 week: 8,
-                text: 'Put self portrait #2 next to the week 1 baseline and post the comparison',
-              },
-              {
-                id: 's3c',
-                week: 9,
-                text: "Thanksgiving at my parents' (Nov 24–29): page 50 Drawing from observation",
-              },
-              {
-                id: 's3c2',
-                week: 9,
-                text: "One low-pressure sketch at my parents'",
-              },
-              {
-                id: 's3d',
-                week: 10,
-                text: 'Page 51: Drawing from imagination',
-              },
-              {
-                id: 's3d2',
-                week: 10,
-                text: 'Drawing prompts (pp. 71–72)',
-              },
-              {
-                id: 's3e',
-                week: 11,
-                text: 'Open sketchbook pages (73+): two skyline or street-scene sketches from photos, using perspective + value',
+                text: 'A Chicago view drawn from life through a window (the apartment or a café), in the travel sketchbook, under an hour',
+                kind: 'midterm',
               },
             ],
           },
           {
             n: 4,
+            title: 'Observation in the field',
+            from: 9,
+            to: 11,
+            steps: [
+              {
+                id: 's3c2',
+                week: 9,
+                text: "Thanksgiving at my parents' (Nov 24–29): one sketch from life, a room or the house from outside",
+              },
+              {
+                id: 's3b',
+                week: 10,
+                text: 'pp. 44–45: Self portrait #2, from a mirror',
+              },
+              {
+                id: 's3b2',
+                week: 10,
+                text: 'Put self portrait #2 next to the week 1 baseline and post the comparison',
+              },
+              {
+                id: 's4f1',
+                week: 11,
+                text: 'Street or skyline scene #1 from life, using perspective + value',
+              },
+              {
+                id: 's4f2',
+                week: 11,
+                text: 'Street or skyline scene #2 from life',
+              },
+            ],
+          },
+          {
+            n: 5,
             title: 'Finish & field work',
             from: 12,
             to: 13,
             steps: [
               {
-                id: 's4b',
-                week: 12,
-                text: 'Finish any leftover book pages',
-              },
-              {
                 id: 's4b2',
                 week: 12,
-                text: 'One timed 30-minute sketch from a photo',
+                text: 'One timed 30-minute sketch from life',
               },
               {
                 id: 's4b3',
