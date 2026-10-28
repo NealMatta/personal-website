@@ -71,6 +71,8 @@ of the visitor's local time shows through.
   --class-calisthenics-tint: #d9ece8;
   --class-sewing: #a03a6b;
   --class-sewing-tint: #f3dde7;
+  --class-drawing: #3f5f7f;
+  --class-drawing-tint: #dde5ee;
 
   /* The chip on a project card, one per kind (src/content/projects.ts). */
   --kind-software: #1f5f80;
@@ -172,6 +174,8 @@ not the theme.
   --class-calisthenics-tint: #1a2e2b;
   --class-sewing: #e88ab4;
   --class-sewing-tint: #36202a;
+  --class-drawing: #8fb2d4;
+  --class-drawing-tint: #1e2732;
 
   --kind-software: #8cc3de;
   --kind-software-tint: #1c2b33;

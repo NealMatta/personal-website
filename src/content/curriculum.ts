@@ -154,6 +154,7 @@ const ACCENT = {
   cad: classColor('cad'),
   calisthenics: classColor('calisthenics'),
   sewing: classColor('sewing'),
+  drawing: classColor('drawing'),
 };
 
 export const QUARTERS: Quarter[] = [
@@ -1502,6 +1503,47 @@ export const CATALOG: CatalogCourse[] = [
             week: 13,
             text: 'Buffer week: finish or redo',
             kind: 'buffer',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'skt-102',
+    dept: 'SKT',
+    code: 'SKT 102',
+    title: 'Sketching 102',
+    why: 'Practice the subjects I actually want to draw: people, urban landscapes and trees. Not portraits or faces.',
+    credits: 2,
+    ...ACCENT.drawing,
+    final:
+      '[Final: e.g. a finished on-location scene with buildings, trees and people in it]',
+    finalWeek: 12,
+    midterm: '[Midterm]',
+    midtermWeek: 6,
+    syllabus: {
+      weeklyMinimum: [
+        '[Weekly minimum: practice cards per week + sketches from life]',
+      ],
+      whenWhere:
+        'Built around the Daribo Drawing practice books (all-in-one bundle, PDF, about €12): https://daribodrawing.gumroad.com/l/all_practice_cards. Separate practice books for subjects like urban scenes, people and trees. Week-by-week breakdown still to write.',
+    },
+    units: [
+      {
+        n: 1,
+        title: '[Unit 1]',
+        from: 1,
+        to: 1,
+        steps: [
+          {
+            id: 'sk2a',
+            week: 1,
+            text: 'Get the Daribo practice bundle and sort the books by subject',
+          },
+          {
+            id: 'sk2b',
+            week: 1,
+            text: 'Write the week-by-week breakdown',
           },
         ],
       },
